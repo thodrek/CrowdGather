@@ -60,7 +60,7 @@
 
 % ****************** TITLE ****************************************
 
-\title{CrowdGather: Budgeted Entity Extraction over Hierarchies}
+\title{CrowdGather: Budgeted Entity Extraction over Structured Data Domains}
 
 \numberofauthors{3} 
 
@@ -70,17 +70,34 @@
 \maketitle
 
 \begin{abstract}
-Crowd entity extraction has become a popular means of acquiring data for many applications, including recommendation systems, listing aggregation and knowledge base compilation.  Most of the current solutions focus on entity extraction over spa queries in isolation and do not consider entire entity domains. 
-
-However, many of the current solutions due to the time and cost of human labor, current solutions may incur large costs, thus, limiting their applicability. In this paper, we explore the problem of 
+Crowd entity extraction has become a popular means of acquiring data for many applications, including recommendation systems, listing aggregation and knowledge base compilation.  Most of the current solutions focus on entity extraction for specific queries and do not consider entity extraction over broader entity domains. Due to the time and cost of human labor, considering each query in isolation may incur large costs when applied to broader domains, thus, limiting the applicability of current approaches.
+ 
+In this paper, we explore the problem of {\em budgeted entity extraction} over {\em structured entity domains}. We consider domains that can be fully described by a collection of predicates, each characterized by a hierarchical structure. We develop new statistical tools that enable users to reason about the gain of issuing {\em further queries} in the presence of little information and show how to exploit the dependencies across different points of the data domain to obtain more accurate estimates. We also demonstrate how budgeted entity extraction over large domains can be cast as an adaptive optimization problem that seeks to maximize the number of extracted entities while minimizing the overall extraction cost. We evaluate our techniques with experiments on both synthetic and real-world data. 
 \end{abstract}
 
 \section{Introduction}
-\subsection{Challenges}
-\subsection{Contributions}
+\ \\Give an example of entity extraction over a structured data domain.
+
+\ \\First example is that of extracting events. Attributes: Location, Type, 
+
+\ \\Second example is that of e
+
+\ \\Give examples of dependencies: (1) side information, (2) empty sub-domains.
+
+\ \\Mention current work.
+
+Combining human computation with traditional computer systems has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014, west:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. 
+
+\ \\Limitation of current work: (1) focus on specific domain points, ignoring the obtained information when issuing new queries at different points of the data domain, large cost, may not capture the tail of the items in the domain, (2) pattern mining approaches, do not consider the overall budget provided by a user. 
+
+\ \\Contributions, estimate the expected gain from further queries at different points in the hierarchy. Exploit indirect information to obtain more accurate estimates. Cast budgeted entity extraction as an adaptive optimization problem. 
+
 
 \section{Crowdsourced Entity Extraction}
-\subsection{Budgeted Entity Extraction}
+In this section we first review the problem of {\em crowdsourced entity extraction} and introduce a {\em budgeted} version of the basic problem. Then, we formally define the problem of {\em budgeted entity extraction over hierarchical domains}. 
+
+\subsection{Entity Extraction Queries}
+
 \subsection{Extracting Entities over Hierarchies}
 
 \section{Framework Overview}
@@ -91,6 +108,12 @@ However, many of the current solutions due to the time and cost of human labor, 
 \section{The Gain of Further Queries}
 
 \section{Profitable Querying Policies}
+
+\section{Related Work}
+
+\ \\Beth's work
+\ \\Tova's work
+\ \\CrowdFill work
 
 \section{Conclusions}
 
