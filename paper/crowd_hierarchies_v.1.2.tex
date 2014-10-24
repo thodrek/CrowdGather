@@ -76,7 +76,10 @@ In this paper, we explore the problem of {\em budgeted entity extraction} over {
 \end{abstract}
 
 \section{Introduction}
-Combining human computation with traditional computer systems has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014, west:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web.
+Combining human computation with traditional computer systems has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{west:2014}.
+
+
+A fundamental challenge in crowd entity extraction is reasoning about the completeness of the extracted information. More precisely, given a query that seeks to enumerate entities from a specific domain, how can one decide on the completeness of the retrieved entities. Recent work has considered this problem for single queries~\cite{trushkowsky:2013}, or has required users to specify the number of desired entities to be retrieved as input~\cite{park:2014, amsterdamer:2014}
 
 However, due to the time and cost of human labor, crowd-based information extraction is limited to small data domains and raises several challenges when used in large data domains. Next, we use a real-world scenario to illustrate these challenges.
 
@@ -95,15 +98,13 @@ We consider the scenario of building a crowdsourced event directory with detaile
 
 \ \\Mention current work.
 
-Combining human computation with traditional computer systems has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014, west:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. 
-
 \ \\Limitation of current work: (1) focus on specific domain points, ignoring the obtained information when issuing new queries at different points of the data domain, large cost, may not capture the tail of the items in the domain, (2) pattern mining approaches, do not consider the overall budget provided by a user. 
 
 \ \\Contributions, estimate the expected gain from further queries at different points in the hierarchy. Exploit indirect information to obtain more accurate estimates. Cast budgeted entity extraction as an adaptive optimization problem. 
 
 
 \section{Crowdsourced Entity Extraction}
-In this section we first review the problem of {\em crowdsourced entity extraction} and introduce a {\em budgeted} version of the basic problem. Then, we formally define the problem of {\em budgeted entity extraction over hierarchical domains}. 
+In this section we first review the problem of {\em crowdsourced entity extraction} and discuss what types of queries. Then, we formally define the problem of {\em budgeted entity extraction over hierarchical domains}. 
 
 \subsection{Entity Extraction Queries}
 
