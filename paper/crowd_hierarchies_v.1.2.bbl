@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{amsterdamer:2014}
+Y.~Amsterdamer, S.~B. Davidson, T.~Milo, S.~Novgorodov, and A.~Somech.
+\newblock {OASSIS:} query driven crowd mining.
+\newblock In {\em International Conference on Management of Data, {SIGMOD}
+  2014, Snowbird, UT, USA, June 22-27, 2014}, pages 589--600, 2014.
+
+\bibitem{kondredi:2014}
+S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
+\newblock Combining information extraction and human computing for crowdsourced
+  knowledge acquisition.
+\newblock In {\em 30th IEEE International Conference on Data Engineering}, ICDE
+  '14, 2014.
+
+\bibitem{park:2014}
+H.~Park and J.~Widom.
+\newblock Crowdfill: A system for collecting structured data from the crowd.
+\newblock In {\em 23rd International World Wide Web Conference (WWW)}, 2014.
+
+\bibitem{trushkowsky:2013}
+B.~Trushkowsky, T.~Kraska, M.~J. Franklin, and P.~Sarkar.
+\newblock Crowdsourced enumeration queries.
+\newblock In {\em Proceedings of the 2013 IEEE International Conference on Data
+  Engineering (ICDE 2013)}, ICDE '13, pages 673--684, 2013.
+
+\bibitem{west:2014}
+R.~West, E.~Gabrilovich, K.~Murphy, S.~Sun, R.~Gupta, and D.~Lin.
+\newblock Knowledge base completion via search-based question answering.
+\newblock In {\em Proceedings of the 23rd International Conference on World
+  Wide Web}, WWW '14, pages 515--526, 2014.
+
+\end{thebibliography}
