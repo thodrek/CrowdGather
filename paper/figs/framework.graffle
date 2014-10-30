@@ -14,7 +14,7 @@
 	<key>BackgroundGraphic</key>
 	<dict>
 		<key>Bounds</key>
-		<string>{{0, 0}, {575.99999094009399, 733}}</string>
+		<string>{{0, 0}, {575.99999094009399, 1466}}</string>
 		<key>Class</key>
 		<string>SolidGraphic</string>
 		<key>ID</key>
@@ -46,14 +46,14 @@
 	<key>Creator</key>
 	<string>thodoris</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1 0/72 in</string>
+	<string>1 0/72 in = 1.0000 in</string>
 	<key>GraphDocumentVersion</key>
 	<integer>8</integer>
 	<key>GraphicsList</key>
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{22.5, 210.5}, {46, 28}}</string>
+			<string>{{-10, 615}, {88, 51}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -61,7 +61,7 @@
 			<key>Flow</key>
 			<string>Resize</string>
 			<key>ID</key>
-			<integer>9</integer>
+			<integer>22</integer>
 			<key>Shape</key>
 			<string>Rectangle</string>
 			<key>Style</key>
@@ -92,8 +92,9 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Observe\
-sample}</string>
+\f0\b\fs28 \cf0 Iterate \
+until no\
+budget is left}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -106,12 +107,227 @@ sample}</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>4</integer>
+				<integer>16</integer>
 				<key>Info</key>
 				<integer>4</integer>
 			</dict>
 			<key>ID</key>
-			<integer>8</integer>
+			<integer>21</integer>
+			<key>Points</key>
+			<array>
+				<string>{134, 720.5}</string>
+				<string>{99, 714}</string>
+				<string>{87, 674}</string>
+				<string>{92, 579}</string>
+				<string>{134, 580.5}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Join</key>
+					<integer>0</integer>
+					<key>Legacy</key>
+					<true/>
+					<key>LineType</key>
+					<integer>1</integer>
+					<key>TailArrow</key>
+					<string>0</string>
+					<key>Width</key>
+					<real>3</real>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>17</integer>
+				<key>Info</key>
+				<integer>4</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>17</integer>
+			</dict>
+			<key>ID</key>
+			<integer>20</integer>
+			<key>Points</key>
+			<array>
+				<string>{316.5, 627}</string>
+				<string>{316.5, 674}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Join</key>
+					<integer>0</integer>
+					<key>Legacy</key>
+					<true/>
+					<key>TailArrow</key>
+					<string>0</string>
+					<key>Width</key>
+					<real>3</real>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>16</integer>
+				<key>Info</key>
+				<integer>1</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{134, 674}, {365, 93}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>17</integer>
+			<key>Magnets</key>
+			<array>
+				<string>{0, 1}</string>
+				<string>{0, -1}</string>
+				<string>{1, 0}</string>
+				<string>{-1, 0}</string>
+				<string>{1, 1}</string>
+				<string>{1, -1}</string>
+				<string>{-1, 1}</string>
+				<string>{-1, -1}</string>
+			</array>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\b\fs28 \cf0 Using the gain estimates as input:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\b0 \cf0 \
+select the optimal lattice point, query size 
+\b k
+\b0  and \
+exclude list size 
+\b l
+\b0  and execute a new crowd entity extraction query}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{134, 534}, {365, 93}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>16</integer>
+			<key>Magnets</key>
+			<array>
+				<string>{0, 1}</string>
+				<string>{0, -1}</string>
+				<string>{1, 0}</string>
+				<string>{-1, 0}</string>
+				<string>{1, 1}</string>
+				<string>{1, -1}</string>
+				<string>{-1, 1}</string>
+				<string>{-1, -1}</string>
+			</array>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\b\fs28 \cf0 Estimate the gain for each candidate lattice point:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\b0 \cf0 \
+use the retrieved entities and estimate the number\
+of new entities to be extracted for different \
+query sizes 
+\b k
+\b0  and different exclude list sizes 
+\b l}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{24, 210.5}, {43, 42}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>FitText</key>
+			<string>YES</string>
+			<key>Flow</key>
+			<string>Resize</string>
+			<key>ID</key>
+			<integer>23</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Pad</key>
+				<integer>0</integer>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\fs24 \cf0 While \
+there is \
+still }</string>
+				<key>VerticalPad</key>
+				<integer>0</integer>
+			</dict>
+			<key>Wrap</key>
+			<string>NO</string>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>27</integer>
+				<key>Info</key>
+				<integer>4</integer>
+			</dict>
+			<key>ID</key>
+			<integer>29</integer>
 			<key>Points</key>
 			<array>
 				<string>{128, 348.5}</string>
@@ -141,7 +357,7 @@ sample}</string>
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>3</integer>
+				<integer>24</integer>
 				<key>Info</key>
 				<integer>4</integer>
 			</dict>
@@ -152,10 +368,10 @@ sample}</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>3</integer>
+				<integer>24</integer>
 			</dict>
 			<key>ID</key>
-			<integer>7</integer>
+			<integer>26</integer>
 			<key>Points</key>
 			<array>
 				<string>{292, 263}</string>
@@ -180,7 +396,7 @@ sample}</string>
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>1</integer>
+				<integer>25</integer>
 				<key>Info</key>
 				<integer>1</integer>
 			</dict>
@@ -191,10 +407,10 @@ sample}</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>1</integer>
+				<integer>25</integer>
 			</dict>
 			<key>ID</key>
-			<integer>5</integer>
+			<integer>28</integer>
 			<key>Points</key>
 			<array>
 				<string>{292, 139}</string>
@@ -219,7 +435,7 @@ sample}</string>
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>4</integer>
+				<integer>27</integer>
 				<key>Info</key>
 				<integer>1</integer>
 			</dict>
@@ -230,7 +446,7 @@ sample}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
-			<integer>4</integer>
+			<integer>27</integer>
 			<key>Magnets</key>
 			<array>
 				<string>{0, 1}</string>
@@ -266,7 +482,7 @@ for each affected lattice point}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
-			<integer>3</integer>
+			<integer>24</integer>
 			<key>Magnets</key>
 			<array>
 				<string>{0, 1}</string>
@@ -302,7 +518,7 @@ exclude list size L and execute a new crowdsourced query}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
-			<integer>1</integer>
+			<integer>25</integer>
 			<key>Magnets</key>
 			<array>
 				<string>{0, 1}</string>
@@ -325,8 +541,9 @@ exclude list size L and execute a new crowdsourced query}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
 \f0\b\fs24 \cf0 For each candidate lattice point:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\b0 \
+\b0 \cf0 \
 create a table containing the expected number \
 of new items to be extracted for different \
 query sizes 
@@ -383,7 +600,7 @@ query sizes
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-09-23 15:49:56 +0000</string>
+	<string>2014-10-25 16:45:43 +0000</string>
 	<key>Modifier</key>
 	<string>thodoris</string>
 	<key>NotesVisible</key>
@@ -461,7 +678,7 @@ query sizes
 	<key>UseEntirePage</key>
 	<false/>
 	<key>VPages</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
@@ -474,7 +691,7 @@ query sizes
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{-1065, 409}, {942, 571}}</string>
+		<string>{{277, 215}, {1147, 714}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -488,7 +705,7 @@ query sizes
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-116, 42}, {807, 432}}</string>
+		<string>{{-223, 250}, {1012, 575}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
