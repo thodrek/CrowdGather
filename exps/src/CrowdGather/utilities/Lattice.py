@@ -6,9 +6,12 @@ import sys
 import DBManager
 
 class Lattice:
-    def __init__(self, hDicts, hDesc):
+    def __init__(self, hDicts, hDesc, itemInfo):
         # store description of hierarchies
         self.hDesc = hDesc
+
+        # store pointer to item info
+        self.itemInfo = itemInfo
 
         # initialize DB manager
         self.db = DBManager.DBManager()
@@ -55,7 +58,7 @@ class Lattice:
                     point_items &= set(point[idx][1])
 
             # generate lattice point
-            newPoint = LatticePoint.LatticePoint(point_key,self.db,self.hDesc)
+            newPoint = LatticePoint.LatticePoint(point_key,self.db,self.hDesc,self)
 
             if persist:
                 self.db.addKeySET(point_key,point_items)
@@ -131,3 +134,9 @@ class Lattice:
 
     def getLatticeSize(self):
         return len(self.points)
+
+    def getItemWeights(self,itemSet):
+        itemList = []
+        for item in itemSet:
+            itemList.append((item, self.itemInfo[item]['weight']))
+        return itemList

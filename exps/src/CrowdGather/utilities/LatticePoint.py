@@ -1,9 +1,10 @@
 __author__ = 'thodrek'
-
+import genutils
 
 class LatticePoint:
-    def __init__(self, key, db, hDesc):
+    def __init__(self, key, db, hDesc, lattice):
         self.key = key
+        self.lattice = lattice
         self.items = None
         self.parents = []
         self.descendants = []
@@ -35,14 +36,39 @@ class LatticePoint:
     def getKey(self):
         return self.key
 
-    def retrieveSample(self, distr):
-        sample = []
+    def retrieveSample(self, sampleSize):
+        # if itemList is empty fetch it from DB
+        if not self.items:
+            self.items = self.__constructPopulation()
+
+        # retrieve sample
+        sample = genutils.sampleWOReplacement(self.items,sampleSize)
+
         return sample
 
-    def grabPopulation(self):
-        self.items = self.db.getKeySET(self.key)
+    def __constructPopulation(self):
+            # retrieve item set associated with lattice point
+            itemSet = self.db.getKeySET(self.key)
+            itemList = self.lattice.getItemWeights(itemSet)
+            return itemList
+
 
     def containsItem(self,item):
-        # check if the attributes of the item much the key of the point
-        tokens = self.tokens
+        # check if current point is the root
+        if self.key == '|'.join(['']*len(self.hValues)):
+            return True
+
+        # if not the root fetch the attributes of the item
+        for h in self.hValues:
+            if self.lattice.itemInfo[item][h].startswith(self.hValues[h]):
+                return True
+
+        return False
+
+    def findMatches(self, itemList):
+        # iterate over items and keep matches
+        matches = []
+        for item in itemList:
+            if self.containsItem(item):
+                matches.append(item)
 

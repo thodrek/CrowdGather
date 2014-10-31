@@ -23,19 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="estimators.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/estimators.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="47" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="810">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Lattice.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Lattice.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="19" selection-start="2421" selection-end="2421" vertical-scroll-proportion="-0.16504854" vertical-offset="1216" max-vertical-offset="2040">
+            <state line="52" column="46" selection-start="1487" selection-end="1487" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2175">
               <folding />
             </state>
           </provider>
@@ -44,7 +35,16 @@
       <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="48" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
+            <state line="64" column="0" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="genutils.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/genutils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="55" column="4" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="930">
               <folding />
             </state>
           </provider>
@@ -59,47 +59,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="genutils.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/genutils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="0" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="930">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createlattice.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="createlattice.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NodeEstimate.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrowdGather/NodeEstimate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="4110">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="YelpData.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrowdGather/YelpData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="1170" max-vertical-offset="2430">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrowdGather/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="19" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="855">
-              <folding />
+            <state line="10" column="0" selection-start="521" selection-end="584" vertical-scroll-proportion="0.1764706" vertical-offset="0" max-vertical-offset="850">
+              <folding>
+                <element signature="e#23#47#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,11 +82,11 @@
       <list>
         <option value="$PROJECT_DIR$/CrowdGather/utilities/DBWrapper.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/DBManager.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/utilities/genutils.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/test.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/createlattice.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/utilities/genutils.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/Lattice.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/createlattice.py" />
       </list>
     </option>
   </component>
@@ -400,7 +366,9 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="270">
-          <folding />
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -442,7 +410,9 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="324">
-          <folding />
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -484,7 +454,9 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="475" selection-end="475" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="324">
-          <folding />
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -540,26 +512,16 @@
         <state line="92" column="38" selection-start="3043" selection-end="3049" vertical-scroll-proportion="0.0" vertical-offset="1308" max-vertical-offset="2916" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1076" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/speciesEstimators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.3697083" vertical-offset="2519" max-vertical-offset="3582" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/estimators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="47" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1076" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/test.py">
@@ -571,28 +533,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/YelpData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="1170" max-vertical-offset="2430">
+        <state line="139" column="32" selection-start="4611" selection-end="4611" vertical-scroll-proportion="0.0" vertical-offset="1580" max-vertical-offset="2430">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/speciesEstimators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="324">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/genutils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1116">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2985">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/NodeEstimate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4932">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.835294" vertical-offset="3260" max-vertical-offset="4110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/estimators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="47" selection-start="685" selection-end="685" vertical-scroll-proportion="0.28235295" vertical-offset="0" max-vertical-offset="850">
           <folding />
         </state>
       </provider>
@@ -604,17 +566,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/genutils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="48" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
+        <state line="55" column="4" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="930">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="2421" selection-end="2421" vertical-scroll-proportion="-0.16504854" vertical-offset="1216" max-vertical-offset="2040">
+        <state line="52" column="46" selection-start="1487" selection-end="1487" vertical-scroll-proportion="0.0" vertical-offset="1325" max-vertical-offset="2175">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="521" selection-end="584" vertical-scroll-proportion="0.1764706" vertical-offset="0" max-vertical-offset="850">
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
