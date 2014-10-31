@@ -143,3 +143,19 @@ class Lattice:
                 weight = 1.0
             itemList.append((item, weight))
         return itemList
+
+    def findKeysForItem(self,item):
+
+        itemHdicts = []
+
+
+        itemHLists = [genutils.lattice_points_list(h) for h in itemHdicts]
+        point_list = genutils.cross(*itemHLists)
+        point_keys = []
+        for point in point_list:
+            point_key = point[0][0]
+            for idx in range(1,len(hDicts)):
+                point_key += '|'+point[idx][0]
+            point_keys.append(point_key)
+
+        return point_keys
