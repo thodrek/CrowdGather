@@ -13,11 +13,12 @@ class Lattice:
         # initialize DB manager
         self.db = DBManager.DBManager()
 
-        if self.db.getSize() == 0:
+        keysInDB = self.db.getSize()
+        if keysInDB == 0:
             print "Store Populations...ENABLED."
             persist = True
         else:
-            print "Populations already present."
+            print "Populations already present. "+str(keysInDB)+" keys found."
             persist = False
         self.points = self.constructPoints(hDicts,persist)
         if persist:
@@ -120,11 +121,11 @@ class Lattice:
                     # reset tokens
                     tokens[i] = setValue
 
-                    # print progress
-                    counter += 1
-                    progress = float(counter)*100.0/float(len(lattice_point_list))
-                    sys.stdout.write("\r%.2f%% (%d out of %d)" % (progress, counter, len(points)))
-                    sys.stdout.flush()
+            # print progress
+            counter += 1
+            progress = float(counter)*100.0/float(len(points))
+            sys.stdout.write("\r%.2f%% (%d out of %d)" % (progress, counter, len(points)))
+            sys.stdout.flush()
         print 'DONE'
         return points
 

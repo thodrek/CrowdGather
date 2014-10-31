@@ -4,7 +4,7 @@ __author__ = 'thodrek'
 class LatticePoint:
     def __init__(self, key, db, hDesc):
         self.key = key
-        self.items = []
+        self.items = None
         self.parents = []
         self.descendants = []
         self.db = db
@@ -35,4 +35,14 @@ class LatticePoint:
     def getKey(self):
         return self.key
 
+    def retrieveSample(self, distr):
+        sample = []
+        return sample
+
+    def grabPopulation(self):
+        self.items = self.db.getKeySET(self.key)
+
+    def containsItem(self,item):
+        # check if the attributes of the item much the key of the point
+        tokens = self.tokens
 
