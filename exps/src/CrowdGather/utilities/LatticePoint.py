@@ -33,10 +33,10 @@ class LatticePoint:
         return self.totalAssignedValues
 
     def getParents(self):
-            return self.parents
+        return self.parents
 
     def getDescendants(self):
-            return self.descendants
+        return self.descendants
 
     def assignParent(self, newparent):
         self.parents.append(newparent)
@@ -61,10 +61,10 @@ class LatticePoint:
         return sample
 
     def __constructPopulation(self):
-            # retrieve item set associated with lattice point
-            itemSet = self.db.getKeySET(self.key)
-            itemList = self.lattice.getItemWeights(itemSet)
-            return itemList
+        # retrieve item set associated with lattice point
+        itemSet = self.db.getKeySET(self.key)
+        itemList = self.lattice.getItemWeights(itemSet)
+        return itemList
 
 
     def containsItem(self,item):
@@ -99,3 +99,50 @@ class LatticePoint:
             else:
                 self.itemFrequencies[id] += 1
 
+
+    def receiveIndirectItem(self,item):
+        newSample = [item]
+        self.__updateSamplingResults(newSample)
+        return True
+
+    def propagateSamples(self,sample):
+        msgReceived = 0
+        for item in sample:
+            affectedLatticePoints = self.findKeysForItem(item)
+            for p_key in affectedLatticePoints:
+                    if self.lattice.points[p_key].receiveIndirectItem(item):
+                        msgReceived += 1
+        return msgReceived
+
+
+
+    def findKeysForItem(self,item):
+        # construct hierarchical attribute information from item description
+        itemHdicts = []
+        for h in self.hValues:
+            # retrieve item value for attribute h
+            attrValue = self.lattice.itemInfo[item][h]
+            # break down to dict
+            newAttrDict = {}
+            attrValueTokens = attrValue.split('_')
+            runningDict = newAttrDict
+            for i in range(len(attrValueTokens)):
+                token = attrValueTokens[i]
+                if i == len(attrValueTokens)-1:
+                    runningDict[token] = []
+                else:
+                    runningDict[token] = {}
+                runningDict = runningDict[token]
+            itemHdicts.append(newAttrDict)
+
+        # perform cross product to find all lattice point relevant to item
+        itemHLists = [genutils.lattice_points_list(h) for h in itemHdicts]
+        point_list = genutils.cross(*itemHLists)
+        point_keys = []
+        for point in point_list:
+            point_key = point[0][0]
+            for idx in range(1,len(itemHDicts)):
+                point_key += '|'+point[idx][0]
+            point_keys.append(point_key)
+
+        return point_keys
