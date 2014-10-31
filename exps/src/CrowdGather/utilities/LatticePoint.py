@@ -22,7 +22,7 @@ class LatticePoint:
         return self.totalAssignedValues
 
     def getParents(self):
-            return self.parent
+            return self.parents
 
     def getDescendants(self):
             return self.descendants

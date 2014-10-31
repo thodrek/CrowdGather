@@ -138,5 +138,8 @@ class Lattice:
     def getItemWeights(self,itemSet):
         itemList = []
         for item in itemSet:
-            itemList.append((item, self.itemInfo[item]['weight']))
+            weight = self.itemInfo[item]['weight']
+            if not weight or weight=='':
+                weight = 1.0
+            itemList.append((item, weight))
         return itemList
