@@ -59,8 +59,13 @@ class LatticePoint:
         sampleRaw = genutils.sampleWOReplacement(self.items,sampleSize)
         sample = list(x[1] for x in sampleRaw)
 
-        # update local sampling results
-        self.__updateSamplingResults(sample)
+        # check if sample is empty
+        if len(sample) == 0.0:
+            self.emptyPopulation = True
+            self.emptyMessageDescendants()
+        else:
+            # update local sampling results
+            self.__updateSamplingResults(sample)
         return sample
 
     def __constructPopulation(self):

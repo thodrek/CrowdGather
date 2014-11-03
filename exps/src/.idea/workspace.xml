@@ -35,10 +35,8 @@
       <file leaf-file-name="createlattice.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="23" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-              <folding>
-                <element signature="e#23#47#0" expanded="true" />
-              </folding>
+            <state line="2" column="0" selection-start="48" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,7 +44,7 @@
       <file leaf-file-name="Lattice.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="0" selection-start="4454" selection-end="4454" vertical-scroll-proportion="0.0" vertical-offset="1675" max-vertical-offset="2235">
+            <state line="131" column="0" selection-start="4454" selection-end="4454" vertical-scroll-proportion="0.0" vertical-offset="1630" max-vertical-offset="2235">
               <folding />
             </state>
           </provider>
@@ -55,8 +53,12 @@
       <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="36" selection-start="897" selection-end="897" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="2430">
-              <folding />
+            <state line="68" column="8" selection-start="1887" selection-end="1887" vertical-scroll-proportion="0.0" vertical-offset="597" max-vertical-offset="2505">
+              <folding>
+                <marker date="1414983735000" expanded="true" signature="2781:3134" placeholder="..." />
+                <marker date="1414983735000" expanded="true" signature="3651:3726" placeholder="..." />
+                <marker date="1414983735000" expanded="true" signature="3766:3833" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,7 +84,7 @@
       <file leaf-file-name="PointEstimateShen.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="32" selection-start="2974" selection-end="2974" vertical-scroll-proportion="2.5714285" vertical-offset="0" max-vertical-offset="2370">
+            <state line="56" column="64" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.72321427" vertical-offset="435" max-vertical-offset="2370">
               <folding>
                 <element signature="e#23#36#0" expanded="true" />
               </folding>
@@ -396,9 +398,7 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="521" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="270">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -412,7 +412,11 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="146" column="0" selection-start="4572" selection-end="4572" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="2295">
-          <folding />
+          <folding>
+            <marker date="1414983735000" expanded="true" signature="2781:3134" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3651:3726" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3766:3833" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -433,7 +437,11 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="792">
-          <folding />
+          <folding>
+            <marker date="1414983735000" expanded="true" signature="2781:3134" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3651:3726" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3766:3833" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -464,9 +472,7 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="475" selection-end="475" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="324">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -490,9 +496,7 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="270">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -528,9 +532,7 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="54" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="324">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -566,9 +568,7 @@
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="475" selection-end="475" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="324">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -671,15 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="23" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <folding>
-            <element signature="e#23#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="131" column="0" selection-start="4454" selection-end="4454" vertical-scroll-proportion="0.0" vertical-offset="1965" max-vertical-offset="2280">
@@ -689,14 +680,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="36" selection-start="897" selection-end="897" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="2430">
+        <state line="68" column="8" selection-start="1887" selection-end="1887" vertical-scroll-proportion="0.0" vertical-offset="597" max-vertical-offset="2505">
+          <folding>
+            <marker date="1414983735000" expanded="true" signature="2781:3134" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3651:3726" placeholder="..." />
+            <marker date="1414983735000" expanded="true" signature="3766:3833" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="48" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="32" selection-start="2974" selection-end="2974" vertical-scroll-proportion="2.5714285" vertical-offset="0" max-vertical-offset="2370">
+        <state line="56" column="64" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.72321427" vertical-offset="435" max-vertical-offset="2370">
           <folding>
             <element signature="e#23#36#0" expanded="true" />
           </folding>

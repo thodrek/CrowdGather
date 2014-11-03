@@ -39,17 +39,17 @@ class PointEstimateShen:
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.freqCounters.clear()
+        if len(self.point.entryFrequencies) > 0.0:
+            maxF = max(self.point.entryFrequencies.values())
+            for f in range(1,maxF+1):
+                self.freqCounters[f] = 0.0
 
-        maxF = max(self.point.entryFrequencies.values())
-        for f in range(1,maxF+1):
-            self.freqCounters[f] = 0.0
-
-        for e in self.point.entryFrequencies:
-            if e not in excludeList:
-                f = self.point.entryFrequencies[e]
-                self.freqCounters[f] += 1.0
-                self.sampleSize += float(f)
-                self.uniqueNumber += 1.0
+            for e in self.point.entryFrequencies:
+                if e not in excludeList:
+                    f = self.point.entryFrequencies[e]
+                    self.freqCounters[f] += 1.0
+                    self.sampleSize += float(f)
+                    self.uniqueNumber += 1.0
 
     # estimate return
     def estimateReturn(self,querySize,excludeListSize,estimator = "chao92"):
