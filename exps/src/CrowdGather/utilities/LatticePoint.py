@@ -25,9 +25,9 @@ class LatticePoint:
         self.items = None
 
         # set lattice sampling results
-        self.retrievedItems = []
+        self.retrievedEntries = []
         self.distinctEntries = set([])
-        self.itemFrequencies = {}
+        self.entryFrequencies = {}
 
     def getTotalAssignedValues(self):
         return self.totalAssignedValues
@@ -89,15 +89,15 @@ class LatticePoint:
 
     def __updateSamplingResults(self,sample):
         # update unique and total entry lists
-        self.retrievedItems.extend(sample)
+        self.retrievedEntries.extend(sample)
         self.distinctEntries |= set(sample)
 
         # update entry counters
         for id in sample:
-            if id not in self.itemFrequencies:
-                self.itemFrequencies[id] = 1
+            if id not in self.entryFrequencies:
+                self.entryFrequencies[id] = 1
             else:
-                self.itemFrequencies[id] += 1
+                self.entryFrequencies[id] += 1
 
 
     def receiveIndirectItem(self,item):
@@ -141,7 +141,7 @@ class LatticePoint:
         point_keys = []
         for point in point_list:
             point_key = point[0][0]
-            for idx in range(1,len(itemHDicts)):
+            for idx in range(1,len(itemHdicts)):
                 point_key += '|'+point[idx][0]
             point_keys.append(point_key)
 
