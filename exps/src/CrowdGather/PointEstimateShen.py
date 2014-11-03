@@ -52,9 +52,9 @@ class PointEstimateShen:
                     self.uniqueNumber += 1.0
 
     # estimate return
-    def estimateReturn(self,querySize,excludeListSize,estimator = "chao92"):
+    def estimateReturn(self,estimator = "chao92"):
         # construct excludeList
-        excludeList = self.constructExcludeList(excludeListSize)
+        excludeList = self.constructExcludeList(self.excludeListSize)
 
         # update freq counters
         self.updateFreqCounterSampleSize(excludeList)
@@ -64,11 +64,11 @@ class PointEstimateShen:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                return querySize
+                return self.querySize
 
         # compute query return
         if estimator == "chao92" or estimator == "shenRegression":
-            return self.shenEstimator(querySize,estimator)
+            return self.shenEstimator(self.querySize,estimator)
         else:
             print "Invalid estimator specified for expected return"
             sys.exit(-1)
