@@ -1,8 +1,9 @@
 __author__ = 'thodrek'
 import genutils
+import copy
 
 class LatticePoint:
-    def __init__(self, key, db, hDesc, lattice):
+    def __init__(self, key, db, hDesc, lattice, samplingHistory=False):
         # set lattice point details
         self.key = key
         self.lattice = lattice
@@ -31,6 +32,12 @@ class LatticePoint:
 
         # flags for estimators
         self.emptyPopulation = False
+
+        # keep sampling log
+        self.samplingHistory = samplingHistory
+        self.sampleLogs = []
+        self.distinctEntryLogs = []
+        self.entryFrequencyLogs = []
 
     def getTotalAssignedValues(self):
         return self.totalAssignedValues
@@ -166,10 +173,15 @@ class LatticePoint:
 
         return point_keys
 
-
     def populationWithExcludeList(self,excludeList):
         populationItems = []
         for item in self.items:
             if item[0] not in excludeList:
                 populationItems.append(item)
         return populationItems
+
+    def logSamplingHistory(self):
+        # keep sampling log
+        self.sampleLogs.append(self.retrievedEntries)
+        self.distinctEntryLogs.append(self.distinctEntries)
+        self.entryFrequencyLogs.append(self.etr)
