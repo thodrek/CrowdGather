@@ -133,7 +133,7 @@ class LatticePoint:
     def findKeysForItem(self,item):
         # construct hierarchical attribute information from item description
         itemHdicts = []
-        for h in self.hValues:
+        for h in self.lattice.hDesc:
             # retrieve item value for attribute h
             attrValue = self.lattice.itemInfo[item][h]
             # break down to dict

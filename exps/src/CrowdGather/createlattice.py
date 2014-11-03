@@ -19,3 +19,9 @@ for p in newLattice.points:
         counter += 1
     if counter > 5:
         break
+
+
+p = newLattice.points[emptyPoints[0]]
+s = p.retrieveSample(5)
+root = newLattice.points['||']
+p.propagateSample(s)

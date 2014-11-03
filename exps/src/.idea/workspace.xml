@@ -35,7 +35,7 @@
       <file leaf-file-name="createlattice.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="38" selection-start="518" selection-end="518" vertical-scroll-proportion="0.21052632" vertical-offset="0" max-vertical-offset="570">
+            <state line="17" column="29" selection-start="772" selection-end="772" vertical-scroll-proportion="0.4473684" vertical-offset="0" max-vertical-offset="570">
               <folding>
                 <element signature="e#23#47#0" expanded="true" />
               </folding>
@@ -46,7 +46,7 @@
       <file leaf-file-name="Lattice.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="51" selection-start="4031" selection-end="4031" vertical-scroll-proportion="0.0" vertical-offset="1198" max-vertical-offset="2265">
+            <state line="117" column="51" selection-start="4031" selection-end="4031" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2265">
               <folding />
             </state>
           </provider>
@@ -55,7 +55,7 @@
       <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="40" selection-start="590" selection-end="609" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="2505">
+            <state line="135" column="36" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0" vertical-offset="1740" max-vertical-offset="2505">
               <folding />
             </state>
           </provider>
@@ -105,9 +105,9 @@
         <option value="$PROJECT_DIR$/CrowdGather/utilities/test.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/genutils.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimate.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/Lattice.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShen.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
         <option value="$PROJECT_DIR$/CrowdGather/createlattice.py" />
       </list>
     </option>
@@ -684,23 +684,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="51" selection-start="4031" selection-end="4031" vertical-scroll-proportion="0.0" vertical-offset="1363" max-vertical-offset="2265">
+        <state line="135" column="36" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0" vertical-offset="1740" max-vertical-offset="2505">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="40" selection-start="590" selection-end="609" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2505">
+        <state line="117" column="51" selection-start="4031" selection-end="4031" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2265">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/createlattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="38" selection-start="518" selection-end="518" vertical-scroll-proportion="0.21052632" vertical-offset="0" max-vertical-offset="570">
+        <state line="17" column="29" selection-start="772" selection-end="772" vertical-scroll-proportion="0.4473684" vertical-offset="0" max-vertical-offset="570">
           <folding>
             <element signature="e#23#47#0" expanded="true" />
           </folding>
