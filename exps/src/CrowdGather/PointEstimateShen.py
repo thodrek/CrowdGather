@@ -31,7 +31,10 @@ class PointEstimateShen:
     # construct exclude list by taking random sample of size listSize
     def constructExcludeList(self,listSize):
         # take a random sample of size listSize from retrieved entries
-        excludeList = random.sample(self.point.distinctEntries,listSize)
+        if listSize >= len(self.point.distinctEntries):
+            excludeList = self.point.distinctEntries
+        else:
+            excludeList = random.sample(self.point.distinctEntries,listSize)
         return excludeList
 
     # compute frequency counters

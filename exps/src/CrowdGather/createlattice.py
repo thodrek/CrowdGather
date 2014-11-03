@@ -14,7 +14,7 @@ emptyPoints = []
 counter = 0
 for p in newLattice.points:
     po = newLattice.points[p]
-    if len(po.db.getKeySET(p)) > 0.0 and po.totalAssignedValues == 2:
+    if len(po.db.getKeySET(p)) > 10.0 and po.totalAssignedValues == 2:
         emptyPoints.append(p)
         counter += 1
     if counter > 5:
