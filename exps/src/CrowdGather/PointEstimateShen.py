@@ -114,6 +114,10 @@ class PointEstimateShen:
                 y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(self.freqCounters[f+1] + 1.0)
                 x.append(float(f))
                 y.append(y_new)
+            else:
+                y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(0.0 + 1.0)
+                x.append(float(f))
+                y.append(y_new)
         # Not enough data to estimate K
         if len(x) < 1.0:
             return None
