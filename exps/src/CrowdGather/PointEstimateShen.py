@@ -146,7 +146,7 @@ class PointEstimateShen:
         if estimator == "chao92":
             f0 = self.estimateF0_Chao92(Chat)
         else:
-            f0, self.oldK = self.estimateF0_regression(self.oldK)
+            f0, self.oldK = self.estimateF0_regression()
 
         #estimate new
         gain = f0*(1.0 - (1.0 - (1.0 - Chat)/(f0 + 1.0))**querySize)
