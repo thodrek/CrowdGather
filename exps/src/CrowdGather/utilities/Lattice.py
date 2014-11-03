@@ -108,6 +108,8 @@ class Lattice:
                 # extract parent keys
                 tokens = pointKey.split('|')
                 for i in range(len(tokens)):
+                    if tokens[i] == '':
+                        continue
                     setValue = tokens[i]
                     tokens[i] = ''
                     parentKey = '|'.join(tokens)
