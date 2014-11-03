@@ -50,13 +50,18 @@ class LatticePoint:
     def getKey(self):
         return self.key
 
-    def retrieveSample(self, sampleSize):
+    def retrieveSample(self, sampleSize, excludeList):
         # if itemList is empty fetch it from DB
         if not self.items:
             self.items = self.__constructPopulation()
 
         # retrieve sample
-        sampleRaw = genutils.sampleWOReplacement(self.items,sampleSize)
+        # update sampling population to consider excludeList
+        if len(excludeList) > 0:
+            popItems = self.populationWithExcludeList(set(excludeList))
+            sampleRaw = genutils.sampleWOReplacement(popItems,sampleSize)
+        else:
+            sampleRaw = genutils.sampleWOReplacement(self.items,sampleSize)
         sample = list(x[1] for x in sampleRaw)
 
         # check if sample is empty
@@ -160,3 +165,11 @@ class LatticePoint:
             point_keys.append(point_key)
 
         return point_keys
+
+
+    def populationWithExcludeList(self,excludeList):
+        populationItems = []
+        for item in self.items:
+            if item[0] not in excludeList:
+                populationItems.append(item)
+        return populationItems
