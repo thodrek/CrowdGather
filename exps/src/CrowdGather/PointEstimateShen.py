@@ -57,7 +57,7 @@ class PointEstimateShen:
     # estimate return
     def estimateReturn(self,estimator = "chao92"):
         # construct excludeList
-        excludeList = self.constructExcludeList(self.excludeListSize)
+        excludeList = self.constructExcludeList()
 
         # update freq counters
         self.updateFreqCounterSampleSize(excludeList)
