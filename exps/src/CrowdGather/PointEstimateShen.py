@@ -87,6 +87,8 @@ class PointEstimateShen:
         gamma_sum = 0.0
         for f in self.freqCounters:
             gamma_sum += float(f)*(float(f)-1.0)*self.freqCounters[f]
+        if n == 1:
+            return 0.0
         gammasq = (c/Chat)*gamma_sum/(n*(n-1.0)) - 1.0
         if gammasq < 0.0:
             return 0.0
