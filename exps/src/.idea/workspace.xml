@@ -88,13 +88,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="48" selection-start="1974" selection-end="1974" vertical-scroll-proportion="0.33267716" vertical-offset="716" max-vertical-offset="2505">
+            <state line="59" column="48" selection-start="1974" selection-end="1974" vertical-scroll-proportion="-6.5" vertical-offset="716" max-vertical-offset="2505">
               <folding>
                 <element signature="e#23#36#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.027422303" vertical-offset="0" max-vertical-offset="547">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,6 +127,7 @@
         <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
         <option value="$PROJECT_DIR$/CrowdGather/createlattice.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShen.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNew.py" />
       </list>
     </option>
   </component>
@@ -711,10 +721,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="48" selection-start="1974" selection-end="1974" vertical-scroll-proportion="0.33267716" vertical-offset="716" max-vertical-offset="2505">
+        <state line="59" column="48" selection-start="1974" selection-end="1974" vertical-scroll-proportion="-6.5" vertical-offset="716" max-vertical-offset="2505">
           <folding>
             <element signature="e#23#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.027422303" vertical-offset="0" max-vertical-offset="547">
+          <folding />
         </state>
       </provider>
     </entry>
