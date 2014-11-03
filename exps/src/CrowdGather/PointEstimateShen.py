@@ -59,6 +59,13 @@ class PointEstimateShen:
         # update freq counters
         self.updateFreqCounterSampleSize(excludeList)
 
+        # check if sample is empty
+        if self.sampleSize == 0.0:
+            if self.point.emptyPopulation == True:
+                return 0.0
+            else:
+                return querySize
+
         # compute query return
         if estimator == "chao92" or estimator == "shenRegression":
             return self.shenEstimator(querySize,estimator)

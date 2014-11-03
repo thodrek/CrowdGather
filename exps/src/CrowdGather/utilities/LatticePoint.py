@@ -29,6 +29,9 @@ class LatticePoint:
         self.distinctEntries = set([])
         self.entryFrequencies = {}
 
+        # flags for estimators
+        self.emptyPopulation = False
+
     def getTotalAssignedValues(self):
         return self.totalAssignedValues
 
@@ -114,7 +117,13 @@ class LatticePoint:
                         msgReceived += 1
         return msgReceived
 
+    def receiveEmptyMsg(self):
+        self.emptyPopulation = True
+        self.emptyMessageDescendants()
 
+    def emptyMessageDescendants(self):
+        for p in self.descendants:
+            p.receiveEmptyMsg()
 
     def findKeysForItem(self,item):
         # construct hierarchical attribute information from item description
