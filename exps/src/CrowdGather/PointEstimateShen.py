@@ -78,7 +78,7 @@ class PointEstimateShen:
         # Good-Turing estimator
         f1 = self.freqCounters[1]
         n = self.sampleSize
-        return 1.0 - f1/n
+        return 1.0 - f1/(n+1)
 
     def estimateGamma2(self, Chat):
         c = self.uniqueNumber
