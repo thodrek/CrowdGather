@@ -174,6 +174,10 @@ class PointEstimateNew:
         self.oldKValues[self.sampleSize] = K
         self.oldK = K
 
+        # check if exclude list contains the entire sample
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
+
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize

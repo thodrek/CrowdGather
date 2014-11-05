@@ -69,6 +69,10 @@ class PointEstimateShen:
             else:
                 return self.querySize
 
+        # check if exclude list contains the entire sample
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
+
         # compute query return
         if estimator == "chao92" or estimator == "shenRegression":
             return self.shenEstimator(self.querySize,estimator)
