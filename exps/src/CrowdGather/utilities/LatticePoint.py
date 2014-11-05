@@ -185,3 +185,11 @@ class LatticePoint:
         self.sampleLogs.append(self.retrievedEntries)
         self.distinctEntryLogs.append(self.distinctEntries)
         self.entryFrequencyLogs.append(self.etr)
+
+    def clearSampledPopulation(self):
+        self.retrievedEntries.clear()
+        self.distinctEntries.clear()
+        self.entryFrequencies.clear()
+
+        # flags for estimators
+        self.emptyPopulation = False

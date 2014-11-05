@@ -48,7 +48,12 @@ r3 = estNew.estimateReturn()
 
 print r1, r2, r3
 
-root.retrieveSample(10,[])
+oldE = len(root.distinctEntries)
+excList = estNew.constructExcludeList()
+x = root.retrieveSample(10,excList)
+newE = len(root.distinctEntries)
+actualReturn = newE - oldE
+print actualReturn
 
 r1 = est.estimateReturn()
 r2 = est.estimateReturn("shenRegression")
