@@ -156,7 +156,10 @@ class EntityExtraction:
     def bfsThresholdFindAction(self,estList):
         for e in estList:
             # check if expected return is above a threshold
-            gainPercentage = e.estimateReturn()
+            gainPercentage = e.estimateReturn()/float(e.querySize)
+            if gainPercentage > 0.2:
+                return e
+        return None
 
     def bfsThresholdExtraction(self):
         # traverse lattice in a BFS manner keep
@@ -165,8 +168,6 @@ class EntityExtraction:
 
         root = self.lattice.points['||']
         frontier = [root]
-        activeNodes = {}
-        activeNodes[root] = 1
         nodeEstimates = {}
         nodeEstimates[root] = []
         for conf in self.extConfigs:
@@ -180,9 +181,20 @@ class EntityExtraction:
             p = frontier.pop(0)
 
             # pick the best configuration with expected return more than a threshold
-            bestConfig = 0.0
+            goodAction = self.bfsThresholdFindAction(nodeEstimates[p])
 
-            querySize = bestConfig[0]
-            exListSize = bestConfig[1]
+            gain += goodAction.takeAction()
+            cost += 1.0
+
+            # check if there exists a good action. If no good action exists move to the descendant of the running node.
+            if self.bfsThresholdFindAction(nodeEstimates[p]):
+                for d in p.getDescendants():
+                    if d not in nodeEstimates:
+                        frontier.append(d)
+                        for conf in self.extConfigs:
+                            querySize = conf[0]
+                            exListSize = conf[1]
+                            est = self.getNewEstimator(d,querySize,exListSize)
+                            nodeEstimates[d].append(est)
 
         return gain, cost-1.0
