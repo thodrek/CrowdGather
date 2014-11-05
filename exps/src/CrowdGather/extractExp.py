@@ -23,7 +23,7 @@ budget = 100
 configurations = [(10,0)]
 # initialize new EntityExtraction
 
-eExtract = EntityExtraction.EntityExtraction(budget,hList,hDescr,itemInfo,configurations,"BFS","chao92")
+eExtract = EntityExtraction.EntityExtraction(budget,hList,hDescr,itemInfo,configurations,"BFS_thres","chao92")
 
 gain, cost = eExtract.retrieveItems()
 
