@@ -191,6 +191,7 @@ class EntityExtraction:
                 for d in p.getDescendants():
                     if d not in nodeEstimates:
                         frontier.append(d)
+                        nodeEstimates[d] = []
                         for conf in self.extConfigs:
                             querySize = conf[0]
                             exListSize = conf[1]
