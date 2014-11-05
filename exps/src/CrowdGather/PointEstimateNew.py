@@ -70,7 +70,7 @@ class PointEstimateNew:
             N2 = self.freqCounters[2] + 1.0
         else:
             N2 = 1.0
-        n = self.totalEntries()
+        n = self.sampleSize
         return 2.0*N2/(n+1)
 
     # estimate altered singletons
