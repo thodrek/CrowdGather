@@ -26,8 +26,9 @@ for p in newLattice.points:
         break
 
 # configurations (querySize, excludeListSize)
-configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
-samples = 100
+#configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
+configurations = [(5,0)]
+samples = 10
 errors = {}
 
 print 'Computing Errors...',
@@ -67,7 +68,7 @@ for conf in configurations:
             actualReturn = newUnique - oldUnique
 
             # errors
-            print querySize,excludeListSize, i, actualReturn,estChao,estRegr, estNewRegr
+            print p.key, querySize,excludeListSize, i, actualReturn,estChao,estRegr, estNewRegr
             totalErrorChao += abs(estChao - actualReturn)/float(actualReturn+1.0)
             totalErrorRegr += abs(estRegr - actualReturn)/float(actualReturn+1.0)
             totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn+1.0)
