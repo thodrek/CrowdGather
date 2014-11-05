@@ -20,7 +20,7 @@ class EntityExtraction:
         self.extConfigs = extConfigs
 
         # store extraction method
-        if optMethod in ["random", "BFS", "randomLeaves", "UCBFront"]:
+        if optMethod in ["random", "BFS", "BFS_thres", "randomLeaves", "UCBFront"]:
             self.optMethod = optMethod
         else:
             print "Invalid extraction method specified"
@@ -28,7 +28,7 @@ class EntityExtraction:
 
         # store estimation method
         if estMethod in ["chao92", "shenRegression", "newRegr"]:
-            self.estMathod = estMethod
+            self.estMethod = estMethod
         else:
             print "Invalid estimation method specified"
             sys.exit(-1)
@@ -40,6 +40,8 @@ class EntityExtraction:
             gain, cost = self.randomExtraction()
         elif self.optMethod == "BFS":
             gain, cost = self.bfsExtraction()
+        elif self.optMethod == "BFS_thres":
+            gain, cost = self.bfsThresholdExtraction()
         elif self.optMethod == "randomLeaves":
             gain, cost = self.randomLeavesExtraction()
         else:
