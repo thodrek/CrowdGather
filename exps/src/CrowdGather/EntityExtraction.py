@@ -178,7 +178,7 @@ class EntityExtraction:
 
         while cost <= self.budget:
             # take the first point key in the frontier
-            p = frontier.pop(0)
+            p = frontier[0]
 
             # pick the best configuration with expected return more than a threshold
             goodAction = self.bfsThresholdFindAction(nodeEstimates[p])
@@ -188,6 +188,7 @@ class EntityExtraction:
 
             # check if there exists a good action. If no good action exists move to the descendant of the running node.
             if self.bfsThresholdFindAction(nodeEstimates[p]):
+                frontier.pop(0)
                 for d in p.getDescendants():
                     if d not in nodeEstimates:
                         frontier.append(d)
