@@ -183,11 +183,22 @@ class PointEstimateNew:
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems
 
-    # cost of estimator
-    def computeCost(self):
-        pointSpecificity = self.point.totalAssignedValues
-        w_Q_Size = 1.0
-        w_E_Size = 1.0
-        w_Spec = 1.0
+    # normalized return
+    def normalizedReturn(self):
+        return self.estimateReturn()/float(self.querySize)
 
-        return 1.0
+    # cost of estimator
+    def computeCost(self,maxQuerySize,maxExListSize):
+        pointSpecificity = self.point.totalAssignedValues
+
+        w_Q_Size = 1.0
+        Q_value = float(self.querySize)/float(maxQuerySize)
+
+        w_E_Size = 1.0
+        E_value = float(self.excludeListSize)/float(maxExListSize)
+
+        w_Spec = 1.0
+        S_value = float(pointSpecificity)/3.0
+
+        cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
+        return cost

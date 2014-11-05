@@ -54,7 +54,7 @@ for conf in configurations:
             # estimates
             estChao = est.estimateReturn()
             estRegr = est.estimateReturn("shenRegression")
-            estNew = estNew.estimateReturn()
+            estNewRegr = estNew.estimateReturn()
 
             # excludeList
             exList = estNew.constructExcludeList()
@@ -69,7 +69,7 @@ for conf in configurations:
             # errors
             totalErrorChao += abs(estChao - actualReturn)
             totalErrorRegr += abs(estRegr - actualReturn)
-            totalErrorNew += abs(estNew - actualReturn)
+            totalErrorNew += abs(estNewRegr - actualReturn)
 
         # avg error
         avgErrorChao = totalErrorChao/float(samples)
@@ -93,7 +93,6 @@ fileOut.write(header)
 for conf in errors:
     querySize = conf[0]
     exListSize = conf[1]
-    line = ''
     chaoAvg = sum(errors[conf]['chao'])/float(len(errors[conf]['chao']))
     regrAvg = sum(errors[conf]['regr'])/float(len(errors[conf]['regr']))
     newAvg = sum(errors[conf]['new'])/float(len(errors[conf]['new']))
