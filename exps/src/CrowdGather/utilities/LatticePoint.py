@@ -78,6 +78,7 @@ class LatticePoint:
         else:
             # update local sampling results
             self.__updateSamplingResults(sample)
+            # propagate sampled items to children
         return sample
 
     def __constructPopulation(self):
@@ -187,7 +188,7 @@ class LatticePoint:
         self.entryFrequencyLogs.append(self.etr)
 
     def clearSampledPopulation(self):
-        self.retrievedEntries.clear()
+        del self.retrievedEntries[:]
         self.distinctEntries.clear()
         self.entryFrequencies.clear()
 
