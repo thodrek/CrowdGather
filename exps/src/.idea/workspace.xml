@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="8" selection-start="2106" selection-end="2106" vertical-scroll-proportion="0.5668693" vertical-offset="602" max-vertical-offset="2850">
+            <state line="65" column="34" selection-start="2132" selection-end="2132" vertical-scroll-proportion="0.0" vertical-offset="572" max-vertical-offset="2820">
               <folding>
                 <element signature="e#23#36#0" expanded="true" />
               </folding>
@@ -37,7 +37,7 @@
       <file leaf-file-name="testEstimatorErrors.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="25" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.0" vertical-offset="705" max-vertical-offset="1665">
+            <state line="63" column="13" selection-start="2125" selection-end="2125" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1665">
               <folding>
                 <element signature="e#26#50#0" expanded="true" />
               </folding>
@@ -54,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="37" selection-start="5281" selection-end="5525" vertical-scroll-proportion="-15.076923" vertical-offset="2173" max-vertical-offset="3315">
+            <state line="165" column="34" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.5253165" vertical-offset="2143" max-vertical-offset="3285">
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -624,27 +624,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="25" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.0" vertical-offset="705" max-vertical-offset="1665">
+        <state line="63" column="13" selection-start="2125" selection-end="2125" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1665">
           <folding>
             <element signature="e#26#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="37" selection-start="5281" selection-end="5525" vertical-scroll-proportion="-15.076923" vertical-offset="2173" max-vertical-offset="3315">
+        <state line="65" column="34" selection-start="2132" selection-end="2132" vertical-scroll-proportion="0.0" vertical-offset="572" max-vertical-offset="2820">
           <folding>
-            <element signature="e#24#42#0" expanded="true" />
+            <element signature="e#23#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="8" selection-start="2106" selection-end="2106" vertical-scroll-proportion="0.5668693" vertical-offset="602" max-vertical-offset="2850">
+        <state line="165" column="34" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.5253165" vertical-offset="2143" max-vertical-offset="3285">
           <folding>
-            <element signature="e#23#36#0" expanded="true" />
+            <element signature="e#24#42#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -50,7 +50,7 @@ for conf in configurations:
         for i in range(1,samples+1):
 
             # newUnique
-            oldUnique = len(po.distinctEntries)
+            oldUnique = len(p.distinctEntries)
 
             # estimates
             estChao = est.estimateReturn()
@@ -61,10 +61,10 @@ for conf in configurations:
             exList = estNew.constructExcludeList()
 
             # retrievesample
-            po.retrieveSample(querySize,exList)
+            p.retrieveSample(querySize,exList)
 
             # new Unique
-            newUnique = len(po.distinctEntries)
+            newUnique = len(p.distinctEntries)
             actualReturn = newUnique - oldUnique
 
             # errors
@@ -84,7 +84,7 @@ for conf in configurations:
         errors[conf]['new'].append(avgErrorNew)
 
         # reset point
-        po.clearSampledPopulation()
+        p.clearSampledPopulation()
 print 'DONE.'
 
 print 'Printing output file...',
