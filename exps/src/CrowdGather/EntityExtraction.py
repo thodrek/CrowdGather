@@ -147,10 +147,16 @@ class EntityExtraction:
             # Populate list with descendants of point
             for d in p.getDescendants():
                 if d not in activeNodes:
-                    frontier.append[d]
+                    frontier.append(d)
                     activeNodes[d] = 1
 
         return gain, cost-1.0
+
+    # auxiliary functions
+    def bfsThresholdFindAction(self,estList):
+        for e in estList:
+            # check if expected return is above a threshold
+            gainPercentage = e.estimateReturn()
 
     def bfsThresholdExtraction(self):
         # traverse lattice in a BFS manner keep
@@ -168,5 +174,15 @@ class EntityExtraction:
             exListSize = conf[1]
             est = self.getNewEstimator(root,querySize,exListSize)
             nodeEstimates[root].append(est)
+
+        while cost <= self.budget:
+            # take the first point key in the frontier
+            p = frontier.pop(0)
+
+            # pick the best configuration with expected return more than a threshold
+            bestConfig = 0.0
+
+            querySize = bestConfig[0]
+            exListSize = bestConfig[1]
 
         return gain, cost-1.0
