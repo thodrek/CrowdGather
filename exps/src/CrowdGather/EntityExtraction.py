@@ -157,7 +157,7 @@ class EntityExtraction:
         for e in estList:
             # check if expected return is above a threshold
             gainPercentage = e.estimateReturn()/float(e.querySize)
-            if gainPercentage > 0.2:
+            if gainPercentage > 0.8:
                 return e
         return None
 

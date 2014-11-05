@@ -86,7 +86,7 @@
       <file leaf-file-name="EntityExtraction.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="16" selection-start="6121" selection-end="6121" vertical-scroll-proportion="0.68085104" vertical-offset="2372" max-vertical-offset="3090">
+            <state line="159" column="35" selection-start="5196" selection-end="5196" vertical-scroll-proportion="0.22492401" vertical-offset="2237" max-vertical-offset="3090">
               <folding>
                 <element signature="e#25#49#0" expanded="true" />
               </folding>
@@ -698,7 +698,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="16" selection-start="6121" selection-end="6121" vertical-scroll-proportion="0.68085104" vertical-offset="2372" max-vertical-offset="3090">
+        <state line="159" column="35" selection-start="5196" selection-end="5196" vertical-scroll-proportion="0.22492401" vertical-offset="2237" max-vertical-offset="3090">
           <folding>
             <element signature="e#25#49#0" expanded="true" />
           </folding>
