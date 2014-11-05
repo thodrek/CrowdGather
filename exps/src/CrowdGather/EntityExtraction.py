@@ -162,6 +162,11 @@ class EntityExtraction:
         activeNodes = {}
         activeNodes[root] = 1
         nodeEstimates = {}
-        nodeEstimates = {}
+        nodeEstimates[root] = []
+        for conf in self.extConfigs:
+            querySize = conf[0]
+            exListSize = conf[1]
+            est = self.getNewEstimator(root,querySize,exListSize)
+            nodeEstimates[root].append(est)
 
         return gain, cost-1.0
