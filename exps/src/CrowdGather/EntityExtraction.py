@@ -117,17 +117,20 @@ class EntityExtraction:
         return gain, cost
 
     def bfsExtraction(self):
-        # ask query random configuration at each node traverse lattice in a BFS manner
+        # traverse lattice in a BFS manner ask single query at each node using a random configuration
         # keep track of queried nodex/configs
 
-        frontier = ['||']
+        root = self.lattice.points['||']
+        frontier = [root]
+        activeNodes = {}
+        activeNodes[root] = 1
 
         gain = 0.0
         cost = 0.0
 
         while cost <= self.budget:
             # take the first point key in the frontier
-            pKey = frontier.pop(0)
+            p = frontier.pop(0)
 
             # pick a random configuration
             randomConfig = random.choice(self.extConfigs)
@@ -135,8 +138,22 @@ class EntityExtraction:
             querySize = randomConfig[0]
             exListSize = randomConfig[1]
 
-            # form action key and retrieve estimator
-            queryKey = (pKey,querySize,exListSize)
-            est = self.getNewEstimator(self.lattice.points[pKey],querySize,exListSize)
+            # Retrieve estimator
+            est = self.getNewEstimator(p,querySize,exListSize)
 
+            gain += est.takeAction()
+            cost += 1.0
+
+            # Populate list with descendants of point
+            for d in p.getDescendants():
+                if d not in activeNodes:
+                    frontier.append[d]
+                    activeNodes[d] = 1
+
+        return gain, cost
+
+    def bfsThresholdExtraction(self):
+        # traverse lattice in a BFS manner keep
+        gain = 0.0
+        cost = 0.0
         return gain, cost

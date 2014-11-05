@@ -198,7 +198,7 @@ class PointEstimateShen:
         oldUnique = len(self.point.distinctEntries)
 
         # retrieve sample from underlying node
-        s = self.point.retrieveSample(self.sampleSize, excludeList)
+        s = self.point.retrieveSample(self.querySize, excludeList)
 
         # store new unique
         newUnique = len(self.point.distinctEntries)

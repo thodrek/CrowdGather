@@ -214,4 +214,4 @@ class PointEstimateNew:
         excludeList = self.constructExcludeList()
 
         # retrieve sample from underlying node
-        s = self.point.retrieveSample(self.sampleSize, excludeList)
+        s = self.point.retrieveSample(self.querySize, excludeList)
