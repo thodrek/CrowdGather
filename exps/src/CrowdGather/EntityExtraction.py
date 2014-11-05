@@ -87,7 +87,7 @@ class EntityExtraction:
         # find leaf nodes
         leafKeys = []
         for pKey in self.lattice.points:
-            if self.lattice.points[pKey].totalAssignedValues == 3:
+            if len(self.lattice.points[pKey].getDescendants()) == 0:
                 leafKeys.append(pKey)
 
         # keep track of queried nodex/configs
@@ -98,7 +98,7 @@ class EntityExtraction:
 
         while cost <= self.budget:
             # pick a node at random, pick a configuration at random and query it
-            randomNode = random.choice(pKey)
+            randomNode = random.choice(leafKeys)
             randomConfig = random.choice(self.extConfigs)
 
             querySize = randomConfig[0]
@@ -156,4 +156,12 @@ class EntityExtraction:
         # traverse lattice in a BFS manner keep
         gain = 0.0
         cost = 0.0
-        return gain, cost
+
+        root = self.lattice.points['||']
+        frontier = [root]
+        activeNodes = {}
+        activeNodes[root] = 1
+        nodeEstimates = {}
+        nodeEstimates = {}
+
+        return gain, cost-1.0
