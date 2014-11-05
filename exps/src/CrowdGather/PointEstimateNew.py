@@ -21,7 +21,7 @@ class PointEstimateNew:
         self.freqCounters = {}
         self.sampleSize  = 0.0
         self.uniqueNumber = 0.0
-
+        self.oldK = None
 
     # construct exclude list by taking random sample of size listSize
     def constructExcludeList(self):
@@ -169,6 +169,7 @@ class PointEstimateNew:
         # compute K
         f0, K = self.estimateF0_regression()
         self.oldKValues.append(K)
+        self.oldK = K
 
         # compute return
         newSampleSize = self.sampleSize + self.querySize

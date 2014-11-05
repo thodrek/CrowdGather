@@ -25,3 +25,35 @@ p = newLattice.points[emptyPoints[0]]
 s = p.retrieveSample(5)
 root = newLattice.points['||']
 p.propagateSample(s)
+
+
+import PointEstimateShen
+import PointEstimateNew
+root = newLattice.points['||']
+
+est = PointEstimateShen.PointEstimateShen(root,10,0)
+estNew = PointEstimateNew.PointEstimateNew(root,10,0)
+
+r1 = est.estimateReturn()
+r2 = est.estimateReturn("shenRegression")
+r3 = estNew.estimateReturn()
+
+print r1, r2, r3
+
+root.retrieveSample(10,[])
+
+r1 = est.estimateReturn()
+r2 = est.estimateReturn("shenRegression")
+r3 = estNew.estimateReturn()
+
+print r1, r2, r3
+
+root.retrieveSample(10,[])
+
+r1 = est.estimateReturn()
+r2 = est.estimateReturn("shenRegression")
+r3 = estNew.estimateReturn()
+
+print r1, r2, r3
+
+
