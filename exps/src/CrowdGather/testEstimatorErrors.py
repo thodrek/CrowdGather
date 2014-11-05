@@ -30,6 +30,7 @@ configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),
 samples = 100
 errors = {}
 
+print 'Computing Errors...',
 for conf in configurations:
     errors[conf] = {}
     errors[conf]['chao'] = []
@@ -45,7 +46,7 @@ for conf in configurations:
         totalErrorRegr = 0.0
         totalErrorNew = 0.0
         # retrieve samples
-        for i in len(1,samples+1):
+        for i in range(1,samples+1):
 
             # newUnique
             oldUnique = len(po.distinctEntries)
@@ -82,7 +83,9 @@ for conf in configurations:
 
         # reset point
         po.clearSampledPopulation()
+print 'DONE.'
 
+print 'Printing output file...',
 # print output to csv
 fileOut = open("estError.txt",'w')
 header = "querySize\texListSize\tchao\tregr\tnew\n"
@@ -97,4 +100,5 @@ for conf in errors:
     line = str(querySize)+"\t"+str(exListSize)+"\t"+str(chaoAvg)+"\t"+str(regrAvg)+"\t"+str(newAvg)+"\n"
     fileOut.write(line)
 fileOut.close()
+print 'DONE.'
 

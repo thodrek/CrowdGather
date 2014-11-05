@@ -182,3 +182,14 @@ class PointEstimateNew:
         f1 = self.freqCounters[1]
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems
+
+    # cost of estimator
+    def computeCost(self):
+        pointSpecificity = self.point.totalAssignedValues
+        w_Q_Size = 1.0
+        w_E_Size = 1.0
+        w_Spec = 1.0
+
+        cost =
+
+        return 1.0
