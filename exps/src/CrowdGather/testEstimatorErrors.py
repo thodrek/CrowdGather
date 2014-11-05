@@ -67,6 +67,7 @@ for conf in configurations:
             actualReturn = newUnique - oldUnique
 
             # errors
+            print abs(estChao - actualReturn), abs(estRegr - actualReturn), abs(estNewRegr - actualReturn)
             totalErrorChao += abs(estChao - actualReturn)/float(actualReturn+1.0)
             totalErrorRegr += abs(estRegr - actualReturn)/float(actualReturn+1.0)
             totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn+1.0)
