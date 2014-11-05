@@ -203,4 +203,11 @@ class PointEstimateNew:
         cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         return cost
 
-    
+    # take action
+    def takeAction(self):
+
+        # construct excludeList
+        excludeList = self.constructExcludeList()
+
+        # retrieve sample from underlying node
+        s = self.point.retrieveSample(self.sampleSize, excludeList)

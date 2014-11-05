@@ -67,9 +67,9 @@ for conf in configurations:
             actualReturn = newUnique - oldUnique
 
             # errors
-            totalErrorChao += abs(estChao - actualReturn)
-            totalErrorRegr += abs(estRegr - actualReturn)
-            totalErrorNew += abs(estNewRegr - actualReturn)
+            totalErrorChao += abs(estChao - actualReturn)/float(actualReturn)
+            totalErrorRegr += abs(estRegr - actualReturn)/float(actualReturn)
+            totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn)
 
         # avg error
         avgErrorChao = totalErrorChao/float(samples)
