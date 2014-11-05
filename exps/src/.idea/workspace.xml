@@ -45,19 +45,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LatticePoint.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="49" selection-start="2412" selection-end="2412" vertical-scroll-proportion="0.43529412" vertical-offset="815" max-vertical-offset="3000">
+            <state line="80" column="49" selection-start="2412" selection-end="2412" vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="3000">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="212" column="19" selection-start="6747" selection-end="6747" vertical-scroll-proportion="-30.538462" vertical-offset="2386" max-vertical-offset="3285">
+            <state line="205" column="4" selection-start="6557" selection-end="6557" vertical-scroll-proportion="0.87257284" vertical-offset="2356" max-vertical-offset="3180">
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -85,8 +85,8 @@
         <option value="$PROJECT_DIR$/CrowdGather/createlattice.py" />
         <option value="$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShen.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNew.py" />
         <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNew.py" />
       </list>
     </option>
   </component>
@@ -624,15 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="19" selection-start="6747" selection-end="6747" vertical-scroll-proportion="-30.538462" vertical-offset="2386" max-vertical-offset="3285">
-          <folding>
-            <element signature="e#24#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="102" column="0" selection-start="3489" selection-end="3489" vertical-scroll-proportion="0.0" vertical-offset="785" max-vertical-offset="1635">
@@ -644,8 +635,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="49" selection-start="2412" selection-end="2412" vertical-scroll-proportion="0.43529412" vertical-offset="815" max-vertical-offset="3000">
+        <state line="80" column="49" selection-start="2412" selection-end="2412" vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="3000">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="205" column="4" selection-start="6557" selection-end="6557" vertical-scroll-proportion="0.87257284" vertical-offset="2356" max-vertical-offset="3180">
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
