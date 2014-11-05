@@ -190,6 +190,4 @@ class PointEstimateNew:
         w_E_Size = 1.0
         w_Spec = 1.0
 
-        cost =
-
         return 1.0
