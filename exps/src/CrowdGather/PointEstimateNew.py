@@ -17,7 +17,7 @@ class PointEstimateNew:
 
         # sampling variables
         self.oldSamples = []
-        self.oldKValues = []
+        self.oldKValues = {}
         self.freqCounters = {}
         self.sampleSize  = 0.0
         self.uniqueNumber = 0.0
@@ -168,7 +168,7 @@ class PointEstimateNew:
 
         # compute K
         f0, K = self.estimateF0_regression()
-        self.oldKValues.append(K)
+        self.oldKValues[self.sampleSize] = K
         self.oldK = K
 
         # compute return
