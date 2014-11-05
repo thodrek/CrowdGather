@@ -80,3 +80,36 @@ class EntityExtraction:
             cost += 1.0
         return gain, cost
 
+    def randomLeavesExtraction(self):
+
+        # find leaf nodes
+        leafKeys = []
+        for pKey in self.lattice.points:
+            if self.lattice.points[pKey].totalAssignedValues == 3:
+                leafKeys.append(pKey)
+
+        # keep track of queried nodex/configs
+        previousQueries = {}
+
+        cost = 0.0
+        gain = 0.0
+
+        while cost <= self.budget:
+            # pick a node at random, pick a configuration at random and query it
+            randomNode = random.choice(pKey)
+            randomConfig = random.choice(self.extConfigs)
+
+            querySize = randomConfig[0]
+            exListSize = randomConfig[1]
+
+            # form action key and retrieve estimator
+            queryKey = (randomNode,querySize,exListSize)
+            if queryKey not in previousQueries:
+                est = self.getNewEstimator(self.lattice.points[randomNode],querySize,exListSize)
+                previousQueries[queryKey] = est
+            else:
+                est = previousQueries[queryKey]
+
+            gain += est.takeAction()
+            cost += 1.0
+        return gain, cost
