@@ -80,7 +80,7 @@ class EntityExtraction:
 
             gain += est.takeAction()
             cost += 1.0
-        return gain, cost
+        return gain, cost-1.0
 
     def randomLeavesExtraction(self):
 
@@ -114,7 +114,7 @@ class EntityExtraction:
 
             gain += est.takeAction()
             cost += 1.0
-        return gain, cost
+        return gain, cost-1.0
 
     def bfsExtraction(self):
         # traverse lattice in a BFS manner ask single query at each node using a random configuration
@@ -150,7 +150,7 @@ class EntityExtraction:
                     frontier.append[d]
                     activeNodes[d] = 1
 
-        return gain, cost
+        return gain, cost-1.0
 
     def bfsThresholdExtraction(self):
         # traverse lattice in a BFS manner keep
