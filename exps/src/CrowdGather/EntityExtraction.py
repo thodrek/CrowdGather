@@ -50,7 +50,7 @@ class EntityExtraction:
 
     def getNewEstimator(self, latticePoint, querySize, exListSize):
         if self.estMethod == "chao92" or self.estMethod == "shenRegression":
-            return PointEstimateShen.PointEstimateShen(latticePoint,querySize,exListSize,self.estMathod)
+            return PointEstimateShen.PointEstimateShen(latticePoint,querySize,exListSize,self.estMethod)
         else:
             return PointEstimateNew.PointEstimateNew(latticePoint,querySize,exListSize)
 
@@ -114,4 +114,29 @@ class EntityExtraction:
 
             gain += est.takeAction()
             cost += 1.0
+        return gain, cost
+
+    def bfsExtraction(self):
+        # ask query random configuration at each node traverse lattice in a BFS manner
+        # keep track of queried nodex/configs
+
+        frontier = ['||']
+
+        gain = 0.0
+        cost = 0.0
+
+        while cost <= self.budget:
+            # take the first point key in the frontier
+            pKey = frontier.pop(0)
+
+            # pick a random configuration
+            randomConfig = random.choice(self.extConfigs)
+
+            querySize = randomConfig[0]
+            exListSize = randomConfig[1]
+
+            # form action key and retrieve estimator
+            queryKey = (pKey,querySize,exListSize)
+            est = self.getNewEstimator(self.lattice.points[pKey],querySize,exListSize)
+
         return gain, cost
