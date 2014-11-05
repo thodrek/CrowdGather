@@ -7,7 +7,7 @@ import scipy.optimize
 
 class PointEstimateShen:
 
-    def __init__(self,latticePoint,querySize,excludeListSize):
+    def __init__(self,latticePoint,querySize,excludeListSize,estMethod):
         self.point = latticePoint
 
         # expected return variables
@@ -19,6 +19,12 @@ class PointEstimateShen:
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.oldK = None
+
+        if estMethod == "chao92" or estMethod == "shenRegression":
+            self.estMethod = estMethod
+        else:
+            print "Invalid estimator specified for expected return"
+            sys.exit(-1)
 
 
     # methods to retrieve characteristics of local sample
@@ -55,7 +61,7 @@ class PointEstimateShen:
                     self.uniqueNumber += 1.0
 
     # estimate return
-    def estimateReturn(self,estimator = "chao92"):
+    def estimateReturn(self):
         # construct excludeList
         excludeList = self.constructExcludeList()
 
@@ -74,11 +80,7 @@ class PointEstimateShen:
             return self.querySize
 
         # compute query return
-        if estimator == "chao92" or estimator == "shenRegression":
-            return self.shenEstimator(self.querySize,estimator)
-        else:
-            print "Invalid estimator specified for expected return"
-            sys.exit(-1)
+        return self.shenEstimator(self.querySize,self.estMethod)
 
     # auxiliary functions
     def estimateCoverage(self):
@@ -185,3 +187,23 @@ class PointEstimateShen:
 
         cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         return cost
+
+    # take action
+    def takeAction(self):
+
+        # construct excludeList
+        excludeList = self.constructExcludeList()
+
+        # store old unique
+        oldUnique = len(self.point.distinctEntries)
+
+        # retrieve sample from underlying node
+        s = self.point.retrieveSample(self.sampleSize, excludeList)
+
+        # store new unique
+        newUnique = len(self.point.distinctEntries)
+
+        # compute gain
+        gain = newUnique - oldUnique
+        return gain
+
