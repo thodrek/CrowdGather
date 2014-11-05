@@ -203,9 +203,12 @@ class Estimate:
         return A/(1.0 + math.exp(-G*(newX - D)))
 
     def estimateP1(self):
-        N2 = self.freqCounters[2]
+        if 2 in self.freqCounters:
+            N2 = self.freqCounters[2] + 1.0
+        else:
+            N2 = 1.0
         n = self.totalEntries()
-        return 2.0*N2/n
+        return 2.0*N2/(n+1)
 
     def estimateP(self,querySize):
         p = 0.0
