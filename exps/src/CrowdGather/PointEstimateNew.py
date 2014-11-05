@@ -66,9 +66,12 @@ class PointEstimateNew:
 
     # estimate P1
     def estimateP1(self):
-        N2 = self.freqCounters[2]
-        n = self.sampleSize
-        return 2.0*N2/n
+        if 2 in self.freqCounters:
+            N2 = self.freqCounters[2] + 1.0
+        else:
+            N2 = 1.0
+        n = self.totalEntries()
+        return 2.0*N2/(n+1)
 
     # estimate altered singletons
     def estimateAlteredSingletons(self):
