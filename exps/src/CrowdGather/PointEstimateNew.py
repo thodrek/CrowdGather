@@ -213,5 +213,15 @@ class PointEstimateNew:
         # construct excludeList
         excludeList = self.constructExcludeList()
 
+        # store old unique
+        oldUnique = len(self.point.distinctEntries)
+
         # retrieve sample from underlying node
         s = self.point.retrieveSample(self.querySize, excludeList)
+
+        # store new unique
+        newUnique = len(self.point.distinctEntries)
+
+        # compute gain
+        gain = newUnique - oldUnique
+        return gain
