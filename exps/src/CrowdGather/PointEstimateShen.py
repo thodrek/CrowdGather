@@ -267,7 +267,7 @@ class PointEstimateShen:
         returnEstimates = []
 
         # iterate over samples and compute estimated return
-        for i in range(n):
+        for i in range(num_samples):
             newSample = list(samples[i])
             newDistinct = set(newSample)
             newEntryFreqs = {}
@@ -285,7 +285,10 @@ class PointEstimateShen:
             newEntryFreqs.clear()
         variance = np.var(np.array(returnEstimates))
         mean = np.mean(np.array(returnEstimates))
-        return mean, variance
+        alpha = 0.05
+        statList = np.sort(returnEstimates)
+        upperValue = statList[int((1-alpha/2.0)*num_samples)]
+        return upperValue, mean, variance
 
     # take action
     def takeAction(self):
@@ -308,8 +311,9 @@ class PointEstimateShen:
 
     def estimateGain(self,upper=False):
         gain = self.estimateReturn()
+        upperValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            gain, variance = self.bootstrapVariance(100)
+            upperValue, gain, variance = self.bootstrapVariance(100)
         else:
             variance = 0.0
-        return gain, variance
+        return gain, variance, upperValue

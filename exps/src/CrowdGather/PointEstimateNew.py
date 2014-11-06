@@ -5,6 +5,7 @@ import sys
 from utilities import functions
 import scipy.optimize
 import math
+import numpy.random as npr
 
 class PointEstimateNew:
 
@@ -196,6 +197,38 @@ class PointEstimateNew:
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems
 
+    # estimate return with variance
+    def estimateReturnBootStrap(self,distinctEntries,entryFrequencies):
+
+        # construct excludeList
+        excludeList = self.constructExcludeList(distinctEntries)
+
+        # update freq counters
+        self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
+
+        # check if sample is empty
+        if self.sampleSize == 0.0:
+            if self.point.emptyPopulation == True:
+                return 0.0
+            else:
+                return self.querySize
+
+        # compute K
+        f0, K = self.estimateF0_regression()
+
+        # check if exclude list contains the entire sample
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
+
+        # compute return
+        newSampleSize = self.sampleSize + self.querySize
+        n = self.sampleSize
+        Kprime = self.estimateKprime(newSampleSize)
+        f1c = self.estimateAlteredSingletons()
+        f1 = self.freqCounters[1]
+        newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
+        return newItems, K
+
     # normalized return
     def normalizedReturn(self):
         return self.estimateReturn()/float(self.querySize)
@@ -272,6 +305,48 @@ class PointEstimateNew:
             self.oldKValues[self.sampleSize] = K
             self.oldK = K
 
+
+    def bootstrapVariance(self, num_samples):
+        # grap retrieved items from lattice point
+        data = np.array(self.point.retrievedEntries)
+        n = len(data)
+        # generate bootstrapped samples
+        idx = npr.randint(0, n, (num_samples, n))
+        samples = data[idx]
+
+        # initialize return estimates
+        returnEstimates = []
+        K_estimates = []
+        K_samplesizes = []
+        # iterate over samples and compute estimated return
+        for i in range(num_samples):
+            newSample = list(samples[i])
+            newDistinct = set(newSample)
+            newEntryFreqs = {}
+            for id in newSample:
+                if id not in newEntryFreqs:
+                    newEntryFreqs[id] = 1
+                else:
+                    newEntryFreqs[id] += 1
+
+            # get new estimate
+            newReturn, newK = self.estimateReturnBootStrap(newDistinct, newEntryFreqs)
+            returnEstimates.append(newReturn)
+            K_estimates.append(newK)
+            K_samplesizes.append(self.sampleSize)
+            del newSample[:]
+            newDistinct.clear()
+            newEntryFreqs.clear()
+        variance = np.var(np.array(returnEstimates))
+        mean = np.mean(np.array(returnEstimates))
+        meanK = np.mean(np.array(K_estimates))
+        meanSS = int(round(np.mean(np.array(K_samplesizes))))
+        mean = np.mean(np.array(returnEstimates))
+        alpha = 0.05
+        statList = np.sort(np.array(returnEstimates))
+        upperValue = statList[int((1-alpha/2.0)*num_samples)]
+        return upperValue, mean, variance, meanK, meanSS
+
     # take action
     def takeAction(self):
 
@@ -290,3 +365,14 @@ class PointEstimateNew:
         # compute gain
         gain = newUnique - oldUnique
         return gain
+
+    def estimateGain(self,upper=False):
+        gain = self.estimateReturn()
+        upperValue = gain
+        if upper and len(self.point.retrievedEntries) > 0.0:
+            upperValue, gain, variance, meanK, meanSS = self.bootstrapVariance(100)
+            self.oldKValues[meanSS] = meanK
+            self.oldK = meanK
+        else:
+            variance = 0.0
+        return gain, variance, upperValue

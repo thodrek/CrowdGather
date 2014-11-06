@@ -10,12 +10,15 @@ from Queue import PriorityQueue
 
 class EntityExtraction:
 
-    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod):
+    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod, lattice=None):
         # store budget
         self.budget = budget
 
         # generate latice
-        self.lattice = Lattice.Lattice(hList,hDescr,itemInfo)
+        if lattice:
+            self.lattice = lattice
+        else:
+            self.lattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
         # store extraction configurations
         self.extConfigs = extConfigs
@@ -165,8 +168,8 @@ class EntityExtraction:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
-                gain, var = e.estimateGain(True)
-                normGain = (gain+var)/float(e.querySize)
+                upperGain, gain, var = e.estimateGain(True)
+                normGain = upperGain/float(e.querySize)
                 gainCostRatio = float(normGain)/float(cost)
                 if gainCostRatio > bestScore:
                     bestAction = e
@@ -191,7 +194,7 @@ class EntityExtraction:
 
         while cost < self.budget:
             # pick the best configuration with expected return more than a threshold
-            bestAction = self.gsThresholdFindAction(nodeEstimates[p])
+            bestAction = self.gsFindBestAction(nodeEstimates)
             if bestAction:
                 gain += bestAction.takeAction()
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)

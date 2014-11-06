@@ -27,7 +27,7 @@ for p in newLattice.points:
         break
 
 # configurations (querySize, excludeListSize)
-configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
+configurations = [(5,0),(10,0),(20,0),(50,0),(100,0)]#,(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
 samples = 10
 errors = {}
 
@@ -37,8 +37,11 @@ print 'Computing Errors...',
 for conf in configurations:
     errors[conf] = {}
     errors[conf]['chao'] = []
+    errors[conf]['chaoUpper'] = []
     errors[conf]['regr'] = []
+    errors[conf]['regrUpper'] = []
     errors[conf]['new'] = []
+    errors[conf]['newUpper'] = []
     querySize = conf[0]
     excludeListSize = conf[1]
     # for each point in samplePoints create estimators
@@ -47,8 +50,11 @@ for conf in configurations:
         estRegr = PointEstimateShen.PointEstimateShen(p,querySize,excludeListSize,"shenRegression")
         estNew = PointEstimateNew.PointEstimateNew(p,querySize,excludeListSize)
         totalErrorChao = 0.0
+        totalErrorChaoUpper = 0.0
         totalErrorRegr = 0.0
+        totalErrorRegrUpper = 0.0
         totalErrorNew = 0.0
+        totalErrorNewUpper = 0.0
         # retrieve samples
         for i in range(1,samples+1):
 
@@ -56,9 +62,9 @@ for conf in configurations:
             oldUnique = len(p.distinctEntries)
 
             # estimates
-            estChaoGain = estChao.estimateReturn()
-            estRegrGain = estRegr.estimateReturn()
-            estNewRegr = estNew.estimateReturn()
+            estChaoGain = estChao.estimateGain()
+            estRegrGain = estRegr.estimateGain()
+            estNewRegr = estNew.estimateGain()
 
             # excludeList
             exList = estNew.constructExcludeList()
