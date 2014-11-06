@@ -4,6 +4,7 @@ import sys
 from utilities import functions
 import numpy as np
 import scipy.optimize
+import numpy.random as npr
 
 class PointEstimateShen:
 
@@ -19,10 +20,6 @@ class PointEstimateShen:
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.oldK = None
-
-        # variables for bootstrapping
-        self.distinctEntries = latticePoint.distinctEntries
-        self.entryFrequencies = latticePoint.entryFrequencies
 
         if estMethod == "chao92" or estMethod == "shenRegression":
             self.estMethod = estMethod
@@ -45,27 +42,27 @@ class PointEstimateShen:
         return len(self.point.retrievedEntries)
 
     # construct exclude list by taking random sample of size listSize
-    def constructExcludeList(self):
+    def constructExcludeList(self, distinctEntries):
         # take a random sample of size listSize from retrieved entries
-        if self.excludeListSize >= len(self.point.distinctEntries):
-            excludeList = self.point.distinctEntries
+        if self.excludeListSize >= len(distinctEntries):
+            excludeList = distinctEntries
         else:
-            excludeList = random.sample(self.point.distinctEntries,self.excludeListSize)
+            excludeList = random.sample(distinctEntries,self.excludeListSize)
         return excludeList
 
     # compute frequency counters
-    def updateFreqCounterSampleSize(self,excludeList):
+    def updateFreqCounterSampleSize(self,excludeList,entryFrequencies):
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.freqCounters.clear()
-        if len(self.point.entryFrequencies) > 0.0:
-            maxF = max(self.point.entryFrequencies.values())
+        if len(entryFrequencies) > 0.0:
+            maxF = max(entryFrequencies.values())
             for f in range(1,maxF+1):
                 self.freqCounters[f] = 0.0
 
-            for e in self.point.entryFrequencies:
+            for e in entryFrequencies:
                 if e not in excludeList:
-                    f = self.point.entryFrequencies[e]
+                    f = entryFrequencies[e]
                     self.freqCounters[f] += 1.0
                     self.sampleSize += float(f)
                     self.uniqueNumber += 1.0
@@ -73,10 +70,10 @@ class PointEstimateShen:
     # estimate return
     def estimateReturn(self,strataOption=False):
         # construct excludeList
-        excludeList = self.constructExcludeList()
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # update freq counters
-        self.updateFreqCounterSampleSize(excludeList)
+        self.updateFreqCounterSampleSize(excludeList,self.point.entryFrequencies)
 
         # check if sample is empty
         if self.sampleSize == 0.0:
@@ -92,6 +89,28 @@ class PointEstimateShen:
         # compute query return
         if strataOption and len(self.point.childrenWeights) > 0:
             return self.estimateStratifiedReturn(excludeList)
+        return self.shenEstimator(self.querySize,self.estMethod)
+
+    # estimate return with variance
+    def estimateReturnBootStrap(self,distinctEntries,entryFrequencies):
+        # construct excludeList
+        excludeList = self.constructExcludeList(distinctEntries)
+
+        # update freq counters
+        self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
+
+        # check if sample is empty
+        if self.sampleSize == 0.0:
+            if self.point.emptyPopulation == True:
+                return 0.0
+            else:
+                return self.querySize
+
+        # check if exclude list contains the entire sample
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
+
+        # compute query return
         return self.shenEstimator(self.querySize,self.estMethod)
 
     # auxiliary functions
@@ -236,6 +255,38 @@ class PointEstimateShen:
             del childExList[:]
         return gain
 
+    def bootstrapVariance(self, num_samples):
+        # grap retrieved items from lattice point
+        data = np.array(self.point.retrievedEntries)
+        n = len(data)
+        # generate bootstrapped samples
+        idx = npr.randint(0, n, (num_samples, n))
+        samples = data[idx]
+
+        # initialize return estimates
+        returnEstimates = []
+
+        # iterate over samples and compute estimated return
+        for i in range(n):
+            newSample = list(samples[i])
+            newDistinct = set(newSample)
+            newEntryFreqs = {}
+            for id in newSample:
+                if id not in newEntryFreqs:
+                    newEntryFreqs[id] = 1
+                else:
+                    newEntryFreqs[id] += 1
+
+            # get new estimate
+            newReturn = self.estimateReturnBootStrap(newDistinct,newEntryFreqs)
+            returnEstimates.append(newReturn)
+            del newSample[:]
+            newDistinct.clear()
+            newEntryFreqs.clear()
+        variance = np.var(np.array(returnEstimates))
+        mean = np.mean(np.array(returnEstimates))
+        return mean, variance
+
     # take action
     def takeAction(self):
 
@@ -255,12 +306,10 @@ class PointEstimateShen:
         gain = newUnique - oldUnique
         return gain
 
-    def bootstrapVariance(self, data, num_samples, alpha):
-        """Returns bootstrap estimate of 100.0*(1-alpha) CI for statistic."""
-        n = len(data)
-        idx = npr.randint(0, n, (num_samples, n))
-        samples = data[idx]
-        stat = np.sort(statistic(samples, 1))
-        variance = np.var(np.array(stat))
-        return (stat[int((alpha/2.0)*num_samples)],
-                stat[int((1-alpha/2.0)*num_samples)],variance)
+    def estimateGain(self,upper=False):
+        gain = self.estimateReturn()
+        if upper and len(self.point.retrievedEntries) > 0.0:
+            gain, variance = self.bootstrapVariance(100)
+        else:
+            variance = 0.0
+        return gain, variance

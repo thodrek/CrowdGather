@@ -165,7 +165,8 @@ class EntityExtraction:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
-                normGain = e.normalizedReturn()
+                gain, var = e.estimateGain(True)
+                normGain = (gain+var)/float(e.querySize)
                 gainCostRatio = float(normGain)/float(cost)
                 if gainCostRatio > bestScore:
                     bestAction = e

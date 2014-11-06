@@ -37,9 +37,7 @@ print 'Computing Errors...',
 for conf in configurations:
     errors[conf] = {}
     errors[conf]['chao'] = []
-    errors[conf]['chaoChildren'] = []
     errors[conf]['regr'] = []
-    errors[conf]['regrChildren'] = []
     errors[conf]['new'] = []
     querySize = conf[0]
     excludeListSize = conf[1]
@@ -50,8 +48,6 @@ for conf in configurations:
         estNew = PointEstimateNew.PointEstimateNew(p,querySize,excludeListSize)
         totalErrorChao = 0.0
         totalErrorRegr = 0.0
-        totalErrorChaoChildren = 0.0
-        totalErrorRegrChildren = 0.0
         totalErrorNew = 0.0
         # retrieve samples
         for i in range(1,samples+1):
@@ -62,8 +58,6 @@ for conf in configurations:
             # estimates
             estChaoGain = estChao.estimateReturn()
             estRegrGain = estRegr.estimateReturn()
-            estChaoChildrenGain = estChao.estimateReturn(True)
-            estRegrChildrenGain = estRegr.estimateReturn(True)
             estNewRegr = estNew.estimateReturn()
 
             # excludeList
@@ -80,8 +74,6 @@ for conf in configurations:
             #print p.key, querySize,excludeListSize, i, actualReturn,estChao,estRegr, estNewRegr
             totalErrorChao += abs(estChaoGain - actualReturn)/float(actualReturn+1.0)
             totalErrorRegr += abs(estRegrGain - actualReturn)/float(actualReturn+1.0)
-            totalErrorChaoChildren += abs(estChaoChildrenGain - actualReturn)/float(actualReturn+1.0)
-            totalErrorRegrChildren += abs(estRegrChildrenGain - actualReturn)/float(actualReturn+1.0)
             totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn+1.0)
 
             # print progress
@@ -93,15 +85,11 @@ for conf in configurations:
         # avg error
         avgErrorChao = totalErrorChao/float(samples)
         avgErrorRegr = totalErrorRegr/float(samples)
-        avgErrorChaoChildren = totalErrorChaoChildren/float(samples)
-        avgErrorRegrChildren = totalErrorRegrChildren/float(samples)
         avgErrorNew = totalErrorNew/float(samples)
 
         # store errros
         errors[conf]['chao'].append(avgErrorChao)
         errors[conf]['regr'].append(avgErrorRegr)
-        errors[conf]['chaoChildren'].append(avgErrorChaoChildren)
-        errors[conf]['regrChildren'].append(avgErrorRegrChildren)
         errors[conf]['new'].append(avgErrorNew)
 
         # reset point
@@ -111,17 +99,15 @@ print 'DONE.'
 print 'Printing output file...',
 # print output to csv
 fileOut = open("estError.txt",'w')
-header = "querySize\texListSize\tchao\tregr\tchaoChildren\tregrChildren\tnew\n"
+header = "querySize\texListSize\tchao\tregr\tnew\n"
 fileOut.write(header)
 for conf in errors:
     querySize = conf[0]
     exListSize = conf[1]
     chaoAvg = sum(errors[conf]['chao'])/float(len(errors[conf]['chao']))
     regrAvg = sum(errors[conf]['regr'])/float(len(errors[conf]['regr']))
-    chaoAvgChildren = sum(errors[conf]['chaoChildren'])/float(len(errors[conf]['chaoChildren']))
-    regrAvgChildren = sum(errors[conf]['regrChildren'])/float(len(errors[conf]['regrChildren']))
     newAvg = sum(errors[conf]['new'])/float(len(errors[conf]['new']))
-    line = str(querySize)+"\t"+str(exListSize)+"\t"+str(chaoAvg)+"\t"+str(regrAvg)+"\t"+str(chaoAvgChildren)+"\t"+str(regrAvgChildren)+"\t"+str(newAvg)+"\n"
+    line = str(querySize)+"\t"+str(exListSize)+"\t"+str(chaoAvg)+"\t"+str(regrAvg)+"\t"+str(newAvg)+"\n"
     fileOut.write(line)
 fileOut.close()
 print 'DONE.'
