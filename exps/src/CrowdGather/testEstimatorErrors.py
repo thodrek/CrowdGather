@@ -5,6 +5,7 @@ import cPickle as pickle
 from utilities import Lattice
 import PointEstimateShen
 import PointEstimateNew
+import sys
 
 catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
 timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
@@ -30,6 +31,8 @@ configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),
 samples = 10
 errors = {}
 
+totalOperations = len(configurations)*len(samplePoints)*samples
+counter = 0
 print 'Computing Errors...',
 for conf in configurations:
     errors[conf] = {}
@@ -80,6 +83,12 @@ for conf in configurations:
             totalErrorChaoChildren += abs(estChaoChildrenGain - actualReturn)/float(actualReturn+1.0)
             totalErrorRegrChildren += abs(estRegrChildrenGain - actualReturn)/float(actualReturn+1.0)
             totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn+1.0)
+
+            # print progress
+            counter += 1
+            progress = float(counter)*100.0/float(totalOperations)
+            sys.stdout.write("\r%.2f%% (%d out of %d)" % (progress, counter, totalOperations))
+            sys.stdout.flush()
 
         # avg error
         avgErrorChao = totalErrorChao/float(samples)
