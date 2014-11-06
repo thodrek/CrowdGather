@@ -24,27 +24,27 @@ class PointEstimateNew:
         self.oldK = None
 
     # construct exclude list by taking random sample of size listSize
-    def constructExcludeList(self):
+    def constructExcludeList(self,distinctEntries):
         # take a random sample of size listSize from retrieved entries
-        if self.excludeListSize >= len(self.point.distinctEntries):
-            excludeList = self.point.distinctEntries
+        if self.excludeListSize >= len(distinctEntries):
+            excludeList = distinctEntries
         else:
-            excludeList = random.sample(self.point.distinctEntries,self.excludeListSize)
+            excludeList = random.sample(distinctEntries,self.excludeListSize)
         return excludeList
 
     # compute frequency counters
-    def updateFreqCounterSampleSize(self,excludeList):
+    def updateFreqCounterSampleSize(self,excludeList,entryFrequencies):
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.freqCounters.clear()
-        if len(self.point.entryFrequencies) > 0.0:
-            maxF = max(self.point.entryFrequencies.values())
+        if len(entryFrequencies) > 0.0:
+            maxF = max(entryFrequencies.values())
             for f in range(1,maxF+1):
                 self.freqCounters[f] = 0.0
 
-            for e in self.point.entryFrequencies:
+            for e in entryFrequencies:
                 if e not in excludeList:
-                    f = self.point.entryFrequencies[e]
+                    f = entryFrequencies[e]
                     self.freqCounters[f] += 1.0
                     self.sampleSize += float(f)
                     self.uniqueNumber += 1.0
@@ -155,12 +155,17 @@ class PointEstimateNew:
         return K*f1/n,K
 
     # estimate return
-    def estimateReturn(self,strataOption=False):
+    def estimateReturn(self,strataOption=False,tempEstimate=False):
+
+        # if temp estimation generate K history
+        if tempEstimate:
+            self.compute_K_History()
+
         # construct excludeList
-        excludeList = self.constructExcludeList()
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # update freq counters
-        self.updateFreqCounterSampleSize(excludeList)
+        self.updateFreqCounterSampleSize(excludeList,self.point.entryFrequencies)
 
         # check if sample is empty
         if self.sampleSize == 0.0:
@@ -241,7 +246,7 @@ class PointEstimateNew:
             childQuerySize = int(round(float(self.querySize)*self.point.childrenWeights[d]/totalWeight))
             # instanciate new estimator
             childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
-            childGain = childGainEst.estimateReturn()
+            childGain = childGainEst.estimateReturn(False,True)
             gain += childGain
             childGainEst.clear()
             del childExList[:]
@@ -249,35 +254,23 @@ class PointEstimateNew:
 
     # history based methods
 
-    def estimateReturnHistory(self):
+    def compute_K_History(self):
 
-        # compute previous K values from lattice point sample history
-        self.sampleLogs = []
-        self.distinctEntryLogs = []
-        self.entryFrequencyLogs = []
-
-        for i in range(len(self.point.sampleLogs)):
-            sample = self.point.sampleLogs[i]
+        # Iterate over sampling history to compute old K values
+        for i in range(len(self.point.distinctEntryLogs)-1):
             distinctEntries = self.point.distinctEntryLogs[i]
+            entryFreqs = self.point.entryFrequencyLogs[i]
 
             # construct excludeList
-            excludeList = self.constructExcludeList()
+            excludeList = self.constructExcludeList(distinctEntries)
 
             # update freq counters
-            self.updateFreqCounterSampleSize(excludeList)
-
-            # check if sample is empty
-            if self.sampleSize == 0.0:
-                if self.point.emptyPopulation == True:
-                    return 0.0
-                else:
-                    return self.querySize
+            self.updateFreqCounterSampleSize(excludeList,entryFreqs)
 
             # compute K
             f0, K = self.estimateF0_regression()
             self.oldKValues[self.sampleSize] = K
             self.oldK = K
-
 
     # take action
     def takeAction(self):

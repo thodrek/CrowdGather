@@ -46,7 +46,7 @@
       <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="36" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-10.8" vertical-offset="90" max-vertical-offset="4122">
+            <state line="37" column="28" selection-start="1037" selection-end="1037" vertical-scroll-proportion="-10.145454" vertical-offset="90" max-vertical-offset="4122">
               <folding />
             </state>
           </provider>
@@ -73,7 +73,7 @@
       <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="33" selection-start="3007" selection-end="3007" vertical-scroll-proportion="0.38344434" vertical-offset="1109" max-vertical-offset="5400">
+            <state line="273" column="0" selection-start="9211" selection-end="9211" vertical-scroll-proportion="2.0104663" vertical-offset="2711" max-vertical-offset="5274">
               <folding />
             </state>
           </provider>
@@ -650,14 +650,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="36" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-10.8" vertical-offset="90" max-vertical-offset="4122">
+        <state line="37" column="28" selection-start="1037" selection-end="1037" vertical-scroll-proportion="-10.145454" vertical-offset="90" max-vertical-offset="4122">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="33" selection-start="3007" selection-end="3007" vertical-scroll-proportion="0.38344434" vertical-offset="1109" max-vertical-offset="5400">
+        <state line="273" column="0" selection-start="9211" selection-end="9211" vertical-scroll-proportion="2.0104663" vertical-offset="2711" max-vertical-offset="5274">
           <folding />
         </state>
       </provider>
