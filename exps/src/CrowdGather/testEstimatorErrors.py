@@ -57,10 +57,10 @@ for conf in configurations:
             oldUnique = len(p.distinctEntries)
 
             # estimates
-            estChao = estChao.estimateReturn()
-            estRegr = estRegr.estimateReturn()
-            estChaoChildren = estChao.estimateReturn(True)
-            estRegrChildren = estRegr.estimateReturn(True)
+            estChaoGain = estChao.estimateReturn()
+            estRegrGain = estRegr.estimateReturn()
+            estChaoChildrenGain = estChao.estimateReturn(True)
+            estRegrChildrenGain = estRegr.estimateReturn(True)
             estNewRegr = estNew.estimateReturn()
 
             # excludeList
@@ -75,9 +75,10 @@ for conf in configurations:
 
             # errors
             #print p.key, querySize,excludeListSize, i, actualReturn,estChao,estRegr, estNewRegr
-            totalErrorChao += abs(estChao - actualReturn)/float(actualReturn+1.0)
-            totalErrorChaoChildren += abs(estChaoChildren - actualReturn)/float(actualReturn+1.0)
-            totalErrorRegrChildren += abs(estRegrChildren - actualReturn)/float(actualReturn+1.0)
+            totalErrorChao += abs(estChaoGain - actualReturn)/float(actualReturn+1.0)
+            totalErrorRegr += abs(estRegrGain - actualReturn)/float(actualReturn+1.0)
+            totalErrorChaoChildren += abs(estChaoChildrenGain - actualReturn)/float(actualReturn+1.0)
+            totalErrorRegrChildren += abs(estRegrChildrenGain - actualReturn)/float(actualReturn+1.0)
             totalErrorNew += abs(estNewRegr - actualReturn)/float(actualReturn+1.0)
 
         # avg error
