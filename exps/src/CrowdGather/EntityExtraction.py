@@ -6,10 +6,11 @@ import PointEstimateShen
 import PointEstimateNew
 import sys
 import random
+from Queue import PriorityQueue
 
 class EntityExtraction:
 
-    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, optMethod, estMethod):
+    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod):
         # store budget
         self.budget = budget
 
@@ -19,8 +20,12 @@ class EntityExtraction:
         # store extraction configurations
         self.extConfigs = extConfigs
 
+        # maxQuerySize, maxExListSize
+        self.maxQuerySize = maxQuerySize
+        self.maxExListSize = maxExListSize
+
         # store extraction method
-        if optMethod in ["random", "BFS", "BFS_thres", "randomLeaves", "UCBFront"]:
+        if optMethod in ["random", "BFS", "GS_thres", "randomLeaves", "UCBFront"]:
             self.optMethod = optMethod
         else:
             print "Invalid extraction method specified"
@@ -40,8 +45,8 @@ class EntityExtraction:
             gain, cost = self.randomExtraction()
         elif self.optMethod == "BFS":
             gain, cost = self.bfsExtraction()
-        elif self.optMethod == "BFS_thres":
-            gain, cost = self.bfsThresholdExtraction()
+        elif self.optMethod == "GS_thres":
+            gain, cost = self.graphSearchExtraction()
         elif self.optMethod == "randomLeaves":
             gain, cost = self.randomLeavesExtraction()
         else:
@@ -62,7 +67,7 @@ class EntityExtraction:
         cost = 0.0
         gain = 0.0
 
-        while cost <= self.budget:
+        while cost < self.budget:
             # pick a node at random, pick a configuration at random and query it
             randomNode = random.choice(self.lattice.points.keys())
             randomConfig = random.choice(self.extConfigs)
@@ -79,8 +84,8 @@ class EntityExtraction:
                 est = previousQueries[queryKey]
 
             gain += est.takeAction()
-            cost += 1.0
-        return gain, cost-1.0
+            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+        return gain, cost
 
     def randomLeavesExtraction(self):
 
@@ -96,7 +101,7 @@ class EntityExtraction:
         cost = 0.0
         gain = 0.0
 
-        while cost <= self.budget:
+        while cost < self.budget:
             # pick a node at random, pick a configuration at random and query it
             randomNode = random.choice(leafKeys)
             randomConfig = random.choice(self.extConfigs)
@@ -113,8 +118,8 @@ class EntityExtraction:
                 est = previousQueries[queryKey]
 
             gain += est.takeAction()
-            cost += 1.0
-        return gain, cost-1.0
+            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+        return gain, cost
 
     def bfsExtraction(self):
         # traverse lattice in a BFS manner ask single query at each node using a random configuration
@@ -128,7 +133,7 @@ class EntityExtraction:
         gain = 0.0
         cost = 0.0
 
-        while cost <= self.budget:
+        while cost < self.budget:
             # take the first point key in the frontier
             p = frontier.pop(0)
 
@@ -142,7 +147,7 @@ class EntityExtraction:
             est = self.getNewEstimator(p,querySize,exListSize)
 
             gain += est.takeAction()
-            cost += 1.0
+            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
 
             # Populate list with descendants of point
             for d in p.getDescendants():
@@ -150,24 +155,29 @@ class EntityExtraction:
                     frontier.append(d)
                     activeNodes[d] = 1
 
-        return gain, cost-1.0
+        return gain, cost
 
     # auxiliary functions
-    def bfsThresholdFindAction(self,estList):
-        for e in estList:
-            # check if expected return is above a threshold
-            gainPercentage = e.estimateReturn()/float(e.querySize)
-            if gainPercentage > 0.8:
-                return e
-        return None
+    def gsFindBestAction(self,nodeEstimates):
+        bestAction = None
+        bestScore = 0.0
+        for node in nodeEstimates:
+            for e in nodeEstimates[node]:
+                # check if expected return is above a threshold
+                cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+                normGain = e.normalizedReturn()
+                gainCostRatio = float(normGain)/float(cost)
+                if gainCostRatio > bestScore:
+                    bestAction = e
+                    bestScore = gainCostRatio
+        return bestAction
 
-    def bfsThresholdExtraction(self):
+    def graphSearchExtraction(self):
         # traverse lattice in a BFS manner keep
         gain = 0.0
         cost = 0.0
 
         root = self.lattice.points['||']
-        frontier = [root]
         nodeEstimates = {}
         nodeEstimates[root] = []
         for conf in self.extConfigs:
@@ -176,26 +186,24 @@ class EntityExtraction:
             est = self.getNewEstimator(root,querySize,exListSize)
             nodeEstimates[root].append(est)
 
-        while cost <= self.budget:
-            # take the first point key in the frontier
-            p = frontier[0]
-
+        while cost < self.budget:
             # pick the best configuration with expected return more than a threshold
-            goodAction = self.bfsThresholdFindAction(nodeEstimates[p])
-            if goodAction:
-                gain += goodAction.takeAction()
-                cost += 1.0
+            bestAction = self.gsThresholdFindAction(nodeEstimates[p])
+            if bestAction:
+                gain += bestAction.takeAction()
+                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
-                # If no good action exists move to the descendant of the running node.
-                frontier.pop(0)
-                for d in p.getDescendants():
-                    if d not in nodeEstimates:
-                        frontier.append(d)
-                        nodeEstimates[d] = []
-                        for conf in self.extConfigs:
-                            querySize = conf[0]
-                            exListSize = conf[1]
-                            est = self.getNewEstimator(d,querySize,exListSize)
-                            nodeEstimates[d].append(est)
+                print "problem with best action"
+                sys.exit(-1)
 
-        return gain, cost-1.0
+            # Extend action collection
+            for d in bestAction.point.getDescendants():
+                if d not in nodeEstimates:
+                    nodeEstimates[d] = []
+                    for conf in self.extConfigs:
+                        querySize = conf[0]
+                        exListSize = conf[1]
+                        est = self.getNewEstimator(d,querySize,exListSize)
+                        nodeEstimates[d].append(est)
+
+        return gain, cost

@@ -86,7 +86,7 @@ class PointEstimateShen:
             return self.querySize
 
         # compute query return
-        if strataOption:
+        if strataOption and len(self.point.childrenWeights) > 0:
             return self.estimateStratifiedReturn(excludeList)
         return self.shenEstimator(self.querySize,self.estMethod)
 
@@ -217,7 +217,7 @@ class PointEstimateShen:
     def estimateStratifiedReturn(self,excludeList):
         gain = 0.0
         totalWeight = self.point.childrenTotalWeight()
-        for d in self.point.descendants:
+        for d in self.point.childrenWeights:
             childExList = []
             # compute child's exclude list
             for item in excludeList:
