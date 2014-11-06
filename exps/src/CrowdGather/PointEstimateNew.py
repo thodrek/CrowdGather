@@ -155,7 +155,7 @@ class PointEstimateNew:
         return K*f1/n,K
 
     # estimate return
-    def estimateReturn(self):
+    def estimateReturn(self,strataOption=False):
         # construct excludeList
         excludeList = self.constructExcludeList()
 
@@ -177,6 +177,10 @@ class PointEstimateNew:
         # check if exclude list contains the entire sample
         if len(excludeList) == len(self.point.distinctEntries):
             return self.querySize
+
+        # compute query return
+        if strataOption and len(self.point.childrenWeights) > 0:
+            return self.estimateStratifiedReturn(excludeList)
 
         # compute return
         newSampleSize = self.sampleSize + self.querySize
@@ -206,6 +210,74 @@ class PointEstimateNew:
 
         cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         return cost
+
+    # break excludelist to children
+    def excludeListToChildren(self,excludeList):
+        childrenExcludeLists = {}
+        for d in self.point.descendants:
+            childrenExcludeLists[d] = []
+            for item in excludeList:
+                if d.containsItem(item):
+                    childrenExcludeLists[d].append(item)
+        return childrenExcludeLists
+
+    def querySizeToChildren(self):
+        childrenQuerySizes = {}
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.descendants:
+            querySize = float(self.querySize)*self.point.childrenWeights[d]/totalWeight
+            childrenQuerySizes[d] = querySize
+        return childrenQuerySizes
+
+    def estimateStratifiedReturn(self,excludeList):
+        gain = 0.0
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.childrenWeights:
+            childExList = []
+            # compute child's exclude list
+            for item in excludeList:
+                if d.containsItem(item):
+                    childExList.append(item)
+            childQuerySize = int(round(float(self.querySize)*self.point.childrenWeights[d]/totalWeight))
+            # instanciate new estimator
+            childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
+            childGain = childGainEst.estimateReturn()
+            gain += childGain
+            childGainEst.clear()
+            del childExList[:]
+        return gain
+
+    # history based methods
+
+    def estimateReturnHistory(self):
+
+        # compute previous K values from lattice point sample history
+        self.sampleLogs = []
+        self.distinctEntryLogs = []
+        self.entryFrequencyLogs = []
+
+        for i in range(len(self.point.sampleLogs)):
+            sample = self.point.sampleLogs[i]
+            distinctEntries = self.point.distinctEntryLogs[i]
+
+            # construct excludeList
+            excludeList = self.constructExcludeList()
+
+            # update freq counters
+            self.updateFreqCounterSampleSize(excludeList)
+
+            # check if sample is empty
+            if self.sampleSize == 0.0:
+                if self.point.emptyPopulation == True:
+                    return 0.0
+                else:
+                    return self.querySize
+
+            # compute K
+            f0, K = self.estimateF0_regression()
+            self.oldKValues[self.sampleSize] = K
+            self.oldK = K
+
 
     # take action
     def takeAction(self):

@@ -125,6 +125,10 @@ class LatticePoint:
             else:
                 self.entryFrequencies[id] += 1
 
+        if self.samplingHistory:
+            # log running sample
+            self.logSamplingHistory()
+
         # update children weights
         self.updateChildrenDistr(sample)
 
