@@ -173,7 +173,9 @@ class EntityExtraction:
         return bestAction
 
     def graphSearchExtraction(self):
-        # traverse lattice in a BFS manner keep
+        # traverse lattice starting from roor and based on previously
+        # chosen decisions
+
         gain = 0.0
         cost = 0.0
 
@@ -193,7 +195,7 @@ class EntityExtraction:
                 gain += bestAction.takeAction()
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
-                print "problem with best action"
+                print "No good action found."
                 sys.exit(-1)
 
             # Extend action collection

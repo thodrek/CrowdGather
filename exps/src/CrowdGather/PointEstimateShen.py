@@ -20,6 +20,10 @@ class PointEstimateShen:
         self.uniqueNumber = 0.0
         self.oldK = None
 
+        # variables for bootstrapping
+        self.distinctEntries = latticePoint.distinctEntries
+        self.entryFrequencies = latticePoint.entryFrequencies
+
         if estMethod == "chao92" or estMethod == "shenRegression":
             self.estMethod = estMethod
         else:
@@ -251,3 +255,12 @@ class PointEstimateShen:
         gain = newUnique - oldUnique
         return gain
 
+    def bootstrapVariance(self, data, num_samples, alpha):
+        """Returns bootstrap estimate of 100.0*(1-alpha) CI for statistic."""
+        n = len(data)
+        idx = npr.randint(0, n, (num_samples, n))
+        samples = data[idx]
+        stat = np.sort(statistic(samples, 1))
+        variance = np.var(np.array(stat))
+        return (stat[int((alpha/2.0)*num_samples)],
+                stat[int((1-alpha/2.0)*num_samples)],variance)
