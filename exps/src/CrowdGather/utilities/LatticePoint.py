@@ -99,10 +99,10 @@ class LatticePoint:
 
         # if not the root fetch the attributes of the item
         for h in self.hValues:
-            if self.lattice.itemInfo[item][h].startswith(self.hValues[h]):
-                return True
+            if not (self.lattice.itemInfo[item][h].startswith(self.hValues[h]) or self.hValues[h] == ''):
+                return False
 
-        return False
+        return True
 
     def findMatches(self, itemList):
         # iterate over items and keep matches
