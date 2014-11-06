@@ -222,7 +222,7 @@ class PointEstimateShen:
             for item in excludeList:
                 if d.containsItem(item):
                     childExList.append(item)
-            childQuerySize = float(self.querySize)*self.point.childrenWeights[d]/totalWeight
+            childQuerySize = int(round(float(self.querySize)*self.point.childrenWeights[d]/totalWeight))
             # instanciate new estimator
             childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
             childGain = childGainEst.estimateReturn()
