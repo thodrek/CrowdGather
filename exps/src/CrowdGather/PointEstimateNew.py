@@ -8,7 +8,7 @@ import math
 
 class PointEstimateNew:
 
-    def __init__(self,latticePoint,querySize,excludeListSize):
+    def __init__(self,latticePoint,querySize,excludeListSize, childrenDistribution=False):
         self.point = latticePoint
 
         # expected return variables

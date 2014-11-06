@@ -75,7 +75,7 @@ class Lattice:
 
         # iterate over lattice points and assign parents and descendants
         # There are three cases: (i) no values are assigned, i.e., root, (ii) only one value assigned, (ii) more than one values assigned
-        print 'Creating lattice edges'
+        print 'Creating lattice edges...'
         counter = 0
         for pointKey in points:
             p = points[pointKey]
@@ -132,6 +132,21 @@ class Lattice:
             sys.stdout.write("\r%.2f%% (%d out of %d)" % (progress, counter, len(points)))
             sys.stdout.flush()
         print 'DONE'
+
+        # iterate over lattice points and assign parents and descendants
+        # There are three cases: (i) no values are assigned, i.e., root, (ii) only one value assigned, (ii) more than one values assigned
+        print 'Creating children distributions for points...'
+        counter = 0
+        for pointKey in points:
+            p = points[pointKey]
+            p.initializeChildrenDistr()
+            # print progress
+            counter += 1
+            progress = float(counter)*100.0/float(len(points))
+            sys.stdout.write("\r%.2f%% (%d out of %d)" % (progress, counter, len(points)))
+            sys.stdout.flush()
+        print 'DONE'
+
         return points
 
     def getLatticeSize(self):

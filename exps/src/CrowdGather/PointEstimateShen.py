@@ -26,6 +26,11 @@ class PointEstimateShen:
             print "Invalid estimator specified for expected return"
             sys.exit(-1)
 
+    def __del__(self):
+        self.freqCounters.clear()
+
+    def clear(self):
+        self.freqCounters.clear()
 
     # methods to retrieve characteristics of local sample
     def uniqueEntries(self):
@@ -61,7 +66,7 @@ class PointEstimateShen:
                     self.uniqueNumber += 1.0
 
     # estimate return
-    def estimateReturn(self):
+    def estimateReturn(self,strataOption=False):
         # construct excludeList
         excludeList = self.constructExcludeList()
 
@@ -80,6 +85,8 @@ class PointEstimateShen:
             return self.querySize
 
         # compute query return
+        if strataOption:
+            return self.estimateStratifiedReturn(excludeList)
         return self.shenEstimator(self.querySize,self.estMethod)
 
     # auxiliary functions
@@ -187,6 +194,41 @@ class PointEstimateShen:
 
         cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         return cost
+
+    # break excludelist to children
+    def excludeListToChildren(self,excludeList):
+        childrenExcludeLists = {}
+        for d in self.point.descendants:
+            childrenExcludeLists[d] = []
+            for item in excludeList:
+                if d.containsItem(item):
+                    childrenExcludeLists[d].append(item)
+        return childrenExcludeLists
+
+    def querySizeToChildren(self):
+        childrenQuerySizes = {}
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.descendants:
+            querySize = float(self.querySize)*self.point.childrenWeights[d]/totalWeight
+            childrenQuerySizes[d] = querySize
+        return childrenQuerySizes
+
+    def estimateStratifiedReturn(self,excludeList):
+        gain = 0.0
+        childExLists = self.excludeListToChildren(excludeList)
+        childQuerySizes = self.querySizeToChildren()
+
+        for d in childExLists:
+            # instanciate new estimator
+            childGainEst = PointEstimateShen(d,childQuerySizes[d],childExLists[d],self.estMethod)
+            childGain = childGainEst.estimateReturn()
+            gain += childGain
+            childGainEst.clear()
+
+        childExLists.clear()
+        childQuerySizes.clear()
+
+        return gain
 
     # take action
     def takeAction(self):

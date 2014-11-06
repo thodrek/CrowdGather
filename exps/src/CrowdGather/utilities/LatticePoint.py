@@ -39,6 +39,9 @@ class LatticePoint:
         self.distinctEntryLogs = []
         self.entryFrequencyLogs = []
 
+        # initialize childrenDistribution
+        self.childrenWeights = {}
+
     def getTotalAssignedValues(self):
         return self.totalAssignedValues
 
@@ -121,6 +124,9 @@ class LatticePoint:
             else:
                 self.entryFrequencies[id] += 1
 
+        # update children weights
+        self.updateChildrenDistr(sample)
+
 
     def receiveIndirectItem(self,item):
         newSample = [item]
@@ -195,3 +201,19 @@ class LatticePoint:
 
         # flags for estimators
         self.emptyPopulation = False
+
+    def initializeChildrenDistr(self):
+        for d in self.descendants:
+            self.childrenWeights[d] = 1.0
+
+    def updateChildrenDistr(self, sample):
+        for item in sample:
+            for d in self.descendants:
+                if d.containsItem(item):
+                    self.childrenWeights[d] += 1.0
+
+    def childrenTotalWeight(self):
+        totalWeight = 0.0
+        for d in self.descendants:
+            totalWeight += self.childrenWeights[d]
+        return totalWeight
