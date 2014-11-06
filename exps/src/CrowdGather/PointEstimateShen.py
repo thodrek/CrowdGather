@@ -228,10 +228,7 @@ class PointEstimateShen:
             childGain = childGainEst.estimateReturn()
             gain += childGain
             childGainEst.clear()
-
-        childExLists.clear()
-        childQuerySizes.clear()
-
+            del childExList[:]
         return gain
 
     # take action
