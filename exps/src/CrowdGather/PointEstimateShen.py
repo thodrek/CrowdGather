@@ -215,12 +215,16 @@ class PointEstimateShen:
 
     def estimateStratifiedReturn(self,excludeList):
         gain = 0.0
-        childExLists = self.excludeListToChildren(excludeList)
-        childQuerySizes = self.querySizeToChildren()
-
-        for d in childExLists:
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.descendants:
+            childExList = []
+            # compute child's exclude list
+            for item in excludeList:
+                if d.containsItem(item):
+                    childExList.append(item)
+            childQuerySize = float(self.querySize)*self.point.childrenWeights[d]/totalWeight
             # instanciate new estimator
-            childGainEst = PointEstimateShen(d,childQuerySizes[d],childExLists[d],self.estMethod)
+            childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
             childGain = childGainEst.estimateReturn()
             gain += childGain
             childGainEst.clear()
