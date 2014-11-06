@@ -26,6 +26,7 @@ class PointEstimateShen:
             print "Invalid estimator specified for expected return"
             sys.exit(-1)
 
+
     def __del__(self):
         self.freqCounters.clear()
 

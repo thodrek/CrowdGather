@@ -42,6 +42,8 @@ class LatticePoint:
         # initialize childrenDistribution
         self.childrenWeights = {}
 
+        self.firstDirectEstimate = True
+
     def getTotalAssignedValues(self):
         return self.totalAssignedValues
 
@@ -61,6 +63,13 @@ class LatticePoint:
         return self.key
 
     def retrieveSample(self, sampleSize, excludeList):
+
+        # revise the children distribution when you retrieve the first direct sample
+        if self.firstDirectEstimate:
+            for d in self.childrenWeights:
+                self.childrenWeights[d] -= 1.0
+            self.firstDirectEstimate = False
+
         # if itemList is empty fetch it from DB
         if not self.items:
             self.items = self.__constructPopulation()
