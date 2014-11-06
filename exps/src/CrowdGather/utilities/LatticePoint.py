@@ -138,6 +138,8 @@ class LatticePoint:
         for item in sample:
             affectedLatticePoints = self.findKeysForItem(item)
             for p_key in affectedLatticePoints:
+                    if p_key == self.key:
+                        continue
                     if self.lattice.points[p_key].receiveIndirectItem(item):
                         msgReceived += 1
         return msgReceived
