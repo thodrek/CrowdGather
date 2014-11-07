@@ -137,8 +137,7 @@ class EntityExtraction:
         cost = 0.0
 
         while cost < self.budget:
-            print "Running cost = ",cost
-            print "Running gain = ",gain
+            print "Running cost,gain\t",cost,gain
             # take the first point key in the frontier
             p = frontier.pop(0)
 
@@ -187,6 +186,7 @@ class EntityExtraction:
 
         root = self.lattice.points['||']
         nodeEstimates = {}
+        removedNodes = set([])
         nodeEstimates[root] = []
         for conf in self.extConfigs:
             querySize = conf[0]
@@ -199,8 +199,7 @@ class EntityExtraction:
 
 
         while cost < self.budget:
-            print "Running cost = ",cost
-            print "Running gain = ",gain
+            print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
             bestAction, bestScore = self.gsFindBestAction(frontier, nodeEstimates)
             if bestAction:
@@ -213,14 +212,15 @@ class EntityExtraction:
             # Extend action collection -- for the current node extract the estimates for each children
             descSet = set([])
             for d in bestAction.point.getDescendants():
-                descSet.add(d)
-                if d not in nodeEstimates:
-                    nodeEstimates[d] = []
-                    for conf in self.extConfigs:
-                        querySize = conf[0]
-                        exListSize = conf[1]
-                        est = self.getNewEstimator(d,querySize,exListSize)
-                        nodeEstimates[d].append(est)
+                if d not in removedNodes:
+                    descSet.add(d)
+                    if d not in nodeEstimates:
+                        nodeEstimates[d] = []
+                        for conf in self.extConfigs:
+                            querySize = conf[0]
+                            exListSize = conf[1]
+                            est = self.getNewEstimator(d,querySize,exListSize)
+                            nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
             bestChildAction, bestChildScore = self.gsFindBestAction(descSet,nodeEstimates)
@@ -229,5 +229,6 @@ class EntityExtraction:
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
                 frontier.discard(bestAction.point)
+                removedNodes.add(bestAction.point)
 
         return gain, cost
