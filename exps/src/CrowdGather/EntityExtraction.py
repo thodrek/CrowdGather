@@ -177,7 +177,7 @@ class EntityExtraction:
         return bestAction
 
     def graphSearchExtraction(self):
-        # traverse lattice starting from roor and based on previously
+        # traverse lattice starting from root and based on previously
         # chosen decisions
 
         gain = 0.0

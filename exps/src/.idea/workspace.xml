@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="218" column="9" selection-start="6911" selection-end="6911" vertical-scroll-proportion="0.51785713" vertical-offset="2905" max-vertical-offset="4800">
+            <state line="26" column="67" selection-start="737" selection-end="737" vertical-scroll-proportion="158.12" vertical-offset="4331" max-vertical-offset="5760">
               <folding />
             </state>
           </provider>
@@ -35,10 +35,8 @@
       <file leaf-file-name="testEstimatorErrors.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="21" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
-              <folding>
-                <element signature="e#26#50#0" expanded="true" />
-              </folding>
+            <state line="96" column="13" selection-start="3495" selection-end="3495" vertical-scroll-proportion="0.0" vertical-offset="1728" max-vertical-offset="2160">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,7 +44,7 @@
       <file leaf-file-name="LatticePoint.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="3450">
+            <state line="58" column="0" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="4140">
               <folding />
             </state>
           </provider>
@@ -55,7 +53,7 @@
       <file leaf-file-name="genutils.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/genutils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="4" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="945">
+            <state line="55" column="4" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="1134">
               <folding />
             </state>
           </provider>
@@ -64,16 +62,16 @@
       <file leaf-file-name="PointEstimateNew.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="353" column="74" selection-start="12098" selection-end="12098" vertical-scroll-proportion="0.0" vertical-offset="5095" max-vertical-offset="5655">
+            <state line="353" column="49" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-21.44" vertical-offset="5710" max-vertical-offset="6786">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityExtraction.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EntityExtraction.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="205" column="0" selection-start="7012" selection-end="7012" vertical-scroll-proportion="0.0" vertical-offset="2022" max-vertical-offset="3240">
+            <state line="181" column="0" selection-start="6142" selection-end="6142" vertical-scroll-proportion="0.34919125" vertical-offset="2783" max-vertical-offset="3888">
               <folding />
             </state>
           </provider>
@@ -82,10 +80,8 @@
       <file leaf-file-name="extractExp.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/extractExp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="105" selection-start="1004" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <folding>
-                <element signature="e#25#48#0" expanded="true" />
-              </folding>
+            <state line="18" column="11" selection-start="646" selection-end="646" vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="630">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,16 +108,17 @@
         <option value="$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py" />
         <option value="$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNew.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/EntityExtraction.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/extractExp.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShen.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/extractExp.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/EntityExtraction.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1280" />
-    <option name="height" value="693" />
+    <option name="x" value="1737" />
+    <option name="y" value="-7" />
+    <option name="width" value="1863" />
+    <option name="height" value="1207" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -354,14 +351,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="693" extended-state="0" />
+    <frame x="1737" y="-7" width="1863" height="1207" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13979349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13955985" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -369,11 +366,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -390,9 +387,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14058776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -628,9 +625,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/NodeEstimate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="211" column="0" selection-start="6107" selection-end="6107" vertical-scroll-proportion="0.5121359" vertical-offset="2743" max-vertical-offset="4155">
-          <folding />
-        </state>
+        <state line="211" column="0" selection-start="6107" selection-end="6107" vertical-scroll-proportion="0.5121359" vertical-offset="2743" max-vertical-offset="4155" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
@@ -649,46 +644,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/Lattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="30" selection-start="4303" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="1755" max-vertical-offset="2325">
-          <folding />
-        </state>
+        <state line="117" column="30" selection-start="4303" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="1755" max-vertical-offset="2325" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/testEstimatorErrors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="21" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1800">
-          <folding>
-            <element signature="e#26#50#0" expanded="true" />
-          </folding>
+        <state line="96" column="13" selection-start="3495" selection-end="3495" vertical-scroll-proportion="0.0" vertical-offset="1728" max-vertical-offset="2160">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/extractExp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="105" selection-start="1004" selection-end="1012" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtraction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="0" selection-start="7012" selection-end="7012" vertical-scroll-proportion="0.0" vertical-offset="2022" max-vertical-offset="3240">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="353" column="74" selection-start="12098" selection-end="12098" vertical-scroll-proportion="0.0" vertical-offset="5020" max-vertical-offset="5655">
+        <state line="18" column="11" selection-start="646" selection-end="646" vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="630">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="218" column="9" selection-start="6911" selection-end="6911" vertical-scroll-proportion="0.51785713" vertical-offset="2905" max-vertical-offset="4800">
+        <state line="26" column="67" selection-start="737" selection-end="737" vertical-scroll-proportion="158.12" vertical-offset="4331" max-vertical-offset="5760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="353" column="49" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-21.44" vertical-offset="5710" max-vertical-offset="6786">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtraction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="0" selection-start="6142" selection-end="6142" vertical-scroll-proportion="0.34919125" vertical-offset="2783" max-vertical-offset="3888">
           <folding />
         </state>
       </provider>
