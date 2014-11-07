@@ -3,7 +3,7 @@ __author__ = 'thodoris'
 import EntityExtraction
 import cPickle as pickle
 import sys
-import Lattice
+from utilities import Lattice
 
 def main(argv):
 
