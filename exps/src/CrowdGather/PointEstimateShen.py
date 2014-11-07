@@ -294,7 +294,7 @@ class PointEstimateShen:
     def takeAction(self):
 
         # construct excludeList
-        excludeList = self.constructExcludeList()
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # store old unique
         oldUnique = len(self.point.distinctEntries)

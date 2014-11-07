@@ -37,11 +37,8 @@ print 'Computing Errors...',
 for conf in configurations:
     errors[conf] = {}
     errors[conf]['chao'] = []
-    errors[conf]['chaoUpper'] = []
     errors[conf]['regr'] = []
-    errors[conf]['regrUpper'] = []
     errors[conf]['new'] = []
-    errors[conf]['newUpper'] = []
     querySize = conf[0]
     excludeListSize = conf[1]
     # for each point in samplePoints create estimators
@@ -50,11 +47,8 @@ for conf in configurations:
         estRegr = PointEstimateShen.PointEstimateShen(p,querySize,excludeListSize,"shenRegression")
         estNew = PointEstimateNew.PointEstimateNew(p,querySize,excludeListSize)
         totalErrorChao = 0.0
-        totalErrorChaoUpper = 0.0
         totalErrorRegr = 0.0
-        totalErrorRegrUpper = 0.0
         totalErrorNew = 0.0
-        totalErrorNewUpper = 0.0
         # retrieve samples
         for i in range(1,samples+1):
 

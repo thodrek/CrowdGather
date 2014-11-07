@@ -278,7 +278,7 @@ class PointEstimateNew:
                     childExList.append(item)
             childQuerySize = int(round(float(self.querySize)*self.point.childrenWeights[d]/totalWeight))
             # instanciate new estimator
-            childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
+            childGainEst = PointEstimateNew(d,childQuerySize,childExList,self.estMethod)
             childGain = childGainEst.estimateReturn(False,True)
             gain += childGain
             childGainEst.clear()
@@ -351,7 +351,7 @@ class PointEstimateNew:
     def takeAction(self):
 
         # construct excludeList
-        excludeList = self.constructExcludeList()
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # store old unique
         oldUnique = len(self.point.distinctEntries)
