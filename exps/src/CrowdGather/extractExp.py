@@ -3,11 +3,12 @@ __author__ = 'thodoris'
 import EntityExtraction
 import cPickle as pickle
 import sys
+import Lattice
 
 def main(argv):
 
-    extractionMethod = argv[1]
-    estimator = argv[2]
+    extractionMethods = ["random", "BFS", "GS_thres", "randomLeaves"]
+    estimator = ["chao92", "shenRegression", "newRegr"]
 
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -21,6 +22,9 @@ def main(argv):
     # construct item info
     itemInfo = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/eventBriteInfo.pkl","rb"))
 
+    # create lattice
+    newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
+
     # set budget
     budget = 50
 
@@ -29,12 +33,22 @@ def main(argv):
     #configurations = [(10,5)]
     # initialize new EntityExtraction
 
-    eExtract = EntityExtraction.EntityExtraction(budget,hList,hDescr,itemInfo,configurations,100,50,"GS_thres","chao92")
+    lines = []
 
-    gain, cost = eExtract.retrieveItems()
+    for eMethod in extractionMethods:
+        for est in estimator:
+            eExtract = EntityExtraction.EntityExtraction(budget,hList,hDescr,itemInfo,configurations,100,50,eMethod,est,newLattice)
 
-    print "Gain = ",gain
-    print "Cost = ",cost
+            gain, cost = eExtract.retrieveItems()
+            newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t"+str(cost)+"\n"
+            lines.append(newLine)
+            newLattice.clearLatticeSamples()
+
+    # print lines
+    fileOut = open("extractionPerf.txt",'w')
+    for l in lines:
+        fileOut.write(l)
+    fileOut.close()
 
 if __name__ == "__main__":
     main(sys.argv)

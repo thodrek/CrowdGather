@@ -137,7 +137,7 @@ class EntityExtraction:
         cost = 0.0
 
         while cost < self.budget:
-            print "Running cost,gain\t",cost,gain
+            #print "Running cost,gain\t",cost,gain
             # take the first point key in the frontier
             p = frontier.pop(0)
 
@@ -199,7 +199,7 @@ class EntityExtraction:
 
 
         while cost < self.budget:
-            print "Running cost,gain\t",cost,gain
+            #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
             bestAction, bestScore = self.gsFindBestAction(frontier, nodeEstimates)
             if bestAction:
