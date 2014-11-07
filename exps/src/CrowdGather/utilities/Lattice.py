@@ -138,6 +138,10 @@ class Lattice:
     def getLatticeSize(self):
         return len(self.points)
 
+    def clearLatticeSamples(self):
+        for p in self.points:
+            p.clearSampledPopulation()
+
     def getItemWeights(self,itemSet):
         itemList = []
         for item in itemSet:
