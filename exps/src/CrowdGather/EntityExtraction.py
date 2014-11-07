@@ -193,6 +193,8 @@ class EntityExtraction:
             nodeEstimates[root].append(est)
 
         while cost < self.budget:
+            print "Running cost = ",cost
+            print "Running gain = ",gain
             # pick the best configuration with expected return more than a threshold
             bestAction = self.gsFindBestAction(nodeEstimates)
             if bestAction:
