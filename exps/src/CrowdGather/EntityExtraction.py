@@ -209,7 +209,9 @@ class EntityExtraction:
                 sys.exit(-1)
 
             # Extend action collection -- for the current node extract the estimates for each children
+            descSet = set([])
             for d in bestAction.point.getDescendants():
+                descSet.add(d)
                 if d not in nodeEstimates:
                     nodeEstimates[d] = []
                     for conf in self.extConfigs:
@@ -219,7 +221,7 @@ class EntityExtraction:
                         nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
-            bestChildAction, bestChildScore = self.gsFindBestAction(set([bestAction.point.getDescendants]),nodeEstimates)
+            bestChildAction, bestChildScore = self.gsFindBestAction(descSet,nodeEstimates)
             bestNodeAction, bestNodeScore = self.gsFindBestAction(set([bestAction.point]),nodeEstimates)
 
             if bestNodeScore <= bestChildScore:
