@@ -137,6 +137,8 @@ class EntityExtraction:
         cost = 0.0
 
         while cost < self.budget:
+            print "Running cost = ",cost
+            print "Running gain = ",gain
             # take the first point key in the frontier
             p = frontier.pop(0)
 
