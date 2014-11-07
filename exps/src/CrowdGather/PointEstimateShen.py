@@ -217,7 +217,7 @@ class PointEstimateShen:
         S_value = float(pointSpecificity)/3.0
 
         cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
-        return cost
+        return 1.0
 
     # break excludelist to children
     def excludeListToChildren(self,excludeList):
