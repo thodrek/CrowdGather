@@ -40,6 +40,7 @@ def main(argv):
             eExtract = EntityExtraction.EntityExtraction(budget,hList,hDescr,itemInfo,configurations,100,50,eMethod,est,newLattice)
 
             gain, cost = eExtract.retrieveItems()
+            print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
             newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t"+str(cost)+"\n"
             lines.append(newLine)
             newLattice.clearLatticeSamples()
