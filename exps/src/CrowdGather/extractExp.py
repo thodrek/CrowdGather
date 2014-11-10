@@ -7,9 +7,10 @@ from utilities import Lattice
 
 def main(argv):
 
-    extractionMethods = ["random", "BFS", "GS_thres", "randomLeaves"]
-    estimator = ["chao92", "shenRegression", "newRegr"]
-
+    #extractionMethods = ["random", "BFS", "GS_thres", "randomLeaves"]
+    # estimator = ["chao92", "shenRegression", "newRegr"]
+    extractionMethods = ["BFS","GS_thres"]
+    estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
     timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
