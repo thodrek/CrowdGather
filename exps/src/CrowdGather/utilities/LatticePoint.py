@@ -83,7 +83,7 @@ class LatticePoint:
             # update local sampling results
             self.__updateSamplingResults(sample)
             # propagate sampled items to children
-            #msgs = self.propagateSamples(sample)
+            msgs = self.propagateSamples(sample)
         return sample
 
     def __constructPopulation(self):
