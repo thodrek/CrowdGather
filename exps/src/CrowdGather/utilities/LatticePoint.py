@@ -86,6 +86,33 @@ class LatticePoint:
             msgs = self.propagateSamples(sample)
         return sample
 
+    def retrieveSamplePreempt(self, sampleSize, excludeList):
+         # if itemList is empty fetch it from DB
+        if not self.items:
+            self.items = self.__constructPopulation()
+
+        # retrieve sample
+        # update sampling population to consider excludeList
+        if len(excludeList) > 0:
+            popItems = self.populationWithExcludeList(set(excludeList))
+            sampleRaw = genutils.sampleWOReplacement(popItems,sampleSize)
+        else:
+            sampleRaw = genutils.sampleWOReplacement(self.items,sampleSize)
+        sample = list(x[1] for x in sampleRaw)
+
+        return sample
+
+    def finalizeSample(self, sample):
+        # check if sample is empty
+        if len(sample) == 0.0:
+            self.emptyPopulation = True
+            self.emptyMessageDescendants()
+        else:
+            # update local sampling results
+            self.__updateSamplingResults(sample)
+            # propagate sampled items to children
+            msgs = self.propagateSamples(sample)
+
     def __constructPopulation(self):
         # retrieve item set associated with lattice point
         itemSet = self.db.getKeySET(self.key)

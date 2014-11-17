@@ -310,7 +310,7 @@ class PointEstimateShen:
         gain = newUnique - oldUnique
         return gain
 
-    def estimateGain(self,upper=False):
+    def estimateGain(self, upper=False):
         gain = self.estimateReturn()
         upperValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
@@ -318,3 +318,29 @@ class PointEstimateShen:
         else:
             variance = 0.0
         return gain, variance, upperValue
+
+
+    def computeExactGain(self):
+        sample = self.prepareAction()
+        sampleSet = set(sample)
+        gain = len(sampleSet.difference(self.point.distinctEntries))
+        return gain,sample
+
+    # prepare action
+    def prepareAction(self):
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
+        s = self.point.retrieveSamplePreempt(self.querySize,excludeList)
+        return s
+
+    def takeActionFinal(self,sample):
+        # store old unique
+        oldUnique = len(self.point.distinctEntries)
+
+        # update lattice sample based on sample
+        self.point.finalizeSample(sample)
+
+        # store new unique
+        newUnique = len(self.point.distinctEntries)
+        # compute gain
+        gain = newUnique - oldUnique
+        return gain

@@ -28,7 +28,7 @@ class EntityExtraction:
         self.maxExListSize = maxExListSize
 
         # store extraction method
-        if optMethod in ["random", "BFS", "GS_thres", "randomLeaves", "UCBFront"]:
+        if optMethod in ["random", "BFS", "GS_thres", "GS_exact", "randomLeaves", "UCBFront"]:
             self.optMethod = optMethod
         else:
             print "Invalid extraction method specified"
@@ -50,6 +50,8 @@ class EntityExtraction:
             gain, cost = self.bfsExtraction()
         elif self.optMethod == "GS_thres":
             gain, cost = self.graphSearchExtraction()
+        elif self.optMethod == "GS_exact":
+            gain, cost = self.graphSearchExtractionExact()
         elif self.optMethod == "randomLeaves":
             gain, cost = self.randomLeavesExtraction()
         else:
@@ -204,6 +206,79 @@ class EntityExtraction:
             bestAction, bestScore = self.gsFindBestAction(frontier, nodeEstimates)
             if bestAction:
                 gain += bestAction.takeAction()
+                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+            else:
+                print "No good action found."
+                sys.exit(-1)
+
+            # Extend action collection -- for the current node extract the estimates for each children
+            descSet = set([])
+            for d in bestAction.point.getDescendants():
+                if d not in removedNodes:
+                    descSet.add(d)
+                    if d not in nodeEstimates:
+                        nodeEstimates[d] = []
+                        for conf in self.extConfigs:
+                            querySize = conf[0]
+                            exListSize = conf[1]
+                            est = self.getNewEstimator(d,querySize,exListSize)
+                            nodeEstimates[d].append(est)
+
+            # check if node corresponding to bestAction should be removed from queue
+            bestChildAction, bestChildScore = self.gsFindBestAction(descSet,nodeEstimates)
+            bestNodeAction, bestNodeScore = self.gsFindBestAction(set([bestAction.point]),nodeEstimates)
+
+            if bestNodeScore <= bestChildScore:
+                frontier |= descSet
+                frontier.discard(bestAction.point)
+                removedNodes.add(bestAction.point)
+
+        return gain, cost
+
+    def gsFindBestActionExact(self,frontier,nodeEstimates):
+        bestAction = None
+        bestScore = 0.0
+        bestSample = []
+        for node in frontier:
+            for e in nodeEstimates[node]:
+                # check if expected return is above a threshold
+                cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+                gain, sample = e.computeExactGain()
+                normGain = gain
+                gainCostRatio = float(normGain)/float(cost)
+                if gainCostRatio > bestScore:
+                    bestAction = e
+                    bestScore = gainCostRatio
+                    bestSample = sample
+        return bestAction, bestScore, bestSample
+
+    def graphSearchExtractionExact(self):
+        # traverse lattice starting from root and based on previously
+        # chosen decisions
+
+        gain = 0.0
+        cost = 0.0
+
+        root = self.lattice.points['||']
+        nodeEstimates = {}
+        removedNodes = set([])
+        nodeEstimates[root] = []
+        for conf in self.extConfigs:
+            querySize = conf[0]
+            exListSize = conf[1]
+            est = self.getNewEstimator(root,querySize,exListSize)
+            nodeEstimates[root].append(est)
+
+        # initialize frontier
+        frontier = set([root])
+
+
+        while cost < self.budget:
+            #print "Running cost,gain\t",cost,gain
+            # pick the best configuration with expected return more than a threshold
+            bestAction, bestScore, bestSample = self.gsFindBestActionExact(frontier, nodeEstimates)
+            if bestAction:
+                gain += bestAction.takeActionFinal(bestSample)
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
                 print "No good action found."
