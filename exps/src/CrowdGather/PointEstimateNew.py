@@ -227,6 +227,7 @@ class PointEstimateNew:
         f1c = self.estimateAlteredSingletons()
         f1 = self.freqCounters[1]
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
+        print newItems, K
         return newItems, K
 
     # normalized return
