@@ -288,8 +288,9 @@ class PointEstimateShen:
         mean = np.mean(np.array(returnEstimates))
         alpha = 0.05
         statList = np.sort(returnEstimates)
+        lowerValue = statList[int((alpha/2.0)*num_samples)]
         upperValue = statList[int((1-alpha/2.0)*num_samples)]
-        return upperValue, mean, variance
+        return lowerValue, upperValue, mean, variance
 
     # take action
     def takeAction(self):
@@ -313,11 +314,12 @@ class PointEstimateShen:
     def estimateGain(self, upper=False):
         gain = self.estimateReturn()
         upperValue = gain
+        lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            upperValue, gain, variance = self.bootstrapVariance(100)
+            lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
         else:
             variance = 0.0
-        return gain, variance, upperValue
+        return gain, variance, upperValue, lowerValue
 
 
     def computeExactGain(self):

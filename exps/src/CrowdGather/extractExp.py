@@ -9,8 +9,9 @@ def main(argv):
 
     #extractionMethods = ["random", "BFS", "GS_thres", "randomLeaves"]
     # estimator = ["chao92", "shenRegression", "newRegr"]
-    extractionMethods = ["BFS","GS_exact"]
-    estimator = ["shenRegression"]
+    #extractionMethods = ["BFS","GS_exact","GS_thres"]
+    extractionMethods = ["GS_thres"]
+    estimator = ["newRegr"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
     timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
@@ -27,7 +28,7 @@ def main(argv):
     newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
     # set budget
-    budget = 50
+    budget = 10
 
     # set query configurations
     configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
@@ -47,7 +48,7 @@ def main(argv):
             newLattice.clearLatticeSamples()
 
     # print lines
-    fileOut = open("extractionPerf.txt",'w')
+    fileOut = open("extractionPerfNew.txt",'w')
     for l in lines:
         fileOut.write(l)
     fileOut.close()

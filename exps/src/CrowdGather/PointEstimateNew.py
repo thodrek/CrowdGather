@@ -344,8 +344,9 @@ class PointEstimateNew:
         mean = np.mean(np.array(returnEstimates))
         alpha = 0.05
         statList = np.sort(np.array(returnEstimates))
+        lowerValue = statList[int((alpha/2.0)*num_samples)]
         upperValue = statList[int((1-alpha/2.0)*num_samples)]
-        return upperValue, mean, variance, meanK, meanSS
+        return lowerValue, upperValue, mean, variance, meanK, meanSS
 
     # take action
     def takeAction(self):
@@ -369,10 +370,11 @@ class PointEstimateNew:
     def estimateGain(self,upper=False):
         gain = self.estimateReturn()
         upperValue = gain
+        lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            upperValue, gain, variance, meanK, meanSS = self.bootstrapVariance(100)
+            lowerValue, upperValue, gain, variance, meanK, meanSS = self.bootstrapVariance(100)
             self.oldKValues[meanSS] = meanK
             self.oldK = meanK
         else:
             variance = 0.0
-        return gain, variance, upperValue
+        return gain, variance, upperValue, lowerValue
