@@ -347,6 +347,88 @@ class PointEstimateNew:
         upperValue = statList[int((1-alpha/2.0)*num_samples)]
         return lowerValue, upperValue, mean, variance, meanK, meanSS
 
+    def bootstrapVarianceAlt(self, num_samples):
+        returnEstimates = []
+
+        # for num_samples times, iterate over old samples for lattice point and estimate old K values
+        for i in range(num_samples):
+            # compute old K values
+            self.oldKValues.clear()
+            self.oldK = None
+            excludeList = []
+            lenDistinct = 0.0
+            for s in self.point.sampleLogs:
+                # get sample
+                data = np.array(s)
+                n = len(data)
+                # generate bootstrapped samples
+                idx = npr.randint(0, n, (1, n))
+                newSample = data[idx]
+                newEntryFreqs = {}
+
+                # distinct entries
+                distinctEntries = set(newSample)
+
+                # update entry frequencies
+                for id in newSample:
+                    if id not in newEntryFreqs:
+                        newEntryFreqs[id] = 1
+                    else:
+                        newEntryFreqs[id] += 1
+
+                # construct exclude list
+                excludeList = self.constructExcludeList(distinctEntries)
+                lenDistinct = len(distinctEntries)
+                if len(excludeList) == len(distinctEntries):
+                    continue
+
+                self.updateFreqCounterSampleSize(excludeList,newEntryFreqs)
+
+                if self.sampleSize == 0.0:
+                    continue
+
+                # compute K
+                f0, K = self.estimateF0_regression()
+                self.oldKValues[self.sampleSize] = K
+                self.oldK = K
+
+                # clear dics
+                newEntryFreqs.clear()
+                distinctEntries.clear()
+                del newSample[:]
+
+            # compute return
+
+            # check if exclude list contains the entire sample
+            if len(excludeList) == lenDistinct:
+                returnEstimates.append(self.querySize)
+
+            elif self.sampleSize == 0.0:
+                if self.point.emptyPopulation == True:
+                    returnEstimates.append(0.0)
+                else:
+                    returnEstimates.append(self.querySize)
+
+            else:
+                newSampleSize = self.sampleSize + self.querySize
+                n = self.sampleSize
+                Kprime = self.estimateKprime(newSampleSize)
+                f1c = self.estimateAlteredSingletons()
+                f1 = self.freqCounters[1]
+                newItems = (self.oldK*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
+                returnEstimates.append(newItems)
+
+        # compute mean, upper,lower, variance
+        variance = np.var(np.array(returnEstimates))
+        mean = np.mean(np.array(returnEstimates))
+        alpha = 0.05
+        statList = np.sort(np.array(returnEstimates))
+        lowerValue = statList[int((alpha/2.0)*num_samples)]
+        upperValue = statList[int((1-alpha/2.0)*num_samples)]
+        return lowerValue, upperValue, mean, variance
+
+
+
     # take action
     def takeAction(self):
 
@@ -371,9 +453,33 @@ class PointEstimateNew:
         upperValue = gain
         lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            lowerValue, upperValue, gain, variance, meanK, meanSS = self.bootstrapVariance(100)
-            self.oldKValues[meanSS] = meanK
-            self.oldK = meanK
+            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
         else:
             variance = 0.0
         return gain, variance, upperValue, lowerValue
+
+
+    def computeExactGain(self):
+        sample = self.prepareAction()
+        sampleSet = set(sample)
+        gain = len(sampleSet.difference(self.point.distinctEntries))
+        return gain,sample
+
+    # prepare action
+    def prepareAction(self):
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
+        s = self.point.retrieveSamplePreempt(self.querySize,excludeList)
+        return s
+
+    def takeActionFinal(self,sample):
+        # store old unique
+        oldUnique = len(self.point.distinctEntries)
+
+        # update lattice sample based on sample
+        self.point.finalizeSample(sample)
+
+        # store new unique
+        newUnique = len(self.point.distinctEntries)
+        # compute gain
+        gain = newUnique - oldUnique
+        return gain
