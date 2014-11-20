@@ -40,14 +40,10 @@ class PointEstimateNew:
         self.freqCounters.clear()
         if len(entryFrequencies) > 0.0:
             maxF = max(entryFrequencies.values())
-            print  maxF
-            print range(1,maxF+1)
             for f in range(1,maxF+1):
                 self.freqCounters[f] = 0.0
 
-            print "after first loop"
             for e in entryFrequencies:
-                print "freq = ",e
                 if e not in excludeList:
                     f = entryFrequencies[e]
                     self.freqCounters[f] += 1.0
@@ -205,26 +201,18 @@ class PointEstimateNew:
     def estimateReturnBootStrap(self,distinctEntries,entryFrequencies):
 
         # construct excludeList
-        print "before excludelist"
         excludeList = self.constructExcludeList(distinctEntries)
 
-        print "before update freq"
         # update freq counters
-        print excludeList, entryFrequencies
         self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
-        print "after update"
         # check if sample is empty
         if self.sampleSize == 0.0:
             if self.point.emptyPopulation == True:
-                print "in if if"
-                return 0.0
+                return 0.0, self.oldK
             else:
-                print "in if else"
-                return self.querySize
-        print "before compute K"
+                return self.querySize, self.oldK
         # compute K
         f0, K = self.estimateF0_regression()
-        print "before excludelist check"
         # check if exclude list contains the entire sample
         if len(excludeList) == len(self.point.distinctEntries):
             return self.querySize
@@ -232,13 +220,9 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
-        print "before Kprime"
         Kprime = self.estimateKprime(newSampleSize)
-        print "before altered Singletons"
         f1c = self.estimateAlteredSingletons()
-        print "before f1"
         f1 = self.freqCounters[1]
-        print "before new items"
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems, K
 
@@ -343,10 +327,7 @@ class PointEstimateNew:
                     newEntryFreqs[id] += 1
 
             # get new estimate
-            print "Distinct Entries", newDistinct
-            print "Entry Frequencies", newEntryFreqs
             newReturn, newK = self.estimateReturnBootStrap(newDistinct, newEntryFreqs)
-            print newReturn, newK
             returnEstimates.append(newReturn)
             K_estimates.append(newK)
             K_samplesizes.append(self.sampleSize)
