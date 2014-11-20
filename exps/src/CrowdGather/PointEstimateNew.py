@@ -200,6 +200,9 @@ class PointEstimateNew:
     # estimate return with variance
     def estimateReturnBootStrap(self,distinctEntries,entryFrequencies):
 
+        print "Distinct Entries", distinctEntries
+        print "Entry Frequencies", entryFrequencies
+
         # construct excludeList
         excludeList = self.constructExcludeList(distinctEntries)
 
