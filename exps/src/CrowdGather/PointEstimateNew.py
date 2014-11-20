@@ -329,8 +329,10 @@ class PointEstimateNew:
             # get new estimate
             newReturn, newK = self.estimateReturnBootStrap(newDistinct, newEntryFreqs)
             returnEstimates.append(newReturn)
-            K_estimates.append(newK)
-            K_samplesizes.append(self.sampleSize)
+            if newK:
+                K_estimates.append(newK)
+                K_samplesizes.append(self.sampleSize)
+                
             del newSample[:]
             newDistinct.clear()
             newEntryFreqs.clear()
