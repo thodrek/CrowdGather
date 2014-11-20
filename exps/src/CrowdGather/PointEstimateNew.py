@@ -201,8 +201,10 @@ class PointEstimateNew:
     def estimateReturnBootStrap(self,distinctEntries,entryFrequencies):
 
         # construct excludeList
+        print "before excludelist"
         excludeList = self.constructExcludeList(distinctEntries)
 
+        print "before update freq"
         # update freq counters
         self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
 
@@ -212,10 +214,10 @@ class PointEstimateNew:
                 return 0.0
             else:
                 return self.querySize
-
+        print "before compute K"
         # compute K
         f0, K = self.estimateF0_regression()
-
+        print "before excludelist check"
         # check if exclude list contains the entire sample
         if len(excludeList) == len(self.point.distinctEntries):
             return self.querySize
@@ -223,11 +225,14 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
+        print "before Kprime"
         Kprime = self.estimateKprime(newSampleSize)
+        print "before altered Singletons"
         f1c = self.estimateAlteredSingletons()
+        print "before f1"
         f1 = self.freqCounters[1]
+        print "before new items"
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
-        print newItems, K
         return newItems, K
 
     # normalized return

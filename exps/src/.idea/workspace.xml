@@ -71,8 +71,10 @@
       <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="334" column="52" selection-start="11303" selection-end="11303" vertical-scroll-proportion="0.45995146" vertical-offset="4541" max-vertical-offset="5745">
-              <folding />
+            <state line="233" column="31" selection-start="7720" selection-end="7720" vertical-scroll-proportion="0.7764706" vertical-offset="2835" max-vertical-offset="5910">
+              <folding>
+                <element signature="e#24#42#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -668,8 +670,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="334" column="52" selection-start="11303" selection-end="11303" vertical-scroll-proportion="0.45995146" vertical-offset="4541" max-vertical-offset="5745">
-          <folding />
+        <state line="233" column="31" selection-start="7720" selection-end="7720" vertical-scroll-proportion="0.7764706" vertical-offset="2835" max-vertical-offset="5910">
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
