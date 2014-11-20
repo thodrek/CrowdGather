@@ -40,9 +40,11 @@ class PointEstimateNew:
         self.freqCounters.clear()
         if len(entryFrequencies) > 0.0:
             maxF = max(entryFrequencies.values())
+            print  maxF
+            print range(1,maxF+1)
             for f in range(1,maxF+1):
                 self.freqCounters[f] = 0.0
-
+                
             for e in entryFrequencies:
                 if e not in excludeList:
                     f = entryFrequencies[e]
