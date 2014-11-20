@@ -216,8 +216,10 @@ class PointEstimateNew:
         # check if sample is empty
         if self.sampleSize == 0.0:
             if self.point.emptyPopulation == True:
+                print "in if if"
                 return 0.0
             else:
+                print "in if else"
                 return self.querySize
         print "before compute K"
         # compute K
