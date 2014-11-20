@@ -44,8 +44,10 @@ class PointEstimateNew:
             print range(1,maxF+1)
             for f in range(1,maxF+1):
                 self.freqCounters[f] = 0.0
-                
+
+            print "after first loop"
             for e in entryFrequencies:
+                print "freq = ",e
                 if e not in excludeList:
                     f = entryFrequencies[e]
                     self.freqCounters[f] += 1.0
