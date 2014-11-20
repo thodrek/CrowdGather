@@ -212,7 +212,7 @@ class PointEstimateNew:
         # update freq counters
         print excludeList, entryFrequencies
         self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
-
+        print "after update"
         # check if sample is empty
         if self.sampleSize == 0.0:
             if self.point.emptyPopulation == True:
