@@ -9,9 +9,8 @@ def main(argv):
 
     #extractionMethods = ["random", "BFS", "GS_thres", "randomLeaves"]
     # estimator = ["chao92", "shenRegression", "newRegr"]
-    #extractionMethods = ["BFS","GS_exact","GS_thres"]
-    extractionMethods = ["BFS"]
-    estimator = ["chao92","newRegr","shenRegression"]
+    extractionMethods = ["BFS","GS_exact","GS_thres"]
+    estimator = ["chao92","newRegr",]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
     timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))

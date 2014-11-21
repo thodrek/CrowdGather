@@ -309,7 +309,6 @@ class PointEstimateShen:
 
         # compute gain
         gain = newUnique - oldUnique
-        print "point key = ",self.point.getKey(),gain
         return gain
 
     def estimateGain(self, upper=False):

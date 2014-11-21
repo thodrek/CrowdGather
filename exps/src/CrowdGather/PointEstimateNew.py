@@ -243,7 +243,8 @@ class PointEstimateNew:
         w_Spec = 1.0
         S_value = float(pointSpecificity)/3.0
 
-        cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
+        #cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
+        cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
         return cost
 
     # break excludelist to children
@@ -446,7 +447,6 @@ class PointEstimateNew:
 
         # compute gain
         gain = newUnique - oldUnique
-        print "point key = ",self.point.getKey(),gain
         return gain
 
     def estimateGain(self,upper=False):
