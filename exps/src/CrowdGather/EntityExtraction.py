@@ -173,7 +173,7 @@ class EntityExtraction:
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
                 gain, variance, upperGain, lowerGain = e.estimateGain(True)
                 normGain = upperGain/float(e.querySize)
-                gainCostRatio = float(normGain)/float(cost)
+                gainCostRatio = float(normGain)/(float(cost)/3.0)
                 if gainCostRatio > bestScore:
                     bestAction = e
                     bestScore = gainCostRatio
