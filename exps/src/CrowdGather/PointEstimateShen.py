@@ -104,11 +104,12 @@ class PointEstimateShen:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                return self.querySize
+                #return self.querySize
+                return 1.0
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(self.point.distinctEntries):
-            return self.querySize
+        #if len(excludeList) == len(self.point.distinctEntries):
+        #    return self.querySize
 
         # compute query return
         return self.shenEstimator(self.querySize,self.estMethod)

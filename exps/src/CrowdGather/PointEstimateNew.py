@@ -210,12 +210,13 @@ class PointEstimateNew:
             if self.point.emptyPopulation == True:
                 return 0.0, self.oldK
             else:
-                return self.querySize, self.oldK
+                #return self.querySize, self.oldK
+                return 1.0, self.oldK
         # compute K
         f0, K = self.estimateF0_regression()
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(self.point.distinctEntries):
-            return self.querySize
+        #if len(excludeList) == len(self.point.distinctEntries):
+        #    return self.querySize
 
         # compute return
         newSampleSize = self.sampleSize + self.querySize
