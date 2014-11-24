@@ -167,6 +167,7 @@ class EntityExtraction:
     def gsFindBestAction(self,frontier,nodeEstimates):
         bestAction = None
         bestScore = 0.0
+        bestGain = 0.0
         for node in frontier:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
@@ -177,7 +178,8 @@ class EntityExtraction:
                 if gainCostRatio > bestScore:
                     bestAction = e
                     bestScore = gainCostRatio
-        return bestAction, bestScore
+                    bestGain = normGain
+        return bestAction, bestScore, bestGain
 
     def graphSearchExtraction(self):
         # traverse lattice starting from root and based on previously
@@ -203,9 +205,13 @@ class EntityExtraction:
         while cost < self.budget:
             #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
-            bestAction, bestScore = self.gsFindBestAction(frontier, nodeEstimates)
+            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates)
             if bestAction:
-                gain += bestAction.takeAction()
+                actualGain = bestAction.takeAction()
+                gain += actualGain
+                print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
+                print "Actual gain was:", actualGain
+                print "Predicted gain was:", bestGain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
                 print "No good action found."
