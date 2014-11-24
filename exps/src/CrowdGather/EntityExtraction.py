@@ -172,8 +172,8 @@ class EntityExtraction:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
                 gain, variance, upperGain, lowerGain = e.estimateGain(True)
-                normGain = upperGain/float(e.querySize)
-                gainCostRatio = float(normGain)/(float(cost)/3.0)
+                normGain = upperGain#/float(e.querySize)
+                gainCostRatio = float(normGain)/float(cost)
                 if gainCostRatio > bestScore:
                     bestAction = e
                     bestScore = gainCostRatio

@@ -203,14 +203,15 @@ class PointEstimateShen:
     def normalizedReturn(self):
         return self.estimateReturn()/float(self.querySize)
 
-    # cost of estimator
+
+     # cost of estimator
     def computeCost(self,maxQuerySize,maxExListSize):
         pointSpecificity = self.point.totalAssignedValues
 
         w_Q_Size = 1.0
         Q_value = float(self.querySize)/float(maxQuerySize)
 
-        w_E_Size = 1.0
+        w_E_Size = 10.0
         E_value = float(self.excludeListSize)/float(maxExListSize)
 
         w_Spec = 1.0
@@ -218,6 +219,7 @@ class PointEstimateShen:
 
         #cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
+        cost = w_Q_Size*Q_value + w_E_Size*E_value #+ S_value*w_Spec
         return cost
 
     # break excludelist to children
