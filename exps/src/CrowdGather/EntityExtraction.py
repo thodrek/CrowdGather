@@ -173,7 +173,7 @@ class EntityExtraction:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
                 gain, variance, upperGain, lowerGain = e.estimateGain(True)
-                normGain = upperGain#/float(e.querySize)
+                normGain = lowerGain#/float(e.querySize)
                 gainCostRatio = float(normGain)/float(cost)
                 if gainCostRatio > bestScore:
                     bestAction = e
@@ -234,7 +234,7 @@ class EntityExtraction:
             bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates)
             bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates)
 
-            if bestNodeGain <= bestChildGain:
+            if bestNodeScore <= bestChildScore:
                 frontier |= descSet
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
