@@ -163,8 +163,8 @@ class EntityExtractionParallel:
         return gain, cost
 
     def gainComputation(self,args):
-        e, round = args
-        cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+        e, round,maxQuerySize,maxExListSize = args
+        cost = e.computeCost(maxQuerySize,maxExListSize)
         gain, variance, upperGain, lowerGain = e.estimateGain(True)
         armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
         gainCostRatio = float(armGain)/float(cost)
@@ -180,7 +180,7 @@ class EntityExtractionParallel:
         estimators = []
         for node in frontier:
             for e in nodeEstimates[node]:
-                estimators.append((e,round))
+                estimators.append((e,round,self.maxQuerySize,self.maxExListSize))
 
         # initialize pool
         p = Pool(processes=3)
