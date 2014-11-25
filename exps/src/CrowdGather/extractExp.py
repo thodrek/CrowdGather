@@ -7,6 +7,7 @@ from utilities import Lattice
 
 import copy_reg
 import types
+import math
 
 #def _pickle_method(method):
 #    func_name = method.im_func.__name__
@@ -20,6 +21,14 @@ import types
 #        cls_name = cls.__name__.lstrip('_')
 #        func_name = '_' + cls_name + func_name
 #    return _unpickle_method, (func_name, obj, cls)
+
+def gainComputation(self,args):
+        e, round,maxQuerySize,maxExListSize = args
+        cost = e.computeCost(maxQuerySize,maxExListSize)
+        gain, variance, upperGain, lowerGain = e.estimateGain(True)
+        armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+        gainCostRatio = float(armGain)/float(cost)
+        return gainCostRatio,armGain
 
 def _pickle_method(method):
      func_name = method.im_func.__name__
