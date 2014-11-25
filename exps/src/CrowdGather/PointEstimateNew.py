@@ -23,6 +23,7 @@ class PointEstimateNew:
         self.sampleSize  = 0.0
         self.uniqueNumber = 0.0
         self.oldK = None
+        self.timesSelected = 1.0
 
     # construct exclude list by taking random sample of size listSize
     def constructExcludeList(self,distinctEntries):
@@ -448,6 +449,10 @@ class PointEstimateNew:
 
         # compute gain
         gain = newUnique - oldUnique
+
+        # update selected times
+        self.timesSelected += 1.0
+
         return gain
 
     def estimateGain(self,upper=False):

@@ -15,11 +15,13 @@ class PointEstimateShen:
         self.querySize = querySize
         self.excludeListSize = excludeListSize
 
+
         # sampling variables
         self.freqCounters = {}
         self.sampleSize = 0.0
         self.uniqueNumber = 0.0
         self.oldK = None
+        self.timesSelected = 1.0
 
         if estMethod == "chao92" or estMethod == "shenRegression":
             self.estMethod = estMethod
@@ -311,6 +313,9 @@ class PointEstimateShen:
 
         # compute gain
         gain = newUnique - oldUnique
+
+        # update selected times
+        self.timesSelected += 1.0
         return gain
 
     def estimateGain(self, upper=False):

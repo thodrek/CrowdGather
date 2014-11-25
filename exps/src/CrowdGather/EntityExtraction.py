@@ -6,7 +6,7 @@ import PointEstimateShen
 import PointEstimateNew
 import sys
 import random
-from Queue import PriorityQueue
+import math
 
 class EntityExtraction:
 
@@ -164,7 +164,7 @@ class EntityExtraction:
         return gain, cost
 
     # auxiliary functions
-    def gsFindBestAction(self,frontier,nodeEstimates):
+    def gsFindBestAction(self,frontier,nodeEstimates,round):
         bestAction = None
         bestScore = 0.0
         bestGain = 0.0
@@ -173,12 +173,12 @@ class EntityExtraction:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
                 gain, variance, upperGain, lowerGain = e.estimateGain(True)
-                normGain = lowerGain#/float(e.querySize)
-                gainCostRatio = float(normGain)/float(cost)
+                armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+                gainCostRatio = float(armGain)/float(cost)
                 if gainCostRatio > bestScore:
                     bestAction = e
                     bestScore = gainCostRatio
-                    bestGain = normGain
+                    bestGain = armGain
         return bestAction, bestScore, bestGain
 
     def graphSearchExtraction(self):
@@ -187,6 +187,8 @@ class EntityExtraction:
 
         gain = 0.0
         cost = 0.0
+
+        round = 1.0
 
         root = self.lattice.points['||']
         nodeEstimates = {}
@@ -205,7 +207,7 @@ class EntityExtraction:
         while cost < self.budget:
             #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
-            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates)
+            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round)
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
@@ -213,6 +215,7 @@ class EntityExtraction:
                 #print "Actual gain was:", actualGain
                 #print "Predicted gain was:", bestGain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+                round += 1.0
             else:
                 print "No good action found."
                 sys.exit(-1)
@@ -231,8 +234,8 @@ class EntityExtraction:
                             nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
-            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates)
-            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates)
+            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,round)
+            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,round)
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
