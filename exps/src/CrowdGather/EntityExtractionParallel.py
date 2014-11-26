@@ -285,6 +285,7 @@ class EntityExtractionParallel:
             est = self.getNewEstimator(root,querySize,exListSize)
             nodeEstimates.append(est)
 
+        print nodeEstimates
         pool = Pool(processes=3)
         results = pool.map(self.gainComputation,nodeEstimates)
         return results
