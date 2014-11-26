@@ -22,7 +22,7 @@ class someClass(object):
         return gainCostRatio
  
     def go(self,s):
-        pool = Pool()
+        pool = Pool(3)
         results = pool.map(self.f,s)
         return results
 
