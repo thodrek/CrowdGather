@@ -456,16 +456,14 @@ class PointEstimateNew:
         return gain
 
     def estimateGain(self,upper=False):
-        #gain = self.estimateReturn()
-        #upperValue = gain
-        #lowerValue = gain
-        #if upper and len(self.point.retrievedEntries) > 0.0:
-        #    lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
-        #else:
-        #    variance = 0.0
-        #return gain, variance, upperValue, lowerValue
-        g = float(self.querySize)
-        return g, 0.0, g,g
+        gain = self.estimateReturn()
+        upperValue = gain
+        lowerValue = gain
+        if upper and len(self.point.retrievedEntries) > 0.0:
+            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
+        else:
+            variance = 0.0
+        return gain, variance, upperValue, lowerValue
 
 
     def computeExactGain(self):
