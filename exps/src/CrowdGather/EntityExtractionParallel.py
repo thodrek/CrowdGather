@@ -179,10 +179,10 @@ class EntityExtractionParallel:
                 estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
         # initialize pool
-        p = Pool(processes=3)
+        p = Pool(processes=10)
 
         # compute scores for estimators
-        results = p.map(gainComputation,estimators)
+        results = p.map(self.gainComputation,estimators)
 
         # find best action
         bestActionIndex = results.index(max(results))
