@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     for eMethod in extractionMethods:
         for est in estimator:
-            eExtract = EntityExtractionParallel.EntityExtractionParallel(budget,inputData.hList,inputData.hDescr,inputData.itemInfo,configurations,20,10,eMethod,est,inputData.newLattice)
+            eExtract = EntityExtractionParallel.EntityExtractionParallel(budget,configurations,20,10,eMethod,est)
 
             gain, cost = eExtract.retrieveItems()
             print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
