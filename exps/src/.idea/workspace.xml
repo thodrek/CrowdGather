@@ -88,7 +88,7 @@
       <file leaf-file-name="SomeClass.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="24" selection-start="765" selection-end="765" vertical-scroll-proportion="0.40588236" vertical-offset="0" max-vertical-offset="850">
+            <state line="27" column="23" selection-start="850" selection-end="850" vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="850">
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -681,13 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="464" column="26" selection-start="16109" selection-end="16109" vertical-scroll-proportion="-264.23077" vertical-offset="0" max-vertical-offset="7365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="15" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3840">
@@ -703,6 +696,13 @@
             <marker date="1417019575000" expanded="true" signature="6665:7189" placeholder="..." />
             <marker date="1417019575000" expanded="true" signature="10633:11028" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="464" column="26" selection-start="16109" selection-end="16109" vertical-scroll-proportion="-264.23077" vertical-offset="0" max-vertical-offset="7365">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -722,7 +722,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="24" selection-start="765" selection-end="765" vertical-scroll-proportion="0.40588236" vertical-offset="0" max-vertical-offset="850">
+        <state line="27" column="23" selection-start="850" selection-end="850" vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="850">
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>

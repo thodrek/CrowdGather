@@ -25,10 +25,10 @@ class someClass(object):
         results = pool.map(self.f,s)
         return results
 
-    def run(self):
+    def run(self,pool):
         s = []
         for i in range(10):
             for j in range(10):
                 newS = PointEstimateShen.PointEstimateShen(None,i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
-        return self.go(s)
+        return self.go(s,pool)
