@@ -7,7 +7,7 @@ import scipy.optimize
 import numpy.random as npr
 import latticepoint
 
-class PointEstimateShen:
+class PointEstimateShenTest:
 
     def __init__(self,querySize,excludeListSize,estMethod):
 
