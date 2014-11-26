@@ -1,7 +1,7 @@
 __author__ = 'thodoris'
 
-import PointEstimateShen
-import PointEstimateNew
+import PointEstimateShenPar
+import PointEstimateNewPar
 import sys
 import random
 import math
@@ -52,9 +52,9 @@ class EntityExtractionParallel:
 
     def getNewEstimator(self, latticePoint, querySize, exListSize):
         if self.estMethod == "chao92" or self.estMethod == "shenRegression":
-            return PointEstimateShen.PointEstimateShen(latticePoint.getKey(),querySize,exListSize,self.estMethod)
+            return PointEstimateShenPar.PointEstimateShenPar(latticePoint.getKey(),querySize,exListSize,self.estMethod)
         else:
-            return PointEstimateNew.PointEstimateNew(latticePoint.getKey(),querySize,exListSize)
+            return PointEstimateNewPar.PointEstimateNewPar(latticePoint.getKey(),querySize,exListSize)
 
     def randomExtraction(self):
 
@@ -207,9 +207,9 @@ class EntityExtractionParallel:
             exListSize = conf[1]
             #est = self.getNewEstimator(root,querySize,exListSize)
             if self.estMethod == "chao92" or self.estMethod == "shenRegression":
-                est = PointEstimateShen.PointEstimateShen(root.getKey(),querySize,exListSize,self.estMethod)
+                est = PointEstimateShenPar.PointEstimateShenPar(root.getKey(),querySize,exListSize,self.estMethod)
             else:
-                est = PointEstimateNew.PointEstimateNew(root.getKey(),querySize,exListSize)
+                est = PointEstimateNewPar.PointEstimateNewPar(root.getKey(),querySize,exListSize)
             nodeEstimates[root].append(est)
 
         # initialize frontier
@@ -244,9 +244,9 @@ class EntityExtractionParallel:
                             exListSize = conf[1]
                             #est = self.getNewEstimator(d,querySize,exListSize)
                             if self.estMethod == "chao92" or self.estMethod == "shenRegression":
-                                est = PointEstimateShen.PointEstimateShen(d.getKey(),querySize,exListSize,self.estMethod)
+                                est = PointEstimateShenPar.PointEstimateShenPar(d.getKey(),querySize,exListSize,self.estMethod)
                             else:
-                                est = PointEstimateNew.PointEstimateNew(d.getKey(),querySize,exListSize)
+                                est = PointEstimateNewPar.PointEstimateNewPar(d.getKey(),querySize,exListSize)
                             nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
@@ -260,21 +260,23 @@ class EntityExtractionParallel:
 
         return gain, cost
 
-    def graphSearchExtractionTest(self,latticePoint):
+    def graphSearchExtractionTest(self):
 
         cRound = 1.0
-
-        root = latticePoint
+        root = "||"
         nodeEstimates = []
         for conf in self.extConfigs:
             querySize = conf[0]
             exListSize = conf[1]
-            est = self.getNewEstimator(root,querySize,exListSize)
-            nodeEstimates.append(est)
+            if self.estMethod == "chao92" or self.estMethod == "shenRegression":
+                est = PointEstimateShenPar.PointEstimateShenPar(root, querySize, exListSize, self.estMethod)
+            else:
+                est = PointEstimateNewPar.PointEstimateNewPar(root, querySize, exListSize)
+            nodeEstimates.append((est,cRound,self.maxQuerySize,self.maxExListSize))
 
         print nodeEstimates
         pool = Pool(processes=3)
-        results = pool.map(self.gain,nodeEstimates)
+        results = pool.map(self.gainComputation,nodeEstimates)
         return results
 
     def gsFindBestActionExact(self,frontier,nodeEstimates):

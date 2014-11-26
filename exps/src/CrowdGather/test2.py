@@ -1,6 +1,6 @@
 from multiprocessing import Pool
 from functools import partial
-import SomeClass
+import EntityExtractionParallel
 import inputData
  
 def _pickle_method(method):
@@ -29,6 +29,8 @@ copy_reg.pickle(types.MethodType, _pickle_method, _unpickle_method)
  
  
 if __name__=='__main__':
-    l = inputData.newLattice
-    sc = SomeClass.someClass()
-    print sc.run()
+
+    budget = 50
+    configurations = [(5,0),(10,0),(20,0),(5,2),(10,5),(20,5),(20,10)]
+    eExtract = EntityExtractionParallel.EntityExtractionParallel(budget,configurations,20,10,"GS_thres","chao92")
+    print eExtract.graphSearchExtractionTest()
