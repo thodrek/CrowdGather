@@ -1,11 +1,7 @@
 from multiprocessing import Pool
 import PointEstimateShen
 import math
-from utilities import LatticePoint,DBManager
 
-db = DBManager.DBManager()
-hDescr = ['category','time','location']
-newLatticePoint = LatticePoint.LatticePoint('||', db, hDescr, None, samplingHistory=False)
 
 class someClass(object):
 
@@ -30,6 +26,6 @@ class someClass(object):
         s = []
         for i in range(10):
             for j in range(10):
-                newS = PointEstimateShen.PointEstimateShen(newLatticePoint,i,j,"shenRegression")
+                newS = PointEstimateShen.PointEstimateShenTest(i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)
