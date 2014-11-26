@@ -183,7 +183,7 @@ class EntityExtractionParallel(object):
 
         # find best action
         bestActionIndex = results.index(max(results))
-        bestAction = estimators[bestActionIndex]
+        bestAction = estimators[bestActionIndex][0]
         bestScore = results[bestActionIndex][0]
         bestGain = results[bestActionIndex][1]
 
