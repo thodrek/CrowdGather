@@ -41,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test1.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="test1.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1275">
+            <state line="42" column="0" selection-start="1125" selection-end="1125" vertical-scroll-proportion="-0.20786516" vertical-offset="741" max-vertical-offset="1275">
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
               </folding>
@@ -88,10 +88,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="9" selection-start="5914" selection-end="5914" vertical-scroll-proportion="0.30164534" vertical-offset="2430" max-vertical-offset="5595">
+            <state line="280" column="26" selection-start="10087" selection-end="10087" vertical-scroll-proportion="0.0" vertical-offset="3563" max-vertical-offset="5535">
               <folding>
                 <element signature="e#25#54#0" expanded="true" />
               </folding>
@@ -151,7 +151,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="x" value="300" />
+    <option name="y" value="51" />
     <option name="width" value="1280" />
     <option name="height" value="690" />
   </component>
@@ -391,7 +392,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="690" extended-state="0" />
+    <frame x="300" y="51" width="1280" height="690" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -692,15 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1275">
-          <folding>
-            <element signature="e#25#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/LatticePoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="128" column="30" selection-start="4049" selection-end="4049" vertical-scroll-proportion="-6.076923" vertical-offset="1747" max-vertical-offset="3840">
@@ -710,9 +702,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="9" selection-start="5914" selection-end="5914" vertical-scroll-proportion="0.30164534" vertical-offset="2430" max-vertical-offset="5595">
+        <state line="280" column="26" selection-start="10087" selection-end="10087" vertical-scroll-proportion="0.0" vertical-offset="3563" max-vertical-offset="5535">
           <folding>
             <element signature="e#25#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="1125" selection-end="1125" vertical-scroll-proportion="-0.20786516" vertical-offset="741" max-vertical-offset="1275">
+          <folding>
+            <element signature="e#25#56#0" expanded="true" />
           </folding>
         </state>
       </provider>

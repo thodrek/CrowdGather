@@ -171,12 +171,18 @@ class EntityExtractionParallel:
         return gain, cost
 
     def gainComputation(self,args):
+        e, round, mQ, mL = args
+        cost = e.computeCost(mQ,mL)
+        gain, variance, upperGain, lowerGain = e.estimateGain(True)
+        armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+        gainCostRatio = float(armGain)/float(cost)
+        return gainCostRatio
         #e,cRound,maxQuerySize,maxExListSize = args
-        cost = e.computeCost(maxQuerySize,maxExListSize)
+        #cost = e.computeCost(maxQuerySize,maxExListSize)
         #gain, variance, upperGain, lowerGain = e.estimateGain(True)
         #armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
         #gainCostRatio = float(armGain)/float(cost)
-        return 1.0,1.0
+        #return 1.0,1.0
 
     # auxiliary functions
     def gsFindBestAction(self,frontier,nodeEstimates,cRound):
@@ -268,30 +274,20 @@ class EntityExtractionParallel:
         return gain, cost
 
     def graphSearchExtractionTest(self,latticePoint):
-        # traverse lattice starting from root and based on previously
-        # chosen decisions
 
-        gain = 0.0
-        cost = 0.0
-
-        round = 1.0
+        cRound = 1.0
 
         root = latticePoint
-        nodeEstimates = {}
-        removedNodes = set([])
-        nodeEstimates[root] = []
+        nodeEstimates = []
         for conf in self.extConfigs:
             querySize = conf[0]
             exListSize = conf[1]
             est = self.getNewEstimator(root,querySize,exListSize)
-            nodeEstimates[root].append(est)
+            nodeEstimates.append(est)
 
-        # initialize frontier
-        frontier = set([root])
-
-        bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round)
-
-        return bestAction, bestScore, bestGain
+        pool = Pool(processes=3)
+        results = pool.map(self.gainComputation,nodeEstimates)
+        return results
 
     def gsFindBestActionExact(self,frontier,nodeEstimates):
         bestAction = None
