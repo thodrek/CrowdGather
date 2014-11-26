@@ -171,7 +171,7 @@ class EntityExtractionParallel:
         return gain, cost
 
     def gainComputation(self,args):
-        e, round,maxQuerySize,maxExListSize = args
+        #e,cRound,maxQuerySize,maxExListSize = args
         cost = e.computeCost(maxQuerySize,maxExListSize)
         #gain, variance, upperGain, lowerGain = e.estimateGain(True)
         #armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
@@ -179,7 +179,7 @@ class EntityExtractionParallel:
         return 1.0,1.0
 
     # auxiliary functions
-    def gsFindBestAction(self,frontier,nodeEstimates,round):
+    def gsFindBestAction(self,frontier,nodeEstimates,cRound):
         bestAction = None
         bestScore = 0.0
         bestGain = 0.0
@@ -188,7 +188,7 @@ class EntityExtractionParallel:
         estimators = []
         for node in frontier:
             for e in nodeEstimates[node]:
-                estimators.append((e,round,self.maxQuerySize,self.maxExListSize))
+                estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
         # initialize pool
         p = Pool(processes=3)
@@ -211,7 +211,7 @@ class EntityExtractionParallel:
         gain = 0.0
         cost = 0.0
 
-        round = 1.0
+        cRound = 1.0
 
         root = self.lattice.points['||']
         nodeEstimates = {}
