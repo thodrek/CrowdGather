@@ -6,12 +6,11 @@ from utilities import functions
 import scipy.optimize
 import math
 import numpy.random as npr
-from inputData import points
 
 class PointEstimateNew:
 
-    def __init__(self,latticePointId,querySize,excludeListSize, childrenDistribution=False):
-        self.pointId = latticePointId
+    def __init__(self,latticePoint,querySize,excludeListSize, childrenDistribution=False):
+        self.point = latticePoint
 
         # expected return variables
         self.querySize = querySize
@@ -165,14 +164,14 @@ class PointEstimateNew:
             self.compute_K_History()
 
         # construct excludeList
-        excludeList = self.constructExcludeList(points[self.pointId].distinctEntries)
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # update freq counters
-        self.updateFreqCounterSampleSize(excludeList,points[self.pointId].entryFrequencies)
+        self.updateFreqCounterSampleSize(excludeList,self.point.entryFrequencies)
 
         # check if sample is empty
         if self.sampleSize == 0.0:
-            if points[self.pointId].emptyPopulation == True:
+            if self.point.emptyPopulation == True:
                 return 0.0
             else:
                 return self.querySize
@@ -183,11 +182,11 @@ class PointEstimateNew:
         self.oldK = K
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(points[self.pointId].distinctEntries):
+        if len(excludeList) == len(self.point.distinctEntries):
             return self.querySize
 
         # compute query return
-        if strataOption and len(points[self.pointId].childrenWeights) > 0:
+        if strataOption and len(self.point.childrenWeights) > 0:
             return self.estimateStratifiedReturn(excludeList)
 
         # compute return
@@ -209,7 +208,7 @@ class PointEstimateNew:
         self.updateFreqCounterSampleSize(excludeList,entryFrequencies)
         # check if sample is empty
         if self.sampleSize == 0.0:
-            if points[self.pointId].emptyPopulation == True:
+            if self.point.emptyPopulation == True:
                 return 0.0, self.oldK
             else:
                 #return self.querySize, self.oldK
@@ -217,7 +216,7 @@ class PointEstimateNew:
         # compute K
         f0, K = self.estimateF0_regression()
         # check if exclude list contains the entire sample
-        #if len(excludeList) == len(points[self.pointId].distinctEntries):
+        #if len(excludeList) == len(self.point.distinctEntries):
         #    return self.querySize
 
         # compute return
@@ -235,7 +234,7 @@ class PointEstimateNew:
 
     # cost of estimator
     def computeCost(self,maxQuerySize,maxExListSize):
-        pointSpecificity = points[self.pointId].totalAssignedValues
+        pointSpecificity = self.point.totalAssignedValues
 
         w_Q_Size = 1.0
         Q_value = float(self.querySize)/float(maxQuerySize)
@@ -253,7 +252,7 @@ class PointEstimateNew:
     # break excludelist to children
     def excludeListToChildren(self,excludeList):
         childrenExcludeLists = {}
-        for d in points[self.pointId].descendants:
+        for d in self.point.descendants:
             childrenExcludeLists[d] = []
             for item in excludeList:
                 if d.containsItem(item):
@@ -262,22 +261,22 @@ class PointEstimateNew:
 
     def querySizeToChildren(self):
         childrenQuerySizes = {}
-        totalWeight = points[self.pointId].childrenTotalWeight()
-        for d in points[self.pointId].descendants:
-            querySize = float(self.querySize)*points[self.pointId].childrenWeights[d]/totalWeight
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.descendants:
+            querySize = float(self.querySize)*self.point.childrenWeights[d]/totalWeight
             childrenQuerySizes[d] = querySize
         return childrenQuerySizes
 
     def estimateStratifiedReturn(self,excludeList):
         gain = 0.0
-        totalWeight = points[self.pointId].childrenTotalWeight()
-        for d in points[self.pointId].childrenWeights:
+        totalWeight = self.point.childrenTotalWeight()
+        for d in self.point.childrenWeights:
             childExList = []
             # compute child's exclude list
             for item in excludeList:
                 if d.containsItem(item):
                     childExList.append(item)
-            childQuerySize = int(round(float(self.querySize)*points[self.pointId].childrenWeights[d]/totalWeight))
+            childQuerySize = int(round(float(self.querySize)*self.point.childrenWeights[d]/totalWeight))
             # instanciate new estimator
             childGainEst = PointEstimateNew(d,childQuerySize,childExList,self.estMethod)
             childGain = childGainEst.estimateReturn(False,True)
@@ -291,9 +290,9 @@ class PointEstimateNew:
     def compute_K_History(self):
 
         # Iterate over sampling history to compute old K values
-        for i in range(len(points[self.pointId].distinctEntryLogs)-1):
-            distinctEntries = points[self.pointId].distinctEntryLogs[i]
-            entryFreqs = points[self.pointId].entryFrequencyLogs[i]
+        for i in range(len(self.point.distinctEntryLogs)-1):
+            distinctEntries = self.point.distinctEntryLogs[i]
+            entryFreqs = self.point.entryFrequencyLogs[i]
 
             # construct excludeList
             excludeList = self.constructExcludeList(distinctEntries)
@@ -309,7 +308,7 @@ class PointEstimateNew:
 
     def bootstrapVariance(self, num_samples):
         # grap retrieved items from lattice point
-        data = np.array(points[self.pointId].retrievedEntries)
+        data = np.array(self.point.retrievedEntries)
         n = len(data)
         # generate bootstrapped samples
         idx = npr.randint(0, n, (num_samples, n))
@@ -336,7 +335,7 @@ class PointEstimateNew:
             if newK:
                 K_estimates.append(newK)
                 K_samplesizes.append(self.sampleSize)
-                
+
             del newSample[:]
             newDistinct.clear()
             newEntryFreqs.clear()
@@ -361,7 +360,7 @@ class PointEstimateNew:
             self.oldK = None
             excludeList = []
             lenDistinct = 0.0
-            for s in points[self.pointId].sampleLogs:
+            for s in self.point.sampleLogs:
                 # get sample
                 data = np.array(s)
                 n = len(data)
@@ -408,7 +407,7 @@ class PointEstimateNew:
                 returnEstimates.append(self.querySize)
 
             elif self.sampleSize == 0.0:
-                if points[self.pointId].emptyPopulation == True:
+                if self.point.emptyPopulation == True:
                     returnEstimates.append(0.0)
                 else:
                     returnEstimates.append(self.querySize)
@@ -437,16 +436,16 @@ class PointEstimateNew:
     def takeAction(self):
 
         # construct excludeList
-        excludeList = self.constructExcludeList(points[self.pointId].distinctEntries)
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
 
         # store old unique
-        oldUnique = len(points[self.pointId].distinctEntries)
+        oldUnique = len(self.point.distinctEntries)
 
         # retrieve sample from underlying node
-        s = points[self.pointId].retrieveSample(self.querySize, excludeList)
+        s = self.point.retrieveSample(self.querySize, excludeList)
 
         # store new unique
-        newUnique = len(points[self.pointId].distinctEntries)
+        newUnique = len(self.point.distinctEntries)
 
         # compute gain
         gain = newUnique - oldUnique
@@ -460,7 +459,7 @@ class PointEstimateNew:
         gain = self.estimateReturn()
         upperValue = gain
         lowerValue = gain
-        if upper and len(points[self.pointId].retrievedEntries) > 0.0:
+        if upper and len(self.point.retrievedEntries) > 0.0:
             lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
         else:
             variance = 0.0
@@ -470,24 +469,24 @@ class PointEstimateNew:
     def computeExactGain(self):
         sample = self.prepareAction()
         sampleSet = set(sample)
-        gain = len(sampleSet.difference(points[self.pointId].distinctEntries))
+        gain = len(sampleSet.difference(self.point.distinctEntries))
         return gain,sample
 
     # prepare action
     def prepareAction(self):
-        excludeList = self.constructExcludeList(points[self.pointId].distinctEntries)
-        s = points[self.pointId].retrieveSamplePreempt(self.querySize,excludeList)
+        excludeList = self.constructExcludeList(self.point.distinctEntries)
+        s = self.point.retrieveSamplePreempt(self.querySize,excludeList)
         return s
 
     def takeActionFinal(self,sample):
         # store old unique
-        oldUnique = len(points[self.pointId].distinctEntries)
+        oldUnique = len(self.point.distinctEntries)
 
         # update lattice sample based on sample
-        points[self.pointId].finalizeSample(sample)
+        self.point.finalizeSample(sample)
 
         # store new unique
-        newUnique = len(points[self.pointId].distinctEntries)
+        newUnique = len(self.point.distinctEntries)
         # compute gain
         gain = newUnique - oldUnique
         return gain
