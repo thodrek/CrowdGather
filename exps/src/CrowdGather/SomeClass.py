@@ -10,7 +10,7 @@ newLatticePoint = LatticePoint.LatticePoint('||', db, hDescr, None, samplingHist
 class someClass(object):
 
     def __init__(self):
-
+        pass
 
     def f(self, args):
         #can put something expensive here to verify CPU utilization
