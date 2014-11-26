@@ -1,28 +1,22 @@
 __author__ = 'thodoris'
 
-from utilities import Lattice
 import PointEstimateShen
 import PointEstimateNew
 import sys
 import random
 import math
 from multiprocessing import Pool
-import inputData
 
 
 class EntityExtractionParallel:
 
-    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod, lattice=None):
+    def __init__(self, budget, hList, hDescr, itemInfo, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod, lattice):
         # store budget
         self.budget = budget
 
-        # generate latice
-        if lattice:
-            self.lattice = lattice
-        else:
-            #self.lattice = Lattice.Lattice(hList,hDescr,itemInfo)
-            self.lattice = lattice
-        # store extraction configurations
+        # store latice
+        self.lattice = lattice
+
         self.extConfigs = extConfigs
 
         # maxQuerySize, maxExListSize
@@ -61,9 +55,9 @@ class EntityExtractionParallel:
 
     def getNewEstimator(self, latticePoint, querySize, exListSize):
         if self.estMethod == "chao92" or self.estMethod == "shenRegression":
-            return PointEstimateShen.PointEstimateShen(latticePoint,querySize,exListSize,self.estMethod)
+            return PointEstimateShen.PointEstimateShen(latticePoint.getKey(),querySize,exListSize,self.estMethod)
         else:
-            return PointEstimateNew.PointEstimateNew(latticePoint,querySize,exListSize)
+            return PointEstimateNew.PointEstimateNew(latticePoint.getKey(),querySize,exListSize)
 
     def randomExtraction(self):
 

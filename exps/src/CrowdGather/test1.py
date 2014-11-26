@@ -7,7 +7,7 @@ from utilities import LatticePoint,DBManager
 
 import copy_reg
 import types
-import math
+import inputData
 
 def _pickle_method(method):
     func_name = method.im_func.__name__

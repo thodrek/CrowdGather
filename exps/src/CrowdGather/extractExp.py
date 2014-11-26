@@ -1,9 +1,7 @@
 __author__ = 'thodoris'
 
 import EntityExtractionParallel
-import cPickle as pickle
 import sys
-from utilities import Lattice
 
 import copy_reg
 import types
@@ -22,12 +20,6 @@ def _pickle_method(method):
         func_name = '_' + cls_name + func_name
     return _unpickle_method, (func_name, obj, cls)
 
-
-def _pickle_method(method):
-     func_name = method.im_func.__name__
-     obj = method.im_self
-     cls = method.im_class
-     return _unpickle_method, (func_name, obj, cls)
 
 def _unpickle_method(func_name, obj, cls):
     for cls in cls.__mro__:
@@ -48,20 +40,6 @@ if __name__ == "__main__":
     #extractionMethods = ["BFS","GS_thres"]
     extractionMethods = ["GS_thres"]
     estimator = ["chao92","shenRegression","newRegr"]
-    # construct hierarchy list
-    catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
-    timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
-    locH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/locHierarchy.pkl","rb"))
-    hList = [catH,timeH,locH]
-
-    # construct hierarchy descr
-    hDescr = ['category','time','location']
-
-    # construct item info
-    itemInfo = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/eventBriteInfo.pkl","rb"))
-
-    # create lattice
-    newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
     # set budget
     budget = int(sys.argv[1])
@@ -76,13 +54,13 @@ if __name__ == "__main__":
 
     for eMethod in extractionMethods:
         for est in estimator:
-            eExtract = EntityExtractionParallel.EntityExtractionParallel(budget,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
+            eExtract = EntityExtractionParallel.EntityExtractionParallel(budget,inputData.hList,inputData.hDescr,inputData.itemInfo,configurations,20,10,eMethod,est,inputData.newLattice)
 
             gain, cost = eExtract.retrieveItems()
             print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
             newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t"+str(cost)+"\n"
             lines.append(newLine)
-            newLattice.clearLatticeSamples()
+            inputData.newLattice.clearLatticeSamples()
 
     # print lines
     fileOut = open("extractionPerfNew.txt",'w')
