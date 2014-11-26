@@ -3,12 +3,14 @@ import PointEstimateShen
 import math
 from utilities import LatticePoint,DBManager
 
+db = DBManager.DBManager()
+hDescr = ['category','time','location']
+newLatticePoint = LatticePoint.LatticePoint('||', db, hDescr, None, samplingHistory=False)
+
 class someClass(object):
 
     def __init__(self):
-        self.db = DBManager.DBManager()
-        self.hDescr = ['category','time','location']
-        self.newLatticePoint = LatticePoint.LatticePoint('||', self.db, self.hDescr, None, samplingHistory=False)
+
 
     def f(self, args):
         #can put something expensive here to verify CPU utilization
@@ -28,6 +30,6 @@ class someClass(object):
         s = []
         for i in range(10):
             for j in range(10):
-                newS = PointEstimateShen.PointEstimateShen(self.newLatticePoint,i,j,"shenRegression")
+                newS = PointEstimateShen.PointEstimateShen(newLatticePoint,i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)

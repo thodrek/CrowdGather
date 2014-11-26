@@ -32,11 +32,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test1.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test1.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="93" selection-end="137" vertical-scroll-proportion="-0.30588236" vertical-offset="335" max-vertical-offset="1185">
-              <folding />
+            <state line="68" column="21" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.0" vertical-offset="335" max-vertical-offset="1185">
+              <folding>
+                <element signature="e#25#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SomeClass.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SomeClass.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="79" selection-start="1047" selection-end="1047" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+            <state line="7" column="54" selection-start="237" selection-end="237" vertical-scroll-proportion="0.12352941" vertical-offset="0" max-vertical-offset="850">
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -680,19 +682,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="79" selection-start="1047" selection-end="1047" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+        <state line="68" column="21" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.0" vertical-offset="335" max-vertical-offset="1185">
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#25#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="93" selection-end="137" vertical-scroll-proportion="-0.30588236" vertical-offset="335" max-vertical-offset="1185">
-          <folding />
+        <state line="7" column="54" selection-start="237" selection-end="237" vertical-scroll-proportion="0.12352941" vertical-offset="0" max-vertical-offset="850">
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
