@@ -222,6 +222,7 @@ class PointEstimateShenTest:
 
         #cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
+        print cost
         return cost
 
     # break excludelist to children
