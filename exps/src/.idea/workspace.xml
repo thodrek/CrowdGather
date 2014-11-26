@@ -93,7 +93,7 @@
       <file leaf-file-name="SomeClass.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="12" selection-start="337" selection-end="337" vertical-scroll-proportion="0.21176471" vertical-offset="0" max-vertical-offset="850">
+            <state line="32" column="63" selection-start="996" selection-end="996" vertical-scroll-proportion="0.5647059" vertical-offset="0" max-vertical-offset="850">
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -693,7 +693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="12" selection-start="337" selection-end="337" vertical-scroll-proportion="0.21176471" vertical-offset="0" max-vertical-offset="850">
+        <state line="32" column="63" selection-start="996" selection-end="996" vertical-scroll-proportion="0.5647059" vertical-offset="0" max-vertical-offset="850">
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
