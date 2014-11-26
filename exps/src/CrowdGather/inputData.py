@@ -21,4 +21,6 @@ itemInfo = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/even
 # create lattice
 newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
+# global vars
+lattice = newLattice
 points = newLattice.points
