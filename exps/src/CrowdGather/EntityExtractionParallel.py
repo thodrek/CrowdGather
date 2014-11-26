@@ -259,6 +259,32 @@ class EntityExtractionParallel:
 
         return gain, cost
 
+    def graphSearchExtractionTest(self,latticePoint):
+        # traverse lattice starting from root and based on previously
+        # chosen decisions
+
+        gain = 0.0
+        cost = 0.0
+
+        round = 1.0
+
+        root = latticePoint
+        nodeEstimates = {}
+        removedNodes = set([])
+        nodeEstimates[root] = []
+        for conf in self.extConfigs:
+            querySize = conf[0]
+            exListSize = conf[1]
+            est = self.getNewEstimator(root,querySize,exListSize)
+            nodeEstimates[root].append(est)
+
+        # initialize frontier
+        frontier = set([root])
+
+        bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round)
+
+        return bestAction, bestScore, bestGain
+
     def gsFindBestActionExact(self,frontier,nodeEstimates):
         bestAction = None
         bestScore = 0.0
