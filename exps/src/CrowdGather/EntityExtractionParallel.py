@@ -8,13 +8,6 @@ import random
 import math
 from multiprocessing import Pool
 
-def gainComputation(args):
-    e, round,maxQuerySize,maxExListSize = args
-    cost = e.computeCost(maxQuerySize,maxExListSize)
-    #gain, variance, upperGain, lowerGain = e.estimateGain(True)
-    #armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
-    #gainCostRatio = float(armGain)/float(cost)
-    return 1.0,cost
 
 class EntityExtractionParallel:
 
@@ -170,7 +163,7 @@ class EntityExtractionParallel:
 
         return gain, cost
 
-    def gainComputation(self,args):
+    def gain(self,args):
         e, round, mQ, mL = args
         cost = e.computeCost(mQ,mL)
         gain, variance, upperGain, lowerGain = e.estimateGain(True)
@@ -200,7 +193,7 @@ class EntityExtractionParallel:
         p = Pool(processes=3)
 
         # compute scores for estimators
-        results = p.map(gainComputation,estimators)
+        results = p.map(gain,estimators)
 
         # find best action
         bestActionIndex = results.index(max(results))
