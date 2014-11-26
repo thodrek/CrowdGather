@@ -41,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test1.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test1.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="10" selection-start="2751" selection-end="2751" vertical-scroll-proportion="0.8876405" vertical-offset="696" max-vertical-offset="1275">
+            <state line="78" column="10" selection-start="2751" selection-end="2751" vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="1275">
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
               </folding>
@@ -88,10 +88,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="34" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5475">
+            <state line="170" column="22" selection-start="5899" selection-end="5899" vertical-scroll-proportion="0.32906765" vertical-offset="2370" max-vertical-offset="5475">
               <folding>
                 <element signature="e#25#54#0" expanded="true" />
               </folding>
@@ -699,20 +699,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="34" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5475">
+        <state line="78" column="10" selection-start="2751" selection-end="2751" vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="1275">
           <folding>
-            <element signature="e#25#54#0" expanded="true" />
+            <element signature="e#25#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/test1.py">
+    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="10" selection-start="2751" selection-end="2751" vertical-scroll-proportion="0.8876405" vertical-offset="696" max-vertical-offset="1275">
+        <state line="170" column="22" selection-start="5899" selection-end="5899" vertical-scroll-proportion="0.32906765" vertical-offset="2370" max-vertical-offset="5475">
           <folding>
-            <element signature="e#25#56#0" expanded="true" />
+            <element signature="e#25#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
