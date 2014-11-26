@@ -30,6 +30,6 @@ class someClass(object):
         s = []
         for i in range(10):
             for j in range(10):
-                newS = PointEstimateShen.PointEstimateShen(None,i,j,"shenRegression")
+                newS = PointEstimateShen.PointEstimateShen(newLatticePoint,i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)
