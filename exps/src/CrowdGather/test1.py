@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # estimator = ["chao92", "shenRegression", "newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     extractionMethods = ["GS_thres"]
-    estimator = ["chao92","shenRegression","newRegr"]
+    estimator = ["chao92"]#,"shenRegression","newRegr"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
     timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
