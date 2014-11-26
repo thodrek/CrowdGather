@@ -8,7 +8,7 @@ import math
 from multiprocessing import Pool
 import inputData
 
-class EntityExtractionParallel:
+class EntityExtractionParallel(object):
 
     def __init__(self, budget, extConfigs, maxQuerySize, maxExListSize, optMethod, estMethod):
         # store budget
@@ -274,7 +274,6 @@ class EntityExtractionParallel:
                 est = PointEstimateNewPar.PointEstimateNewPar(root, querySize, exListSize)
             nodeEstimates.append((est,cRound,self.maxQuerySize,self.maxExListSize))
 
-        print nodeEstimates
         pool = Pool(processes=3)
         results = pool.map(self.gainComputation,nodeEstimates)
         return results
