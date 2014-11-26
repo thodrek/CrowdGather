@@ -28,8 +28,6 @@ class Lattice:
             self.db.saveToDisk()
 
 
-
-
     def constructPoints(self,hDicts,persist):
         # initialize points
         points = {}
