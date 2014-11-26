@@ -65,6 +65,15 @@
 \numberofauthors{3} 
 
 \author{
+	\alignauthor Theodoros Rekatsinas\\
+            \affaddr{University of Maryland, College Park} %, College Park MD 20742}
+                \email{thodrek@cs.umd.edu}
+            \alignauthor Amol Deshpande\\
+            \affaddr{University of Maryland, College Park} %, College Park MD 20742}
+                \email{amol@cs.umd.edu}
+            \alignauthor Aditya Parameswaran \\
+            \affaddr{University of Illinois, Urbana-Champaign University} %, Durham NC 27708}
+                \email{adityagp@illinois.edu}
 }
 
 \maketitle
@@ -77,9 +86,9 @@ In this paper, we explore the problem of {\em budgeted entity extraction} over {
 
 \section{Introduction}
 \label{sec:intro}
-Combining human computation with traditional computer systems has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{west:2014}.
+Combining human computation with traditional computation has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{west:2014}.
 
-A fundamental challenge in crowd entity extraction is reasoning about the completeness of the extracted information. More precisely, given a query that seeks to enumerate entities from a specific domain, how can one decide on the completeness of the retrieved entities. Recent work has considered this problem for single queries~\cite{trushkowsky:2013} where the query predicates specify the data domain of interest. Often, however, crowd entity extraction techniques are used to acquire information from large data domains that cannot be described adequately by a single query with fixed predicates. Consider for example a scenario where crowd sourcing techniques are used to collect information about various types of events (e.g., music concerts or political rallies) over different countries. Extracting entities from this domain requires issuing multiple targeted queries requesting the crowd to provide information for specific types of events potentially focusing on a specific location. Crowd entity extraction in such domains entails several challenges. Next, we use a real-world scenario to illustrate these challenges.
+A fundamental challenge in crowdsourced entity extraction is reasoning about the completeness of the extracted information. More precisely, given a task that seeks to enumerate entities from a specific domain by asking human workers, e.g., ``extract all restaurants in New York", it is not easy to judge if we have extracted all entities (in this case restaurants). This is because we are in an ``open world"~\cite{trushkowsky:2013} scenario. Recent work has considered this problem for single queries~\cite{trushkowsky:2013} where the query predicates specify the data domain of interest. Often, however, crowd entity extraction techniques are used to acquire information from large data domains that cannot be described adequately by a single query with fixed predicates. Consider for example a scenario where crowd sourcing techniques are used to collect information about various types of events (e.g., music concerts or political rallies) over different countries. Extracting entities from this domain requires issuing multiple targeted queries requesting the crowd to provide information for specific types of events potentially focusing on a specific location. Crowd entity extraction in such domains entails several challenges. Next, we use a real-world scenario to illustrate these challenges.
 
 \subsection{Challenges and Opportunities}
 \label{sec:challenges}
