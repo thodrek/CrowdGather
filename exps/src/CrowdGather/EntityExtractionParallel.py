@@ -18,8 +18,8 @@ class EntityExtractionParallel:
         if lattice:
             self.lattice = lattice
         else:
-            self.lattice = Lattice.Lattice(hList,hDescr,itemInfo)
-
+            #self.lattice = Lattice.Lattice(hList,hDescr,itemInfo)
+            self.lattice = lattice
         # store extraction configurations
         self.extConfigs = extConfigs
 
