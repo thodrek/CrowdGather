@@ -1,5 +1,5 @@
 from multiprocessing import Pool
-import PointEstimateShenTest
+import PointEstimateShen
 import math
 
 
@@ -26,6 +26,6 @@ class someClass(object):
         s = []
         for i in range(1,10):
             for j in range(1,10):
-                newS = PointEstimateShenTest.PointEstimateShenTest("||",i,j,"shenRegression")
+                newS = PointEstimateShen.PointEstimateShen("||",i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)

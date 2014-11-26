@@ -7,6 +7,7 @@ import sys
 import random
 import math
 from multiprocessing import Pool
+import inputData
 
 
 class EntityExtractionParallel:

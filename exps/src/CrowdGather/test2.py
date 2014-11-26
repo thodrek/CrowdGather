@@ -1,7 +1,7 @@
 from multiprocessing import Pool
 from functools import partial
 import SomeClass
-
+import inputData
  
 def _pickle_method(method):
 	func_name = method.im_func.__name__
@@ -29,5 +29,6 @@ copy_reg.pickle(types.MethodType, _pickle_method, _unpickle_method)
  
  
 if __name__=='__main__':
-	sc = SomeClass.someClass()
-	print sc.run()
+    l = inputData.newLattice
+    sc = SomeClass.someClass()
+    print sc.run()
