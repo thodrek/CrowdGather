@@ -193,7 +193,7 @@ class EntityExtractionParallel:
         p = Pool(processes=3)
 
         # compute scores for estimators
-        results = p.map(gain,estimators)
+        results = p.map(gainComputation,estimators)
 
         # find best action
         bestActionIndex = results.index(max(results))
@@ -280,7 +280,7 @@ class EntityExtractionParallel:
 
         print nodeEstimates
         pool = Pool(processes=3)
-        results = pool.map(self.gainComputation,nodeEstimates)
+        results = pool.map(self.gain,nodeEstimates)
         return results
 
     def gsFindBestActionExact(self,frontier,nodeEstimates):
