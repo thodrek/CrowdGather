@@ -97,10 +97,8 @@
       <file leaf-file-name="SomeClass.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="63" selection-start="793" selection-end="793" vertical-scroll-proportion="0.49411765" vertical-offset="0" max-vertical-offset="850">
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state line="1" column="28" selection-start="61" selection-end="61" vertical-scroll-proportion="0.01764706" vertical-offset="0" max-vertical-offset="850">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -730,10 +728,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="63" selection-start="793" selection-end="793" vertical-scroll-proportion="0.49411765" vertical-offset="0" max-vertical-offset="850">
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state line="1" column="28" selection-start="61" selection-end="61" vertical-scroll-proportion="0.01764706" vertical-offset="0" max-vertical-offset="850">
+          <folding />
         </state>
       </provider>
     </entry>
