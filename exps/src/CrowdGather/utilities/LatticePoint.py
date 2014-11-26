@@ -1,6 +1,5 @@
 __author__ = 'thodrek'
 import genutils
-import copy
 
 class LatticePoint:
     def __init__(self, key, db, hDesc, lattice, samplingHistory=False):

@@ -1,4 +1,4 @@
-from multiprocessing import Pool
+from pathos.pp import ParallelPythonPool as Pool
 import PointEstimateShen
 import math
 from utilities import LatticePoint,DBManager
@@ -22,7 +22,7 @@ class someClass(object):
         return gainCostRatio
  
     def go(self,s):
-        pool = Pool(processes=3)
+        pool = Pool()
         results = pool.map(self.f,s)
         return results
 
@@ -30,6 +30,6 @@ class someClass(object):
         s = []
         for i in range(10):
             for j in range(10):
-                newS = PointEstimateShen.PointEstimateShen(newLatticePoint,i,j,"shenRegression")
+                newS = PointEstimateShen.PointEstimateShen(None,i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)
