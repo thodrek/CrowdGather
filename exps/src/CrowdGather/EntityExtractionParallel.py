@@ -158,13 +158,13 @@ class EntityExtractionParallel:
 
         return gain, cost
 
-    def gain(self,args):
+    def gainComputation(self,args):
         e,cRound,maxQuerySize,maxExListSize = args
         cost = e.computeCost(maxQuerySize,maxExListSize)
         gain, variance, upperGain, lowerGain = e.estimateGain(True)
         armGain = gain + math.sqrt(variance*math.log(cRound)/e.timesSelected)
         gainCostRatio = float(armGain)/float(cost)
-        return 1.0,1.0
+        return gainCostRatio,armGain
 
     # auxiliary functions
     def gsFindBestAction(self,frontier,nodeEstimates,cRound):
