@@ -21,8 +21,7 @@ class someClass(object):
         gainCostRatio = float(armGain)/float(cost)
         return gainCostRatio
  
-    def go(self,s):
-        pool = Pool(3)
+    def go(self,s,pool):
         results = pool.map(self.f,s)
         return results
 

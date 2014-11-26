@@ -1,7 +1,4 @@
-from multiprocessing import Pool
-from functools import partial
 import SomeClass
-import cPickle as pickle
  
 def _pickle_method(method):
 	func_name = method.im_func.__name__
