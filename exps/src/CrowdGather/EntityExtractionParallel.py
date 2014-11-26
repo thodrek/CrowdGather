@@ -6,7 +6,7 @@ import sys
 import random
 import math
 from multiprocessing import Pool
-from inputData import lattice
+import inputData
 
 class EntityExtractionParallel:
 
@@ -66,7 +66,7 @@ class EntityExtractionParallel:
 
         while cost < self.budget:
             # pick a node at random, pick a configuration at random and query it
-            randomNode = random.choice(lattice.points.keys())
+            randomNode = random.choice(inputData.newLattice.points.keys())
             randomConfig = random.choice(self.extConfigs)
 
             querySize = randomConfig[0]
@@ -75,7 +75,7 @@ class EntityExtractionParallel:
             # form action key and retrieve estimator
             queryKey = (randomNode,querySize,exListSize)
             if queryKey not in previousQueries:
-                est = self.getNewEstimator(lattice.points[randomNode],querySize,exListSize)
+                est = self.getNewEstimator(inputData.newLattice.points[randomNode],querySize,exListSize)
                 previousQueries[queryKey] = est
             else:
                 est = previousQueries[queryKey]
@@ -88,8 +88,8 @@ class EntityExtractionParallel:
 
         # find leaf nodes
         leafKeys = []
-        for pKey in lattice.points:
-            if len(lattice.points[pKey].getDescendants()) == 0:
+        for pKey in inputData.newLattice.points:
+            if len(inputData.newLattice.points[pKey].getDescendants()) == 0:
                 leafKeys.append(pKey)
 
         # keep track of queried nodex/configs
@@ -109,7 +109,7 @@ class EntityExtractionParallel:
             # form action key and retrieve estimator
             queryKey = (randomNode,querySize,exListSize)
             if queryKey not in previousQueries:
-                est = self.getNewEstimator(lattice.points[randomNode],querySize,exListSize)
+                est = self.getNewEstimator(inputData.newLattice.points[randomNode],querySize,exListSize)
                 previousQueries[queryKey] = est
             else:
                 est = previousQueries[queryKey]
@@ -122,7 +122,7 @@ class EntityExtractionParallel:
         # traverse lattice in a BFS manner ask single query at each node using a random configuration
         # keep track of queried nodex/configs
 
-        root = lattice.points['||']
+        root = inputData.newLattice.points['||']
         frontier = [root]
         activeNodes = {}
         activeNodes[root] = 1
@@ -176,7 +176,7 @@ class EntityExtractionParallel:
                 estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
         # initialize pool
-        p = Pool(processes=10)
+        p = Pool(processes=3)
 
         # compute scores for estimators
         results = p.map(self.gainComputation,estimators)
@@ -198,7 +198,7 @@ class EntityExtractionParallel:
 
         cRound = 1.0
 
-        root = lattice.points['||']
+        root = inputData.newLattice.points['||']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
@@ -301,7 +301,7 @@ class EntityExtractionParallel:
         gain = 0.0
         cost = 0.0
 
-        root = lattice.points['||']
+        root = inputData.newLattice.points['||']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
