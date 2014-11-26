@@ -9,7 +9,8 @@ import latticepoint
 
 class PointEstimateShenTest:
 
-    def __init__(self,querySize,excludeListSize,estMethod):
+    def __init__(self,pointId,querySize,excludeListSize,estMethod):
+        self.pointId = pointId
 
         # expected return variables
         self.querySize = querySize
@@ -38,10 +39,10 @@ class PointEstimateShenTest:
 
     # methods to retrieve characteristics of local sample
     def uniqueEntries(self):
-        return len(latticepoint.newpoint.distinctEntries)
+        return len(latticepoint.points[self.pointId].distinctEntries)
 
     def totalEntries(self):
-        return len(latticepoint.newpoint.retrievedEntries)
+        return len(latticepoint.points[self.pointId].retrievedEntries)
 
     # construct exclude list by taking random sample of size listSize
     def constructExcludeList(self, distinctEntries):
@@ -72,24 +73,24 @@ class PointEstimateShenTest:
     # estimate return
     def estimateReturn(self,strataOption=False):
         # construct excludeList
-        excludeList = self.constructExcludeList(latticepoint.newpoint.distinctEntries)
+        excludeList = self.constructExcludeList(latticepoint.points[self.pointId].distinctEntries)
 
         # update freq counters
-        self.updateFreqCounterSampleSize(excludeList,latticepoint.newpoint.entryFrequencies)
+        self.updateFreqCounterSampleSize(excludeList,latticepoint.points[self.pointId].entryFrequencies)
 
         # check if sample is empty
         if self.sampleSize == 0.0:
-            if latticepoint.newpoint.emptyPopulation == True:
+            if latticepoint.points[self.pointId].emptyPopulation == True:
                 return 0.0
             else:
                 return self.querySize
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(latticepoint.newpoint.distinctEntries):
+        if len(excludeList) == len(latticepoint.points[self.pointId].distinctEntries):
             return self.querySize
 
         # compute query return
-        if strataOption and len(latticepoint.newpoint.childrenWeights) > 0:
+        if strataOption and len(latticepoint.points[self.pointId].childrenWeights) > 0:
             return self.estimateStratifiedReturn(excludeList)
         return self.shenEstimator(self.querySize,self.estMethod)
 
@@ -103,14 +104,14 @@ class PointEstimateShenTest:
 
         # check if sample is empty
         if self.sampleSize == 0.0:
-            if latticepoint.newpoint.emptyPopulation == True:
+            if latticepoint.points[self.pointId].emptyPopulation == True:
                 return 0.0
             else:
                 #return self.querySize
                 return 1.0
 
         # check if exclude list contains the entire sample
-        #if len(excludeList) == len(latticepoint.newpoint.distinctEntries):
+        #if len(excludeList) == len(latticepoint.points[self.pointId].distinctEntries):
         #    return self.querySize
 
         # compute query return
@@ -209,7 +210,7 @@ class PointEstimateShenTest:
 
      # cost of estimator
     def computeCost(self,maxQuerySize,maxExListSize):
-        #pointSpecificity = latticepoint.newpoint.totalAssignedValues
+        #pointSpecificity = latticepoint.points[self.pointId].totalAssignedValues
         pointSpecificity = 3.0
         w_Q_Size = 1.0
         Q_value = float(self.querySize)/float(maxQuerySize)
@@ -227,7 +228,7 @@ class PointEstimateShenTest:
     # break excludelist to children
     def excludeListToChildren(self,excludeList):
         childrenExcludeLists = {}
-        for d in latticepoint.newpoint.descendants:
+        for d in latticepoint.points[self.pointId].descendants:
             childrenExcludeLists[d] = []
             for item in excludeList:
                 if d.containsItem(item):
@@ -236,22 +237,22 @@ class PointEstimateShenTest:
 
     def querySizeToChildren(self):
         childrenQuerySizes = {}
-        totalWeight = latticepoint.newpoint.childrenTotalWeight()
-        for d in latticepoint.newpoint.descendants:
-            querySize = float(self.querySize)*latticepoint.newpoint.childrenWeights[d]/totalWeight
+        totalWeight = latticepoint.points[self.pointId].childrenTotalWeight()
+        for d in latticepoint.points[self.pointId].descendants:
+            querySize = float(self.querySize)*latticepoint.points[self.pointId].childrenWeights[d]/totalWeight
             childrenQuerySizes[d] = querySize
         return childrenQuerySizes
 
     def estimateStratifiedReturn(self,excludeList):
         gain = 0.0
-        totalWeight = latticepoint.newpoint.childrenTotalWeight()
-        for d in latticepoint.newpoint.childrenWeights:
+        totalWeight = latticepoint.points[self.pointId].childrenTotalWeight()
+        for d in latticepoint.points[self.pointId].childrenWeights:
             childExList = []
             # compute child's exclude list
             for item in excludeList:
                 if d.containsItem(item):
                     childExList.append(item)
-            childQuerySize = int(round(float(self.querySize)*latticepoint.newpoint.childrenWeights[d]/totalWeight))
+            childQuerySize = int(round(float(self.querySize)*latticepoint.points[self.pointId].childrenWeights[d]/totalWeight))
             # instanciate new estimator
             childGainEst = PointEstimateShen(d,childQuerySize,childExList,self.estMethod)
             childGain = childGainEst.estimateReturn()
@@ -262,7 +263,7 @@ class PointEstimateShenTest:
 
     def bootstrapVariance(self, num_samples):
         # grap retrieved items from lattice point
-        data = np.array(latticepoint.newpoint.retrievedEntries)
+        data = np.array(latticepoint.points[self.pointId].retrievedEntries)
         n = len(data)
         # generate bootstrapped samples
         idx = npr.randint(0, n, (num_samples, n))
@@ -300,16 +301,16 @@ class PointEstimateShenTest:
     def takeAction(self):
 
         # construct excludeList
-        excludeList = self.constructExcludeList(latticepoint.newpoint.distinctEntries)
+        excludeList = self.constructExcludeList(latticepoint.points[self.pointId].distinctEntries)
 
         # store old unique
-        oldUnique = len(latticepoint.newpoint.distinctEntries)
+        oldUnique = len(latticepoint.points[self.pointId].distinctEntries)
 
         # retrieve sample from underlying node
-        s = latticepoint.newpoint.retrieveSample(self.querySize, excludeList)
+        s = latticepoint.points[self.pointId].retrieveSample(self.querySize, excludeList)
 
         # store new unique
-        newUnique = len(latticepoint.newpoint.distinctEntries)
+        newUnique = len(latticepoint.points[self.pointId].distinctEntries)
 
         # compute gain
         gain = newUnique - oldUnique
@@ -322,7 +323,7 @@ class PointEstimateShenTest:
         #gain = self.estimateReturn()
         #upperValue = gain
         #lowerValue = gain
-        #if upper and len(latticepoint.newpoint.retrievedEntries) > 0.0:
+        #if upper and len(latticepoint.points[self.pointId].retrievedEntries) > 0.0:
         #    lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
         #else:
         #    variance = 0.0
@@ -334,24 +335,24 @@ class PointEstimateShenTest:
     def computeExactGain(self):
         sample = self.prepareAction()
         sampleSet = set(sample)
-        gain = len(sampleSet.difference(latticepoint.newpoint.distinctEntries))
+        gain = len(sampleSet.difference(latticepoint.points[self.pointId].distinctEntries))
         return gain,sample
 
     # prepare action
     def prepareAction(self):
-        excludeList = self.constructExcludeList(latticepoint.newpoint.distinctEntries)
-        s = latticepoint.newpoint.retrieveSamplePreempt(self.querySize,excludeList)
+        excludeList = self.constructExcludeList(latticepoint.points[self.pointId].distinctEntries)
+        s = latticepoint.points[self.pointId].retrieveSamplePreempt(self.querySize,excludeList)
         return s
 
     def takeActionFinal(self,sample):
         # store old unique
-        oldUnique = len(latticepoint.newpoint.distinctEntries)
+        oldUnique = len(latticepoint.points[self.pointId].distinctEntries)
 
         # update lattice sample based on sample
-        latticepoint.newpoint.finalizeSample(sample)
+        latticepoint.points[self.pointId].finalizeSample(sample)
 
         # store new unique
-        newUnique = len(latticepoint.newpoint.distinctEntries)
+        newUnique = len(latticepoint.points[self.pointId].distinctEntries)
         # compute gain
         gain = newUnique - oldUnique
         return gain
