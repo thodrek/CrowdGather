@@ -99,7 +99,7 @@
       <file leaf-file-name="SomeClass.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="899" selection-end="899" vertical-scroll-proportion="0.5470588" vertical-offset="0" max-vertical-offset="850">
+            <state line="27" column="29" selection-start="733" selection-end="733" vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="850">
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -157,8 +157,8 @@
         <option value="$PROJECT_DIR$/CrowdGather/test2.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNew.py" />
         <option value="$PROJECT_DIR$/CrowdGather/latticepoint.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/SomeClass.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShenTest.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/SomeClass.py" />
       </list>
     </option>
   </component>
@@ -734,7 +734,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/SomeClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="899" selection-end="899" vertical-scroll-proportion="0.5470588" vertical-offset="0" max-vertical-offset="850">
+        <state line="27" column="29" selection-start="733" selection-end="733" vertical-scroll-proportion="0.4764706" vertical-offset="0" max-vertical-offset="850">
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>

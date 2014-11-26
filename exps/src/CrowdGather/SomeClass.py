@@ -24,8 +24,8 @@ class someClass(object):
 
     def run(self):
         s = []
-        for i in range(10):
-            for j in range(10):
+        for i in range(1,10):
+            for j in range(1,10):
                 newS = PointEstimateShenTest.PointEstimateShenTest("root",i,j,"shenRegression")
                 s.append((newS,1.0,10,10))
         return self.go(s)
