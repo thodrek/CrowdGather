@@ -159,18 +159,12 @@ class EntityExtractionParallel:
         return gain, cost
 
     def gain(self,args):
-        e, round, mQ, mL = args
-        cost = e.computeCost(mQ,mL)
+        e,cRound,maxQuerySize,maxExListSize = args
+        cost = e.computeCost(maxQuerySize,maxExListSize)
         gain, variance, upperGain, lowerGain = e.estimateGain(True)
-        armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+        armGain = gain + math.sqrt(variance*math.log(cRound)/e.timesSelected)
         gainCostRatio = float(armGain)/float(cost)
-        return gainCostRatio
-        #e,cRound,maxQuerySize,maxExListSize = args
-        #cost = e.computeCost(maxQuerySize,maxExListSize)
-        #gain, variance, upperGain, lowerGain = e.estimateGain(True)
-        #armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
-        #gainCostRatio = float(armGain)/float(cost)
-        #return 1.0,1.0
+        return 1.0,1.0
 
     # auxiliary functions
     def gsFindBestAction(self,frontier,nodeEstimates,cRound):
@@ -224,7 +218,7 @@ class EntityExtractionParallel:
         while cost < self.budget:
             #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
-            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round)
+            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,cRound)
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
@@ -232,7 +226,7 @@ class EntityExtractionParallel:
                 #print "Actual gain was:", actualGain
                 #print "Predicted gain was:", bestGain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
-                round += 1.0
+                cRound += 1.0
             else:
                 print "No good action found."
                 sys.exit(-1)
@@ -251,8 +245,8 @@ class EntityExtractionParallel:
                             nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
-            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,round)
-            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,round)
+            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,cRound)
+            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,cRound)
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet

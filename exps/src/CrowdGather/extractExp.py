@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # estimator = ["chao92", "shenRegression", "newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     extractionMethods = ["GS_thres"]
-    estimator = ["chao92","shenRegression","newRegr"]
+    estimator = ["chao92","newRegr"]
 
     # set budget
     budget = int(sys.argv[1])
