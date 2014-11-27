@@ -34,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="59" selection-start="6164" selection-end="6164" vertical-scroll-proportion="-10.538462" vertical-offset="2381" max-vertical-offset="5310">
+            <state line="272" column="28" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.40588236" vertical-offset="3735" max-vertical-offset="5295">
               <folding>
                 <element signature="e#25#52#0" expanded="true" />
               </folding>
@@ -45,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inputData.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="inputData.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/inputData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.5117647" vertical-offset="0" max-vertical-offset="850">
+            <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
               <folding>
                 <element signature="e#24#48#0" expanded="true" />
               </folding>
@@ -164,9 +164,9 @@
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateNewPar.py" />
         <option value="$PROJECT_DIR$/CrowdGather/PointEstimateShenPar.py" />
         <option value="$PROJECT_DIR$/CrowdGather/test2.py" />
-        <option value="$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py" />
         <option value="$PROJECT_DIR$/CrowdGather/extractExpPar.py" />
         <option value="$PROJECT_DIR$/CrowdGather/inputData.py" />
+        <option value="$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py" />
       </list>
     </option>
   </component>
@@ -742,15 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="59" selection-start="6164" selection-end="6164" vertical-scroll-proportion="-10.538462" vertical-offset="2381" max-vertical-offset="5310">
-          <folding>
-            <element signature="e#25#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/extractExpPar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="10" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1005">
@@ -760,9 +751,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/inputData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.5117647" vertical-offset="0" max-vertical-offset="850">
+        <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
           <folding>
             <element signature="e#24#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="272" column="28" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.40588236" vertical-offset="3735" max-vertical-offset="5295">
+          <folding>
+            <element signature="e#25#52#0" expanded="true" />
           </folding>
         </state>
       </provider>

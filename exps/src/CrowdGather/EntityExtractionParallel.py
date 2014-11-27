@@ -175,7 +175,7 @@ class EntityExtractionParallel(object):
                 estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
         # compute scores for estimators
-        results = pool.map(self.gainComputation,estimators)
+        results = inputData.pool.map(self.gainComputation,estimators)
 
         # find best action
         bestActionIndex = results.index(max(results))
@@ -270,8 +270,7 @@ class EntityExtractionParallel(object):
                 est = PointEstimateNewPar.PointEstimateNewPar(root, querySize, exListSize)
             nodeEstimates.append((est,cRound,self.maxQuerySize,self.maxExListSize))
 
-        pool = Pool(processes=3)
-        results = pool.map(self.gainComputation,nodeEstimates)
+        results = inputData.pool.map(self.gainComputation,nodeEstimates)
         return results
 
     def gsFindBestActionExact(self,frontier,nodeEstimates):
