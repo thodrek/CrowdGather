@@ -1,7 +1,6 @@
 __author__ = 'thodoris'
 import cPickle as pickle
 from utilities import Lattice,LatticePoint,DBManager
-from multiprocessing import Pool
 
 db = DBManager.DBManager()
 hDescr = ['category','time','location']
@@ -23,8 +22,4 @@ itemInfo = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/even
 newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
 # global vars
-lattice = newLattice
 points = newLattice.points
-
-# pool initialization
-pool = Pool(processes=4)

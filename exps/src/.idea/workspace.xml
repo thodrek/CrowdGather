@@ -37,7 +37,7 @@
       <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="272" column="28" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.40588236" vertical-offset="3735" max-vertical-offset="5295">
+            <state line="178" column="29" selection-start="6153" selection-end="6153" vertical-scroll-proportion="0.22941177" vertical-offset="2475" max-vertical-offset="5370">
               <folding>
                 <element signature="e#25#52#0" expanded="true" />
               </folding>
@@ -48,7 +48,7 @@
       <file leaf-file-name="inputData.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/inputData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+            <state line="24" column="26" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
               <folding>
                 <element signature="e#24#48#0" expanded="true" />
               </folding>
@@ -59,8 +59,10 @@
       <file leaf-file-name="extractExpPar.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/extractExpPar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="10" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1005">
-              <folding />
+            <state line="33" column="23" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1005">
+              <folding>
+                <element signature="e#25#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,7 +70,7 @@
       <file leaf-file-name="PointEstimateShenPar.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShenPar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="75" selection-start="2416" selection-end="2421" vertical-scroll-proportion="-43.26923" vertical-offset="0" max-vertical-offset="5415">
+            <state line="22" column="31" selection-start="550" selection-end="550" vertical-scroll-proportion="-12.692307" vertical-offset="0" max-vertical-offset="5415">
               <folding>
                 <element signature="e#23#36#0" expanded="true" />
               </folding>
@@ -79,7 +81,7 @@
       <file leaf-file-name="PointEstimateNewPar.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNewPar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="8" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7470">
+            <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7470">
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -688,15 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNewPar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="8" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7470">
-          <folding>
-            <element signature="e#24#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShenTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="32" selection-start="1623" selection-end="1623" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5400">
@@ -724,15 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShenPar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="75" selection-start="2416" selection-end="2421" vertical-scroll-proportion="-43.26923" vertical-offset="0" max-vertical-offset="5415">
-          <folding>
-            <element signature="e#23#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/extractExp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="130" selection-start="1558" selection-end="1676" vertical-scroll-proportion="0.0" vertical-offset="5" max-vertical-offset="870">
@@ -744,23 +728,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/extractExpPar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1005">
-          <folding />
+        <state line="33" column="23" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1005">
+          <folding>
+            <element signature="e#25#56#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/inputData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="24" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+        <state line="24" column="26" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
           <folding>
             <element signature="e#24#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNewPar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7470">
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateShenPar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="31" selection-start="550" selection-end="550" vertical-scroll-proportion="-12.692307" vertical-offset="0" max-vertical-offset="5415">
+          <folding>
+            <element signature="e#23#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="272" column="28" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.40588236" vertical-offset="3735" max-vertical-offset="5295">
+        <state line="178" column="29" selection-start="6153" selection-end="6153" vertical-scroll-proportion="0.22941177" vertical-offset="2475" max-vertical-offset="5370">
           <folding>
             <element signature="e#25#52#0" expanded="true" />
           </folding>
