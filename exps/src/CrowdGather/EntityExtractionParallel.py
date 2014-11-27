@@ -176,7 +176,7 @@ class EntityExtractionParallel(object):
                 estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
         # initialize pool
-        p = Pool(processes=10)
+        p = Pool(processes=3)
 
         # compute scores for estimators
         results = p.map(self.gainComputation,estimators)
