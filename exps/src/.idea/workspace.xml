@@ -48,7 +48,7 @@
       <file leaf-file-name="EntityExtractionParallel.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="304" column="48" selection-start="11511" selection-end="11511" vertical-scroll-proportion="0.5145631" vertical-offset="4136" max-vertical-offset="5370">
+            <state line="250" column="0" selection-start="9322" selection-end="9322" vertical-scroll-proportion="0.35072815" vertical-offset="3461" max-vertical-offset="5370">
               <folding>
                 <element signature="e#25#52#0" expanded="true" />
               </folding>
@@ -764,7 +764,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/EntityExtractionParallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="48" selection-start="11511" selection-end="11511" vertical-scroll-proportion="0.5145631" vertical-offset="4136" max-vertical-offset="5370">
+        <state line="250" column="0" selection-start="9322" selection-end="9322" vertical-scroll-proportion="0.35072815" vertical-offset="3461" max-vertical-offset="5370">
           <folding>
             <element signature="e#25#52#0" expanded="true" />
           </folding>

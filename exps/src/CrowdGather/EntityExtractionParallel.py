@@ -251,12 +251,12 @@ class EntityExtractionParallel(object):
 
             # check if node corresponding to bestAction should be removed from queue
             bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,cRound)
-            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,cRound)
+            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([inputData.points[bestAction.pointId]]),nodeEstimates,cRound)
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
-                frontier.discard(bestAction.point)
-                removedNodes.add(bestAction.point)
+                frontier.discard(inputData.points[bestAction.pointId])
+                removedNodes.add(inputData.points[bestAction.pointId])
 
         return gain, cost
 
