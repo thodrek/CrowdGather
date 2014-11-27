@@ -5,7 +5,6 @@ import PointEstimateNewPar
 import sys
 import random
 import math
-from multiprocessing import Pool
 import inputData
 
 class EntityExtractionParallel(object):
@@ -175,11 +174,8 @@ class EntityExtractionParallel(object):
             for e in nodeEstimates[node]:
                 estimators.append((e,cRound,self.maxQuerySize,self.maxExListSize))
 
-        # initialize pool
-        p = Pool(processes=3)
-
         # compute scores for estimators
-        results = p.map(self.gainComputation,estimators)
+        results = pool.map(self.gainComputation,estimators)
 
         # find best action
         bestActionIndex = results.index(max(results))
