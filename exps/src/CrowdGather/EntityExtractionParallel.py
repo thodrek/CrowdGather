@@ -80,8 +80,11 @@ class EntityExtractionParallel(object):
             else:
                 est = previousQueries[queryKey]
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            else:
+                break
         return gain, cost
 
     def randomLeavesExtraction(self):
@@ -114,8 +117,11 @@ class EntityExtractionParallel(object):
             else:
                 est = previousQueries[queryKey]
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            else:
+                break
         return gain, cost
 
     def bfsExtraction(self):
@@ -130,7 +136,7 @@ class EntityExtractionParallel(object):
         gain = 0.0
         cost = 0.0
 
-        while cost < self.budget:
+        while cost < self.budget and len(frontier) > 0:
             #print "Running cost,gain\t",cost,gain
             # take the first point key in the frontier
             p = frontier.pop(0)
@@ -144,14 +150,17 @@ class EntityExtractionParallel(object):
             # Retrieve estimator
             est = self.getNewEstimator(p,querySize,exListSize)
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
 
-            # Populate list with descendants of point
-            for d in p.getDescendants():
-                if d not in activeNodes:
-                    frontier.append(d)
-                    activeNodes[d] = 1
+                # Populate list with descendants of point
+                for d in p.getDescendants():
+                    if d not in activeNodes:
+                        frontier.append(d)
+                        activeNodes[d] = 1
+            else:
+                pass
 
         return gain, cost
 

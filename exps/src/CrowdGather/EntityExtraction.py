@@ -88,8 +88,11 @@ class EntityExtraction:
             else:
                 est = previousQueries[queryKey]
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            else:
+                break
         return gain, cost
 
     def randomLeavesExtraction(self):
@@ -122,8 +125,11 @@ class EntityExtraction:
             else:
                 est = previousQueries[queryKey]
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            else:
+                break
         return gain, cost
 
     def bfsExtraction(self):
@@ -138,7 +144,7 @@ class EntityExtraction:
         gain = 0.0
         cost = 0.0
 
-        while cost < self.budget:
+        while cost < self.budget and len(frontier) > 0:
             #print "Running cost,gain\t",cost,gain
             # take the first point key in the frontier
             p = frontier.pop(0)
@@ -152,19 +158,22 @@ class EntityExtraction:
             # Retrieve estimator
             est = self.getNewEstimator(p,querySize,exListSize)
 
-            gain += est.takeAction()
-            cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                gain += est.takeAction()
+                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
 
-            # Populate list with descendants of point
-            for d in p.getDescendants():
-                if d not in activeNodes:
-                    frontier.append(d)
-                    activeNodes[d] = 1
+                # Populate list with descendants of point
+                for d in p.getDescendants():
+                    if d not in activeNodes:
+                        frontier.append(d)
+                        activeNodes[d] = 1
+            else:
+                pass
 
         return gain, cost
 
     # auxiliary functions
-    def gsFindBestAction(self,frontier,nodeEstimates,round):
+    def gsFindBestAction(self,frontier,nodeEstimates,round,remBudget):
         bestAction = None
         bestScore = 0.0
         bestGain = 0.0
@@ -172,13 +181,14 @@ class EntityExtraction:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
-                gain, variance, upperGain, lowerGain = e.estimateGain(True)
-                armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
-                gainCostRatio = float(armGain)/float(cost)
-                if gainCostRatio > bestScore:
-                    bestAction = e
-                    bestScore = gainCostRatio
-                    bestGain = armGain
+                if cost <= remBudget:
+                    gain, variance, upperGain, lowerGain = e.estimateGain(True)
+                    armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+                    gainCostRatio = float(armGain)/float(cost)
+                    if gainCostRatio > bestScore:
+                        bestAction = e
+                        bestScore = gainCostRatio
+                        bestGain = armGain
         return bestAction, bestScore, bestGain
 
     def graphSearchExtraction(self):
@@ -207,7 +217,8 @@ class EntityExtraction:
         while cost < self.budget:
             #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
-            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round)
+            remBudget = self.budget - cost
+            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates,round,remBudget)
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
@@ -217,8 +228,7 @@ class EntityExtraction:
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
                 round += 1.0
             else:
-                print "No good action found."
-                sys.exit(-1)
+                break
 
             # Extend action collection -- for the current node extract the estimates for each children
             descSet = set([])
@@ -233,9 +243,11 @@ class EntityExtraction:
                             est = self.getNewEstimator(d,querySize,exListSize)
                             nodeEstimates[d].append(est)
 
+            remBudget = self.budget - cost
+
             # check if node corresponding to bestAction should be removed from queue
-            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,round)
-            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,round)
+            bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,round,remBudget)
+            bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,round,remBudget)
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
