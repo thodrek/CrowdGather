@@ -234,7 +234,7 @@ class EntityExtractionParallel(object):
 
             # Extend action collection -- for the current node extract the estimates for each children
             descSet = set([])
-            for d in bestAction.point.getDescendants():
+            for d in inputData.points[bestAction.pointId].getDescendants():
                 if d not in removedNodes:
                     descSet.add(d)
                     if d not in nodeEstimates:
