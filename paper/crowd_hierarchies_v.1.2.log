@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  27 NOV 2014 18:38
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 00:51
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -449,14 +449,26 @@ Overfull \hbox (4.64452pt too wide) in paragraph at lines 91--92
 
 
 ]
-<figs/eventBritePopulation.pdf, id=13, 925.95938pt x 511.31024pt>
-File: figs/eventBritePopulation.pdf Graphic file (type pdf)
+Package epstopdf Info: Source file: <figs/eventBritePopulation.eps>
+(epstopdf)                    date: 2014-11-27 17:37:13
+(epstopdf)                    size: 2797943 bytes
+(epstopdf)             Output file: <figs/eventBritePopulation-eps-converted-to
+.pdf>
+(epstopdf)             Command: <epstopdf --outfile=figs/eventBritePopulation-e
+ps-converted-to.pdf figs/eventBritePopulation.eps>
+(epstopdf)             \includegraphics on input line 109.
+runsystem(epstopdf --outfile=figs/eventBritePopulation-eps-converted-to.pdf fig
+s/eventBritePopulation.eps)...executed.
 
-<use figs/eventBritePopulation.pdf>
-Overfull \hbox (2.55797pt too wide) in paragraph at lines 109--110
- [] 
- []
+Package epstopdf Info: Result file: <figs/eventBritePopulation-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2014-11-28 00:52:35
+(epstopdf)                    size: 12910134 bytes.
 
+<figs/eventBritePopulation-eps-converted-to.pdf, id=13, 578.16pt x 433.62pt>
+File: figs/eventBritePopulation-eps-converted-to.pdf Graphic file (type pdf)
+
+<use figs/eventBritePopulation-eps-converted-to.pdf>
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
 
@@ -471,7 +483,7 @@ Overfull \hbox (2.8628pt too wide) in paragraph at lines 145--146
 fer-ent costs
  []
 
-[2 <./figs/eventBritePopulation.pdf>]
+[2 <./figs/eventBritePopulation-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <figs/eventsDomain.eps>
 (epstopdf)                    date: 2014-10-25 10:50:25
 (epstopdf)                    size: 437324 bytes
@@ -483,7 +495,7 @@ rted-to.pdf figs/eventsDomain.eps>
 (epstopdf)             \includegraphics on input line 153.
 Package epstopdf Info: Output file is already uptodate.
 
-<figs/eventsDomain-eps-converted-to.pdf, id=63, 583.17876pt x 265.99374pt>
+<figs/eventsDomain-eps-converted-to.pdf, id=61, 583.17876pt x 265.99374pt>
 File: figs/eventsDomain-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsDomain-eps-converted-to.pdf>
@@ -499,7 +511,7 @@ nverted-to.pdf figs/eventsExLattice.eps>
 (epstopdf)             \includegraphics on input line 164.
 Package epstopdf Info: Output file is already uptodate.
 
-<figs/eventsExLattice-eps-converted-to.pdf, id=65, 764.8575pt x 314.17375pt>
+<figs/eventsExLattice-eps-converted-to.pdf, id=63, 764.8575pt x 314.17375pt>
 File: figs/eventsExLattice-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsExLattice-eps-converted-to.pdf>
@@ -525,7 +537,7 @@ rted-to.pdf figs/exampleQuery.eps>
 (epstopdf)             \includegraphics on input line 197.
 Package epstopdf Info: Output file is already uptodate.
 
-<figs/exampleQuery-eps-converted-to.pdf, id=120, 765.86125pt x 357.335pt>
+<figs/exampleQuery-eps-converted-to.pdf, id=118, 765.86125pt x 357.335pt>
 File: figs/exampleQuery-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/exampleQuery-eps-converted-to.pdf>
@@ -562,7 +574,7 @@ Package epstopdf Info: Source file: <figs/framework.eps>
 d-to.pdf figs/framework.eps>
 (epstopdf)             \includegraphics on input line 223.
 Package epstopdf Info: Output file is already uptodate.
-<figs/framework-eps-converted-to.pdf, id=122, 521.95pt x 255.95625pt>
+<figs/framework-eps-converted-to.pdf, id=120, 521.95pt x 255.95625pt>
 File: figs/framework-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/framework-eps-converted-to.pdf>
@@ -625,8 +637,8 @@ Overfull \hbox (24.01765pt too wide) in paragraph at lines 345--345
 
 ] (./crowd_hierarchies_v.1.2.aux) ) 
 Here is how much of TeX's memory you used:
- 4934 strings out of 493747
- 78016 string characters out of 3143546
+ 4933 strings out of 493747
+ 78080 string characters out of 3143546
  197743 words of memory out of 3000000
  8091 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
@@ -655,10 +667,10 @@ live/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2010/
 texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 749184 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 13625687 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
+ 257 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

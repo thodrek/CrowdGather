@@ -158,9 +158,14 @@ class EntityExtraction:
             # Retrieve estimator
             est = self.getNewEstimator(p,querySize,exListSize)
 
+
             if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+                actualGain = est.takeAction()
                 gain += est.takeAction()
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+
+                print "Took:", est.point.getKey(),"with qS:",est.querySize,"and exS:",est.excludeListSize
+                print "Actual gain was:", actualGain
 
                 # Populate list with descendants of point
                 for d in p.getDescendants():
@@ -222,9 +227,9 @@ class EntityExtraction:
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
-                #print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
-                #print "Actual gain was:", actualGain
-                #print "Predicted gain was:", bestGain
+                print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
+                print "Actual gain was:", actualGain
+                print "Predicted gain was:", bestGain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
                 round += 1.0
             else:
