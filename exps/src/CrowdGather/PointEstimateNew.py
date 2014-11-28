@@ -421,14 +421,15 @@ class PointEstimateNew:
             # compute return
 
             # check if exclude list contains the entire sample
-            if len(excludeList) == lenDistinct:
-                returnEstimates.append(self.querySize)
+            #if len(excludeList) == lenDistinct:
+            #    returnEstimates.append(self.querySize)
 
-            elif self.sampleSize == 0.0:
+            if self.sampleSize == 0.0:
                 if self.point.emptyPopulation == True:
                     returnEstimates.append(0.0)
                 else:
-                    returnEstimates.append(self.querySize)
+                    returnEstimates.append(1.0)
+                    #returnEstimates.append(self.querySize)
 
             else:
                 newSampleSize = self.sampleSize + self.querySize
