@@ -208,7 +208,7 @@ class PointEstimateShen:
 
 
      # cost of estimator
-    def computeCost(self,maxQuerySize,maxExListSize):
+    def computeCostLinear(self,maxQuerySize,maxExListSize):
         pointSpecificity = self.point.totalAssignedValues
 
         w_Q_Size = 1.0
@@ -223,6 +223,25 @@ class PointEstimateShen:
         #cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
         return cost
+
+    def computeCost(self,maxQuerySize,maxExListSize):
+
+        if self.querySize == 5:
+            qSizeCost = 0.20
+        elif self.querySize == 10:
+            qSizeCost = 0.60
+        else:
+            qSizeCost = 1.50
+
+        if self.excludeListSize == 2:
+            eSizeCost = 0.10
+        elif self.excludeListSize == 5:
+            eSizeCost = 0.50
+        else:
+            eSizeCost = 1.50
+        cost = qSizeCost + eSizeCost
+        return cost
+
 
     # break excludelist to children
     def excludeListToChildren(self,excludeList):

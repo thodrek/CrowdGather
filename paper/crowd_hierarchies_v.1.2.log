@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  26 NOV 2014 18:14
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  27 NOV 2014 18:38
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -445,27 +445,33 @@ Overfull \hbox (4.64452pt too wide) in paragraph at lines 91--92
 -tion. More
  []
 
-
-Underfull \vbox (badness 1466) has occurred while \output is active []
-
-
-Underfull \vbox (badness 1400) has occurred while \output is active []
-
- [1{/usr/local/texlive/2010/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{/usr/local/texlive/2010/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Overfull \hbox (2.40385pt too wide) in paragraph at lines 110--111
+<figs/eventBritePopulation.pdf, id=13, 925.95938pt x 511.31024pt>
+File: figs/eventBritePopulation.pdf Graphic file (type pdf)
+
+<use figs/eventBritePopulation.pdf>
+Overfull \hbox (2.55797pt too wide) in paragraph at lines 109--110
+ [] 
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
+
+Overfull \hbox (2.40385pt too wide) in paragraph at lines 128--129
 []\OT1/ptm/m/n/9 We pro-pose a novel al-go-rith-mic frame-work that ex-ploits t
 he struc-
  []
 
 
-Overfull \hbox (2.8628pt too wide) in paragraph at lines 127--128
+Overfull \hbox (2.8628pt too wide) in paragraph at lines 145--146
 []\OT1/ptm/m/n/9 In a typ-i-cal crowd-sourc-ing en-vi-ron-ment, tasks have dif-
 fer-ent costs
  []
 
+[2 <./figs/eventBritePopulation.pdf>]
 Package epstopdf Info: Source file: <figs/eventsDomain.eps>
 (epstopdf)                    date: 2014-10-25 10:50:25
 (epstopdf)                    size: 437324 bytes
@@ -474,14 +480,13 @@ Package epstopdf Info: Source file: <figs/eventsDomain.eps>
 (epstopdf)                    size: 66200 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/eventsDomain-eps-conve
 rted-to.pdf figs/eventsDomain.eps>
-(epstopdf)             \includegraphics on input line 135.
+(epstopdf)             \includegraphics on input line 153.
 Package epstopdf Info: Output file is already uptodate.
-<figs/eventsDomain-eps-converted-to.pdf, id=12, 583.17876pt x 265.99374pt>
+
+<figs/eventsDomain-eps-converted-to.pdf, id=63, 583.17876pt x 265.99374pt>
 File: figs/eventsDomain-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsDomain-eps-converted-to.pdf>
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 136.
 Package epstopdf Info: Source file: <figs/eventsExLattice.eps>
 (epstopdf)                    date: 2014-10-25 17:32:25
 (epstopdf)                    size: 906635 bytes
@@ -491,23 +496,24 @@ Package epstopdf Info: Source file: <figs/eventsExLattice.eps>
 (epstopdf)                    size: 191518 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/eventsExLattice-eps-co
 nverted-to.pdf figs/eventsExLattice.eps>
-(epstopdf)             \includegraphics on input line 146.
+(epstopdf)             \includegraphics on input line 164.
 Package epstopdf Info: Output file is already uptodate.
 
-<figs/eventsExLattice-eps-converted-to.pdf, id=14, 764.8575pt x 314.17375pt>
+<figs/eventsExLattice-eps-converted-to.pdf, id=65, 764.8575pt x 314.17375pt>
 File: figs/eventsExLattice-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsExLattice-eps-converted-to.pdf>
-Overfull \hbox (4.7594pt too wide) in paragraph at lines 146--147
+Overfull \hbox (4.7594pt too wide) in paragraph at lines 164--165
  [] 
  []
 
-[2 <./figs/eventsDomain-eps-converted-to.pdf> <./figs/eventsExLattice-eps-conve
-rted-to.pdf>]
-Overfull \hbox (7.81784pt too wide) in paragraph at lines 162--164
+
+Overfull \hbox (7.81784pt too wide) in paragraph at lines 180--182
 []
  []
 
+[3 <./figs/eventsDomain-eps-converted-to.pdf> <./figs/eventsExLattice-eps-conve
+rted-to.pdf>]
 Package epstopdf Info: Source file: <figs/exampleQuery.eps>
 (epstopdf)                    date: 2014-10-25 17:32:36
 (epstopdf)                    size: 933736 bytes
@@ -516,31 +522,32 @@ Package epstopdf Info: Source file: <figs/exampleQuery.eps>
 (epstopdf)                    size: 178073 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/exampleQuery-eps-conve
 rted-to.pdf figs/exampleQuery.eps>
-(epstopdf)             \includegraphics on input line 179.
+(epstopdf)             \includegraphics on input line 197.
 Package epstopdf Info: Output file is already uptodate.
-<figs/exampleQuery-eps-converted-to.pdf, id=73, 765.86125pt x 357.335pt>
+
+<figs/exampleQuery-eps-converted-to.pdf, id=120, 765.86125pt x 357.335pt>
 File: figs/exampleQuery-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/exampleQuery-eps-converted-to.pdf>
-Overfull \hbox (5.0806pt too wide) in paragraph at lines 179--180
+Overfull \hbox (5.0806pt too wide) in paragraph at lines 197--198
  [] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 186.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 204.
 
 (/usr/local/texlive/2010/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
- [3 <./figs/exampleQuery-eps-converted-to.pdf>]
-Overfull \hbox (1.29692pt too wide) in paragraph at lines 199--200
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 204.
+
+Overfull \hbox (1.29692pt too wide) in paragraph at lines 217--218
 \OT1/ptm/m/n/9 (query, node) com-bi-na-tion so that the to-tal gain across all 
 rounds
  []
 
 
-Overfull \hbox (3.60086pt too wide) in paragraph at lines 201--202
+Overfull \hbox (3.60086pt too wide) in paragraph at lines 219--220
 \OT1/ptm/m/n/9 Our pro-posed frame-work it-er-a-tively solves the afore-men-tio
 ned prob-
  []
@@ -553,105 +560,105 @@ Package epstopdf Info: Source file: <figs/framework.eps>
 (epstopdf)                    size: 31418 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/framework-eps-converte
 d-to.pdf figs/framework.eps>
-(epstopdf)             \includegraphics on input line 205.
+(epstopdf)             \includegraphics on input line 223.
 Package epstopdf Info: Output file is already uptodate.
-<figs/framework-eps-converted-to.pdf, id=101, 521.95pt x 255.95625pt>
+<figs/framework-eps-converted-to.pdf, id=122, 521.95pt x 255.95625pt>
 File: figs/framework-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/framework-eps-converted-to.pdf>
 
 LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-14.
+32.
 
 
 LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 2
-19.
+37.
 
 
-Overfull \hbox (1.34692pt too wide) in paragraph at lines 219--220
+Overfull \hbox (1.34692pt too wide) in paragraph at lines 237--238
 \OT1/ptm/m/n/9 de-rive an es-ti-ma-tor for the num-ber of new species $[]$ that
  would
  []
 
+[4 <./figs/exampleQuery-eps-converted-to.pdf> <./figs/framework-eps-converted-t
+o.pdf>]
 
 LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-25.
+43.
 
 
 LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-27.
+45.
 
 
 LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-227.
+245.
 
 
 LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-227.
+245.
 
-[4 <./figs/framework-eps-converted-to.pdf>]
 
 LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-236.
+254.
 
 
 LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 2
-75.
+93.
 
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 277.
+(amsmath)                 on input line 295.
 
+[5]
 
 LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-297.
+315.
 
 
-Overfull \hbox (24.01765pt too wide) in paragraph at lines 327--327
+Overfull \hbox (24.01765pt too wide) in paragraph at lines 345--345
 [] 
  []
 
+[6] (./crowd_hierarchies_v.1.2.bbl [7]) [8
 
-Underfull \vbox (badness 6526) has occurred while \output is active []
-
- [5]
-[6] (./crowd_hierarchies_v.1.2.bbl) [7] (./crowd_hierarchies_v.1.2.aux) ) 
+] (./crowd_hierarchies_v.1.2.aux) ) 
 Here is how much of TeX's memory you used:
- 4925 strings out of 493747
- 77792 string characters out of 3143546
+ 4934 strings out of 493747
+ 78016 string characters out of 3143546
  197743 words of memory out of 3000000
- 8084 multiletter control sequences out of 15000+200000
+ 8091 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,11n,26p,1351b,528s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/
-local/texlive/2010/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2
-010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texliv
-e/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/tex
-live/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/
-texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/te
-xlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texl
-ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texliv
-e/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/
-2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/201
-0/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2010/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2010/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2010/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2010/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2010/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2010/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2010/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2010/texmf-dist/fonts/
-type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/u
-rw/helvetic/uhvr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/time
-s/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.p
-fb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/l
-ocal/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (7 pages, 716367 bytes).
+ 41i,11n,26p,1615b,528s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2010/texmf-dist/fonts/en
+c/dvips/base/8r.enc}</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsf
+onts/cmextra/cmex7.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
+msfonts/cmextra/cmex8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publi
+c/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5
+.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.p
+fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><
+/usr/local/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/lo
+cal/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/tex
+live/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2010/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist
+/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/typ
+e1/urw/times/utmri8a.pfb>
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 749184 bytes).
 PDF statistics:
- 213 PDF objects out of 1000 (max. 8388607)
- 130 compressed objects within 2 object streams
+ 259 PDF objects out of 1000 (max. 8388607)
+ 138 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
