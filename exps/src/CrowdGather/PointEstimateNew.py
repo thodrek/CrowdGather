@@ -62,8 +62,8 @@ class PointEstimateNew:
         x_ar = np.array(x)
         y_ar = np.array(y)
         initial_values = np.array([0.0,0.0,0.0])
-        bounds = [(0.0, None), (None, None), (None, None)]
-        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error_gompertz, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        #bounds = [(0.0, None), (None, None), (None, None)]
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error, x0 = initial_values, args=(x_ar,y_ar), approx_grad=True)
         A, G, D = params
         return A/(1.0 + math.exp(-G*(newX - D)))
 
@@ -492,7 +492,10 @@ class PointEstimateNew:
         upperValue = gain
         lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
+            #lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
+            lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(100)
+            self.oldKValues[meanSS] = meanK
+            self.oldK = meanK
         else:
             variance = 0.0
         return gain, variance, upperValue, lowerValue
