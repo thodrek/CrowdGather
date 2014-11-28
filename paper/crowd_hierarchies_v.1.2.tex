@@ -113,9 +113,9 @@ We focus on the collected Eventbrite dataset and plot the number of items for ea
 	\end{center}
 \end{figure}
 
-However, the hierarchical struckcture of the data domain presents an opportunity. In fact, we observe that the
+However, the hierarchical structure of the data domain presents us with an opportunity. In fact, we observe that the heavily populated domain points are not {\em leaf points}, i.e., points for which all the dimension values are specified but points for which one or more dimensions are assigned the wildcard value and thus can obtain any value. In fact, one can exploit this to maximize the number of extracted entities as we further discuss in \Cref{sec:prelims}.
 
-\ \\Opportunity: Exploit the hierarchical structure of the data domain. Discuss how the structure of Eventbrite's hierarchy can be exploited to discover sparse areas and optimize for the budget.
+The second challenge when consider large domains such as the Eventbrite domain, is the overlaps among different points of the domain. More precisely, when we ask the crowd to provide us with entities associated with a domain specific point (e.g., events in New York) these entities may be associated with other points in the domain (e.g., concerts in New York). Therefore we indirectly obtain information about the population of domain points for which no queries may have been issues. 
 
 \ \\Second challenge: Information flow across crowd entity extraction queries that correspond to overlapping parts of the data domain. Show example of overlaps. and the fact that when we request events for a location we get many events for a specific topic etc. dependent samples.
 
