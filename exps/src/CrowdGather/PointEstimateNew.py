@@ -432,7 +432,7 @@ class PointEstimateNew:
                     #returnEstimates.append(self.querySize)
 
             elif not self.oldK:
-                print self.point.sampleLogs
+                f0, K = self.estimateF0_regression()
                 Chat = self.estimateCoverage()
                 gain = f0*(1.0 - (1.0 - (1.0 - Chat)/(f0 + 1.0))**self.querySize)
                 returnEstimates.append(gain)
