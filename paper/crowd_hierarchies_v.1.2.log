@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 14:53
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 18:52
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -544,13 +544,19 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
 
-Overfull \hbox (1.29692pt too wide) in paragraph at lines 227--228
+Overfull \hbox (5.28333pt too wide) in paragraph at lines 217--218
+\OT1/ptm/m/n/9 pop-u-la-tion. The rea-son is that the pop-u-la-tion of node \OM
+S/cmsy/m/n/9 f\OT1/ptm/m/n/9 EventType
+ []
+
+
+Overfull \hbox (1.29692pt too wide) in paragraph at lines 229--230
 \OT1/ptm/m/n/9 (query, node) com-bi-na-tion so that the to-tal gain across all 
 rounds
  []
 
 
-Overfull \hbox (3.60086pt too wide) in paragraph at lines 229--230
+Overfull \hbox (3.60086pt too wide) in paragraph at lines 231--232
 \OT1/ptm/m/n/9 Our pro-posed frame-work it-er-a-tively solves the afore-men-tio
 ned prob-
  []
@@ -563,63 +569,30 @@ Package epstopdf Info: Source file: <figs/framework.eps>
 (epstopdf)                    size: 31418 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/framework-eps-converte
 d-to.pdf figs/framework.eps>
-(epstopdf)             \includegraphics on input line 233.
+(epstopdf)             \includegraphics on input line 235.
 Package epstopdf Info: Output file is already uptodate.
 <figs/framework-eps-converted-to.pdf, id=129, 521.95pt x 255.95625pt>
 File: figs/framework-eps-converted-to.pdf Graphic file (type pdf)
 
-<use figs/framework-eps-converted-to.pdf>
-
-LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-42.
-
-[4 <./figs/exampleQuery-eps-converted-to.pdf>]
-
-LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 2
-47.
-
-
-Overfull \hbox (1.34692pt too wide) in paragraph at lines 247--248
+<use figs/framework-eps-converted-to.pdf> [4 <./figs/exampleQuery-eps-converted
+-to.pdf>]
+Overfull \hbox (1.34692pt too wide) in paragraph at lines 249--250
 \OT1/ptm/m/n/9 de-rive an es-ti-ma-tor for the num-ber of new species $[]$ that
  would
  []
 
 
-LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-53.
-
-
-LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
-55.
-
-
-LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-255.
-
-
-LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-255.
-
-
-LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-264.
+LaTeX Warning: Reference `sec:exps' on page \thepage  undefined on input line 2
+61.
 
 [5 <./figs/framework-eps-converted-to.pdf>]
 
-LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 3
-03.
-
-
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 305.
+(amsmath)                 on input line 311.
 
 
-LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
-325.
-
-
-Overfull \hbox (24.01765pt too wide) in paragraph at lines 355--355
+Overfull \hbox (24.01765pt too wide) in paragraph at lines 361--361
 [] 
  []
 
@@ -627,18 +600,16 @@ Overfull \hbox (24.01765pt too wide) in paragraph at lines 355--355
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] (./crowd_hierarchies_v.1.2.bbl) [8
-
-] (./crowd_hierarchies_v.1.2.aux)
+[7] (./crowd_hierarchies_v.1.2.bbl) [8] (./crowd_hierarchies_v.1.2.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4941 strings out of 493747
- 78187 string characters out of 3143546
+ 4942 strings out of 493747
+ 78202 string characters out of 3143546
  197743 words of memory out of 3000000
- 8098 multiletter control sequences out of 15000+200000
+ 8099 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  41i,11n,26p,1615b,528s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -664,7 +635,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4233038 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4233765 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  145 compressed objects within 2 object streams

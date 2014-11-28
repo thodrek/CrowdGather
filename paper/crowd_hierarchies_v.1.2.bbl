@@ -6,6 +6,18 @@ Y.~Amsterdamer, S.~B. Davidson, T.~Milo, S.~Novgorodov, and A.~Somech.
 \newblock In {\em International Conference on Management of Data, {SIGMOD}
   2014, Snowbird, UT, USA, June 22-27, 2014}, pages 589--600, 2014.
 
+\bibitem{chao:1992}
+A.~Chao and S.~M. Lee.
+\newblock {Estimating the Number of Classes via Sample Coverage}.
+\newblock {\em Journal of the American Statistical Association},
+  87(417):210--217, 1992.
+
+\bibitem{hwang:2010}
+W.-H. Hwang and T.-J. Shen.
+\newblock Small-sample estimation of species richness applied to forest
+  communities.
+\newblock {\em Biometrics}, 66(4):1052--1060, 2010.
+
 \bibitem{kondredi:2014}
 S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
 \newblock Combining information extraction and human computing for crowdsourced
@@ -17,6 +29,11 @@ S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
 H.~Park and J.~Widom.
 \newblock Crowdfill: A system for collecting structured data from the crowd.
 \newblock In {\em 23rd International World Wide Web Conference (WWW)}, 2014.
+
+\bibitem{shen:2003}
+T.~Shen, A.~Chao, and C.~Lin.
+\newblock Predicting the number of new species in further taxonomic sampling.
+\newblock {\em Ecology}, 84(3), 2003.
 
 \bibitem{trushkowsky:2013}
 B.~Trushkowsky, T.~Kraska, M.~J. Franklin, and P.~Sarkar.

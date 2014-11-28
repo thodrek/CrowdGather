@@ -67,7 +67,12 @@ class PointEstimateNew:
         #A, G, D = params
         #return A/(1.0 + math.exp(-G*(newX - D)))
         K, Q, B, M, v = params
-        return K/math.pow((1 + Q*math.exp(-B*(newX - M))),1.0/v)
+        temp = 1.0/v
+        try:
+            return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
+        except:
+            print K, Q, B, M, v, newX
+            sys.exit(-1)
 
 
     # estimate P1
