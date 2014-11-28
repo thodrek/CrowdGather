@@ -485,7 +485,7 @@ class PointEstimateNew:
         upperValue = gain
         lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
+            lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
         else:
             variance = 0.0
         return gain, variance, upperValue, lowerValue
