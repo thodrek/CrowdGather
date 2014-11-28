@@ -143,8 +143,14 @@ class PointEstimateNew:
         y_ar = np.array(y)
         initial_values = np.array([self.uniqueNumber,0.0,0.0])
         bounds = [(upperK, None), (None, 0.0), (0.0, None)]
-        print upperK
-        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        try:
+            params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        except:
+            print initial_values
+            print bounds
+            print x_ar
+            print y_ar
+            sys.exit(-1)
         return params[0]
 
     def estimateF0_regression(self):
