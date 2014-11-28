@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 14:30
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 14:53
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -478,38 +478,29 @@ Package epstopdf Info: Source file: <figs/eventsDomain.eps>
 (epstopdf)                    date: 2014-11-28 14:27:35
 (epstopdf)                    size: 336859 bytes
 (epstopdf)             Output file: <figs/eventsDomain-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-11-26 18:03:27
-(epstopdf)                    size: 66200 bytes
+(epstopdf)                    date: 2014-11-28 14:30:58
+(epstopdf)                    size: 43169 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/eventsDomain-eps-conve
 rted-to.pdf figs/eventsDomain.eps>
 (epstopdf)             \includegraphics on input line 163.
-runsystem(epstopdf --outfile=figs/eventsDomain-eps-converted-to.pdf figs/events
-Domain.eps)...executed.
-
-Package epstopdf Info: Result file: <figs/eventsDomain-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-11-28 14:30:58
-(epstopdf)                    size: 43169 bytes.
+Package epstopdf Info: Output file is already uptodate.
 <figs/eventsDomain-eps-converted-to.pdf, id=76, 583.17876pt x 236.885pt>
 File: figs/eventsDomain-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsDomain-eps-converted-to.pdf>
+Underfull \vbox (badness 2894) has occurred while \output is active []
+
 Package epstopdf Info: Source file: <figs/eventsExLattice.eps>
 (epstopdf)                    date: 2014-11-28 14:30:37
 (epstopdf)                    size: 907194 bytes
 (epstopdf)             Output file: <figs/eventsExLattice-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2014-11-26 18:03:32
-(epstopdf)                    size: 191518 bytes
+(epstopdf)                    date: 2014-11-28 14:31:01
+(epstopdf)                    size: 191710 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/eventsExLattice-eps-co
 nverted-to.pdf figs/eventsExLattice.eps>
 (epstopdf)             \includegraphics on input line 174.
-runsystem(epstopdf --outfile=figs/eventsExLattice-eps-converted-to.pdf figs/eve
-ntsExLattice.eps)...executed.
-
-Package epstopdf Info: Result file: <figs/eventsExLattice-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2014-11-28 14:31:01
-(epstopdf)                    size: 191710 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
 <figs/eventsExLattice-eps-converted-to.pdf, id=78, 764.8575pt x 314.17375pt>
 File: figs/eventsExLattice-eps-converted-to.pdf Graphic file (type pdf)
@@ -530,17 +521,12 @@ Package epstopdf Info: Source file: <figs/exampleQuery.eps>
 (epstopdf)                    date: 2014-11-28 14:30:48
 (epstopdf)                    size: 934296 bytes
 (epstopdf)             Output file: <figs/exampleQuery-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-11-26 18:03:38
-(epstopdf)                    size: 178073 bytes
+(epstopdf)                    date: 2014-11-28 14:31:05
+(epstopdf)                    size: 178266 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/exampleQuery-eps-conve
 rted-to.pdf figs/exampleQuery.eps>
 (epstopdf)             \includegraphics on input line 207.
-runsystem(epstopdf --outfile=figs/exampleQuery-eps-converted-to.pdf figs/exampl
-eQuery.eps)...executed.
-
-Package epstopdf Info: Result file: <figs/exampleQuery-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-11-28 14:31:05
-(epstopdf)                    size: 178266 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
 <figs/exampleQuery-eps-converted-to.pdf, id=127, 765.86125pt x 357.335pt>
 File: figs/exampleQuery-eps-converted-to.pdf Graphic file (type pdf)
@@ -557,9 +543,6 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
-
-Underfull \vbox (badness 1297) has occurred while \output is active []
-
 
 Overfull \hbox (1.29692pt too wide) in paragraph at lines 227--228
 \OT1/ptm/m/n/9 (query, node) com-bi-na-tion so that the to-tal gain across all 
@@ -590,8 +573,7 @@ File: figs/framework-eps-converted-to.pdf Graphic file (type pdf)
 LaTeX Warning: Citation `chao:1992' on page \thepage  undefined on input line 2
 42.
 
-[4 <./figs/exampleQuery-eps-converted-to.pdf> <./figs/framework-eps-converted-t
-o.pdf>]
+[4 <./figs/exampleQuery-eps-converted-to.pdf>]
 
 LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 2
 47.
@@ -622,7 +604,7 @@ LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line
 LaTeX Warning: Citation `hwang:2010' on page \thepage  undefined on input line 
 264.
 
-[5]
+[5 <./figs/framework-eps-converted-to.pdf>]
 
 LaTeX Warning: Citation `shen:2003' on page \thepage  undefined on input line 3
 03.
@@ -641,7 +623,11 @@ Overfull \hbox (24.01765pt too wide) in paragraph at lines 355--355
 [] 
  []
 
-[6] [7] (./crowd_hierarchies_v.1.2.bbl) [8
+[6]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7] (./crowd_hierarchies_v.1.2.bbl) [8
 
 ] (./crowd_hierarchies_v.1.2.aux)
 
@@ -651,7 +637,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  4941 strings out of 493747
  78187 string characters out of 3143546
- 198743 words of memory out of 3000000
+ 197743 words of memory out of 3000000
  8098 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -678,7 +664,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4232892 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4233038 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  145 compressed objects within 2 object streams

@@ -39,3 +39,16 @@ def kappa_new_error(params, *args):
             y_model = 0.0
         error += (y[i] - y_model)**2
     return error
+
+def kappa_new_error_gompertz(params, *args):
+    x = args[0]
+    y = args[1]
+    A, B, C = params
+    error = 0.0
+    for i in range(len(x)):
+        try:
+            y_model = A*math.exp(-B*math.exp(-C*x[i]))
+        except:
+            y_model = 0.0
+        error += (y[i] - y_model)**2
+    return error

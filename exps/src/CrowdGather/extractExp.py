@@ -6,11 +6,11 @@ import numpy
 from utilities import Lattice
 
 if __name__ == "__main__":
-    extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres"]
-    estimator = ["chao92", "shenRegression", "newRegr"]
+    #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres"]
+    #estimator = ["chao92", "shenRegression", "newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
-    #extractionMethods = ["GS_thres"]
-    #estimator = ["newRegr"]
+    extractionMethods = ["GS_thres"]
+    estimator = ["chao92","newRegr"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
     timeH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/timeHierarchy.pkl","rb"))
@@ -27,8 +27,8 @@ if __name__ == "__main__":
     newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
     # set budget
-    budgetValues = [10,20,50,80,100,200]
-    #budgetValues = [10]
+    #budgetValues = [10,20,50,80,100,200]
+    budgetValues = [20,50]
 
     # set query configurations
     #configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
