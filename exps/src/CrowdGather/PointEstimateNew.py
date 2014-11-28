@@ -174,7 +174,8 @@ class PointEstimateNew:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                return self.querySize
+                return 1.0
+                #return self.querySize
 
         # compute K
         f0, K = self.estimateF0_regression()
@@ -182,8 +183,8 @@ class PointEstimateNew:
         self.oldK = K
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(self.point.distinctEntries):
-            return self.querySize
+        #if len(excludeList) == len(self.point.distinctEntries):
+        #    return self.querySize
 
         # compute query return
         if strataOption and len(self.point.childrenWeights) > 0:
