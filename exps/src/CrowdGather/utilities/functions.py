@@ -27,6 +27,19 @@ def kappa_error(params, *args):
     return error
 
 
+def kappa_new_error_gen(params, *args):
+    x = args[0]
+    y = args[1]
+    K, Q, B, M, v = params
+    error = 0.0
+    for i in range(len(x)):
+        try:
+            y_model = K/math.pow((1 + Q*math.exp(-B*(x[i] - M))),1.0/v)
+        except:
+            y_model = 0.0
+        error += (y[i] - y_model)**2
+    return error
+
 def kappa_new_error(params, *args):
     x = args[0]
     y = args[1]

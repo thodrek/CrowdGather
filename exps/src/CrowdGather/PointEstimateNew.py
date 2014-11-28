@@ -61,11 +61,14 @@ class PointEstimateNew:
             y.append(self.oldKValues[v])
         x_ar = np.array(x)
         y_ar = np.array(y)
-        initial_values = np.array([0.0,0.0,0.0])
-        #bounds = [(0.0, None), (None, None), (None, None)]
-        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error, x0 = initial_values, args=(x_ar,y_ar), approx_grad=True)
-        A, G, D = params
-        return A/(1.0 + math.exp(-G*(newX - D)))
+        initial_values = np.array([1.0,0.0,0.0,0.0,1.0])
+        bounds = [(0.0, None), (None, None), (None, None),(None, None),(0.0, None)]
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error_gen, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        #A, G, D = params
+        #return A/(1.0 + math.exp(-G*(newX - D)))
+        K, Q, B, M, v = params
+        return K/math.pow((1 + Q*math.exp(-B*(newX - M))),1.0/v)
+
 
     # estimate P1
     def estimateP1(self):
@@ -143,14 +146,7 @@ class PointEstimateNew:
         y_ar = np.array(y)
         initial_values = np.array([self.uniqueNumber,0.0,0.0])
         bounds = [(upperK, None), (None, 0.0), (0.0, None)]
-        try:
-            params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
-        except:
-            print initial_values
-            print bounds
-            print x_ar
-            print y_ar
-            sys.exit(-1)
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
         return params[0]
 
     def estimateF0_regression(self):
@@ -492,10 +488,7 @@ class PointEstimateNew:
         upperValue = gain
         lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            #lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
-            lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(100)
-            self.oldKValues[meanSS] = meanK
-            self.oldK = meanK
+            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
         else:
             variance = 0.0
         return gain, variance, upperValue, lowerValue
