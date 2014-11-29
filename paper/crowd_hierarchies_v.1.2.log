@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 18:58
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 20:11
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -550,6 +550,10 @@ S/cmsy/m/n/9 f\OT1/ptm/m/n/9 EventType
  []
 
 
+LaTeX Warning: Reference `sec:gain estimators' on page \thepage  undefined on i
+nput line 220.
+
+
 Overfull \hbox (1.29692pt too wide) in paragraph at lines 229--230
 \OT1/ptm/m/n/9 (query, node) com-bi-na-tion so that the to-tal gain across all 
 rounds
@@ -574,8 +578,10 @@ Package epstopdf Info: Output file is already uptodate.
 <figs/framework-eps-converted-to.pdf, id=129, 521.95pt x 255.95625pt>
 File: figs/framework-eps-converted-to.pdf Graphic file (type pdf)
 
-<use figs/framework-eps-converted-to.pdf> [4 <./figs/exampleQuery-eps-converted
--to.pdf>]
+<use figs/framework-eps-converted-to.pdf>
+Underfull \vbox (badness 1014) has occurred while \output is active []
+
+ [4 <./figs/exampleQuery-eps-converted-to.pdf>]
 Overfull \hbox (1.34692pt too wide) in paragraph at lines 249--250
 \OT1/ptm/m/n/9 de-rive an es-ti-ma-tor for the num-ber of new species $[]$ that
  would
@@ -604,10 +610,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4942 strings out of 493747
- 78202 string characters out of 3143546
- 197743 words of memory out of 3000000
- 8099 multiletter control sequences out of 15000+200000
+ 4944 strings out of 493747
+ 78250 string characters out of 3143546
+ 198743 words of memory out of 3000000
+ 8101 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  41i,11n,26p,1615b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -633,7 +639,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4230316 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4230499 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  145 compressed objects within 2 object streams

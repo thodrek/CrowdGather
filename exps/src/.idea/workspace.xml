@@ -46,7 +46,7 @@
       <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="27" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.28089887" vertical-offset="885" max-vertical-offset="7950">
+            <state line="65" column="81" selection-start="2185" selection-end="2185" vertical-scroll-proportion="0.39325842" vertical-offset="765" max-vertical-offset="7950">
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -696,13 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="69" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="1095">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/inputData.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="0" selection-start="256" selection-end="357" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
@@ -712,9 +705,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CrowdGather/utilities/functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="69" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="1095">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/PointEstimateNew.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="27" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.28089887" vertical-offset="885" max-vertical-offset="7950">
+        <state line="65" column="81" selection-start="2185" selection-end="2185" vertical-scroll-proportion="0.39325842" vertical-offset="765" max-vertical-offset="7950">
           <folding>
             <element signature="e#24#42#0" expanded="true" />
           </folding>

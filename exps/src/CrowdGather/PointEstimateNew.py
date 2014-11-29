@@ -61,18 +61,18 @@ class PointEstimateNew:
             y.append(self.oldKValues[v])
         x_ar = np.array(x)
         y_ar = np.array(y)
-        initial_values = np.array([1.0,0.0,0.0,0.0,1.0])
-        bounds = [(0.0, None), (0.0, None), (None, None),(None, None),(0.0, None)]
-        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error_gen, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
-        #A, G, D = params
-        #return A/(1.0 + math.exp(-G*(newX - D)))
-        K, Q, B, M, v = params
-        temp = 1.0/round(v)
-        try:
-            return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
-        except:
-            print K, Q, B, M, v, newX
-            sys.exit(-1)
+        initial_values = np.array([1.0,0.0,0.0])
+        bounds = [(0.0, None), (None, None),(None, None)]
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        A, G, D = params
+        return A/(1.0 + math.exp(-G*(newX - D)))
+        #K, Q, B, M, v = params
+        #temp = 1.0/round(v)
+        #try:
+        #    return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
+        #except:
+        #    print K, Q, B, M, v, newX
+        #    sys.exit(-1)
 
 
     # estimate P1
@@ -144,7 +144,7 @@ class PointEstimateNew:
                 y.append(y_new)
         # Not enough data to estimate K
         if len(x) < 1.0:
-            return None
+            return 1.0
 
         # Estimate K using lbfgsb
         x_ar = np.array(x)
