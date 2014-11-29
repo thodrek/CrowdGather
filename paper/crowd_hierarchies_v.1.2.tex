@@ -400,8 +400,34 @@ Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimat
 \sigma(\alpha) = \sqrt{\frac{v_{\alpha,t}\cdot\log(t)}{n_{\alpha,t}}}
 \end{equation}
 
-\subsection{A Frontier UCB Algorithm}
-We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows. Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in A_{\mathcal{F}}$. An overview of the proposed algorithm is shown in Algorithm \ref{algo:frontierucb}.
+\subsection{A Heuristic for Querying Policies}
+We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows: Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$ during a round $r$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in \mathcal{S}$. At round $r$ the algorithm identifies an action in $\mathcal{S}$ that maximizes the quantity $\frac{f(\alpha)}{c(\alpha)}$ under the constraint that the cost of action $\alpha$ is less or equal to the remaining budget. Since we are operating under a specified budget one can view the problem in hand as a variation of the typical knapsack problem. If no such action exists then the algorithm terminates. Otherwise the algorithm issues the query corresponding to action $\alpha$, updates the set of unique entities obtained from the queries, the remaining budget and updates the set of potential queries $q(k,l)$ that can be executed in the next round.  An overview of the proposed algorithm is shown in Algorithm \ref{algo:overall}.
+
+\begin{algorithm}[h]
+\caption{Overall Algorithm}
+\label{algo:overall}
+\begin{algorithmic}[1]
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $\beta_c$: query budget;
+\STATE {\bf Output:} $\uentities$: a set of extracted distinct entities;
+\STATE $\uentities \leftarrow \{\}$
+\STATE $RB \leftarrow \beta_c$ /* Initialize remaining budget */
+\STATE $\mathcal{S} \leftarrow$ {\sf InitializeActionSet($\hierarchy$)}
+\WHILE {$RB > 0$ and $S \neq \{\}$}
+	\STATE $\alpha \leftarrow \arg\max_{\alpha \in {\mathcal{S}}} \frac{f(a)}{c(a)}$ such that $RB - c(a) >0$
+	\IF {$\alpha$ is NULL }
+		\STATE break;
+	\ENDIF
+	\STATE $RB \leftarrow RB - c(a)$ /* Update budget */
+	\STATE Issue query corresponding to $\alpha$
+	\STATE $E \leftarrow$ entities from query
+	\STATE $\uentities \leftarrow \uentities \cup E$ /* Update unique entities */
+	\STATE $\mathcal{S} \leftarrow$ {\sf UpdateActionSet($\hierarchy$)}
+\ENDWHILE
+\RETURN $\uentities$
+\end{algorithmic}
+\end{algorithm}
+
+Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in A_{\mathcal{F}}$. An overview of the proposed algorithm is shown in Algorithm \ref{algo:frontierucb}.
 
 \begin{algorithm}[h]
 \caption{Frontier UCB}
