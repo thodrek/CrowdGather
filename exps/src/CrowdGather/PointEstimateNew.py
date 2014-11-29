@@ -61,10 +61,19 @@ class PointEstimateNew:
             y.append(self.oldKValues[v])
         x_ar = np.array(x)
         y_ar = np.array(y)
-        initial_values = np.array([0.0,0.0,0.0])
-        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error, x0 = initial_values, args=(x_ar,y_ar), approx_grad=True)
+        initial_values = np.array([1.0,0.0,0.0])
+        bounds = [(0.0, None), (None, None),(None, None)]
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
         A, G, D = params
         return A/(1.0 + math.exp(-G*(newX - D)))
+        #K, Q, B, M, v = params
+        #temp = 1.0/round(v)
+        #try:
+        #    return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
+        #except:
+        #    print K, Q, B, M, v, newX
+        #    sys.exit(-1)
+
 
     # estimate P1
     def estimateP1(self):
@@ -142,7 +151,6 @@ class PointEstimateNew:
         y_ar = np.array(y)
         initial_values = np.array([self.uniqueNumber,0.0,0.0])
         bounds = [(upperK, None), (None, 0.0), (0.0, None)]
-
         params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_error, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
         return params[0]
 
@@ -174,7 +182,8 @@ class PointEstimateNew:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                return self.querySize
+                return 1.0
+                #return self.querySize
 
         # compute K
         f0, K = self.estimateF0_regression()
@@ -182,8 +191,8 @@ class PointEstimateNew:
         self.oldK = K
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(self.point.distinctEntries):
-            return self.querySize
+        #if len(excludeList) == len(self.point.distinctEntries):
+        #    return self.querySize
 
         # compute query return
         if strataOption and len(self.point.childrenWeights) > 0:
@@ -420,14 +429,21 @@ class PointEstimateNew:
             # compute return
 
             # check if exclude list contains the entire sample
-            if len(excludeList) == lenDistinct:
-                returnEstimates.append(self.querySize)
+            #if len(excludeList) == lenDistinct:
+            #    returnEstimates.append(self.querySize)
 
-            elif self.sampleSize == 0.0:
+            if self.sampleSize == 0.0:
                 if self.point.emptyPopulation == True:
                     returnEstimates.append(0.0)
                 else:
-                    returnEstimates.append(self.querySize)
+                    returnEstimates.append(1.0)
+                    #returnEstimates.append(self.querySize)
+
+            elif not self.oldK:
+                f0, K = self.estimateF0_regression()
+                Chat = self.estimateCoverage()
+                gain = f0*(1.0 - (1.0 - (1.0 - Chat)/(f0 + 1.0))**self.querySize)
+                returnEstimates.append(gain)
 
             else:
                 newSampleSize = self.sampleSize + self.querySize
