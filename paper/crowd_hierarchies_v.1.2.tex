@@ -86,7 +86,7 @@ In this paper, we explore the problem of {\em budgeted entity extraction} over {
 
 \section{Introduction}
 \label{sec:intro}
-Combining human computation with traditional computation has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{west:2014}.
+Combining human computation with traditional computation has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{franklin:2011, Parameswaran:2012, west:2014}.
 
 A fundamental challenge in crowdsourced entity extraction is reasoning about the completeness of the extracted information. More precisely, given a task that seeks to enumerate entities from a specific domain by asking human workers, e.g., ``extract all restaurants in New York", it is not easy to judge if we have extracted all entities (in this case restaurants). This is because we are in an ``open world"~\cite{trushkowsky:2013} scenario. Extracting entities from the crowd can be done by issuing {\em queries} of the form ``Give me $k$ entities corresponding to a specific domain". In our restaurant example, such queries may correspond to crowdsourced task of the form ``give me 5 French restaurant in Manhattan, NY". Recent work has considered this problem for isolated queries~\cite{trushkowsky:2013} , i.e., queries that correspond to exactly the same question and are repeatedly evaluated against workers. In this line of work, the query predicates specify the data domain of interest. 
 
@@ -385,32 +385,33 @@ Another type of negative answer corresponds to the scenario where we issue a que
 
 \section{Discovering Querying Policies}
 \label{sec:solving}
-In this section, we focus on the second component of our proposed algorithmic framework, and introduce a multi-round adaptive optimization algorithm for identifying a querying strategy that will maximize the total gain across all rounds under the given budget constraints. At each round the proposed algorithm uses as input the estimated return for queries $q(k,l)$ at the different nodes in $\hierarchy$. Before presenting our proposed algorithm we list several challenges associated with this adaptive optimization problem.
+In this section, we focus on the second component of our proposed algorithmic framework. In particular, we introduce a multi-round adaptive optimization algorithm for identifying a querying strategy that will maximize the total gain across all rounds under the given budget constraints. The algorithmic framework we propose builds upon ideas from the multi-armed bandit literature~\cite{Auer:2003,EvenDar06actionelimination}. In particular,  at each round the proposed algorithm uses as input the estimated return for queries $q(k,l)$ at the different nodes in $\hierarchy$. Before presenting our proposed algorithm we list several challenges associated with this adaptive optimization problem.
 
 \begin{enumerate}
 \item The first challenge is that the number of nodes in $\hierarchy$ is exponential with respect to the number of attributes $\attributes$ describing the domain of interest. Querying every possible node to estimate its expected return for different queries $q(k,l)$ is prohibitively expensive. In fact, it is natural to assume a budget that does not allow any algorithm to query all nodes in the hierarchy. However, we assume that keeping estimates for each of the nodes for which at least one entity has been retrieved is feasible. 
-\item The second challenge is balancing there tradeoff between {\em exploitation} and {\em exploration}. The first refers to querying nodes for which sufficient entities have been retrieved and hence we have an accurate estimate for their expected return while the latter refers to exploring new nodes in $\hierarchy$ in order to avoid locally optimal policies.
+\item The second challenge is balancing there tradeoff between {\em exploitation} and {\em exploration}~\cite{Auer:2003}. The first refers to querying nodes for which sufficient entities have been retrieved and hence we have an accurate estimate for their expected return while the latter refers to exploring new nodes in $\hierarchy$ in order to avoid locally optimal policies.
 \end{enumerate}
 
 \subsection{Balancing Exploration and Exploitation}
 While issuing different queries $q(k,l)$ at different nodes of $\hierarchy$ we obtain a collection of entities that can be assigned to different nodes in $\hierarchy$. For each such node we can estimate the return of a new query $q(k,l)$ using the estimator presented in \Cref{sec:newestim}. However, this estimate is based on a rather small sample of the underlying population. Thus, exploiting this information at every round may need to suboptimal decision. This is the reason why one needs to balance the trade-off between exploiting nodes for which the estimated return is high and nodes that haven't been queried many times. Formally, the latter corresponds to upper bounding the expected return of each potential action with a confidence interval that depends on both the variance of the expected return and the number of times an action is evaluated.
 
-Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimate of the true return $r^*(\alpha)$. We assume that the expected return is normalized so that it has support in $[0,1]$. We can normalize that by dividing it with the query size $k$. Moreover, let $\mathcal{E}(\alpha)$ be an error component on the return of action $\alpha$ chosen such that $r(\alpha) - \sigma(\alpha) \leq r^*(\alpha) \leq r(\alpha) + \sigma(\alpha)$ with high probability. The parameter $\sigma(\alpha)$ should take into account both the empirical variance of the expected return as well as our uncertainty if an action has been chosen few times. Let $n_{\alpha,t}$ be the number of times we have chosen action $\alpha$ by round $t$, and let $v_{\alpha,t}$ denote the maximum between some constance $c$ (e.g., $c = 0.01$) and the empirical variance for action $\alpha$ at round $t$. The latter can be computed using bootstrapping over the estimator presented in \Cref{sec:newestim}. We choose to use the following formula for sigma:
+Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimate of the true return $r^*(\alpha)$. Moreover, let $\mathcal{E}(\alpha)$ be an error component on the return of action $\alpha$ chosen such that $r(\alpha) - \sigma(\alpha) \leq r^*(\alpha) \leq r(\alpha) + \sigma(\alpha)$ with high probability. The parameter $\sigma(\alpha)$ should take into account both the empirical variance of the expected return as well as our uncertainty if an action has been chosen few times. Let $n_{\alpha,t}$ be the number of times we have chosen action $\alpha$ by round $t$, and let $v_{\alpha,t}$ denote the maximum between some constant $c$ (e.g., $c = 0.01$) and the empirical variance for action $\alpha$ at round $t$. The latter can be computed using bootstrapping over the estimator presented in \Cref{sec:newestim}. Several techniques have been proposed in the multi-armed bandits literature to compute the parameter $\sigma(\alpha)$~\cite{teytaud:inria-00173263}. Teytaud et al.~\cite{teytaud:inria-00173263} showed that techniques considering both the variance and the number of times an action has been chosen tend to outperform other proposed methods. Based on this observation, we choose to use the following formula for sigma:
 \begin{equation}
 \sigma(\alpha) = \sqrt{\frac{v_{\alpha,t}\cdot\log(t)}{n_{\alpha,t}}}
 \end{equation}
 
 \subsection{A Frontier UCB Algorithm}
-We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows. Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return and cost for an action $\alpha \in A_{\mathcal{F}}$. An overview of the proposed algorithm is shown in Algorithm \ref{algo:frontierucb}.
+We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows. Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in A_{\mathcal{F}}$. An overview of the proposed algorithm is shown in Algorithm \ref{algo:frontierucb}.
 
 \begin{algorithm}[h]
 \caption{Frontier UCB}
 \label{algo:frontierucb}
 \begin{algorithmic}[1]
-\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to return upper bound; $c$: value oracle access to the query costs; $\beta_c$: query budget;
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $\beta_c$: query budget;
 \STATE {\bf Output:} $\uentities$: a set of extracted distinct entities;
 \STATE $\uentities \leftarrow \{\}$
 \STATE $RB \leftarrow \beta_c$ /* Set remaining budget */
+\STATE $QF \leftarrow \{$ Root node of $\hierarchy$ $\}$
 \WHILE {$RB > 0$ and $QF \neq \{\}$}
 	\STATE $\alpha \leftarrow \arg\max_{\alpha \in {\mathcal{S}}} \frac{f(a)}{c(a)}$ such that $RB - c(a) >0$
 	\IF {$\alpha$ is NULL }
@@ -426,7 +427,8 @@ We now introduce our proposed multi-round algorithm for solving the budgeted ent
 \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Removing Bad Actions} 
+The algorithm takes as input the lattice $\hierarchy$ corresponding to the domain of interest. It also assumes value oracle access to functions $f(\cdot)$ $c(\dot)$ and a budget $\beta_c$. The algorithm iterates 
+
 At each point we can eliminate actions that are not promising. We define non-promising actions as follows:
 
 \begin{definition}[Bad Action]

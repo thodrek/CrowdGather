@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 20:11
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 21:29
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -488,8 +488,6 @@ Package epstopdf Info: Output file is already uptodate.
 File: figs/eventsDomain-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/eventsDomain-eps-converted-to.pdf>
-Underfull \vbox (badness 2894) has occurred while \output is active []
-
 Package epstopdf Info: Source file: <figs/eventsExLattice.eps>
 (epstopdf)                    date: 2014-11-28 14:30:37
 (epstopdf)                    size: 907194 bytes
@@ -602,7 +600,7 @@ Overfull \hbox (24.01765pt too wide) in paragraph at lines 361--361
 [] 
  []
 
-[6] (./crowd_hierarchies_v.1.2.bbl [7]) [8
+[6] [7] (./crowd_hierarchies_v.1.2.bbl) [8
 
 ] (./crowd_hierarchies_v.1.2.aux)
 
@@ -610,10 +608,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4944 strings out of 493747
- 78250 string characters out of 3143546
- 198743 words of memory out of 3000000
- 8101 multiletter control sequences out of 15000+200000
+ 4949 strings out of 493747
+ 78347 string characters out of 3143546
+ 197743 words of memory out of 3000000
+ 8106 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  41i,11n,26p,1615b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -639,7 +637,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4230499 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4231999 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  145 compressed objects within 2 object streams

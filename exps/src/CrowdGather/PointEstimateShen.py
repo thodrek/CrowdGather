@@ -209,7 +209,7 @@ class PointEstimateShen:
 
 
      # cost of estimator
-    def computeCostLinear(self,maxQuerySize,maxExListSize):
+    def computeCost(self,maxQuerySize,maxExListSize):
         pointSpecificity = self.point.totalAssignedValues
 
         w_Q_Size = 1.0
@@ -225,7 +225,7 @@ class PointEstimateShen:
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
         return cost
 
-    def computeCost(self,maxQuerySize,maxExListSize):
+    def computeCostLinear(self,maxQuerySize,maxExListSize):
 
         if self.querySize == 5:
             qSizeCost = 0.20

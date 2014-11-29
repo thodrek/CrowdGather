@@ -13,17 +13,8 @@ def kappa_error(params, *args):
         b1 = 0.0
     error = 0.0
     for i in range(len(x)):
-        try:
-            y_model = b0*math.exp(b1*x[i]**b2)
-            error += (y[i] - y_model)**2
-        except:
-            print "Errors", sys.exc_info()[0]
-            print b0
-            print b1
-            print x[i]
-            print b2
-            print "Error over"
-            sys.exit(-1)
+        y_model = b0*math.exp(b1*x[i]**b2)
+        error += (y[i] - y_model)**2
     return error
 
 
