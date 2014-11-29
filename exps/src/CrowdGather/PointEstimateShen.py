@@ -82,12 +82,11 @@ class PointEstimateShen:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                #return self.querySize
-                return 1.0
+                return self.querySize
 
         # check if exclude list contains the entire sample
-        #if len(excludeList) == len(self.point.distinctEntries):
-        #    return self.querySize
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
 
         # compute query return
         if strataOption and len(self.point.childrenWeights) > 0:
@@ -225,7 +224,7 @@ class PointEstimateShen:
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
         return cost
 
-    def computeCostLinear(self,maxQuerySize,maxExListSize):
+    def computeCostStep(self,maxQuerySize,maxExListSize):
 
         if self.querySize == 5:
             qSizeCost = 0.20

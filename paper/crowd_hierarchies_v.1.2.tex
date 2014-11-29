@@ -413,7 +413,7 @@ As discussed before, the size of $\hierarchy$ is exponential to the values of at
 \STATE {\bf Output:} $\uentities$: a set of extracted distinct entities;
 \STATE $\uentities \leftarrow \{\}$
 \STATE $RB \leftarrow \beta_c$ /* Initialize remaining budget */
-\STATE $\mathcal{S} \leftarrow$ {\sf InitializeActionSet($\hierarchy$)}
+\STATE $\mathcal{S} \leftarrow$ {\sf UpdateActionSet($\hierarchy$)}
 \WHILE {$RB > 0$ and $S \neq \{\}$}
 	\STATE $\alpha \leftarrow \arg\max_{\alpha \in {\mathcal{S}}} \frac{f(a)}{c(a)}$ such that $RB - c(a) >0$
 	\IF {$\alpha$ is NULL }
@@ -430,31 +430,39 @@ As discussed before, the size of $\hierarchy$ is exponential to the values of at
 \end{algorithm}
 
 \subsection{Updating the Set of Actions}
-Due to the exponential size of the lattice $\hierarchy$ we need to limit the set of possible actions Algorithm~\ref{algo:overall} considers. To achieve that we adopt an iterative deepening traversal algorithm. 
+Due to the exponential size of the lattice $\hierarchy$ we need to limit the set of possible actions Algorithm~\ref{algo:overall} considers. To avoid keeping estimates for actions with bad returns we exploit the structure the given domain $\hierarchy$. We propose an algorithm that updates the set of actions by traversing the input lattice in a bottom-down manner extending it by adding new actions that corresponds to queries for nodes that are {\em direct descendants} of already queried nodes.
 
+The intuition behind this approach is the following. It is easy to see that due to the hierarchical structure of the lattice nodes at higher levels of the lattice corresponds to larger populations of entities. Therefore, issuing queries at these nodes can potentially result to a larger number of extracted entities. Also, traversing the lattice in a bottom-down fashion allows one to detect sparsely populated areas of the lattice and hence avoid spending any of the available budget on issuing queries corresponding to them.
+
+In more detail, our approach for updating the set of available actions (Algorithm~\ref{algo:updateactions}) proceeds as follows: If the set of available actions is empty start by considering all possible queries that can be issued at the root of $\hierarchy$ (Ln. 4-5). The set of possible queries corresponds to queries $q(k,l)$ for all combinations of the values of parameters $k$ and $l$. Recall that these are pre-specified by the designed of the querying interface. If the set of available actions is not empty, we consider the node associated with the action selected in the last round and populate the set of available actions with all the queries corresponding to its direct descendants (Ln. 7-9). As mentioned above the number of nodes in $\hierarchy$ can be prohibitively large, therefore we also remove any {\em bad actions} from the running set of actions (Ln.  10-14). 
+An action $\alpha$ is bad when $r(\alpha) + \sigma(\alpha) < \max_{\alpha^{\prime} \in \mathcal{S}} (r(\alpha^{\prime}) - \sigma(\alpha^{\prime}))$. Intuitively, this inequality states that we do not need to consider again an action as long as there exists another action such that the upper bounded return of the former is lower than the lower bounded return of the latter. This is a standard technique adopted in multi-armed bandits to limit the number of actions considered by the algorithm~\cite{EvenDar06actionelimination}. 
 \begin{algorithm}[h]
 \caption{UpdateActionSet}
 \label{algo:updateactions}
 \begin{algorithmic}[1]
-\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $u$: a node in $\hieararchy$ associated with the last selected action; $\mathcal{S}_{old}$: the running set of actions; $V_k$: values for query parameter $k$; $V_l$: values for query parameter $l$;
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $u$: a node in $\hierarchy$ associated with the last selected action; $\mathcal{S}_{old}$: the running set of actions; $V_k$: set of values for query parameter $k$; $V_l$: set of values for query parameter $l$;
 \STATE {\bf Output:} $\mathcal{S}_{new}$: the updated set of actions;
-\STATE $A_u \leftarrow $
+\STATE \textbf{/* Extend Set of Actions*/}
+\IF {$\mathcal{S}_{old}$ is empty}
+	\RETURN $\{$Root of $\hierarchy \}$
+\ENDIF 
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{old}$
+\FORALL{$d \in ${\sf Set of Direct Descendant Nodes of $u$}}
+\STATE $A_d \leftarrow$ Set of queries at $u$ for all configurations in $V_k \times V_l$
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{new} \cup A_d$
+\ENDFOR
+\STATE \textbf{/* Remove Bad Actions*/}
+\STATE /* Find maximum lower bound on gain over all actions in $\mathcal{S}_{new}$*/
+\STATE $thres \leftarrow \max_{\alpha^{\prime} \in \mathcal{S}_{new}} (r(\alpha^{\prime}) - \sigma(\alpha^{\prime}))$  
+\STATE $\mathcal{B} \leftarrow$ All actions $a$ in $\mathcal{S}_{new}$ with $r(\alpha) + \sigma(\alpha) < thres$
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{new} \setminus \mathcal{B}$
 \RETURN $\mathcal{S}_{new}$
 \end{algorithmic}
 \end{algorithm}
 
-The algorithm takes as input the lattice $\hierarchy$ corresponding to the domain of interest. It also assumes value oracle access to functions $f(\cdot)$ $c(\dot)$ and a budget $\beta_c$. The algorithm iterates 
-
-At each point we can eliminate actions that are not promising. We define non-promising actions as follows:
-
-\begin{definition}[Bad Action]
-An action $\alpha \in \mathcal{S}$ is said to be bad if 
-\begin{equation}
-r(\alpha) + \sigma(\alpha) < \max_{\alpha^{\prime} \in \mathcal{S}} (r(\alpha^{\prime}) - \sigma(\alpha^{\prime}))
-\end{equation}
-\end{definition}
-Intuitively, the above definitions says that we do not need to consider again an action as long as there exists another action such that the upper bounded return of the former is lower than the lower bounded return of the latter. 
-\subsubsection{Regret Analysis}
+\section{Experimental Evaluaiton}
+\label{sec:exps}
+In this section we present an empirical evaluation of our proposed algorithmic framework.
 
 \section{Related Work}
 \label{sec:related}
