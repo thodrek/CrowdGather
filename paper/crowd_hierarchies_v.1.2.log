@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 18:52
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  28 NOV 2014 18:58
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -596,11 +596,9 @@ Overfull \hbox (24.01765pt too wide) in paragraph at lines 361--361
 [] 
  []
 
-[6]
+[6] (./crowd_hierarchies_v.1.2.bbl [7]) [8
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7] (./crowd_hierarchies_v.1.2.bbl) [8] (./crowd_hierarchies_v.1.2.aux)
+] (./crowd_hierarchies_v.1.2.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -612,7 +610,7 @@ Here is how much of TeX's memory you used:
  8099 multiletter control sequences out of 15000+200000
  39273 words of font info for 80 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,11n,26p,1615b,528s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,11n,26p,1615b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2010/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/loca
 l/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/l
@@ -635,7 +633,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4233765 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (8 pages, 4230316 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  145 compressed objects within 2 object streams

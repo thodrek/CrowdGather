@@ -62,7 +62,7 @@ class PointEstimateNew:
         x_ar = np.array(x)
         y_ar = np.array(y)
         initial_values = np.array([1.0,0.0,0.0,0.0,1.0])
-        bounds = [(0.0, None), (None, None), (None, None),(None, None),(0.0, None)]
+        bounds = [(0.0, None), (0.0, None), (None, None),(None, None),(0.0, None)]
         params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error_gen, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
         #A, G, D = params
         #return A/(1.0 + math.exp(-G*(newX - D)))
