@@ -34,7 +34,8 @@ def kappa_new_error_gen(params, *args):
     error = 0.0
     for i in range(len(x)):
         try:
-            y_model = K/math.pow((1 + Q*math.exp(-B*(x[i] - M))),1.0/v)
+            temp = 1.0/round(v)
+            y_model = K/math.pow((1 + Q*math.exp(-B*(x[i] - M))),temp)
         except:
             y_model = 0.0
         error += (y[i] - y_model)**2

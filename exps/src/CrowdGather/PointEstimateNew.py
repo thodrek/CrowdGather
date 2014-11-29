@@ -67,7 +67,7 @@ class PointEstimateNew:
         #A, G, D = params
         #return A/(1.0 + math.exp(-G*(newX - D)))
         K, Q, B, M, v = params
-        temp = 1.0/v
+        temp = 1.0/round(v)
         try:
             return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
         except:
