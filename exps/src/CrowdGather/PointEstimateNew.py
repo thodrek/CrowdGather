@@ -144,7 +144,7 @@ class PointEstimateNew:
                 y.append(y_new)
         # Not enough data to estimate K
         if len(x) < 1.0:
-            return 1.0
+            return None
 
         # Estimate K using lbfgsb
         x_ar = np.array(x)
@@ -436,8 +436,8 @@ class PointEstimateNew:
                 if self.point.emptyPopulation == True:
                     returnEstimates.append(0.0)
                 else:
-                    returnEstimates.append(1.0)
-                    #returnEstimates.append(self.querySize)
+                    #returnEstimates.append(1.0)
+                    returnEstimates.append(self.querySize)
 
             elif not self.oldK:
                 f0, K = self.estimateF0_regression()

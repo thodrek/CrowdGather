@@ -401,7 +401,9 @@ Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimat
 \end{equation}
 
 \subsection{A Heuristic for Querying Policies}
-We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows: Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$ during a round $r$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in \mathcal{S}$. At round $r$ the algorithm identifies an action in $\mathcal{S}$ that maximizes the quantity $\frac{f(\alpha)}{c(\alpha)}$ under the constraint that the cost of action $\alpha$ is less or equal to the remaining budget. Since we are operating under a specified budget one can view the problem in hand as a variation of the typical knapsack problem. If no such action exists then the algorithm terminates. Otherwise the algorithm issues the query corresponding to action $\alpha$, updates the set of unique entities obtained from the queries, the remaining budget and updates the set of potential queries $q(k,l)$ that can be executed in the next round.  An overview of the proposed algorithm is shown in Algorithm \ref{algo:overall}.
+We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows: Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$ during a round $r$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in \mathcal{S}$. At round $r$ the algorithm identifies an action in $\mathcal{S}$ that maximizes the quantity $\frac{f(\alpha)}{c(\alpha)}$ under the constraint that the cost of action $\alpha$ is less or equal to the remaining budget. Since we are operating under a specified budget one can view the problem in hand as a variation of the typical knapsack problem. If no such action exists then the algorithm terminates. Otherwise the algorithm issues the query corresponding to action $\alpha$, updates the set of unique entities obtained from the queries, the remaining budget and updates the set of potential queries $q(k,l)$ that can be executed in the next round.  An overview of the proposed algorithm is shown in Algorithm \ref{algo:overall}. 
+
+As discussed before, the size of $\hierarchy$ is exponential to the values of attributes describing it, and thus, considering all the possible queries corresponding to the different nodes of the hierarchy can be prohibitively expensive. Next, we discuss how one can initialize and update the set of potential actions as the algorithm progresses considering the structure of the lattice $\hierarchy$ and the retrieved entities from previous rounds. 
 
 \begin{algorithm}[h]
 \caption{Overall Algorithm}
@@ -427,29 +429,17 @@ We now introduce our proposed multi-round algorithm for solving the budgeted ent
 \end{algorithmic}
 \end{algorithm}
 
-Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in A_{\mathcal{F}}$. An overview of the proposed algorithm is shown in Algorithm \ref{algo:frontierucb}.
+\subsection{Updating the Set of Actions}
+Due to the exponential size of the lattice $\hierarchy$ we need to limit the set of possible actions Algorithm~\ref{algo:overall} considers. To achieve that we adopt an iterative deepening traversal algorithm. 
 
 \begin{algorithm}[h]
-\caption{Frontier UCB}
-\label{algo:frontierucb}
+\caption{UpdateActionSet}
+\label{algo:updateactions}
 \begin{algorithmic}[1]
-\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $\beta_c$: query budget;
-\STATE {\bf Output:} $\uentities$: a set of extracted distinct entities;
-\STATE $\uentities \leftarrow \{\}$
-\STATE $RB \leftarrow \beta_c$ /* Set remaining budget */
-\STATE $QF \leftarrow \{$ Root node of $\hierarchy$ $\}$
-\WHILE {$RB > 0$ and $QF \neq \{\}$}
-	\STATE $\alpha \leftarrow \arg\max_{\alpha \in {\mathcal{S}}} \frac{f(a)}{c(a)}$ such that $RB - c(a) >0$
-	\IF {$\alpha$ is NULL }
-		\STATE break;
-	\ENDIF
-	\STATE $RB \leftarrow RB - c(a)$ /* Update budget */
-	\STATE Issue query corresponding to $\alpha$
-	\STATE $E \leftarrow$ entities from query
-	\STATE $\uentities \leftarrow \uentities \cup E$ /* Update unique entities */
-	\STATE Remove bad actions from $\mathcal{S}$. 
-\ENDWHILE
-\RETURN $\uentities$
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $f$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $u$: a node in $\hieararchy$ associated with the last selected action; $\mathcal{S}_{old}$: the running set of actions; $V_k$: values for query parameter $k$; $V_l$: values for query parameter $l$;
+\STATE {\bf Output:} $\mathcal{S}_{new}$: the updated set of actions;
+\STATE $A_u \leftarrow $
+\RETURN $\mathcal{S}_{new}$
 \end{algorithmic}
 \end{algorithm}
 
