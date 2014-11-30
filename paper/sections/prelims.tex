@@ -1,16 +1,13 @@
+%!TEX root = ../crowd_hierarchies_v.1.3.tex
+
 \section{Preliminaries}
 \label{sec:prelims}
-In this section we first review different types of crowd query interfaces for entity extraction. The we focus on crowdsourced entity extraction using these interfaces and consider the problem of maximizing the number of extracted entities. In particular, we define the problem of {\em crowd entity extraction} over {\em structured domains} under budget constraints. Then, we formally introduce the challenge of dependencies across queries when extracting entities from structured domains, and finally, we present an overview of our proposed algorithmic framework.
+In this section we first describe our crowdsourcing queries or interfaces for entity extraction, as well as our cost and response model. We then describe The we focus on crowdsourced entity extraction using these interfaces and consider the problem of maximizing the number of extracted entities. In particular, we define the problem of {\em crowd entity extraction} over {\em structured domains} under budget constraints. Then, we formally introduce the challenge of dependencies across queries when extracting entities from structured domains, and finally, we present an overview of our proposed algorithmic framework. \agp{revisit}
 
-\subsection{Entity Extraction Queries}
-\label{sec:queries}
-Let $\domain$ be a data domain described by a set of discrete attributes $\attributes = \{A_1, A_2, \dots, A_d\}$. Let $dom(A_i)$ denote the domain of each attribute $A_i  \in \attributes$.  We consider three different types of crowd queries for extracting entities from the crowd. The first type corresponds to {\em single entity queries} where workers are required to provide ``one more" entity that satisfies the collection of predicates over attributes in $\attributes$. Considering the Eventbrite example introduced in the previous section an example of a single entity query would be asking a worker to provide ``a concert in Manhattan, New York'". The second type of queries corresponds to {\em queries of  size k} where workers are asked to provide up to $k$ distinct entities. Finally, the last type corresponds to {\em exclude list queries}. Here,  workers are provided with $l$ entities that have already been extracted and are required to provide up to $k$ distinct entities under the constraint that none of them is included in the exclude list. It is easy to see that the last type of queries generalizes the previous two. Therefore, in the remainder of the paper, we will consider that all queries of the third type. To describe a query, we will use the notation $q(k,l)$ denoting a query of size $k$ accompanied with an exclude list of length $l$. 
+\subsection{Structured Data Domain}
+\label{sec:data-domain}
 
-In a typical crowdsourcing environment, tasks have different costs depending on their difficulty. Thus, crowdsourced queries of different difficulties should also exhibit different costs. Let $c(\dot)$ be a cost function for any query $q(k,l)$. This cost function should obey the following properties: (a) given an exclude list of fixed length $l$ then $c(q(k^{\prime},l)) \geq c(q(k,l)),  \forall k^{\prime} \geq k$, and (b) given a fixed query size $k$ then $c(q(k,l^{\prime})) \geq c(q(k,l)), \forall l^{\prime} \geq l$. These are fixed upfront by the interface designed based on the amount of work involved.
-
-\subsection{Crowd Entity Extraction}
-\label{sec:extraction}
-We focus on structured domains where each attribute is hierarchically organized. For example, consider the Eventbrite domain introduced in \Cref{sec:challenges}. The data domain $\domain$ corresponds to all events and the attributes describing the entities in $\domain$ are $\attributes = \{$``Event Type", ``Location", ``Date"$\}$. \Cref{fig:eventsdomain} shows the hierarchical organization of each attribute.
+Let $\domain$ be a data domain described by a set of discrete attributes $\attributes = \{A_1, A_2, \dots, A_d\}$. Let $dom(A_i)$ denote the domain of each attribute $A_i  \in \attributes$. We focus on structured domains where each attribute $A_i$ is hierarchically organized. For example, consider the Eventbrite domain introduced in \Cref{sec:challenges}. The data domain $\domain$ corresponds to all events and the attributes describing the entities in $\domain$ are $\attributes = \{$``Event Type", ``Location", ``Date"$\}$. \Cref{fig:eventsdomain} shows the hierarchical organization of each attribute.
 
 \begin{figure}[h]
 	\begin{center}
@@ -21,16 +18,31 @@ We focus on structured domains where each attribute is hierarchically organized.
 	\vspace{-10pt}
 \end{figure}
 
-The domain $\domain$ can be viewed as a {\em lattice} corresponding to the crossproduct of all available hierarchies. Part of the lattice corresponding to the previous example is shown in \Cref{fig:eventslattice}. We denote this crossproduct as $\hierarchy$. We define a {\em point} in $\domain$ as a possible combination of values of {\em all} attributes. We will also refer to a collection of points for which only a subset of attributes shares the same value as a {\em slice} $\domain_P$ of $\domain$. For example, a slice of the event domain described above may correspond to concerts in Boston. The predicates describing this slice are EVENT TYPE = ``Concert", LOCATION = ``Boston, MA", DATE = ``*".  It is easy to see that each node in $\hierarchy$ represents a slice of the data domain $\domain$. 
+The domain $\domain$ can be viewed as a {\em poset}, i.e., a partially ordered set, corresponding to the cross-product of all available hierarchies\footnote{Note that $\domain$ is not a lattice since there is no unique infimum.}. Part of the poset corresponding to the previous example is shown in \Cref{fig:eventslattice}. We denote this cross-product as $\hierarchy$. As can be seen in \Cref{fig:eventslattice}, there are nodes, such as $\{\}$, where no attributes are specified, and nodes, such as $\{X1\}$ and $\{C1\}$ where just one of the attribute values is specified, as well as nodes, such as $\{X2, ST2\}$, where multiple attribute values are specified.
+
+
+We define a {\em point} in $\domain$ as a possible combination of values of {\em all} attributes: in our setting, if values are specified for all. 
+
+We will also refer to a collection of points for which only a subset of attributes shares the same value as a {\em slice} $\domain_P$ of $\domain$. For example, a slice of the event domain described above may correspond to concerts in Boston. The predicates describing this slice are EVENT TYPE = ``Concert", LOCATION = ``Boston, MA", DATE = ``*".  It is easy to see that each node in $\hierarchy$ represents a slice of the data domain $\domain$. 
 
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[clip,scale=0.32]{figs/eventsExLattice.eps}
-	\caption{Part of the lattice defining the entire event entity domain described by the attributes in \Cref{fig:eventsdomain}.}
+	\caption{Part of the poset defining the entire event entity domain described by the attributes in \Cref{fig:eventsdomain}.}
 	\label{fig:eventslattice}
 	\end{center}
 	\vspace{-10pt}
 \end{figure}
+
+\subsection{Entity Extraction Queries}
+\label{sec:queries}
+ We consider three different types of crowd queries for extracting entities from the crowd. The first type corresponds to {\em single entity queries} where workers are required to provide ``one more" entity that satisfies the collection of predicates over attributes in $\attributes$. Considering the Eventbrite example introduced in the previous section an example of a single entity query would be asking a worker to provide ``a concert in Manhattan, New York'". The second type of queries corresponds to {\em queries of  size k} where workers are asked to provide up to $k$ distinct entities. Finally, the last type corresponds to {\em exclude list queries}. Here,  workers are provided with $l$ entities that have already been extracted and are required to provide up to $k$ distinct entities under the constraint that none of them is included in the exclude list. It is easy to see that the last type of queries generalizes the previous two. Therefore, in the remainder of the paper, we will consider that all queries of the third type. To describe a query, we will use the notation $q(k,l)$ denoting a query of size $k$ accompanied with an exclude list of length $l$. 
+
+In a typical crowdsourcing environment, tasks have different costs depending on their difficulty. Thus, crowdsourced queries of different difficulties should also exhibit different costs. Let $c(\dot)$ be a cost function for any query $q(k,l)$. This cost function should obey the following properties: (a) given an exclude list of fixed length $l$ then $c(q(k^{\prime},l)) \geq c(q(k,l)),  \forall k^{\prime} \geq k$, and (b) given a fixed query size $k$ then $c(q(k,l^{\prime})) \geq c(q(k,l)), \forall l^{\prime} \geq l$. These are fixed upfront by the interface designed based on the amount of work involved.
+
+\subsection{Crowd Entity Extraction}
+\label{sec:extraction}
+
 
 The basic version of {\em crowd entity extraction}~\cite{trushkowsky:2013} seeks to extract entities that belong in a {\em single} slice $\domain_P$ of $\domain$, specified by a set of predicates $P$ over a subset of attributes in $\attributes$. However, when considering large entity domains, such as the event domain, one may need to issue a series of entity extraction queries over multiple slices of $\domain$ - that may overlap with each other- so that the entire domain is covered. Issuing queries for different slices of the domain ensures that the coverage across the domain will be maximized. 
 
@@ -65,13 +77,13 @@ When extracting entities from a structured domain, the retrieved entities for a 
 	\vspace{-10pt}
 \end{figure}
 
-We use an example considering the lattice in \Cref{fig:eventslattice}, to illustrate these two cases. The example is shown in \Cref{fig:query}. Assume a query $q(k,0)$ issued against node \{EventType X1\}. Assume that the query result contains entities that correspond only to node \{X1,ST2\}. The green nodes in \Cref{fig:query} are nodes for which samples are obtained indirectly without querying them. Notice, that all these nodes, are ancestors of \{X1,ST2\}. Analyzing the samples for the different nodes we have:
+We use an example considering the poset in \Cref{fig:eventslattice}, to illustrate these two cases. The example is shown in \Cref{fig:query}. Assume a query $q(k,0)$ issued against node \{EventType X1\}. Assume that the query result contains entities that correspond only to node \{X1,ST2\}. The green nodes in \Cref{fig:query} are nodes for which samples are obtained indirectly without querying them. Notice, that all these nodes, are ancestors of \{X1,ST2\}. Analyzing the samples for the different nodes we have:
 \squishlist
 \item The samples corresponding to nodes \{X1, C1\} and \{X1,ST2\} where obtained by considering their {\em entire population}. The reason is that node \{EventType X1\} is an ancestor of both and the entity population corresponding to it fully contains the populations of both \{X1,C1\} and \{X1,ST1\}. 
 \item The samples corresponding to nodes \{ \}, \{Country C1\} and \{State ST2\} where obtained by considering only part of their population. The reason is that the population of node \{EventType X1\} does not fully contain the populations of these nodes. 
 \squishend
 
-Samples belonging to both types need to be considered when estimating the gain of a query at a node in $v \in \hierarchy$. To address this issue we merge the extracted entities for each node in $\hierarchy$ into a single sample and treat the unified sample as being extracted from the entire underlying population of the node. As we discuss later in \Cref{sec:solving} we develop querying strategies that traverse the lattice $\hierarchy$ in a top-down approach, hence, the number of samples belonging in the first category, i.e., samples retrieved considering the entire population of a node, dominates the number of samples retrieved by considering only part of a node's population. Moreover, it has been shown by Hortal et al.~\cite{hortal2006evaluating} that several of the techniques that can be used to estimate the gain of a query(see \Cref{sec:gainestimators}) present insensitivity to differences in the way the samples are aggregated.
+Samples belonging to both types need to be considered when estimating the gain of a query at a node in $v \in \hierarchy$. To address this issue we merge the extracted entities for each node in $\hierarchy$ into a single sample and treat the unified sample as being extracted from the entire underlying population of the node. As we discuss later in \Cref{sec:solving} we develop querying strategies that traverse the poset $\hierarchy$ in a top-down approach, hence, the number of samples belonging in the first category, i.e., samples retrieved considering the entire population of a node, dominates the number of samples retrieved by considering only part of a node's population. Moreover, it has been shown by Hortal et al.~\cite{hortal2006evaluating} that several of the techniques that can be used to estimate the gain of a query(see \Cref{sec:gainestimators}) present insensitivity to differences in the way the samples are aggregated.
 
 \subsection{Framework Overview}
 \label{sec:framework}
