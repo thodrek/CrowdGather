@@ -545,7 +545,7 @@ The poor performance of Rand and RandL is due to the sparsity of the Eventbrite 
 
 \subsection{Real Data Experiments}
 \label{sec:realdata}
-Since the performance of the baselines algorithms is significantly affected by the sparsity of the Eventbrite domain, we chose to further evaluate the performance of the extraction algorithms listed above for a smaller, thus more dense domain. For this purpose, we use a real-world dataset collected via Amazon Mechanical Turk. 
+Since the performance of the baselines algorithms is significantly affected by the sparsity of the Eventbrite domain, we chose to further evaluate the performance of the extraction algorithms listed above for a smaller, thus more dense domain. For this purpose, we use a real-world dataset collected via Amazon Mechanical Turk~\cite{mturk}. 
 
 We asked workers to extract the names of people belonging in four different types from five different news portals. The people types we considered were ``Politicians", ``Athletes", ``Actors/Singers" and ``Industry People". The news portals we considered were ``New York Times", ``Huffington Post", ``Washington Post", ``USA  Today" and ``The Wall Street Journal". The domain under consideration is specified by the two attributes corresponding to the type of the person and the news portal. The lattice corresponding to this domain was constructed by taking the crossproduct of the aforementioned values. Workers were paid \$0.20 per HIT to provide items belonging in the specified data domain. We issued 20 HITS for each leaf node of the lattice, resulting in 600 HITS in total and extracted 1,245 people in total. \Cref{tab:ptypedata} and \Cref{tab:ntypedata} show the number of distinct entities for the different values of the people-type and news portal attributes. Finally, the popularity weight of each extracted entity was assigned to be equal to the number of times it appeared in the extraction result. These weights are then normalized during sampling time to form a proper popularity distribution.
 
@@ -619,16 +619,19 @@ In particular, we observe that issuing random extraction queries at the nodes of
 We have the following recommendations according to the experimental results.
 \squishlist
 \item Exploiting the structure of the entity extraction domain is effective for maximizing the total number of extracted entities. Moreover, balancing the exploration of queries for non-observed nodes of the lattice with queries over observed nodes of the lattice is crucial.
-\item For sparse domains, i.e., domain specified by large lattices with a small number of populated nodes, one should resolve to regression-based techniques for estimating the expected gain of further queries as they result in better performance. However, for dense domains the Chao92Shen estimator results in better performance as a larger portion of the underlying population can be sampled. We point out that the size of the input domain as well as its sparsity are known in advance to the designed of the querying interface. 
-\item For small budgets we observe that the proposed estimator-based lattice traversal algorithms (i.e., GSChao, GSHwang and GSNewR) exhibit comparable performance with a traversal algorithm that has oracle access to the gain of each query to be issued.
+\item For sparse domains, i.e., domain specified by large lattices with a small number of populated nodes, one should resolve to regression based techniques for estimating the expected gain of further queries as they result in better performance. However, for dense domains the Chao92Shen estimator results in better performance as a larger portion of the underlying population can be sampled. The size of the input domain as well as its sparsity are known in advance to the designed of the querying interface. 
+\item For small budgets the proposed estimator-based lattice traversal algorithms (i.e., GSChao, GSHwang and GSNewR) exhibit comparable performance with a traversal algorithm that has oracle access to the gain of each query to be issued.
 \squishend
 
 \vspace{2pt}\section{Related Work}
 \label{sec:related}
+The prior work related to the techniques proposed in this paper can be placed in a few categories; we describe each of them in turn:
 
-\ \\Beth's work
-\ \\Work by Yael Amsterdamer on Crowd Mining
-\ \\CrowdFill work by Stanford
+\vspace{5pt}\noindent\textbf{Crowd Algorithms:} There has been a significant amount of work on designing algorithms where the unit operations are performed by human workers, including the execution of common database query operators such as filter~\cite{crowdscreen}, join~\cite{markus-sorts-joins} and max~\cite{so-who-won},  machine learning~\cite{entity-matching, crowdclustering, crowder} and data mining tasks~\cite{amsterdamer:2013, get-another-label} etc. Previous work on the task of populating a database~\cite{park:2014, trushkowsky:2013} is the most related to ours. However, in both cases authors focus on a single entity extraction query and do consider extracting entities from large and diverse data domains. Moreover, the proposed techniques do not support  dynamic adaptation of the queries issued against the crowd to optimize for a specified monetary budget. 
+
+\vspace{5pt}\noindent\textbf{Knowledge Acquisition Systems:} Recent work has focused on combining crowd souring techniques with knowledge acquisition systems~\cite{jiang:13, kondredi:2014, west:2014}. This line of work suggests using the crowd for curating automatically constructed knowledge bases (i.e., assessing the validity of the extracted facts) and for gathering additional knowledge to be added in the knowledge base. Estimating the newly acquired information from a query and then  devising querying strategies that maximize the amount of extracted information will surely be beneficial for knowledge extraction systems.
+
+\vspace{5pt}\noindent\textbf{Deep Web Crawling:}
 
 \section{Conclusions}
 \label{sec:conclusions}

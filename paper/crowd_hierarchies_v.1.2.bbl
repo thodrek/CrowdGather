@@ -1,15 +1,31 @@
 \begin{thebibliography}{10}
 
+\bibitem{mturk}
+{Mechanical Turk}.
+\newblock {\em {http://mturk.com}}.
+
 \bibitem{amsterdamer:2014}
 Y.~Amsterdamer, S.~B. Davidson, T.~Milo, S.~Novgorodov, and A.~Somech.
 \newblock {OASSIS:} query driven crowd mining.
 \newblock In {\em International Conference on Management of Data, {SIGMOD}
   2014, Snowbird, UT, USA, June 22-27, 2014}, pages 589--600, 2014.
 
+\bibitem{amsterdamer:2013}
+Y.~Amsterdamer, Y.~Grossman, T.~Milo, and P.~Senellart.
+\newblock Crowd mining.
+\newblock In {\em Proceedings of the 2013 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '13, pages 241--252, New York, NY, USA, 2013.
+  ACM.
+
 \bibitem{Auer:2003}
 P.~Auer.
 \newblock Using confidence bounds for exploitation-exploration trade-offs.
 \newblock {\em J. Mach. Learn. Res.}, 3:397--422, Mar. 2003.
+
+\bibitem{entity-matching}
+K.~Bellare, S.~Iyengar, A.~Parameswaran, and V.~Rastogi.
+\newblock Active sampling for entity matching.
+\newblock In {\em KDD}, 2012.
 
 \bibitem{chao:1992}
 A.~Chao and S.~M. Lee.
@@ -29,6 +45,11 @@ M.~J. Franklin, D.~Kossmann, T.~Kraska, S.~Ramesh, and R.~Xin.
 \newblock In {\em Proceedings of the 2011 ACM SIGMOD International Conference
   on Management of Data}, SIGMOD '11, pages 61--72, 2011.
 
+\bibitem{so-who-won}
+S.~Guo, A.~Parameswaran, and H.~Garcia-Molina.
+\newblock {So Who Won? Dynamic Max Discovery with the Crowd}.
+\newblock In {\em SIGMOD}, 2012.
+
 \bibitem{hortal2006evaluating}
 J.~Hortal, P.~A. Borges, and C.~Gaspar.
 \newblock Evaluating the performance of species richness estimators:
@@ -41,12 +62,29 @@ W.-H. Hwang and T.-J. Shen.
   communities.
 \newblock {\em Biometrics}, 66(4):1052--1060, 2010.
 
+\bibitem{jiang:13}
+L.~Jiang, Y.~Wang, J.~Hoffart, and G.~Weikum.
+\newblock Crowdsourced entity markup.
+\newblock In {\em CrowdSem}, volume 1030 of {\em CEUR Workshop Proceedings},
+  pages 59--68, 2013.
+
 \bibitem{kondredi:2014}
 S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
 \newblock Combining information extraction and human computing for crowdsourced
   knowledge acquisition.
 \newblock In {\em 30th IEEE International Conference on Data Engineering}, ICDE
   '14, 2014.
+
+\bibitem{markus-sorts-joins}
+A.~Marcus, E.~Wu, D.~Karger, S.~Madden, and R.~Miller.
+\newblock Human-powered sorts and joins.
+\newblock In {\em VLDB}, 2012.
+
+\bibitem{crowdscreen}
+A.~Parameswaran, H.~Garcia-Molina, H.~Park, N.~Polyzotis, A.~Ramesh, and
+  J.~Widom.
+\newblock Crowdscreen: Algorithms for filtering data with humans.
+\newblock In {\em SIGMOD}, 2012.
 
 \bibitem{Parameswaran:2012}
 A.~G. Parameswaran, H.~Park, H.~Garcia-Molina, N.~Polyzotis, and J.~Widom.
@@ -60,10 +98,21 @@ H.~Park and J.~Widom.
 \newblock Crowdfill: A system for collecting structured data from the crowd.
 \newblock In {\em 23rd International World Wide Web Conference (WWW)}, 2014.
 
+\bibitem{crowdclustering}
+{R. Gomes et al.}
+\newblock Crowdclustering.
+\newblock In {\em NIPS}, 2011.
+
 \bibitem{shen:2003}
 T.~Shen, A.~Chao, and C.~Lin.
 \newblock Predicting the number of new species in further taxonomic sampling.
 \newblock {\em Ecology}, 84(3), 2003.
+
+\bibitem{get-another-label}
+V.~S. Sheng, F.~Provost, and P.~Ipeirotis.
+\newblock Get another label? improving data quality and data mining using
+  multiple, noisy labelers.
+\newblock In {\em SIGKDD}, 2008.
 
 \bibitem{teytaud:inria-00173263}
 O.~Teytaud, S.~Gelly, and M.~Sebag.
@@ -75,6 +124,11 @@ B.~Trushkowsky, T.~Kraska, M.~J. Franklin, and P.~Sarkar.
 \newblock Crowdsourced enumeration queries.
 \newblock In {\em Proceedings of the 2013 IEEE International Conference on Data
   Engineering (ICDE 2013)}, ICDE '13, pages 673--684, 2013.
+
+\bibitem{crowder}
+J.~Wang, T.~Kraska, M.~Franklin, and J.~Feng.
+\newblock Crowder: Crowdsourcing entity resolution.
+\newblock In {\em VLDB}, 2012.
 
 \bibitem{west:2014}
 R.~West, E.~Gabrilovich, K.~Murphy, S.~Sun, R.~Gupta, and D.~Lin.
