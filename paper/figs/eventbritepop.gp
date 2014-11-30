@@ -2,8 +2,8 @@ set ter postscript enhanced color eps "Helvetica" 30
 set output "eventbritepop.eps"
 set boxwidth 5.0 relative
 set title "{/Helvetica-Bold Eventbrite Domain Population"
-set xlabel  "Point Index (x 10^3)"
-set ylabel  "Number of Events in Point"
+set xlabel  "Poset Node Index (x 10^3)"
+set ylabel  "Number of Events in Node"
 set datafile missing "-"
 unset key
 set grid x y
