@@ -484,7 +484,7 @@ All estimators were coupled with bootstrapping to estimate their variance. Recal
 \item GSChao: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the Chao92Shen estimator to estimate the gain from a query to be issued.
 \item GSHwang: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the HwangShen estimator to estimate the gain from a query to be issued.
 \item GSNewR: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the NewRegr estimator to estimate the gain from a query to be issued.
-\item GSExact: This algorithm is used as a near-optimal baseline. In particular, we combine the heuristic proposed in \Cref{sec:heuristic} with an exact computation of the query return. More precisely, the algorithm proceeds as follows: At each round we speculatively execute each of the available actions and we select the one that results in the largest  number of new items to cost ratio. Notice, that the return of each query is known and the algorithm is not coupled with any of the estimation methods discussed above.
+\item GSExact: This algorithm is used as a near-optimal baseline. In particular, we combine the heuristic proposed in \Cref{sec:heuristic} with an exact computation of the query return. More precisely, the algorithm proceeds as follows: At each round we speculatively execute each of the available actions and we select the one that results in the largest  number of new items to cost ratio. Notice, that the return of each query is known and the algorithm is not coupled with any of the aforementioned estimators.
 \squishend
 We run each algorithm multiple times as the results of each run depend on the sampled entities front the underlying unknown population. For each algorithm we report the average gain achieved under the given budget as well as the corresponding standard errors.
 
@@ -511,7 +511,7 @@ First, we evaluate the proposed framework on extracting entities from a large do
 \noindent\textbf{Results:} First, we evaluate the performance of the gain estimators described above at predicting the number of new retrieved events for different query configurations. We choose ten random points from the Eventbrite lattice each containing more than 5,000 events . For each of the points and each of the available query parameter configurations $(k,l)$, we execute ten queries of the form ``Give me $k$ items from point $u \in \hierarchy$ that are not included in an exclude list of size $l$". As mentioned in \Cref{sec:excludelist} the exclude list for each query is constructed following a randomized approach. We evaluate the performance of Chao92Shen, HwangShen, and NewRegr at predicting the return of each query. We measure the performance of each estimator by considering the absolute relative error between the predicted return and the actual return of the query. In \Cref{tab:eventesterror} we report the relative error for each of the three estimators averaged over all points under consideration. As shown, all three estimators perform equivalently with the new regression based technique slightly outperforming Chao92Shen and HwangShen for certain types of queries. The increased number of relative errors are justified as the retrieved samples correspond to a very small portion of the underlying population for each of the points. This is a well-known behavior for non-parametric estimators and studied extensively in the species estimation literature~\cite{hwang:2010}. 
 
 \begin{table}
-\center
+\small\center
 \caption{Average absolute relative error for estimating the gain of different generalized queries. The results reported correspond to the average error over multiple queries issued at multiple points of the Eventbrite lattice.}
 \label{tab:eventesterror}
 \begin{tabular}{|c|c|c|c|c|}
@@ -526,10 +526,11 @@ First, we evaluate the proposed framework on extracting entities from a large do
 20 & 10 & 0.653 & 0.756 & 0.631\\
 \hline
 \end{tabular}
+\vspace{-10pt}
 \end{table}
 
 
-Next, we evaluate the performance of our proposed algorithmic framework when extracting events from the Eventbrite domain. We evaluate the performance of the different extraction algorithms described above for different budgets. We ran each algorithm ten times and report the average number of unique events extracted as well as the corresponding standard error. The results are shown in \Cref{fig:ebextraction}. As shown all of our proposed algorithms, i.e., GSChao, GSHwang, GSNewR outperform the baselines under consideration exhibiting an improvement of at least 2x on the total number of unique events extracted. 
+Next, we evaluate the performance of our proposed algorithmic framework when extracting events from the Eventbrite domain. We evaluate the performance of the different extraction algorithms described above for different budgets. We ran each algorithm ten times and report the average number of unique events extracted as well as the corresponding standard error. The results are shown in \Cref{fig:ebextraction}. As shown all of our proposed algorithms, i.e., GSChao, GSHwang, GSNewR outperform the baselines under consideration exhibiting an improvement of at least 2x on the total number of unique events extracted. Moreover, for smaller budgets we observe that these algorithms perform comparably to GSExact that has oracle access to the gain of each query.
 
 \begin{figure}[h]
 	\begin{center}
@@ -582,7 +583,7 @@ USA Today & 593 \\ \hline
 \noindent\textbf{Results}: We first evaluate the performance of the gain estimators. As before, we issue ten generalized queries to different nodes of the input lattice for all available query configurations. Since the input domain is rather small we issued ten queries over all nodes in the input lattice. For each gain estimator and query configuration, we computed the average relative error, comparing the estimated query return with the actual query return. The results are shown in \Cref{tab:peopleesterror}. Again, we observe that for smaller query sizes the regression techniques proposed in this paper offers better gain estimates. However, as the query size increases, and hence, a larger portion of the underlying population is observed we see that Chao92Shen outperforms both regression based techniques. 
 
 \begin{table}
-\center
+\small\center
 \caption{Average absolute percentage error for estimating the gain of different generalized queries. The results reported correspond to  averaged over multiple queries issued at all points of the People data domain.}
 \label{tab:peopleesterror}
 \begin{tabular}{|c|c|c|c|c|}
@@ -597,22 +598,30 @@ USA Today & 593 \\ \hline
 20 & 10 & 0.405 & 0.428 & 0.638\\
 \hline
 \end{tabular}
+\vspace{-10pt}
 \end{table}
 
 Finally, we evaluate the performance of the different extraction algorithms. Similarly to Eventbrite we ran each algorithm ten times and report the average performance and the corresponding standard error. The results are shown in \Cref{fig:poextraction}. As shown our proposed techniques (i.e., GSChao, GSHwang and GSNewR) still outperform Rand, RandL and BFS. However, we see that the performance improvement is smaller compared to Eventbrite. The reason is that the people's domain is dense and all nodes of the input lattice are populated. 
 
-In particular, we observe that issuing random extraction queries at the nodes of the lattice outperforms BFS for a significant margin as the available budget increases. This behavior is expected in dense small domains where all the available nodes are populated. Notice that this approach corresponds to a querying policy that focuses purely on exploring different queries. However, exploited previously obtained information and balancing exploration and exploitation of the possible actions (i.e., following the proposed lattice traversal algorithm) leads to superior performance. 
-
-\begin{figure}
+\vspace{-10pt}\begin{figure}[h]
 	\begin{center}
 	\includegraphics[clip,scale=0.6]{figs/poExtraction.eps}
 	\caption{The number of people extracted by different algorithms for the People data domain and different budgets.}
 	\label{fig:poextraction}
 	\end{center}
+	\vspace{-10pt}
 \end{figure}
 
-\subsection{Take-Away Points}
+In particular, we observe that issuing random extraction queries at the nodes of the lattice outperforms BFS for a significant margin as the available budget increases. This behavior is expected in dense small domains where all the available nodes are populated. Notice that this approach corresponds to a querying policy that focuses purely on exploring different queries. However, exploited previously obtained information and balancing exploration and exploitation of the possible actions (i.e., following the proposed lattice traversal algorithm) leads to superior performance. 
 
+
+\subsection{Take-Away Points}
+We have the following recommendations according to the experimental results.
+\squishlist
+\item Exploiting the structure of the entity extraction domain is effective for maximizing the total number of extracted entities. Moreover, balancing the exploration of queries for non-observed nodes of the lattice with queries over observed nodes of the lattice is crucial.
+\item For sparse domains, i.e., domain specified by large lattices with a small number of populated nodes, one should resolve to regression-based techniques for estimating the expected gain of further queries as they result in better performance. However, for dense domains the Chao92Shen estimator results in better performance as a larger portion of the underlying population can be sampled. We point out that the size of the input domain as well as its sparsity are known in advance to the designed of the querying interface. 
+\item For small budgets we observe that the proposed estimator-based lattice traversal algorithms (i.e., GSChao, GSHwang and GSNewR) exhibit comparable performance with a traversal algorithm that has oracle access to the gain of each query to be issued.
+\squishend
 
 \vspace{2pt}\section{Related Work}
 \label{sec:related}

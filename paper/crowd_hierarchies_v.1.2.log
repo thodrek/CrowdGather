@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  29 NOV 2014 23:26
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  29 NOV 2014 23:54
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -626,37 +626,28 @@ Overfull \hbox (6.31659pt too wide) in paragraph at lines 491--492
 9 l$ \OT1/ptm/m/n/9 were dimmed un-rea-son-able for crowd-sourced queries.
  []
 
-
-Overfull \hbox (16.3157pt too wide) in paragraph at lines 517--529
- [] 
- []
-
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 519.
 Package epstopdf Info: Source file: <figs/ebExtraction.eps>
-(epstopdf)                    date: 2014-11-29 19:24:38
-(epstopdf)                    size: 22754 bytes
+(epstopdf)                    date: 2014-11-29 23:47:45
+(epstopdf)                    size: 23253 bytes
 (epstopdf)             Output file: <figs/ebExtraction-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-11-29 19:25:56
-(epstopdf)                    size: 10534 bytes
+(epstopdf)                    date: 2014-11-29 23:47:50
+(epstopdf)                    size: 10662 bytes
 (epstopdf)             Command: <epstopdf --outfile=figs/ebExtraction-eps-conve
 rted-to.pdf figs/ebExtraction.eps>
-(epstopdf)             \includegraphics on input line 536.
+(epstopdf)             \includegraphics on input line 537.
 Package epstopdf Info: Output file is already uptodate.
 <figs/ebExtraction-eps-converted-to.pdf, id=196, 361.35pt x 252.945pt>
 File: figs/ebExtraction-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/ebExtraction-eps-converted-to.pdf>
+Underfull \vbox (badness 3439) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[9]
-Overfull \hbox (4.97694pt too wide) in paragraph at lines 549--550
+ [9 <./figs/ebExtraction-eps-converted-to.pdf>]
+Overfull \hbox (4.97694pt too wide) in paragraph at lines 550--551
 \OT1/ptm/m/n/9 types we con-sid-ered were ``Politi-cians", ``Ath-letes", ``Ac-t
 ors/Singers"
- []
-
-
-Overfull \hbox (16.3157pt too wide) in paragraph at lines 588--600
- [] 
  []
 
 Package epstopdf Info: Source file: <figs/poExtraction.eps>
@@ -669,18 +660,40 @@ Package epstopdf Info: Source file: <figs/poExtraction.eps>
 rted-to.pdf figs/poExtraction.eps>
 (epstopdf)             \includegraphics on input line 608.
 Package epstopdf Info: Output file is already uptodate.
-<figs/poExtraction-eps-converted-to.pdf, id=201, 361.35pt x 252.945pt>
+<figs/poExtraction-eps-converted-to.pdf, id=210, 361.35pt x 252.945pt>
 File: figs/poExtraction-eps-converted-to.pdf Graphic file (type pdf)
 
-<use figs/poExtraction-eps-converted-to.pdf> [10 <./figs/ebExtraction-eps-conve
-rted-to.pdf> <./figs/poExtraction-eps-converted-to.pdf>]
+<use figs/poExtraction-eps-converted-to.pdf>
+Overfull \hbox (2.36858pt too wide) in paragraph at lines 621--622
+\OT1/ptm/m/n/9 More-over, bal-anc-ing the ex-plo-ration of queries for non-obse
+rved
+ []
+
+[10 <./figs/poExtraction-eps-converted-to.pdf>]
+Overfull \hbox (17.65pt too wide) in paragraph at lines 622--623
+\OT1/ptm/m/n/9 a small num-ber of pop-u-lated nodes, one should re-solve to reg
+ression-
+ []
+
+
+Overfull \hbox (2.93443pt too wide) in paragraph at lines 622--623
+\OT1/ptm/m/n/9 do-mains the Chao92Shen es-ti-ma-tor re-sults in bet-ter per-for
+-mance
+ []
+
+
+Overfull \hbox (13.51863pt too wide) in paragraph at lines 623--624
+\OT1/ptm/m/n/9 lat-tice traver-sal al-go-rithms (i.e., GSChao, GSH-wang and GSN
+ewR)
+ []
+
 (./crowd_hierarchies_v.1.2.bbl) [11] (./crowd_hierarchies_v.1.2.aux) ) 
 Here is how much of TeX's memory you used:
- 5034 strings out of 493747
- 79814 string characters out of 3143546
+ 5037 strings out of 493747
+ 79847 string characters out of 3143546
  197743 words of memory out of 3000000
- 8185 multiletter control sequences out of 15000+200000
- 39897 words of font info for 81 fonts, out of 3000000 for 9000
+ 8187 multiletter control sequences out of 15000+200000
+ 41523 words of font info for 83 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  41i,11n,26p,1615b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/loc
@@ -706,7 +719,7 @@ helvetic/uhvr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/u
 tmb8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
 </usr/local/texlive/2010/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loca
 l/texlive/2010/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (11 pages, 4269239 bytes).
+Output written on crowd_hierarchies_v.1.2.pdf (11 pages, 4270951 bytes).
 PDF statistics:
  298 PDF objects out of 1000 (max. 8388607)
  165 compressed objects within 2 object streams
