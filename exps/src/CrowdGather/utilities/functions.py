@@ -41,7 +41,7 @@ def kappa_new_error(params, *args):
         try:
             y_model = A/(1 + math.exp(-G*(x[i] - D)))
         except:
-            y_model = 0.0
+            y_model = 1.0
         error += (y[i] - y_model)**2
     return error
 

@@ -35,13 +35,13 @@ def lattice_point_product(l1,l2):
     tempProd = list(itertools.product(l1,l2))
     latticePointList = []
     for e in tempProd:
-	key1 = e[0][0]
-	key2 = e[1][0]
-	items = []
-	items.extend(e[0][1])
-	items.extend(e[1][1])
-	newkey = key1+"|"+key2
-	latticePointList.append((newkey, items))
+        key1 = e[0][0]
+        key2 = e[1][0]
+        items = []
+        items.extend(e[0][1])
+        items.extend(e[1][1])
+        newkey = key1+"|"+key2
+        latticePointList.append((newkey, items))
     return latticePointList
 
 
