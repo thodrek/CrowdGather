@@ -88,11 +88,13 @@ Then, estimating the gain of a query $q(k,l)$ at a node $v \in \hierarchy$ is eq
 \stitle{Samples for a Node.} When extracting entities from a structured domain, the retrieved entities for a node $v$ can correspond to two different kinds of samples: (i) those that were extracted by considering the {\bf entire population} corresponding to node $v$ (ii) and those that we obtained by sampling {\bf only a part of the population} corresponding to $v$. Samples for a node $v$ can be obtained either by querying node $v$ or by indirect information flowing to $v$ by queries at other nodes in $\hierarchy$. We refer to the latter case as {\em dependencies across queries}. 
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[clip,scale=0.32]{figs/exampleQuery.eps}
+	\vspace{-10pt}
+	\includegraphics[clip,scale=0.3]{figs/exampleQuery.eps}
 	\caption{An example query that extract an entity sample from the red node. The nodes marked with green correspond to the nodes for which indirect entity samples are retrieved.}
 	\label{fig:query}
-	\end{center}
 	\vspace{-10pt}
+	\end{center}
+	\vspace{-5pt}
 \end{figure}
 
 We use an example considering the poset in \Cref{fig:eventslattice}, to illustrate these two cases. The example is shown in \Cref{fig:query}. Assume a query $q(k,0)$ issued against node \{EventType X1\}. Assume that the query result contains entities that correspond only to node \{X1,ST2\}. The green nodes in \Cref{fig:query} are nodes for which samples are obtained indirectly without querying them. Notice, that all these nodes, are ancestors of \{X1,ST2\}. Analyzing the samples for the different nodes we have:
@@ -107,7 +109,7 @@ Samples belonging to both types need to be considered when estimating the gain o
 \label{sec:framework}
 We present an overview of our proposed framework for solving the problem of budgeted crowd entity extraction over structured domains. We view the optimization problem described in \Cref{sec:extraction} as a multi-round adaptive optimization problem where at each round we solve the following subproblems: 
 \squishlist 
-\item \textbf{Estimating the Gain for a Query.} For each node in $v \in \hierarchy$, consider the retrieved entities associated with $v$ and estimate the number of new unique entities that will be retrieved if a new query $q(k,l)$ is issued at $v$. This needs to be repeat for all possible configurations of $k$ and $l$.
+\item \textbf{Estimating the Gain for a Query.} For each node in $v \in \hierarchy$, consider the retrieved entities associated with $v$ and estimate the number of new unique entities that will be retrieved if a new query $q(k,l)$ is issued at $v$. This needs to be repeated for all possible configurations of $k$ and $l$.
 \item \textbf{Detecting the Optimal Querying Policy.} Using the gain estimates from the previous problem as input, identify the next (query, node) combination so that the total gain across all rounds is maximized with respect to the given budget constraint. 
 \squishend
 Our proposed framework iteratively solves the aforementioned problems until the entire budget is used. \Cref{fig:framework} shows a high-level diagram of our proposed framework. 
@@ -115,9 +117,10 @@ Our proposed framework iteratively solves the aforementioned problems until the 
 
 \begin{figure}
 	\begin{center}
-	\includegraphics[clip,scale=0.45]{figs/framework.eps}
-	\caption{Solution overview for budgeted entity extraction.}
+	\includegraphics[clip,scale=0.43]{figs/framework.eps}
+	\vspace{-10pt}
+	\caption{Solution overview for budgeted entity extraction.\agp{if time, fix lattice to poset}}
 	\label{fig:framework}
 	\end{center}
-	\vspace{-10pt}
+	\vspace{-15pt}
 \end{figure}
