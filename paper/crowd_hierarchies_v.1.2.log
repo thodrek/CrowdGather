@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  30 NOV 2014 10:29
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  30 NOV 2014 12:11
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -669,45 +669,52 @@ Overfull \hbox (2.36858pt too wide) in paragraph at lines 621--622
 rved
  []
 
-[10 <./figs/poExtraction-eps-converted-to.pdf>] (./crowd_hierarchies_v.1.2.bbl
+[10 <./figs/poExtraction-eps-converted-to.pdf>]
+
+LaTeX Warning: Citation `jiang:13' on page \thepage  undefined on input line 63
+2.
+
+
+Underfull \vbox (badness 5802) has occurred while \output is active []
+
+
+(./crowd_hierarchies_v.1.2.bbl [11])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11])
-[12
-
-] (./crowd_hierarchies_v.1.2.aux) ) 
+ [12]
+(./crowd_hierarchies_v.1.2.aux) ) 
 Here is how much of TeX's memory you used:
- 5047 strings out of 493747
- 79989 string characters out of 3143546
+ 5054 strings out of 493747
+ 80082 string characters out of 3143546
  197743 words of memory out of 3000000
- 8197 multiletter control sequences out of 15000+200000
+ 8204 multiletter control sequences out of 15000+200000
  41523 words of font info for 83 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  41i,11n,26p,1615b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2010/texmf-dist/fonts/en
-c/dvips/base/8r.enc}</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsf
-onts/cmextra/cmex7.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
-msfonts/cmextra/cmex8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publi
-c/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-s9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5
-.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.p
-fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><
-/usr/local/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/lo
-cal/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/tex
-live/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2010/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist
-/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on crowd_hierarchies_v.1.2.pdf (12 pages, 4273936 bytes).
+{/usr/local/texlive/2010/texmf-dist/fonts/enc/
+dvips/base/8r.enc}</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfon
+ts/cmextra/cmex7.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/
+amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr5.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr6.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9
+.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.p
+fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
+></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+/usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></u
+sr/local/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/loca
+l/texlive/2010/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texli
+ve/2010/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2010/te
+xmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on crowd_hierarchies_v.1.2.pdf (12 pages, 4277441 bytes).
 PDF statistics:
  301 PDF objects out of 1000 (max. 8388607)
  167 compressed objects within 2 object streams

@@ -93,7 +93,7 @@
       <file leaf-file-name="extractExpReal.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrowdGather/extractExpReal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="12" selection-start="5117" selection-end="5117" vertical-scroll-proportion="0.9444444" vertical-offset="1080" max-vertical-offset="1710">
+            <state line="91" column="47" selection-start="4301" selection-end="4301" vertical-scroll-proportion="0.5277778" vertical-offset="1080" max-vertical-offset="1710">
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -742,7 +742,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrowdGather/extractExpReal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="12" selection-start="5117" selection-end="5117" vertical-scroll-proportion="0.9444444" vertical-offset="1080" max-vertical-offset="1710">
+        <state line="91" column="47" selection-start="4301" selection-end="4301" vertical-scroll-proportion="0.5277778" vertical-offset="1080" max-vertical-offset="1710">
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>

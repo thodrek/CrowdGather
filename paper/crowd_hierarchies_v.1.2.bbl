@@ -33,6 +33,11 @@ A.~Chao and S.~M. Lee.
 \newblock {\em Journal of the American Statistical Association},
   87(417):210--217, 1992.
 
+\bibitem{vox-populii}
+O.~Dekel and O.~Shamir.
+\newblock Vox populi: Collecting high-quality labels from a crowd.
+\newblock In {\em COLT}, 2009.
+
 \bibitem{EvenDar06actionelimination}
 E.~Even-Dar, S.~Mannor, and Y.~Mansour.
 \newblock Action elimination and stopping conditions for the multi-armed bandit
@@ -62,11 +67,16 @@ W.-H. Hwang and T.-J. Shen.
   communities.
 \newblock {\em Biometrics}, 66(4):1052--1060, 2010.
 
-\bibitem{jiang:13}
-L.~Jiang, Y.~Wang, J.~Hoffart, and G.~Weikum.
-\newblock Crowdsourced entity markup.
-\newblock In {\em CrowdSem}, volume 1030 of {\em CEUR Workshop Proceedings},
-  pages 59--68, 2013.
+\bibitem{quality}
+P.~G. Ipeirotis, F.~Provost, and J.~Wang.
+\newblock Quality management on amazon mechanical turk.
+\newblock In {\em HCOMP '10}, 2010.
+
+\bibitem{Jin:2011}
+X.~Jin, N.~Zhang, and G.~Das.
+\newblock Attribute domain discovery for hidden web databases.
+\newblock In {\em Proceedings of the 2011 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '11, pages 553--564, 2011.
 
 \bibitem{kondredi:2014}
 S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
@@ -79,6 +89,12 @@ S.~K. Kondredi, P.~Triantafillou, and G.~Weikum.
 A.~Marcus, E.~Wu, D.~Karger, S.~Madden, and R.~Miller.
 \newblock Human-powered sorts and joins.
 \newblock In {\em VLDB}, 2012.
+
+\bibitem{nushi:14}
+B.~Nushi, A.~Singla, A.~Gruenheid, A.~Krause, and D.~Kossmann.
+\newblock Quality assurance and crowd access optimization: Why does diversity
+  matter?
+\newblock In {\em ICML Workshop on Crowdsourcing and Human Computation}, 2014.
 
 \bibitem{crowdscreen}
 A.~Parameswaran, H.~Garcia-Molina, H.~Park, N.~Polyzotis, A.~Ramesh, and
@@ -103,10 +119,21 @@ H.~Park and J.~Widom.
 \newblock Crowdclustering.
 \newblock In {\em NIPS}, 2011.
 
+\bibitem{rekatsinas:2015}
+T.~Rekatsinas, X.~L. Dong, L.~Getoor, and D.~Srivastava.
+\newblock {Finding Quality in Quantity: The Challenge of Discovering Valuable
+  Sources for Integration}.
+\newblock {\em CIDR}, 2015.
+
 \bibitem{shen:2003}
 T.~Shen, A.~Chao, and C.~Lin.
 \newblock Predicting the number of new species in further taxonomic sampling.
 \newblock {\em Ecology}, 84(3), 2003.
+
+\bibitem{Sheng:2012}
+C.~Sheng, N.~Zhang, Y.~Tao, and X.~Jin.
+\newblock Optimal algorithms for crawling a hidden database in the web.
+\newblock {\em Proc. VLDB Endow.}, 5(11):1112--1123, July 2012.
 
 \bibitem{get-another-label}
 V.~S. Sheng, F.~Provost, and P.~Ipeirotis.
@@ -124,6 +151,12 @@ B.~Trushkowsky, T.~Kraska, M.~J. Franklin, and P.~Sarkar.
 \newblock Crowdsourced enumeration queries.
 \newblock In {\em Proceedings of the 2013 IEEE International Conference on Data
   Engineering (ICDE 2013)}, ICDE '13, pages 673--684, 2013.
+
+\bibitem{raykar-whom-to-trust}
+{V. C. Raykar et al.}
+\newblock Supervised learning from multiple experts: whom to trust when
+  everyone lies a bit.
+\newblock In {\em ICML}, page 112, 2009.
 
 \bibitem{crowder}
 J.~Wang, T.~Kraska, M.~Franklin, and J.~Feng.
