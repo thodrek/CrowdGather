@@ -19,6 +19,8 @@
 \usepackage{multirow}
 \usepackage{epstopdf}
 \usepackage{cleveref}
+\usepackage[font={small,it}]{caption}
+
 \newcommand{\squishlist}{
    \begin{list}{$\bullet$}
     {
@@ -34,6 +36,10 @@
     \end{list}  }
 
 \renewcommand*\ttdefault{cmvtt}
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
 
 
 \newcommand{\argmax}{\operatornamewithlimits{arg\ max}}
