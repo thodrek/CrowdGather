@@ -1,3 +1,4 @@
+%!TEX root = ../crowd_hierarchies_v.1.3.tex
 
 % THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
 % based on ACM SIGPROC-SP.TEX VERSION 2.7
@@ -25,14 +26,14 @@ Our crowdsourced entity extraction techniques can be useful for a variety of app
 In this case, the structured data domain could include event type (e.g., music concerts vs.~political rallies) or location, among other attributes.
 \item A stock trading firm wants to collect a list of stocks that have been mentioned by popular press on the previous day. In this case, the structured data domain could include stock type, popular press article type, or whether the mention was positive or negative, among other attributes. 
 \item A real estate expert wants to curate a list of houses available for viewing today. 
-\item A university wants to find all the faculty candidates on the job market. The structured data domain in this scenario includes the university of the applicant, if she is a post-doc or a ph.d. as well as the field of research.
-\item The PC chair of a new conference wants to find potential reviewers. Again the domain describing each of the candidates can be characterized by the university of the reviewer, her field of study, if she an academic or researcher in industry etc. 
+\item A university wants to find all the faculty candidates on the job market. The structured data domain in this scenario includes the university of the applicant, specialization, and whether they are Ph.D./Postdoc.
+\item The PC chair of a new conference wants to find potential reviewers. The domain describing each of the candidates can be characterized by the university or company of the reviewer, expertise, qualifications, and so on. 
 \squishend
 
 \subsection{A Real-World Scenario}
 \label{sec:challenges}
 To further exemplify the aforementioned challenges we review a large-scale real-world scenario where crowdsourcing is used to extract entities. 
-We consider Eventbrite~\footnote{https://www.eventbrite.com}, an online event aggregator, that relies on crowdsourcing to compile a directory of events with detailed information about the location, type, date and category of each event. Typically, event aggregators are interested in collecting information about diverse events spanning from conferences and music festivals to political rallies across different location, i.e., countries or cities. In particular, Eventbrite collects information about events across different countries in the world. Each country is further split into cities and areas across the country. Moreover, events are organized according to their type and topic. We collected a dataset from Eventbrite spanning over 63 countries that are divided into 1,709 subareas (e.g., states) and 10,739 cities, containing events of 19 different types, such as rallies, tournaments, conferences, conventions, etc. and a time period of 31 days spanning over the months of October and November. 
+We consider Eventbrite~(\url{https://www.eventbrite.com}), an online event aggregator, that relies on crowdsourcing to compile a directory of events with detailed information about the location, type, date and category of each event. Typically, event aggregators are interested in collecting information about diverse events spanning from conferences and music festivals to political rallies across different location, i.e., countries or cities. In particular, Eventbrite collects information about events across different countries in the world. Each country is further split into cities and areas across the country. Moreover, events are organized according to their type and topic. We collected a dataset from Eventbrite spanning over 63 countries that are divided into 1,709 subareas (e.g., states) and 10,739 cities, containing events of 19 different types, such as rallies, tournaments, conferences, conventions, etc. and a time period of 31 days spanning over the months of October and November. 
 
 It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in poset with a total of 8,508,160 nodes containing 57,805 distinct events overall. We point out that the events associated with a node in the poset overlap with the events corresponding to its descendants. First, we demonstrate how the sparsity challenge applies to Eventbrite.
 \begin{example}
@@ -42,6 +43,7 @@ Using the collected Eventbrite dataset, we plot the number of events for each no
 \begin{figure}
 	\begin{center}
 	\includegraphics[clip,scale=0.5]{figs/eventbritepop.eps}
+	\vspace{-15pt}
 	\caption{The attributes describing the events domain and the hierarchical structure of each attribute.}
 	\label{fig:eventbritepop}
 	\vspace{-20pt}
