@@ -7,7 +7,7 @@ In this section, we focus on the second component of our proposed algorithmic fr
 
 \squishlist
 \item The first challenge is that the number of nodes in $\hierarchy$ is exponential with respect to the number of attributes $\attributes$ describing the domain of interest. Querying every possible node to estimate its expected return for different queries $q(k,l)$ is prohibitively expensive. That said, typical budgets do not allow algorithms to query all nodes in the hierarchy, so this intractability may not hurt us all that much. For example, we can keep estimates for each of the nodes for which at least one entity has been retrieved.
-\item The second challenge is balancing the tradeoff between {\em exploitation} and {\em exploration}~\cite{Auer:2003}. The first refers to querying nodes for which sufficient entities have been retrieved and hence we have an accurate estimate for their expected return; the latter refers to exploring new nodes in $\hierarchy$ in order to avoid locally optimal policies.
+\item The second challenge is balancing the tradeoff between {\em exploitation} and {\em exploration}~\cite{Auer:2003}. The first refers to querying nodes for which sufficient entities have been retrieved and hence we have an accurate estimate for their expected return; the latter refers to exploring new nodes in $\hierarchy$ to avoid locally optimal policies.
 \squishend
 
 \subsection{Balancing Exploration and Exploitation}
