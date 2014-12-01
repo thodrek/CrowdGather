@@ -37,9 +37,8 @@ We consider Eventbrite~(\url{www.eventbrite.com}), an online event aggregator, t
 
 It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in poset with a total of 8,508,160 nodes containing 57,805 distinct events overall. We point out that the events associated with a node in the poset overlap with the events corresponding to its descendants. First, we demonstrate how the sparsity challenge applies to Eventbrite.
 \begin{example}
-Using the collected Eventbrite dataset, we plot the number of events for each node in the poset describing the event domain. Out of 8,508,160 nodes only 175,068 nodes are associated with events while the remaining nodes have zero events. \Cref{fig:eventbritepop} shows the number of events per node. The y-axis is in log-scale. As shown the most of the populated nodes have less than 100 items. We point out that the most populated nodes of the domain correspond to nodes from the higher levels of the poset. When extracting events from such a sparse domain one needs to carefully decide on the crowdsourced queries to be issued especially if operating under a monetary budget.
+We plot the number of events for each node in the poset describing the event domain in the Eventbrite dataset. Out of 8,508,160 nodes only 175,068 nodes are associated with events while the remaining have zero events. \Cref{fig:eventbritepop} shows the number of events per node (y-axis is in log-scale). As shown the most of the populated nodes have less than 100 events. Additionally, the most populated nodes of the domain correspond to nodes from the higher levels of the poset. When extracting events from such a sparse domain one needs to carefully decide on the crowdsourced queries to be issued especially if operating under a monetary budget.
 \end{example}
-
 \begin{figure}
 	\begin{center}
 	\includegraphics[clip,scale=0.5]{figs/eventbritepop.eps}
@@ -49,13 +48,10 @@ Using the collected Eventbrite dataset, we plot the number of events for each no
 	\vspace{-20pt}
 	\end{center}
 \end{figure}
-
 As mentioned before, a critical challenge in such large domains is deciding on the queries to ask. However, the hierarchical structure of the data domain presents us with an opportunity. One approach would be to perform a top-down traversal of the poset and issue queries at the different nodes. Nevertheless, this gives rise to a series of challenges: (i) how can one decide on the number of queries to be asked at each node, (ii) when should one progress to deeper levels of the poset and (iii) which subareas should be explored. We elaborate on these in \Cref{sec:prelims}. Next, we focus on the second challenge, i.e., the interdependencies across poset nodes. 
-
 \begin{example}
-We consider again the Eventbrite dataset and plot the pairwise overlaps of the ten most populous nodes in the domain. \Cref{fig:eventbriteover} shows the Jaccard index for the corresponding node pairs. As shown the event populations corresponding to these nodes overlap significantly. It is easy to see that when issuing queries at a certain domain node, we not only obtain events corresponding to this node but to other nodes in the domain as well. 
+We consider again the Eventbrite dataset and plot the pairwise overlaps of the ten most populous nodes in the domain. \Cref{fig:eventbriteover} shows the Jaccard index for the corresponding node pairs. As shown the event populations corresponding to these nodes overlap significantly. It is easy to see that when issuing queries at a certain domain node, we not only obtain events corresponding to this node but to other nodes in the domain as well.
 \end{example}
-
 A critical issue that stems from the overlaps across nodes is being able to decide how many answers to expect when issuing an additional query at a node whose underlying population overlaps with nodes associated with previous queries. In \Cref{sec:prelims}, we elaborate more on the dependencies across nodes of the poset.
 
 \begin{figure}
