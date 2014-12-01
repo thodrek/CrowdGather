@@ -12,11 +12,12 @@ Let $\domain$ be a data domain described by a set of discrete attributes $\attri
 
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[clip,scale=0.4]{figs/eventsDomain.eps}
+	\includegraphics[clip,scale=0.33]{figs/eventsDomain.eps}
+	\vspace{-10pt}
 	\caption{The attributes describing the Eventbrite domain and the hierarchical structure of each attribute.}
 	\label{fig:eventsdomain}
 	\end{center}
-	\vspace{-10pt}
+	\vspace{-20pt}
 \end{figure}
 
 The domain $\domain$ can be viewed as a {\em poset}, i.e., a partially ordered set, corresponding to the cross-product of all available hierarchies\footnote{Note that $\domain$ is not a lattice since there is no unique infimum.}. Part of the poset corresponding to the previous example is shown in \Cref{fig:eventslattice}. We denote this cross-product as $\hierarchy$. As can be seen in \Cref{fig:eventslattice}, there are nodes, such as $\{\}$, where no attributes are specified, and nodes, such as $\{X1\}$ and $\{C1\}$ where just one of the attribute values is specified, as well as nodes, such as $\{X2, ST2\}$, where multiple attribute values are specified.
@@ -26,12 +27,14 @@ The domain $\domain$ can be viewed as a {\em poset}, i.e., a partially ordered s
 % We define a {\em point} in $\domain$ as a possible combination of values of {\em all} attributes: in our setting, if values are specified for all. We will also refer to a collection of points for which only a subset of attributes shares the same value as a {\em slice} $\domain_P$ of $\domain$. For example, a slice of the event domain described above may correspond to concerts in Boston. The predicates describing this slice are EVENT TYPE = ``Concert", LOCATION = ``Boston, MA", DATE = ``*".  It is easy to see that each node in $\hierarchy$ represents a slice of the data domain $\domain$. 
 
 \begin{figure}[h]
+\vspace{-10pt}
 	\begin{center}
 	\includegraphics[clip,scale=0.32]{figs/eventsExLattice.eps}
+	\vspace{-10pt}
 	\caption{Part of the poset defining the entire event entity domain described by the attributes in \Cref{fig:eventsdomain}.}
 	\label{fig:eventslattice}
 	\end{center}
-	\vspace{-10pt}
+	\vspace{-20pt}
 \end{figure}
 
 
@@ -63,7 +66,7 @@ Here, we require that the user will {\em only} provide a monetary budget $\tau_c
 \begin{problem}[Budgeted Crowd Entity Extraction]
 Let $\domain$ be a given entity domain and $\tau_c$ a monetary budget on the total cost of issued queries. The Budgeted Crowd Entity Extraction problem seeks to find a querying policy $\pi^*_S$ using queries over nodes in $\hierarchy$ that maximizes the number of unique entities extracted $\uentities(\pi^*_S)$ under the constraint $C(\pi^*_S) \leq \tau_c$.
 \end{problem}
-Notice that due to the different query configurations the optimal querying policy for the problem of budgeted crowd entity extraction should also identify the optimal configuration $(k,l)$ for each query in $\pi^*_S$.
+Notice that due to the different query configurations, the optimal querying policy for budgeted crowd entity extraction should also identify the optimal configuration $(k,l)$ for each query in $\pi^*_S$.
 
 The cost of a querying policy $\pi$ is defined as the total cost of all queries issued by following $\pi$. We have that $C(\pi) = \sum_{q \in \pi} c(q)$ where the cost of each query $q$ is defined according to a cost model specified by the user. Computing the total cost of a policy $\pi$ is easy. However, the gain $\uentities(\pi)$ of a policy $\pi$ is unknown as we do not know in advance the entities corresponding to each node in $\hierarchy$, and hence, needs to be estimated, as we discuss next. 
 
@@ -81,7 +84,7 @@ Thus, since workers are asked to provide a limited number of entities as respons
 
 Then, estimating the gain of a query $q(k,l)$ at a node $v \in \hierarchy$ is equivalent to estimating the number of new entities extracted by taking additional samples from the population of $v$ given all the retrieved entities by past samples associated with node $v$~\cite{trushkowsky:2013}. 
 
-\stitle{Samples for a Node.} When extracting entities from a structured domain, the retrieved entities for a node $v$ can correspond to two different kinds of samples: (i) those that were extracted by considering the {\bf entire population} corresponding to node $v$ (ii) and those that we obtained by sampling {\bf only a part of the population} corresponding to $v$. Samples for a node $v$ can be obtained either by querying node $v$ or by indirect information flowing to $v$ by queries at other nodes in $\hierarchy$. We refer to the latter case as {\em dependencies across queries}. 
+\stitle{Samples for a Node.} When extracting entities,  the retrieved entities for a node $v$ can correspond to two different kinds of samples: (i) those that were extracted by considering the {\bf entire population} corresponding to node $v$ (ii) and those that we obtained by sampling {\bf only a part of the population} corresponding to $v$. Samples for a node $v$ can be obtained either by querying node $v$ or by indirect information flowing to $v$ by queries at other nodes. We refer to the latter case as {\em dependencies across queries}. 
 \begin{figure}[h]
 	\begin{center}
 	\vspace{-10pt}
