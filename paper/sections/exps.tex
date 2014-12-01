@@ -118,7 +118,7 @@ NY Times & 595 \\
 HuffPost & 599 \\
 USA Today & 593 \\ \hline
 \end{tabular}
-\vspace{-20pt}
+\vspace{-15pt}
 \end{table}
 
 
@@ -131,7 +131,7 @@ USA Today & 593 \\ \hline
 	\caption{The number of people extracted by different algorithms for the People data domain and different budgets.}
 	\label{fig:poextraction}
 	\end{center}
-	\vspace{-20pt}
+	\vspace{-15pt}
 \end{figure}
 
 We also observe that issuing random extraction queries at the nodes of the poset outperforms BFS for a significant margin as the available budget increases. This behavior is expected in dense small domains where all the available nodes are populated. Notice that this approach corresponds to a querying policy that focuses purely on exploring different queries. However, exploiting previously obtained information and balancing exploration and exploitation of the possible actions (i.e., following the proposed poset traversal algorithm) leads to superior performance. We further notice that GSChao does better than GSNewR in this case, unlike the previous case. This is because the Chao92Shen estimator performs better when the retrieved samples correspond to a larger portion of the underlying population (i.e., when operating under a large budget), as we see below. 
@@ -158,8 +158,7 @@ Next, we evaluate the performance of the gain estimators. As before, we issue te
 \vspace{-5pt}
 \end{table}
 
-
-We next explore how our different algorithms traverse the lattice, and how they use different query configurations, relative to GSExact. We begin by considering how many queries these algorithms issue at various levels of the lattice. In Figure~\ref{fig:level}, we plot the different number of queries issued at various levels by our algorithms when the budget is set to 10 and 100 respectively. \agp{add a couple of lines about how ..} Then, in Figures~\ref{fig:queryconf10} and \ref{fig:queryconf100}, we plot the different query configurations by our algorithms when the budget is set to 10 and 100 respectively. 
+We next explore how our different algorithms traverse the poset, and how they use different query configurations, relative to GSExact. The results reported are averaged over ten runs. We begin by considering how many queries these algorithms issue at various levels of the poset. In Figure~\ref{fig:level}, we plot the different number of queries issued at various levels by our algorithms when the budget is set to 10 and 100 respectively. Given a small budget, we observe that all algorithms prefer issuing queries at higher levels of the poset. Notice, that inner nodes of the poset are preferred and only a small number of queries is issued at the root (i.e., level one) of the poset. This behavior is justified if we consider that due to their popularity certain entities are repeatedly retrieved in the query results, thus leading to a small gain. As the budget increases, we see that all algorithms tend to consider more specialized queries at deeper levels of the poset. It is interesting to observe that all of our algorithms issue the majority of their queries at the level two nodes, while GSExact focuses mostly on the leaf nodes. This clearly indicates that our techniques need to be more aggressive at traversing the poset and reaching deeper levels of it. In Figure~\ref{fig:queryconf}, we plot the different query configurations chosen by our algorithms when the budget is set to 10 and 100 respectively. We observe GSExact always prefers queries with $k = 20$ and $l = 0$ for both small and large budgets. On the other hand, our algorithms issue more queries of smaller size when operating under a limited budget and prefer queries of larger size for larger budgets. Out of all algorithms we see that GSNewR was the only one issuing queries with exclude lists of different sizes, thus being more prone to exploration. However, the number of such queries is limited. 
 
 
 \begin{figure}[h]
@@ -174,7 +173,7 @@ We next explore how our different algorithms traverse the lattice, and how they 
 
 \begin{figure}[h]
 	\vspace{-5pt}
-    \includegraphics[clip,scale=0.32]{figs/queryConfBudget10.eps}
+   	 \includegraphics[clip,scale=0.32]{figs/queryConfBudget10.eps}
 	\hspace{-10pt}
 	\includegraphics[clip,scale=0.32]{figs/queryConfBudget100.eps}
 	\vspace{-10pt}
