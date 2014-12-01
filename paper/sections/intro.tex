@@ -34,7 +34,7 @@ In this case, the structured data domain could include event type (e.g., music c
 To further exemplify the aforementioned challenges we review a large-scale real-world scenario where crowdsourcing is used to extract entities. 
 We consider Eventbrite~\footnote{https://www.eventbrite.com}, an online event aggregator, that relies on crowdsourcing to compile a directory of events with detailed information about the location, type, date and category of each event. Typically, event aggregators are interested in collecting information about diverse events spanning from conferences and music festivals to political rallies across different location, i.e., countries or cities. In particular, Eventbrite collects information about events across different countries in the world. Each country is further split into cities and areas across the country. Moreover, events are organized according to their type and topic. We collected a dataset from Eventbrite spanning over 63 countries that are divided into 1,709 subareas (e.g., states) and 10,739 cities, containing events of 19 different types, such as rallies, tournaments, conferences, conventions, etc. and a time period of 31 days spanning over the months of October and November. 
 
-It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in poset with a total of 8,508,160 nodes containing 57,805 distinct events overall. We point out that the events associated a node in the poset overlap with the events corresponding to its descendants. First, we demonstrate how the first challenge, i.e., the sparsity of the input domain, applied to Eventbrite.
+It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in poset with a total of 8,508,160 nodes containing 57,805 distinct events overall. We point out that the events associated a node in the poset overlap with the events corresponding to its descendants. First, we demonstrate how the sparsity challenge applies to Eventbrite.
 \begin{example}
 Using the collected Eventbrite dataset, we plot the number of events for each point in the poset describing the event domain. Out of 8,508,160 points only 175,068 points are associated with events while the remaining points have zero events. \Cref{fig:eventbritepop} shows the number of events per point. The y-axis is in log-scale. As shown the majority of populated points have less than 100 items. We point out that the most populated points of the domain correspond to nodes from the higher levels of the poset. It is obvious that when extracting events from such a sparse domain one needs to carefully decide on the crowdsourced queries to be issued if operating under a monetary budget.
 \end{example}
@@ -48,7 +48,7 @@ Using the collected Eventbrite dataset, we plot the number of events for each po
 	\end{center}
 \end{figure}
 
-As mentioned before, a critical challenge in such large domains is deciding on the queries to ask. However, the hierarchical structure of the data domain presents us with an opportunity. One approach would be to perform a bottom-down traversal of the poset and issue queries at the different nodes. Nevertheless, this gives rise to a series of challenges: (i) how can one decide on the number of queries to be asked at each node, (ii) when should one progress to deeper levels of the poset and (iii) which subareas should be explored. We elaborate more on these in \Cref{sec:prelims}. Next, we focus on the second challenge, i.e., the interdependencies across poset points. 
+As mentioned before, a critical challenge in such large domains is deciding on the queries to ask. However, the hierarchical structure of the data domain presents us with an opportunity. One approach would be to perform a bottom-down traversal of the poset and issue queries at the different nodes. Nevertheless, this gives rise to a series of challenges: (i) how can one decide on the number of queries to be asked at each node, (ii) when should one progress to deeper levels of the poset and (iii) which subareas should be explored. We elaborate on these in \Cref{sec:prelims}. Next, we focus on the second challenge, i.e., the interdependencies across poset points. 
 
 \begin{example}
 We consider again the Eventbrite dataset and plot the pairwise overlaps of the ten most populous points in the domain. \Cref{fig:eventbriteover} shows the Jaccard index for the corresponding point pairs. As shown the event populations corresponding to these points overlap significantly. It is easy to see that when issuing queries at a certain domain point, we not only obtain events corresponding to this point but to other points in the domain as well. 
@@ -58,7 +58,7 @@ A critical issue that stems from the overlaps across nodes is being able to deci
 
 \begin{figure}
 	\begin{center}
-	\includegraphics[clip,scale=0.6]{figs/overlaps.eps}
+	\includegraphics[clip,scale=0.5]{figs/overlaps.eps}
 	\caption{Pairwise overlaps for the 10 most populous domain points in Eventbrite.}
 	\label{fig:eventbriteover}
 	\vspace{-20pt}
@@ -73,6 +73,7 @@ We propose a novel algorithmic framework that exploits the structure of the doma
 
 \squishlist
 \item We study the challenge of information flow across entity extraction queries for overlapping parts of the data domain.
+\item We formalize the notion of an exclude list for crowdsourced entity extraction queries and show how previously proposed gain estimators can be extended to handle such queries.
 \item We develop a new technique to estimate the gain of generalized entity extraction queries under the presence of dependent information. The proposed technique exploits the structure of the data domain to obtain accurate estimates. 
 \item We introduce an adaptive optimization algorithm that takes as input the gain estimates for different types of queries and identifies querying policies that maximize the total number of retrieved entities under given budget constraints. 
 \item Finally, we show that our techniques can effectively solve the problem of budgeted crowd entity extraction for large data domains on both real-world and synthetic data.

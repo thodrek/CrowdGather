@@ -2,7 +2,7 @@
 
 \section{Preliminaries}
 \label{sec:prelims}
-In this section we first describe our structured data domain, then describe entities and entity extraction queries or interfaces, along with the response and cost model for these queries. The we focus on crowdsourced entity extraction using these interfaces and consider the problem of maximizing the number of extracted entities. In particular, we define the problem of {\em crowd entity extraction} over {\em structured domains} under budget constraints. Then, we formally introduce the challenge of dependencies across queries when extracting entities from structured domains, and finally, we present an overview of our proposed algorithmic framework. \agp{revisit}
+In this section we first describe our structured data domain, then describe entities and entity extraction queries or interfaces, along with the response and cost model for these queries. The we focus on crowdsourced entity extraction using these interfaces and consider the problem of maximizing the number of extracted entities. In particular, we define the problem of {\em crowd entity extraction} over {\em structured domains} under budget constraints. Then, we formally introduce the challenge of dependencies across queries when extracting entities from structured domains, and finally, we present an overview of our proposed algorithmic framework.
 
 
 \subsection{Structured Data Domain}
@@ -48,19 +48,15 @@ Given a query issued at a node, there are three different configurations one can
 
 While the reader may wonder if getting additional attributes for entities is necessary, note that this information allows us to reason about which all nodes in $\hierarchy$ the entity belongs to; without this, it is impossible to effectively traverse the poset. Furthermore, we find that in most practical applications, it is useful to get the values of the missing attributes in order to organize and categorize the extracted entities better. 
 
-Notice also that we assume that human workers specify or extract an entity correctly (e.g., no abbreviations, typos, and so on), once again for simplicity. It is straightforward to use an entity resolution or string matching (e.g., jaccard coefficient) algorithm to group identical entities together. Furthermore, since we are getting all attributes for each entity, we can use these attributes to further ascertain similarity of entities. In our experiments on real datasets, we found that there were no cases where humans introduced errors when extracting entities. \agp{fix}
+Notice also that we assume that human workers specify or extract an entity correctly (e.g., no abbreviations, typos, and so on), once again for simplicity. It is straightforward to use an entity resolution or string matching (e.g., jaccard coefficient) algorithm to group identical entities together. Furthermore, since we are getting all attributes for each entity, we can use these attributes to further ascertain similarity of entities. In our experiments on real datasets, we found that there were no cases where humans introduced errors to the attribute values of extracted entities. Only minor errors (e.g., misspelled entity names) were detected.
 
 \stitle{Query Cost.} In a typical crowdsourcing marketplace, tasks have different costs depending on their difficulty. Thus, crowdsourced queries of different difficulties should also exhibit different costs. Let $c(\dot)$ be a cost function for any query $q(k,l)$. This cost function should obey the following properties: (a) given an exclude list of fixed length $l$ then $c(q(k^{\prime},l)) \geq c(q(k,l)),  \forall k^{\prime} \geq k$, and (b) given a fixed query size $k$ then $c(q(k,l^{\prime})) \geq c(q(k,l)), \forall l^{\prime} \geq l$. These are fixed upfront by the interface designer based on the amount of work involved.
 
 \subsection{Crowdsourced Entity Extraction}
 \label{sec:extraction}
-
-
 The basic version of {\em crowdsourced entity extraction}~\cite{trushkowsky:2013} seeks to extract entities that belong to $\domain$, by simply using repeated queries at the root node, with $k = 1, l = 0$ (subsequent versions relax $l$ to be non-zero). However, when considering large entity domains, such as the event domain, one may need to issue a series of entity extraction queries at multiple nodes in  $\hierarchy$ --- often overlapping with each other --- so that the entire domain is covered. Issuing queries at different nodes ensures that the coverage across the domain will be maximized. 
 
 We let $\pi$ denote a {\em querying policy}, that is, a chain of queries at different nodes in $\hierarchy$. Notice that multiple queries can be issued at the same node. Let $C(\pi)$ denote the overall cost, in terms of monetary cost (or equivalently, latency, since the more queries are issued, the more time the policy will take) of a querying policy $\pi$. We define the gain of a querying policy $\pi$ as the total number of unique entities, denoted by $\uentities(\pi)$ extracted when following policy $\pi$. Thus, there is a natural tradeoff between the gain (i.e., the number of extracted entities) and the cost of policies. 
-
-\agp{consider deleting this paragraph. too detailed and tangential.} To optimize this tradeoff, previous work has proposed either a {\em pay-as-you-go} scheme~\cite{trushkowsky:2013} or a fixed answer size scheme~\cite{park:2014}. In the first case, one repeatedly issues queries to the crowd until the {\em marginal gain}, i.e., the difference between the new extracted entities and the querying cost, drops below a desired threshold. However, the proposed scheme does not enforce any budget constraints explicitly and focuses on a single query in isolation. Thus, it does not optimize the gain-cost tradeoff over an entire querying policy. In the second case, one repeatedly issues queries to the crowd until a desired number of entities is retrieved. The latter is specified by the user. Notice, that this assumes knowledge of the number of entities to be extracted, nevertheless, this information may not be available in many real-world scenarios. 
 
 Here, we require that the user will {\em only} provide a monetary budget $\tau_c$ imposing a constraint on the total cost of a selected querying policy, and optimize over all possible querying policies across different nodes of $\hierarchy$. Our goal is to identify the policy that maximizes the number of retrieved entities under the given budget constraint. More formally, we define the problem of budgeted crowd entity extraction as follows:
 
@@ -119,7 +115,7 @@ Our proposed framework iteratively solves the aforementioned problems until the 
 	\begin{center}
 	\includegraphics[clip,scale=0.43]{figs/framework.eps}
 	\vspace{-10pt}
-	\caption{Solution overview for budgeted entity extraction.\agp{if time, fix lattice to poset}}
+	\caption{Framework overview for budgeted entity extraction.}
 	\label{fig:framework}
 	\end{center}
 	\vspace{-15pt}
