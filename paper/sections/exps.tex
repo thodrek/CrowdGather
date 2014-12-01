@@ -31,9 +31,12 @@ Rand, RandL and BFS promote the exploration of the action space when extracting 
 The three partial cost terms are: (i) {\sf CostK} that depends on the number of responses $k$ requested from a user, (ii) {\sf CostL} that depends on the size of the exclude list $l$ used in the query, and (iii) {\sf CostSpec} that depends on the {\em specificity} of the query $q_s$, e.g., we assume that queries that require users to provide more specialized entities such as a ``Give me one concert for New York on the 17th of Nov" cost more than more generic queries such as ``Give me one concert in New York". More formally, we define the specificity of a query to be equal to the number on attributes assigned non-wildcard values for the node $u \in \hierarchy$ the query corresponds to. 
 
 For each of the cost terms we assume a maximum cost of \$1 realized by considering the maximum value of the corresponding input variable. The overall cost for a query $q(k,l)$ with specificity $s$ is computed as:
+
+{\small
 \begin{equation}
-Cost(q(k,l)) = \alpha \cdot \frac{k^{\prime}}{\mbox{max. $k$ value}} + \beta \cdot  \frac{l^{\prime}}{\mbox{max. $l$ value}} + \gamma \cdot  \frac{s^{\prime}}{\mbox{max. specificity value}} \nonumber
-\end{equation}
+Cost(q) = \alpha \cdot \frac{k}{\mbox{max. query size}} + \beta \cdot  \frac{l}{\mbox{max. ex. list size}} + \gamma \cdot  \frac{s}{\mbox{max. specificity}} \nonumber
+\end{equation}}
+
 The cost of a query should be significantly increased when an exclude list is used, thus we require that $\beta$ is set to a larger value than $\alpha$ and $\gamma$. For the results reported below, we set $\alpha = \gamma = 1$ and $\beta = 5$. Similar results were observed for other settings but are omitted due to space limitations.
 
 \subsection{Synthetic Data Experiments}
