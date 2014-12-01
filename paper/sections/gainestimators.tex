@@ -1,34 +1,37 @@
+%!TEX root = ../crowd_hierarchies_v.1.3.tex
+
+
 \section{Estimating the Gain of Queries}
 \label{sec:gainestimators}
-In this section, we present a novel lower bound for the return of a generalized query $q(k,l)$ at a node $v \in \hierarchy$. Previous work~\cite{trushkowsky:2013} has drawn connections between this problem and the literature of species estimation~\cite{chao:1992}. However,  the proposed techniques are agnostic to any structure exhibited by the domain under consideration and to the presence of an exclude-list-based query interface. In particular, the existing methodology does not proposed any techniques for estimating the number of new tuples extracted by a query when restricting the worker answer not to belong to a certain collection of entities. We first review the existing methodology for estimating the gain of a query, then we discuss how these estimators can be extended to consider an exclude list, and finally, we present a new methodology for estimating the gain of generalized queries $q(k,l)$. We first introduce our approach considering samples that are retrieved by the entire entity population corresponding to a node and then generalize it to stratified samples.
+In this section, we present a novel lower bound for the return of a generalized query $q(k,l)$ at a node $v \in \hierarchy$. Previous work~\cite{trushkowsky:2013} has drawn connections between this problem and the literature of species estimation~\cite{chao:1992}. However,  these techniques are agnostic to any structure exhibited by the domain under consideration and to the presence of an exclude-list-based query interface. In particular, there is no mechanism for estimating the number of new tuples extracted by a query when restricting the worker answer to not contain any entities from a certain collection of entities as enforced by an exclude list. 
+
+We first review the existing methodology for estimating the gain of a query, then we discuss how these estimators can be extended to consider an exclude list, and finally, we present a new methodology for estimating the gain of generalized queries $q(k,l)$. We introduce our approach by first considering samples that are retrieved by the entire entity population corresponding to a node and then generalize it to stratified samples\agp{stratified samples has not been defined}.
 
 \subsection{Previous Estimators} 
-Consider a specific node $v \in \hierarchy$. Prior work only considers samples retrieved from the entire population associated with $v$ and does not consider an exclude list. Let $Q$ be the set of all existing samples retrieved by issuing queries against $v$. These samples can be combined into a single sample of size $n = \sum_{q \in Q} {\sf size}(q)$. Let $f_i$ denote the number of entities that appear $i$ times in this unified sample, and let $f_0$ denote the number of unseen entities from the population under consideration. Finally, let $C$ be the population coverage of the unified sample.
+Consider a specific node $v \in \hierarchy$. Prior work only considers samples retrieved from the entire population associated with $v$ and does not consider an exclude list. Let $Q$ be the set of all existing samples retrieved by issuing queries against $v$ \agp{without an exclude list?}. These samples can be combined into a single sample of size $n = \sum_{q \in Q} {\sf size}(q)$. Let $f_i$ denote the number of entities that appear $i$ times in this unified sample, and let $f_0$ denote the number of unseen entities from the population under consideration. Finally, let $C$ be the population coverage of the unified sample --- that is, this is the fraction of the population covered by the sample.
 
 A new query $q(k,0)$ at node $v$ can be viewed as increasing the size of the unified sample by $k$ elements. Prior work leveraged techniques from the species estimation literature to estimate the expected number of new entities returned in $q(k,0)$. Shen et al.~\cite{shen:2003}, derive an estimator for the number of new species $\hat{N}_{Shen}$ that would be found in an increased sample of size $k$. The approach assumes that the unobserved entities have equal relative popularity. An estimate of the unique elements found in an increased sample of size $k$ is given by:
-
 \begin{equation}
 \label{eq:shen}
 \hat{N}_{Shen} = f_0\left( 1 - \left(1 - \frac{1 - C}{f_0}\right)^k\right)
 \end{equation}
-
 At a high-level, the second term of Shen's formula corresponds to the probability that at least one unseen entity will be present in a query asking for $k$ more entities. Thus, multiplying this quantity with the number of unseen entities $f_0$ corresponds to the expected number of unseen entities that will be present in the result of a new query $q(k,0)$.
 
-Notice, that the quantities $f_0$ and $C$ are unknown and thus need to be estimated considering the entities in the running unified sample. The coverage can be estimated by considering the Good-Turing estimator $\hat{C} = 1 - \frac{f_1}{n}$ for the existing retrieved sample. On the other hand, multiple estimators have been proposed for estimating the number of unseen entities $f_0$. Trushkowsky et al.~\cite{trushkowsky:2013} proposed a variation of an estimator introduced by Chao et al.~\cite{chao:1992} to estimate $f_0$. Nevertheless, the authors argue that the original estimator proposed by Chao as well as their own estimator when estimating  the number of new unseen items in a query $q(k,0)$.
+Notice, that the quantities $f_0$ and $C$ are unknown and thus need to be estimated considering the entities in the running unified sample. The coverage can be estimated by considering the Good-Turing estimator $\hat{C} = 1 - \frac{f_1}{n}$ for the existing retrieved sample. On the other hand, multiple estimators have been proposed for estimating the number of unseen entities $f_0$. Trushkowsky et al.~\cite{trushkowsky:2013} proposed a variation of an estimator introduced by Chao et al.~\cite{chao:1992} to estimate $f_0$. Nevertheless, the authors argue that the original estimator proposed by Chao as well as their own estimator when estimating  the number of new unseen items in a query $q(k,0)$. \agp{previous sentence is ill-formed.}
 
-The estimator by Chao~\cite{chao:1992} on which the authors build has been shown to result in considerable negative bias in cases where the number of observed entities from a population represents only a small fraction of the entire population~\cite{hwang:2010}. To address this problem, Hwang and Shen~\cite{hwang:2010} proposed a regression based technique to estimate $f_0$. This estimator is shown to result in significantly smaller bias and empirically outperforms previously proposed estimators, including the one proposed by Chao, when the ratio of retrieved entities to the entire entity population is small. It also performs comparably to previous estimators when the ratio is larger. Notice, that the output of this estimator can also be used as a plug-in quantity in \Cref{eq:shen}. 
-Thus in this paper we use the regression based estimator proposed by Hwang and Shen~\cite{hwang:2010} and in \Cref{sec:exps} we empirically show that it is better than the one proposed by Chao~\cite{chao:1992}.
+The estimator by Chao~\cite{chao:1992} on which the authors build has been shown to result in considerable negative bias in cases where the number of observed entities from a population represents only a small fraction of the entire population~\cite{hwang:2010}. To address this problem, Hwang and Shen~\cite{hwang:2010} proposed a regression based technique to estimate $f_0$. This estimator is shown to result in significantly smaller bias and empirically outperforms previously proposed estimators, including the one proposed by Chao, when the ratio of retrieved entities to the entire entity population is small. It also performs comparably to previous estimators when the ratio is larger. Notice that the output of this estimator can also be used as a plug-in quantity in \Cref{eq:shen}. 
+Thus, in this paper, we use the regression based estimator proposed by Hwang and Shen~\cite{hwang:2010}; in \Cref{sec:exps} we empirically show that it is better than the one proposed by Chao~\cite{chao:1992}.
 
 However, both the aforementioned estimators are agnostic to an exclude list. Next, we discuss how one can estimate the return of a query $q(k,l)$ in the presence of an exclude list of size $l$.
 \subsection{Queries With an Exclude List}
 \label{sec:excludelist}
-Consider an exclude list of size $l$. As discussed before an exclude list is a set of entities that correspond to invalid worker answers. Considering an exclude list for a query at a node $v \in \hierarchy$ corresponds to limiting our sampling to a restricted subset of the entity population corresponding to node $v$. In fact, we want to estimate the expected return of a query of size $k$ conditioning on the fact that the entities in the exclude list will not be retrieved by any new sample. The latter corresponds to removing these entities from the population under consideration. Thus, the estimates $\hat{f}_0$ and $\hat{C}$ should be updated before applying \Cref{eq:shen} to compute the expected return of a query of size $k$. This can be done by removing the entities included in the exclude list from the running sample for node $v$, recomputing the entity counts $f_i$ and following the techniques presented above for computing the updated estimates for $\hat{f}_0$ and $\hat{C}$. This approach requires that the exclude list is known in advance. To construct an exclude list on can follow a randomized approach, where $l$ of the retrieved entities are including in the list uniformly at random. 
+Consider an exclude list of size $l$. As discussed before an exclude list is a set of entities that correspond to invalid worker answers. Considering an exclude list for a query at a node $v \in \hierarchy$ corresponds to limiting our sampling to a restricted subset of the entity population corresponding to node $v$. In fact, we want to estimate the expected return of a query of size $k$ conditioning on the fact that the entities in the exclude list will not be retrieved by any new sample. The latter corresponds to removing these entities from the population under consideration. Thus, the estimates $\hat{f}_0$ and $\hat{C}$ should be updated before applying \Cref{eq:shen} to compute the expected return of a query of size $k$. This can be done by removing the entities included in the exclude list from the running sample for node $v$, recomputing the entity counts $f_i$ and following the techniques presented above for computing the updated estimates for $\hat{f}_0$ and $\hat{C}$. This approach requires that the exclude list is known in advance. To construct an exclude list on can follow a randomized approach, where $l$ of the retrieved entities are including in the list uniformly at random. \agp{So what is the solution here if it is randomized?}
 
 \subsection{Regression Based Gain Estimation}
 \label{sec:newestim}
 Building upon the approach of Hwang and Shen~\cite{hwang:2010}, we introduce a new technique for estimating the gain of a generalized query $q(k,l)$ directly without using the estimator shown in \Cref{eq:shen}. Since we want to estimate the gain even for nodes with a small number of retrieved entities we propose a regression based technique that is able to capture the structural properties of the expected gain function as discussed below. 
 
-To derive the new lower bound we make used of the generalized jackknife procedure for species richness estimation. Given two (biased) estimators of $S$, say $\hat{S}_1$ and $\hat{S}_2$, let $R$ be the ratio of their biases:
+To derive the new lower bound we make used of the generalized jackknife procedure for species richness estimation\agp{give citation}. Given two (biased) estimators of $S$, say $\hat{S}_1$ and $\hat{S}_2$, let $R$ be the ratio of their biases:
 \begin{equation}
 R = \frac{E(\hat{S}_1) - S}{E(\hat{S}_2) - S}
 \end{equation}
@@ -37,13 +40,12 @@ By the generalized jackknife procedure, we can completely eliminate the bias res
 S = G(\hat{S}_1, \hat{S}_2) = \frac{\hat{S}_1 - R\hat{S}_2}{1 - R}
 \label{eq:jknife}
 \end{equation}
-provided the ratio of biases $R$ is known. However, $R$ is unknown and we need to estimate it. 
+provided the ratio of biases $R$ is known. However, $R$ is unknown and needs to be estimated. 
 
 Let $D_n$ denote the number of unique entities in a unified sample of size $n$. We consider the following two biased estimators of $S$: $\hat{S_1} = D_n$ and $\hat{S}_2 = \sum_{j=1}^n D_{n-1}(j)/n = D_n - f_1/n$ where $D_{n-1}(j)$ is the number of species discovered with the $j$th observation removed from the original sample. Replacing these estimators in \Cref{eq:jknife} gives us:
 \begin{equation}
 S = D_n +\frac{R}{1-R}\frac{f_1}{n}
 \end{equation}
-
 Similarly, for a sample of increased size $n+m$ we have:
 \begin{equation}
 S = D_{n+m} +\frac{R^{\prime}}{1-R^{\prime}}\frac{f^{\prime}_1}{n+m}
@@ -61,7 +63,7 @@ Therefore, we have:
 new = K\frac{f_1}{n} - K^{\prime}\frac{f^{\prime}_1}{n+m}
 \end{equation}
 
-We need to estimate $K$, $K^{\prime}$ and $f^{\prime}_1$. We start with $f^{\prime}_1$ denoting the number of singleton in the increased sample of size $n+m$. Notice, that $f^{\prime}_1$ is not known since we have not obtained the increased sample yet, so we need to express it in terms of $f_1$, i.e., the number of singletons, in the running sample of size $n$. We have:
+We need to estimate $K$, $K^{\prime}$ and $f^{\prime}_1$. We start with $f^{\prime}_1$, which denotes the number of singleton in the increased sample of size $n+m$. Notice, that $f^{\prime}_1$ is not known since we have not obtained the increased sample yet, so we need to express it in terms of $f_1$, i.e., the number of singletons, in the running sample of size $n$. We have:
 \begin{equation}
 f^{\prime}_1 = new + f_1 - f_1*\Pr[\mbox{in query of size m}]
 \end{equation}
