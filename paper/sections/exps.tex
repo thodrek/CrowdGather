@@ -158,6 +158,32 @@ Next, we evaluate the performance of the gain estimators. As before, we issue te
 \vspace{-5pt}
 \end{table}
 
+
+We next explore how our different algorithms traverse the lattice, and how they use different query configurations, relative to GSExact. We begin by considering how many queries these algorithms issue at various levels of the lattice. In Figure~\ref{fig:level}, we plot the different number of queries issued at various levels by our algorithms when the budget is set to 10 and 100 respectively. \agp{add a couple of lines about how ..} Then, in Figures~\ref{fig:queryconf10} and \ref{fig:queryconf100}, we plot the different query configurations by our algorithms when the budget is set to 10 and 100 respectively. 
+
+
+\begin{figure}[h]
+	\vspace{-10pt}
+    \includegraphics[clip,scale=0.32]{figs/levelBudget10.eps}
+	\hspace{-10pt}
+	\includegraphics[clip,scale=0.32]{figs/levelBudget100.eps}
+	\vspace{-10pt}
+	\caption{The different number of queries issued at different levels used when budget is set at 10 or 100.}\label{fig:level}
+	\vspace{-10pt}
+\end{figure}
+
+\begin{figure}[h]
+	\vspace{-5pt}
+    \includegraphics[clip,scale=0.32]{figs/queryConfBudget10.eps}
+	\hspace{-10pt}
+	\includegraphics[clip,scale=0.32]{figs/queryConfBudget100.eps}
+	\vspace{-10pt}
+	\caption{The different query configurations used when budget is set at 10 or 100.}\label{fig:queryconf}
+	\vspace{-15pt}
+\end{figure}
+
+
+
 \subsection{Take-Away Points}
 We have the following recommendations based our results:
 \squishlist
