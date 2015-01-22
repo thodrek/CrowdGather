@@ -210,7 +210,7 @@ class EntityExtraction:
         # actions selected
         actionsSelected = {}
 
-        root = self.lattice.points['|']
+        root = self.lattice.points['||']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
@@ -308,7 +308,7 @@ class EntityExtraction:
         # actions selected
         actionsSelected = {}
 
-        root = self.lattice.points['|']
+        root = self.lattice.points['||']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
