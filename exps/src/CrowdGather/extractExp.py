@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     for b in budgetValues:
         print "Starting exps with budget ",b
-        fileName = "exacttPerformance_budget="+str(b)+".txt"
+        fileName = "exactPerformance_budget="+str(b)+".txt"
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
             print "Starting exps with method ",eMethod

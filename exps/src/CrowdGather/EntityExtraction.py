@@ -362,21 +362,13 @@ class EntityExtraction:
             remBudget = self.budget - cost
 
             # check if node corresponding to bestAction should be removed from queue
-<<<<<<< HEAD
-            bestChildAction, bestChildScore, bestSample = self.gsFindBestActionExact(descSet,nodeEstimates)
-            bestNodeAction, bestNodeScore, bestSample = self.gsFindBestActionExact(set([bestAction.point]),nodeEstimates)
-=======
             bestChildAction, bestChildScore, bestSample = self.gsFindBestActionExact(descSet,nodeEstimates,remBudget)
             bestNodeAction, bestNodeScore, bestSample = self.gsFindBestActionExact(set([bestAction.point]),nodeEstimates,remBudget)
->>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
 
-<<<<<<< HEAD
-        return gain, cost
-=======
+
         return gain, cost, actionsSelected
->>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1
