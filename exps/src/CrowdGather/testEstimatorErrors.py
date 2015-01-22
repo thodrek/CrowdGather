@@ -20,14 +20,15 @@ samplePoints = []
 counter = 0
 for p in newLattice.points:
     po = newLattice.points[p]
-    if len(po.db.getKeySET(p)) > 500.0:
+    if len(po.db.getKeySET(p)) > 5000.0:
         samplePoints.append(po)
         counter += 1
     if counter > 10:
         break
 
 # configurations (querySize, excludeListSize)
-configurations = [(5,0),(10,0),(20,0),(50,0),(100,0)]#,(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
+#configurations = [(5,0),(10,0),(20,0),(50,0),(100,0)]#,(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
+configurations = [(5,0),(10,0),(20,0),(5,2),(10,5),(20,5),(20,10)]
 samples = 10
 errors = {}
 
@@ -56,12 +57,12 @@ for conf in configurations:
             oldUnique = len(p.distinctEntries)
 
             # estimates
-            estChaoGain = estChao.estimateGain()
-            estRegrGain = estRegr.estimateGain()
-            estNewRegr = estNew.estimateGain()
+            estChaoGain = estChao.estimateReturn()
+            estRegrGain = estRegr.estimateReturn()
+            estNewRegr = estNew.estimateReturn()
 
             # excludeList
-            exList = estNew.constructExcludeList()
+            exList = estNew.constructExcludeList(estNew.point.distinctEntries)
 
             # retrievesample
             p.retrieveSample(querySize,exList)
@@ -98,7 +99,7 @@ print 'DONE.'
 
 print 'Printing output file...',
 # print output to csv
-fileOut = open("estError.txt",'w')
+fileOut = open("estErrorEvent.txt",'w')
 header = "querySize\texListSize\tchao\tregr\tnew\n"
 fileOut.write(header)
 for conf in errors:
@@ -111,4 +112,3 @@ for conf in errors:
     fileOut.write(line)
 fileOut.close()
 print 'DONE.'
-

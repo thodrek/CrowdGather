@@ -77,12 +77,12 @@ class LatticePoint:
         # check if sample is empty
         if len(sample) == 0.0:
             self.emptyPopulation = True
-            self.emptyMessageDescendants()
+            #self.emptyMessageDescendants()
         else:
             # update local sampling results
             self.__updateSamplingResults(sample)
             # propagate sampled items to children
-            msgs = self.propagateSamples(sample)
+            #msgs = self.propagateSamples(sample)
         return sample
 
     def retrieveSamplePreempt(self, sampleSize, excludeList):

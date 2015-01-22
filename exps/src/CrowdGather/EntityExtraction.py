@@ -324,8 +324,8 @@ class EntityExtraction:
                             nodeEstimates[d].append(est)
 
             # check if node corresponding to bestAction should be removed from queue
-            bestChildAction, bestChildScore = self.gsFindBestAction(descSet,nodeEstimates)
-            bestNodeAction, bestNodeScore = self.gsFindBestAction(set([bestAction.point]),nodeEstimates)
+            bestChildAction, bestChildScore, bestSample = self.gsFindBestActionExact(descSet,nodeEstimates)
+            bestNodeAction, bestNodeScore, bestSample = self.gsFindBestActionExact(set([bestAction.point]),nodeEstimates)
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
