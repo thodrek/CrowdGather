@@ -1,6 +1,5 @@
 __author__ = 'thodrek'
 import genutils
-import random
 
 class LatticePoint:
     def __init__(self, key, db, hDesc, lattice, samplingHistory=False):
@@ -24,7 +23,6 @@ class LatticePoint:
 
         # set lattice real population
         self.items = None
-        self.items = self.__constructPopulation()
 
         # set lattice sampling results
         self.retrievedEntries = []
@@ -79,12 +77,12 @@ class LatticePoint:
         # check if sample is empty
         if len(sample) == 0.0:
             self.emptyPopulation = True
-            #self.emptyMessageDescendants()
+            self.emptyMessageDescendants()
         else:
             # update local sampling results
             self.__updateSamplingResults(sample)
             # propagate sampled items to children
-            #msgs = self.propagateSamples(sample)
+            msgs = self.propagateSamples(sample)
         return sample
 
     def retrieveSamplePreempt(self, sampleSize, excludeList):
@@ -127,14 +125,11 @@ class LatticePoint:
             return True
 
         # if not the root fetch the attributes of the item
-        #for h in self.hValues:
-        #    if not (self.lattice.itemInfo[item][h].startswith(self.hValues[h]) or self.hValues[h] == ''):
-        #        return False
-        #return True
+        for h in self.hValues:
+            if not (self.lattice.itemInfo[item][h].startswith(self.hValues[h]) or self.hValues[h] == ''):
+                return False
 
-        if item in self.items:
-            return True
-        return False
+        return True
 
     def findMatches(self, itemList):
         # iterate over items and keep matches
@@ -188,12 +183,11 @@ class LatticePoint:
         for p in self.descendants:
             p.receiveEmptyMsg()
 
-    def findKeysForItemOld(self,item):
+    def findKeysForItem(self,item):
         # construct hierarchical attribute information from item description
         itemHdicts = []
         for h in self.lattice.hDesc:
             # retrieve item value for attribute h
-            #for attrValue in self.lattice.itemInfo[item][h]:
             attrValue = self.lattice.itemInfo[item][h]
             # break down to dict
             newAttrDict = {}
@@ -219,42 +213,6 @@ class LatticePoint:
             point_keys.append(point_key)
 
         return point_keys
-
-    def findKeysForItem(self,item):
-        if self.key == '|':
-            rKey = random.choice(self.lattice.itemInfo[item]['keys'])
-            point_keys = [rKey]
-            otherKeys = rKey.split('|')
-            k1 = otherKeys[0]+"|"
-            k2 = "|"+otherKeys[1]
-            point_keys.append(k1)
-            point_keys.append(k2)
-            return point_keys
-
-        if self.totalAssignedValues == 1:
-            point_keys = ['|']
-            candKey = ''
-            for k in self.lattice.itemInfo[item]['keys']:
-                if self.key in k:
-                    candKey = k
-                    point_keys.append(k)
-                    break
-            tempKey = self.key
-            tempKey.replace('|','')
-            candKey.replace(tempKey,'')
-            point_keys.append(candKey)
-            return point_keys
-
-
-        if self.totalAssignedValues == 2:
-            point_keys = ['|']
-            otherKeys = self.key.split('|')
-            k1 = otherKeys[0]+"|"
-            k2 = "|"+otherKeys[1]
-            point_keys.append(k1)
-            point_keys.append(k2)
-            return point_keys
-
 
     def populationWithExcludeList(self,excludeList):
         populationItems = []
