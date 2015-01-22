@@ -27,8 +27,8 @@ if __name__ == "__main__":
     newLattice = Lattice.Lattice(hList,hDescr,itemInfo)
 
     # set budget
-    budgetValues = [10,20,50,80,100]
-    #budgetValues = [20,50]
+    #budgetValues = [10,20,50,80,100]
+    budgetValues = [20]
 
     # set query configurations
     #configurations = [(5,0),(10,0),(20,0),(50,0),(100,0),(5,2),(10,2),(10,5),(20,2),(20,5),(20,10),(50,2),(50,5),(50,10),(50,20),(100,2),(100,5),(100,10),(100,20),(100,50)]
