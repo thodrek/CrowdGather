@@ -79,70 +79,77 @@
 \maketitle
 
 \begin{abstract}
-Crowd entity extraction has become a popular means of acquiring data for many applications, including recommendation systems, listing aggregation and knowledge base compilation.  Most of the current solutions focus on entity extraction for specific queries and do not consider entity extraction over broader entity domains. Due to the time and cost of human labor, considering each query in isolation may incur large costs when applied to broader domains, thus, limiting the applicability of current approaches.
- 
-In this paper, we explore the problem of {\em budgeted entity extraction} over {\em structured entity domains}. We consider domains that can be fully described by a collection of attributes, each characterized by a hierarchical structure. We develop new statistical tools that enable users to reason about the gain of issuing {\em further queries} in the presence of little information and show how to exploit the dependencies across different points of the data domain to obtain more accurate estimates. We also demonstrate how budgeted entity extraction over large domains can be cast as an adaptive optimization problem that seeks to maximize the number of extracted entities while minimizing the overall extraction cost. We evaluate our techniques with experiments on both synthetic and real-world data. 
+Crowdsourced entity extraction is often used to acquire data for many applications, including recommendation systems, 
+construction of aggregated listings and directories, and knowledge base compilation. Current solutions focus on entity extraction using a single query, e.g., only using ``give me another restaurant", when assembling a list of all restaurants. Due to the time and cost of human labor, just focusing on a single query limits the practical applicability of these solutions.
+
+In this paper, we leverage a {\em structured entity domain}, i.e., domains that can be fully described by a collection of attributes, each potentially displaying hierarchical structure. Given such an entity domain, we enable a richer space of queries, e.g., ``give me another Moroccan restaurant in Manhattan that does takeout". Naturally, enabling a richer space of queries comes with a host of issues, especially since many queries return empty answers. We develop new statistical tools that enable us to reason about the gain of issuing {\em additional queries} in the presence of little to no information, and show how we can exploit the dependencies across different points of the data
+domain to obtain accurate estimates of the gain. We demonstrate that for the problem of {\em budgeted entity extraction} over large domains, we can cast it as an adaptive optimization problem that seeks to maximize the number of extracted entities, while minimizing the overall extraction costs. We evaluate our techniques with experiments on both synthetic and real-world datasets, demonstrating a yield of up to 3.3x over competing approaches for the same budget.
+%Crowd entity extraction has become a popular means of acquiring data for many applications, including recommendation systems, listing aggregation and knowledge base compilation.  Most of the current solutions focus on entity extraction for specific queries and do not consider entity extraction over broader entity domains. Due to the time and cost of human labor, considering each query in isolation may incur large costs when applied to broader domains, thus, limiting the applicability of current approaches.
+% 
+%In this paper, we explore the problem of {\em budgeted entity extraction} over {\em structured entity domains}. We consider domains that can be fully described by a collection of attributes, each characterized by a hierarchical structure. We develop new statistical tools that enable users to reason about the gain of issuing {\em further queries} in the presence of little information and show how to exploit the dependencies across different points of the data domain to obtain more accurate estimates. We also demonstrate how budgeted entity extraction over large domains can be cast as an adaptive optimization problem that seeks to maximize the number of extracted entities while minimizing the overall extraction cost. We evaluate our techniques with experiments on both synthetic and real-world data. 
 \end{abstract}
 
-\section{Introduction}
-\label{sec:intro}
-Combining human computation with traditional computation has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{franklin:2011, Parameswaran:2012, west:2014}.
+%\section{Introduction}
+%\label{sec:intro}
+%Combining human computation with traditional computation has been recently proven beneficial in extracting knowledge and acquiring data for many application domains, including recommendation systems~\cite{amsterdamer:2014}, knowledge base completion~\cite{kondredi:2014}, entity extraction and structured data collection~\cite{trushkowsky:2013, park:2014}. In fact, extracting information, and entities in particular, from the crowd has been shown to provide access to more fine grained information that may belong to the long tail of the web or even be completely unavailable on the web~\cite{franklin:2011, Parameswaran:2012, west:2014}.
+%
+%A fundamental challenge in crowdsourced entity extraction is reasoning about the completeness of the extracted information. More precisely, given a task that seeks to enumerate entities from a specific domain by asking human workers, e.g., ``extract all restaurants in New York", it is not easy to judge if we have extracted all entities (in this case restaurants). This is because we are in an ``open world"~\cite{trushkowsky:2013} scenario. Extracting entities from the crowd can be done by issuing {\em queries} of the form ``Give me $k$ entities corresponding to a specific domain". In our restaurant example, such queries may correspond to crowdsourced task of the form ``give me 5 French restaurant in Manhattan, NY". Recent work has considered this problem for isolated queries~\cite{trushkowsky:2013} , i.e., queries that correspond to exactly the same question and are repeatedly evaluated against workers. In this line of work, the query predicates specify the data domain of interest. 
+%
+%Often, however, crowd entity extraction techniques are used to acquire information from large data domains that cannot be described adequately by a single query with fixed predicates. Consider for example a scenario where crowd sourcing techniques are used to collect information about various types of events (e.g., music concerts or political rallies) over different countries. If we just asked workers to provide us with events without specifying the event type or location, we would get a limited number of {\em popular} events. Moreover, the characteristics of collected events would heavily depend on the demographics of the workers completing the task. For example, a US based worker is more likely to provide us with events occurring in the state she is located. 
+%
+%However, if we want to maximize the number of extracted events we can intuitively issue multiple diversified queries, requesting the crowd to provide information for specific types of events potentially focusing on a specific location. Notice, that following this approach we are less likely to be affected by heavily popular events and the worker specific characteristics. However, deciding on the right queries in such domains entails several challenges. Next, we use a real-world scenario to illustrate these challenges.
+%
+%\subsection{Challenges and Opportunities}
+%\label{sec:challenges}
+%We consider Eventbrite~\footnote{https://www.eventbrite.com}, an online event aggregator, that relies on crowdsourcing to compile a directory of events with detailed information about the location, type, date and category of each event. Typically, event aggregators are interested in collecting information about diverse events spanning from conferences and music festivals to political rallies for multiple locations across different location, i.e., countries or cities. In particular, Eventbrite collects information about events across different countries in the world. Each country is further split into cities and areas across the country. Moreover, events are organized according to their type and topic. We collected a dataset from Eventbrite spanning over 63 countries that are divided into 1,709 subareas (e.g., states) and 10,739 cities, containing events of 19 different types, such as rallies, tournaments, conferences, conventions, etc. and a time period of 31 days spanning over the months of October and November. It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in a total of 8,508,160 points containing 57,805 distinct events overall.
+%
+%The first challenge stems from the fact that due to the sheer size of the data domain there are potentially many sparsely populated points, i.e., points  that contain only a limited number of items. Assuming a given budget for crowdsourced entity extraction, one needs to avoid such points when issuing crowdsourced entity enumeration queries in order to maximize the number of extracted entities under the specified budget. 
+%
+%\begin{example}
+%We focus on the collected Eventbrite dataset and plot the number of items for each of the data items associated the event domain under consideration. Out of 8,508,160 points only 175,068 points are associated with events while the remaining points have zero events. \Cref{fig:eventbritepop} shows the number of events associated with these point. Notice that the y-axis is in log-scale. As shown the majority of populated points have less than 100 items. It is obvious that when trying to extract events from such a sparse domain one needs to optimize the crowdsourced queries if operating under a monetary budget.
+%\end{example}
+%
+%\begin{figure}
+%	\begin{center}
+%	\includegraphics[trim=55 240 40 250,clip,scale=0.4]{figs/eventBritePopulationSS.pdf}
+%	\caption{The attributes describing the events domain and the hierarchical structure of each attribute.}
+%	\label{fig:eventbritepop}
+%	\vspace{-20pt}
+%	\end{center}
+%\end{figure}
+%
+%However, the hierarchical structure of the data domain presents us with an opportunity. In fact, we observe that the heavily populated domain points are not {\em leaf points}, i.e., points for which all the dimension values are specified but points for which one or more dimensions are assigned the wildcard value and thus can obtain any value. In fact, one can exploit this to maximize the number of extracted entities as we further discuss in \Cref{sec:prelims}.
+%
+%The second challenge when consider large domains such as the Eventbrite domain, is the overlaps among different points of the domain. More precisely, when we ask the crowd to provide us with entities associated with a domain specific point (e.g., events in New York) these entities may be associated with other points in the domain (e.g., concerts in New York). Therefore we indirectly obtain information about the population of domain points for which no queries may have been issues. 
+%These dependencies across queries pose a significant challenge when estimating the number of new entities obtain by a query.
+%
+%\begin{example}
+%We consider again the Eventbrite dataset and plot the pairwise overlaps of the ten most populous points in the domain. \Cref{fig:eventbriteover} shows the Jackard index for the corresponding point pairs. As shown the event populations corresponding to these points overlap significantly. It is easy to see that when issuing queries at a certain domain point, we not only obtain events corresponding to this point but to other points in the domain as well. 
+%\end{example}
+%
+%\begin{figure}
+%	\begin{center}
+%	\includegraphics[trim=55 0 62 0,clip,scale=0.2]{figs/overlaps.pdf}
+%	\caption{Pairwise overlaps of the 10 most populous domain points in Eventbrite.}
+%	\label{fig:eventbriteover}
+%	\vspace{-20pt}
+%	\end{center}
+%\end{figure}
+%
+%\subsection{Contributions}
+%\label{sec:contributions}
+%Motivated by these examples, we study the problem of {\em budgeted crowd entity extraction} over {\em structured domains}. More precisely, we focus on domains described by a collection of attributes, each following a known {\em hierarchical structure}, i.e., we assume that for each attribute the corresponding hierarchy is known.
+%
+%We propose a novel algorithmic framework that exploits the structure of the domain to maximize the number of extracted entities under given budget constraints. In particular, we view the problem of entity extraction as a {\em multi-round adaptive optimization problem}. At  each round we exploit the information on extracted entities obtained by previous queries to adaptively select the crowd query that will maximize the {\em gain} and cost trade-off at each round. The gain of a query is defined as the number of new unique entities extracted by it. We extend on previous query interfaces that considered only questions of the type ``Give me $k$ more entities" and examine {\em generalized queries} that can also include an {\em exclude list}. In general such queries are of the type ``Give me $k$ more entities that are not $A$, $B$, etc". Building upon techniques from the species estimation and the multi-armed bandits literature, we introduce a new methodology for estimating the gain for such generalized queries and show how the hierarchical structure of the domain can be exploited to improve the accuracy of our gain estimates. Our main contributions are as follows:
+%
+%\squishlist
+%\item We study the challenge of information flow across entity extraction queries for overlapping parts of the data domain.
+%\item We develop a new technique to estimate the gain of generalized entity extraction queries under the presence of dependent information. The proposed technique exploits the structure of the data domain to obtain accurate estimates. 
+%\item We introduce an adaptive optimization algorithm that takes as input the gain estimates for different types of queries and identifies querying policies that maximize the total number of retrieved entities under given budget constraints. 
+%\item Finally, we show that our techniques can effectively solve the problem of budgeted crowd entity extraction for large data domains on both real-world and synthetic data.
+%\squishend
 
-A fundamental challenge in crowdsourced entity extraction is reasoning about the completeness of the extracted information. More precisely, given a task that seeks to enumerate entities from a specific domain by asking human workers, e.g., ``extract all restaurants in New York", it is not easy to judge if we have extracted all entities (in this case restaurants). This is because we are in an ``open world"~\cite{trushkowsky:2013} scenario. Extracting entities from the crowd can be done by issuing {\em queries} of the form ``Give me $k$ entities corresponding to a specific domain". In our restaurant example, such queries may correspond to crowdsourced task of the form ``give me 5 French restaurant in Manhattan, NY". Recent work has considered this problem for isolated queries~\cite{trushkowsky:2013} , i.e., queries that correspond to exactly the same question and are repeatedly evaluated against workers. In this line of work, the query predicates specify the data domain of interest. 
-
-Often, however, crowd entity extraction techniques are used to acquire information from large data domains that cannot be described adequately by a single query with fixed predicates. Consider for example a scenario where crowd sourcing techniques are used to collect information about various types of events (e.g., music concerts or political rallies) over different countries. If we just asked workers to provide us with events without specifying the event type or location, we would get a limited number of {\em popular} events. Moreover, the characteristics of collected events would heavily depend on the demographics of the workers completing the task. For example, a US based worker is more likely to provide us with events occurring in the state she is located. 
-
-However, if we want to maximize the number of extracted events we can intuitively issue multiple diversified queries, requesting the crowd to provide information for specific types of events potentially focusing on a specific location. Notice, that following this approach we are less likely to be affected by heavily popular events and the worker specific characteristics. However, deciding on the right queries in such domains entails several challenges. Next, we use a real-world scenario to illustrate these challenges.
-
-\subsection{Challenges and Opportunities}
-\label{sec:challenges}
-We consider Eventbrite~\footnote{https://www.eventbrite.com}, an online event aggregator, that relies on crowdsourcing to compile a directory of events with detailed information about the location, type, date and category of each event. Typically, event aggregators are interested in collecting information about diverse events spanning from conferences and music festivals to political rallies for multiple locations across different location, i.e., countries or cities. In particular, Eventbrite collects information about events across different countries in the world. Each country is further split into cities and areas across the country. Moreover, events are organized according to their type and topic. We collected a dataset from Eventbrite spanning over 63 countries that are divided into 1,709 subareas (e.g., states) and 10,739 cities, containing events of 19 different types, such as rallies, tournaments, conferences, conventions, etc. and a time period of 31 days spanning over the months of October and November. It is easy to see that two of the three dimensions, i.e., location and time, describing the domain of collected events  are hierarchically structured. The overall domain can be fully specified if we consider the cross product across the possible values for location, event type and time. For each of the location, time, type dimensions we also consider a special {\em wildcard} value. Taking the cross-product across the possible values of these dimensions results in a total of 8,508,160 points containing 57,805 distinct events overall.
-
-The first challenge stems from the fact that due to the sheer size of the data domain there are potentially many sparsely populated points, i.e., points  that contain only a limited number of items. Assuming a given budget for crowdsourced entity extraction, one needs to avoid such points when issuing crowdsourced entity enumeration queries in order to maximize the number of extracted entities under the specified budget. 
-
-\begin{example}
-We focus on the collected Eventbrite dataset and plot the number of items for each of the data items associated the event domain under consideration. Out of 8,508,160 points only 175,068 points are associated with events while the remaining points have zero events. \Cref{fig:eventbritepop} shows the number of events associated with these point. Notice that the y-axis is in log-scale. As shown the majority of populated points have less than 100 items. It is obvious that when trying to extract events from such a sparse domain one needs to optimize the crowdsourced queries if operating under a monetary budget.
-\end{example}
-
-\begin{figure}
-	\begin{center}
-	\includegraphics[trim=55 0 62 0,clip,scale=0.25]{figs/eventBritePopulationS.pdf}
-	\caption{The attributes describing the events domain and the hierarchical structure of each attribute.}
-	\label{fig:eventbritepop}
-	\vspace{-20pt}
-	\end{center}
-\end{figure}
-
-However, the hierarchical structure of the data domain presents us with an opportunity. In fact, we observe that the heavily populated domain points are not {\em leaf points}, i.e., points for which all the dimension values are specified but points for which one or more dimensions are assigned the wildcard value and thus can obtain any value. In fact, one can exploit this to maximize the number of extracted entities as we further discuss in \Cref{sec:prelims}.
-
-The second challenge when consider large domains such as the Eventbrite domain, is the overlaps among different points of the domain. More precisely, when we ask the crowd to provide us with entities associated with a domain specific point (e.g., events in New York) these entities may be associated with other points in the domain (e.g., concerts in New York). Therefore we indirectly obtain information about the population of domain points for which no queries may have been issues. 
-These dependencies across queries pose a significant challenge when estimating the number of new entities obtain by a query.
-
-\begin{example}
-We consider again the Eventbrite dataset and plot the pairwise overlaps of the ten most populous points in the domain. \Cref{fig:enventbriteover} shows the Jackard index for the corresponding point pairs. As shown the event populations corresponding to these points overlap significantly. It is easy to see that when issuing queries at a certain domain point, we not only obtain events corresponding to this point but to other points in the domain as well. 
-\end{example}
-
-\begin{figure}
-	\begin{center}
-	\includegraphics[trim=55 0 62 0,clip,scale=0.2]{figs/overlaps.pdf}
-	\caption{Pairwise overlaps of the 10 most populous domain points in Eventbrite.}
-	\label{fig:eventbriteover}
-	\vspace{-20pt}
-	\end{center}
-\end{figure}
-
-\subsection{Contributions}
-\label{sec:contributions}
-Motivated by these examples, we study the problem of {\em budgeted crowd entity extraction} over {\em structured domains}. More precisely, we focus on domains described by a collection of attributes, each following a known {\em hierarchical structure}, i.e., we assume that for each attribute the corresponding hierarchy is known.
-
-We propose a novel algorithmic framework that exploits the structure of the domain to maximize the number of extracted entities under given budget constraints. In particular, we view the problem of entity extraction as a {\em multi-round adaptive optimization problem}. At  each round we exploit the information on extracted entities obtained by previous queries to adaptively select the crowd query that will maximize the {\em gain} and cost trade-off at each round. The gain of a query is defined as the number of new unique entities extracted by it. We extend on previous query interfaces that considered only questions of the type ``Give me $k$ more entities" and examine {\em generalized queries} that can also include an {\em exclude list}. In general such queries are of the type ``Give me $k$ more entities that are not $A$, $B$, etc". Building upon techniques from the species estimation and the multi-armed bandits literature, we introduce a new methodology for estimating the gain for such generalized queries and show how the hierarchical structure of the domain can be exploited to improve the accuracy of our gain estimates. Our main contributions are as follows:
-
-\squishlist
-\item We study the challenge of information flow across entity extraction queries for overlapping parts of the data domain.
-\item We develop a new technique to estimate the gain of generalized entity extraction queries under the presence of dependent information. The proposed technique exploits the structure of the data domain to obtain accurate estimates. 
-\item We introduce an adaptive optimization algorithm that takes as input the gain estimates for different types of queries and identifies querying policies that maximize the total number of retrieved entities under given budget constraints. 
-\item Finally, we show that our techniques can effectively solve the problem of budgeted crowd entity extraction for large data domains on both real-world and synthetic data.
-\squishend
+\input{intro}
 
 \section{Preliminaries}
 \label{sec:prelims}
@@ -217,7 +224,7 @@ We use an example considering the lattice in \Cref{fig:eventslattice}, to illust
 \item The samples corresponding to nodes \{ \}, \{Country C1\} and \{State ST2\} where obtained by considering only part of their population. The reason is that the population of node \{EventType X1\} does not fully contain the populations of these nodes. 
 \squishend
 
-Samples belonging to both types need to be considered when estimating the gain of a query at a node in $v \in \hierarchy$. To address this issue we merge the extracted entities for each node in $\hierarchy$ into a single sample and treat the unified sample as being extracted from the entire underlying population of the node. As we discuss later in \Cref{sec:solving} we develop querying strategies that traverse the lattice $\hierarchy$ in a top-down approach, hence, the number of samples belonging in the first category, i.e., samples retrieved considering the entire population of a node, dominates the number of samples retrieved by considering only part of a node's population. Moreover, it has been shown by Hortal et al.~\cite{hortal2006evaluating} that several of the techniques that can be used to estimate the gain of a query(see \Cref{sec:gain estimators}) present insensitivity to differences in the way the samples are aggregated.
+Samples belonging to both types need to be considered when estimating the gain of a query at a node in $v \in \hierarchy$. To address this issue we merge the extracted entities for each node in $\hierarchy$ into a single sample and treat the unified sample as being extracted from the entire underlying population of the node. As we discuss later in \Cref{sec:solving} we develop querying strategies that traverse the lattice $\hierarchy$ in a top-down approach, hence, the number of samples belonging in the first category, i.e., samples retrieved considering the entire population of a node, dominates the number of samples retrieved by considering only part of a node's population. Moreover, it has been shown by Hortal et al.~\cite{hortal2006evaluating} that several of the techniques that can be used to estimate the gain of a query(see \Cref{sec:gainestimators}) present insensitivity to differences in the way the samples are aggregated.
 
 %However, one cannot merge them directly into a single sample since samples that consider only part of the population for a node $v$ do not follow the same popularity distribution as samples that consider the entire population. To address, this challenge, we can view the process described above as an instance of {\em stratified sampling}. More precisely, given the hierarchical structure of the domain $\domain$, we can consider the population of each node in $\hierarchy$ as being split in multiple strata considering to the populations of its direct descendants. Following, this approach one can combine the aforementioned types of samples into a single stratified sample and use this observation to estimate the gain of different queries for the nodes in $\hierarchy$ (see \Cref{sec:gainestimators}).
 
@@ -397,10 +404,12 @@ While issuing different queries $q(k,l)$ at different nodes of $\hierarchy$ we o
 
 Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimate of the true return $r^*(\alpha)$. Moreover, let $\mathcal{E}(\alpha)$ be an error component on the return of action $\alpha$ chosen such that $r(\alpha) - \sigma(\alpha) \leq r^*(\alpha) \leq r(\alpha) + \sigma(\alpha)$ with high probability. The parameter $\sigma(\alpha)$ should take into account both the empirical variance of the expected return as well as our uncertainty if an action has been chosen few times. Let $n_{\alpha,t}$ be the number of times we have chosen action $\alpha$ by round $t$, and let $v_{\alpha,t}$ denote the maximum between some constant $c$ (e.g., $c = 0.01$) and the empirical variance for action $\alpha$ at round $t$. The latter can be computed using bootstrapping over the estimator presented in \Cref{sec:newestim}. Several techniques have been proposed in the multi-armed bandits literature to compute the parameter $\sigma(\alpha)$~\cite{teytaud:inria-00173263}. Teytaud et al.~\cite{teytaud:inria-00173263} showed that techniques considering both the variance and the number of times an action has been chosen tend to outperform other proposed methods. Based on this observation, we choose to use the following formula for sigma:
 \begin{equation}
+\label{eq:upper}
 \sigma(\alpha) = \sqrt{\frac{v_{\alpha,t}\cdot\log(t)}{n_{\alpha,t}}}
 \end{equation}
 
 \subsection{A Heuristic for Querying Policies}
+\label{sec:heuristic}
 We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level our algorithm proceeds as follows: Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$ during a round $r$. Moreover, let $f(\alpha)$ and $c(\alpha)$ denote the upper bounded return (i.e., gain) and cost for an action $\alpha \in \mathcal{S}$. At round $r$ the algorithm identifies an action in $\mathcal{S}$ that maximizes the quantity $\frac{f(\alpha)}{c(\alpha)}$ under the constraint that the cost of action $\alpha$ is less or equal to the remaining budget. Since we are operating under a specified budget one can view the problem in hand as a variation of the typical knapsack problem. If no such action exists then the algorithm terminates. Otherwise the algorithm issues the query corresponding to action $\alpha$, updates the set of unique entities obtained from the queries, the remaining budget and updates the set of potential queries $q(k,l)$ that can be executed in the next round.  An overview of the proposed algorithm is shown in Algorithm \ref{algo:overall}. 
 
 As discussed before, the size of $\hierarchy$ is exponential to the values of attributes describing it, and thus, considering all the possible queries corresponding to the different nodes of the hierarchy can be prohibitively expensive. Next, we discuss how one can initialize and update the set of potential actions as the algorithm progresses considering the structure of the lattice $\hierarchy$ and the retrieved entities from previous rounds. 
@@ -447,7 +456,7 @@ An action $\alpha$ is bad when $r(\alpha) + \sigma(\alpha) < \max_{\alpha^{\prim
 	\RETURN $\{$Root of $\hierarchy \}$
 \ENDIF 
 \STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{old}$
-\FORALL{$d \in ${\sf Set of Direct Descendant Nodes of $u$}}
+\FORALL{$d \in ${\sf ~Set of Direct Descendant Nodes of $u$}}
 \STATE $A_d \leftarrow$ Set of queries at $u$ for all configurations in $V_k \times V_l$
 \STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{new} \cup A_d$
 \ENDFOR
@@ -460,21 +469,182 @@ An action $\alpha$ is bad when $r(\alpha) + \sigma(\alpha) < \max_{\alpha^{\prim
 \end{algorithmic}
 \end{algorithm}
 
-\section{Experimental Evaluaiton}
+\section{Experimental Evaluation}
 \label{sec:exps}
-In this section we present an empirical evaluation of our proposed algorithmic framework.
+In this section we present an empirical evaluation of our proposed algorithmic framework. The main questions we seek to address are: (1) how the different gain estimators presented in \Cref{sec:gainestimators} compare with each other, (2) how the proposed querying policy algorithm compares against baselines for maximizing the number of extracted entities under a specific budget, and (3) how it exploits the structure of the input domain to construct the set of available actions. 
 
-\section{Related Work}
+We empirically study these questions using both real and synthetic datasets. First we discuss the experimental methodology, and then we describe the data and results that demonstrate the effectiveness of our framework on crowdsourced entity extraction. The evaluation is performed on an Inter(R) Cored(TM) i7 3.7 GHz/64bit/32GB machine. The proposed framework is implemented in Python. 
+
+\vspace{5pt}\noindent\textbf{Gain Estimators:} We evaluate the following gain estimators:
+\squishlist
+\item Chao92Shen: This estimator combines the methodology for estimating the number of unseen species proposed by Chao~\cite{chao:1992} with Shen's formula~\Cref{eq:shen}.
+\item HwangShen: This estimator combines the regression based approach proposed by Hwang and Shen~\cite{hwang:2010} for estimating the number of unseen species with Shen's formula. 
+\item NewRegr: This estimator corresponds to the new regression based technique proposed in \Cref{sec:newestim}.
+\squishend
+All estimators were coupled with bootstrapping to estimate their variance. Recall that computing the variance of each estimator is used to compute an upper bound on the return of a query as shown in \Cref{eq:upper}.
+
+\vspace{5pt}\noindent\textbf{Entity Extraction Algorithms:} We evaluate the following algorithms for crowdsourced entity extraction:
+\squishlist
+\item Rand: This algorithm executes random queries over the input domain until all the available budget is used. It considers all nodes in the input lattice $\hierarchy$ and randomly selected query configurations $q(k,l)$ from a list of pre-specified $k$, $l$ value combinations. We expect Rand to be effective for extracting entities in small data domains that do not have a large number of sparsely populated areas. 
+\item RandL: This algorithm executes random queries {\em only at the leaves} of the input lattice $\hierarchy$ until all the available budget is used. Given a randomly leaf node it randomly selects a query configuration $q(k,l)$ from a list of pre-specified $k$, $l$ value combinations.  Similarly to Rand we expect RandL to be effective in {\em shallow} hierarchy when the majority of nodes corresponds to leaf nodes. Again the performance of RandL is expected to be reasonable for small data domains without sparsely populated areas. 
+\item BFS: This algorithm performs a breadth-first traversal of the input lattice $\hierarchy$. It only executes {\em one query} at a given node. The query configuration is randomly selected from a list of pre-specified $k$, $l$ value combinations. We point out that this algorithm promotes exploration of the action space when extracting entities. It also takes into account the structure of the input domain but is agnostic to identifying sparsely populated areas of the domain.
+\item GSChao: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the Chao92Shen estimator to estimate the gain from a query to be issued.
+\item GSHwang: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the HwangShen estimator to estimate the gain from a query to be issued.
+\item GSNewR: This algorithm corresponds to our proposed heuristic shown in \Cref{sec:heuristic} and uses the NewRegr estimator to estimate the gain from a query to be issued.
+\item GSExact: This algorithm is used as a near-optimal baseline. In particular, we combine the heuristic proposed in \Cref{sec:heuristic} with an exact computation of the query return. More precisely, the algorithm proceeds as follows: At each round we speculatively execute each of the available actions and we select the one that results in the largest  number of new items to cost ratio. Notice, that the return of each query is known and the algorithm is not coupled with any of the aforementioned estimators.
+\squishend
+We run each algorithm multiple times as the results of each run depend on the sampled entities front the underlying unknown population. For each algorithm we report the average gain achieved under the given budget as well as the corresponding standard errors.
+
+\vspace{5pt}\noindent\textbf{Querying Interface:} For all datasets we consider generalized queries $q(k,l)$ of the type ``Give me $k$ more entities that are not present in an exclude list of size $l$". The  configurations considered for $(k,l)$ are $\{(5,0), (10,0), (20,0), (5,2), (10,5), (20,5), (20,10)\}$. Larger values of $k$ or $l$ were dimmed unreasonable for crowdsourced queries. The gain of a query is computed as the number of new entities extracted by issuing that query against a crowd worker.  The cost of each query is computed using an additive model which considers three partial cost terms that depend on the characteristics of the query. 
+
+The three partial cost terms are: (i) {\sf CostK} that depends on the number of responses $k$ requested from a user, (ii) {\sf CostL} that depends on the size of the exclude list $l$ used in the query, and (iii) {\sf CostSpec} that depends on the {\em specificity} of the query $q_s$, e.g., we assume that queries that require users to provide more specialized entities such as a ``Give me one concert for New York on the 17th of Nov" cost more than more generic queries such as ``Give me one concert in New York". More formally, we define the specificity of a query to be equal to the number on attributes assigned non-wildcard values for the node $u \in \hierarchy$ the query corresponds to. 
+
+For each of the cost terms we assume a maximum cost of \$1 realized by considering the maximum value of the corresponding input variable. More precisely, we have that:
+\begin{align}
+{\sf CostK}(k^{\prime}) &= \frac{k^{\prime}}{\mbox{max. $k$ value}} \nonumber \\
+{\sf CostL}(l^{\prime}) &= \frac{l^{\prime}}{\mbox{max. $l$ value}} \nonumber \\
+{\sf CostSpec}(q_{s^{\prime}}) &= \frac{s^{\prime}}{\mbox{max. specificity value}} \nonumber
+\end{align}
+The overall cost for a query is then computed as:
+\begin{equation}
+Cost(q(k,l)) = \alpha \cdot {\sf CostK}(k) + \beta \cdot  {\sf CostK}(k) + \gamma \cdot  {\sf CostSpec}(q_s) \nonumber
+\end{equation}
+Since the cost of a query should be significantly increased when an exclude list is used we set $\alpha = \gamma = 1$ and $\beta = 5$. 
+
+\subsection{Synthetic Data Experiments}
+\label{sec:synthetic}
+First, we evaluate the proposed framework on extracting entities from a large domain. We consider the event dataset collected from Eventbrite. As described in \Cref{sec:intro} the lattice corresponding to the Eventbrite domain contains 8,508,160 points with 57,805 distinct events overall. However, only 175,068 points are populated leading to an rather sparsely populated domain. Due to luck of popularity proxies for the extracted events, we assigned a random {\em popularity weight} in $(0,10]$ to each event. These weights are used during sampling to form the actual popularity distribution characterizing the population of each point in the lattice. 
+
+\noindent\textbf{Results:} First, we evaluate the performance of the gain estimators described above at predicting the number of new retrieved events for different query configurations. We choose ten random points from the Eventbrite lattice each containing more than 5,000 events . For each of the points and each of the available query parameter configurations $(k,l)$, we execute ten queries of the form ``Give me $k$ items from point $u \in \hierarchy$ that are not included in an exclude list of size $l$". As mentioned in \Cref{sec:excludelist} the exclude list for each query is constructed following a randomized approach. We evaluate the performance of Chao92Shen, HwangShen, and NewRegr at predicting the return of each query. We measure the performance of each estimator by considering the absolute relative error between the predicted return and the actual return of the query. In \Cref{tab:eventesterror} we report the relative error for each of the three estimators averaged over all points under consideration. As shown, all three estimators perform equivalently with the new regression based technique slightly outperforming Chao92Shen and HwangShen for certain types of queries. The increased number of relative errors are justified as the retrieved samples correspond to a very small portion of the underlying population for each of the points. This is a well-known behavior for non-parametric estimators and studied extensively in the species estimation literature~\cite{hwang:2010}. 
+
+\begin{table}
+\small\center
+\caption{Average absolute relative error for estimating the gain of different generalized queries. The results reported correspond to the average error over multiple queries issued at multiple points of the Eventbrite lattice.}
+\label{tab:eventesterror}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Q. Size $k$} & \textbf{EL. Size $l$} & \textbf{Chao92Shen} & \textbf{HwangShen} & \textbf{NewRegr} \\ \hline
+5 & 0 & 0.470 & 0.500 & 0.427 \\
+5 & 2 & 0.554 & 0.612 & 0.567\\
+10 & 0 & 0.569 & 0.592 & 0.544\\
+10 & 5 & 0.580 & 0.696 & 0.559\\
+20 & 0 & 0.642 & 0.756 &0.601\\
+20 & 5 & 0.510 & 0.60 & 0.519 \\
+20 & 10 & 0.653 & 0.756 & 0.631\\
+\hline
+\end{tabular}
+\vspace{-10pt}
+\end{table}
+
+
+Next, we evaluate the performance of our proposed algorithmic framework when extracting events from the Eventbrite domain. We evaluate the performance of the different extraction algorithms described above for different budgets. We ran each algorithm ten times and report the average number of unique events extracted as well as the corresponding standard error. The results are shown in \Cref{fig:ebextraction}. As shown all of our proposed algorithms, i.e., GSChao, GSHwang, GSNewR outperform the baselines under consideration exhibiting an improvement of at least 2x on the total number of unique events extracted. Moreover, for smaller budgets we observe that these algorithms perform comparably to GSExact that has oracle access to the gain of each query.
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[clip,scale=0.6]{figs/ebExtraction.eps}
+	\caption{The number of events extracted by different algorithms for the Eventbrite data domain and different budgets.}
+	\label{fig:ebextraction}
+	\end{center}
+\end{figure}
+
+The poor performance of Rand and RandL is due to the sparsity of the Eventbrite data domain. Regarding BFS, we see that it exhibits better performance than Rand and RandL by exploiting the structure of the underlying domain. However, since BFS is agnostic to the cost of the issued queries as well as to sparsely populated areas of the underlying lattice it can only extract a limited number of events. On the other hand, our proposed techniques were able to extract significantly more tuples as they both exploit the structure of the lattice and optimize for the cost of the issued queries. Finally, we point out that GSNewR that combines the proposed lattice traversal heuristic with our new regression-based gain estimator was able to outperform GSChao and GSHwang which rely on well-known estimators from the species estimation literature. This improved performance stems from the fact that our regression-based technique is capable of deriving better gain estimates in the presence of very small smalls and queries where workers are requested to provide a small number of answers.
+
+
+\subsection{Real Data Experiments}
+\label{sec:realdata}
+Since the performance of the baselines algorithms is significantly affected by the sparsity of the Eventbrite domain, we chose to further evaluate the performance of the extraction algorithms listed above for a smaller, thus more dense domain. For this purpose, we use a real-world dataset collected via Amazon Mechanical Turk~\cite{mturk}. 
+
+We asked workers to extract the names of people belonging in four different types from five different news portals. The people types we considered were ``Politicians", ``Athletes", ``Actors/Singers" and ``Industry People". The news portals we considered were ``New York Times", ``Huffington Post", ``Washington Post", ``USA  Today" and ``The Wall Street Journal". The domain under consideration is specified by the two attributes corresponding to the type of the person and the news portal. The lattice corresponding to this domain was constructed by taking the crossproduct of the aforementioned values. Workers were paid \$0.20 per HIT to provide items belonging in the specified data domain. We issued 20 HITS for each leaf node of the lattice, resulting in 600 HITS in total and extracted 1,245 people in total. \Cref{tab:ptypedata} and \Cref{tab:ntypedata} show the number of distinct entities for the different values of the people-type and news portal attributes. Finally, the popularity weight of each extracted entity was assigned to be equal to the number of times it appeared in the extraction result. These weights are then normalized during sampling time to form a proper popularity distribution.
+
+\begin{table}
+\center
+\caption{The population characteristics of the AMT data.}
+\label{tab:ptypedata}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Person Type} & \textbf{People} \\ \hline
+Industry People & 743 \\
+Athletes & 743 \\
+Politicians & 748 \\
+Actors/Singers & 744 \\ \hline \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}
+\center
+\caption{The population characteristics of the AMT data.}
+\label{tab:ntypedata}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{News Portal} & \textbf{People} \\ \hline
+WSJ & 594 \\
+WashPost & 597 \\
+NY Times & 595 \\
+HuffPost & 599 \\
+USA Today & 593 \\ \hline
+\end{tabular}
+\end{table}
+
+
+\noindent\textbf{Results}: We first evaluate the performance of the gain estimators. As before, we issue ten generalized queries to different nodes of the input lattice for all available query configurations. Since the input domain is rather small we issued ten queries over all nodes in the input lattice. For each gain estimator and query configuration, we computed the average relative error, comparing the estimated query return with the actual query return. The results are shown in \Cref{tab:peopleesterror}. Again, we observe that for smaller query sizes the regression techniques proposed in this paper offers better gain estimates. However, as the query size increases, and hence, a larger portion of the underlying population is observed we see that Chao92Shen outperforms both regression based techniques. 
+
+\begin{table}
+\small\center
+\caption{Average absolute percentage error for estimating the gain of different generalized queries. The results reported correspond to  averaged over multiple queries issued at all points of the People data domain.}
+\label{tab:peopleesterror}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Q. Size $k$} & \textbf{EL. Size $l$} & \textbf{Chao92Shen} & \textbf{HwangShen} & \textbf{NewRegr} \\ \hline
+5 & 0 & 0.295 & 0.299 & 0.228\\
+5 & 2 & 0.163 &  0.156 & 0.144\\
+10 & 0 &  0.306 & 0.305 & 0.277\\
+10 & 5 &  0.341 & 0.349 & 0.293\\
+20 & 0 &  0.359& 0.371 & 0.467 \\
+20 & 5 &  0.402 & 0.418 & 0.493\\
+20 & 10 & 0.405 & 0.428 & 0.638\\
+\hline
+\end{tabular}
+\vspace{-10pt}
+\end{table}
+
+Finally, we evaluate the performance of the different extraction algorithms. Similarly to Eventbrite we ran each algorithm ten times and report the average performance and the corresponding standard error. The results are shown in \Cref{fig:poextraction}. As shown our proposed techniques (i.e., GSChao, GSHwang and GSNewR) still outperform Rand, RandL and BFS. However, we see that the performance improvement is smaller compared to Eventbrite. The reason is that the people's domain is dense and all nodes of the input lattice are populated. 
+
+\vspace{-10pt}\begin{figure}[h]
+	\begin{center}
+	\includegraphics[clip,scale=0.6]{figs/poExtraction.eps}
+	\caption{The number of people extracted by different algorithms for the People data domain and different budgets.}
+	\label{fig:poextraction}
+	\end{center}
+	\vspace{-10pt}
+\end{figure}
+
+In particular, we observe that issuing random extraction queries at the nodes of the lattice outperforms BFS for a significant margin as the available budget increases. This behavior is expected in dense small domains where all the available nodes are populated. Notice that this approach corresponds to a querying policy that focuses purely on exploring different queries. However, exploited previously obtained information and balancing exploration and exploitation of the possible actions (i.e., following the proposed lattice traversal algorithm) leads to superior performance. 
+
+
+\subsection{Take-Away Points}
+We have the following recommendations according to the experimental results.
+\squishlist
+\item Exploiting the structure of the entity extraction domain is effective for maximizing the total number of extracted entities. Moreover, balancing the exploration of queries for non-observed nodes of the lattice with queries over observed nodes of the lattice is crucial.
+\item For sparse domains, i.e., domain specified by large lattices with a small number of populated nodes, one should resolve to regression based techniques for estimating the expected gain of further queries as they result in better performance. However, for dense domains the Chao92Shen estimator results in better performance as a larger portion of the underlying population can be sampled. The size of the input domain as well as its sparsity are known in advance to the designed of the querying interface. 
+\item For small budgets the proposed estimator-based lattice traversal algorithms (i.e., GSChao, GSHwang and GSNewR) exhibit comparable performance with a traversal algorithm that has oracle access to the gain of each query to be issued.
+\squishend
+
+\vspace{2pt}\section{Related Work}
 \label{sec:related}
+The prior work related to the techniques proposed in this paper can be placed in a few categories; we describe each of them in turn:
 
-\ \\Beth's work
-\ \\Work by Yael Amsterdamer on Crowd Mining
-\ \\CrowdFill work by Stanford
+\vspace{5pt}\noindent\textbf{Crowd Algorithms:} There has been a significant amount of work on designing algorithms where the unit operations are performed by human workers, including the execution of common database query operators such as filter~\cite{crowdscreen}, join~\cite{markus-sorts-joins} and max~\cite{so-who-won},  machine learning~\cite{entity-matching, crowdclustering, crowder} and data mining tasks~\cite{amsterdamer:2013, get-another-label} etc. Previous work on the task of populating a database~\cite{park:2014, trushkowsky:2013} is the most related to ours. However, in both cases authors focus on a single entity extraction query and do consider extracting entities from large and diverse data domains. Moreover, the proposed techniques do not support  dynamic adaptation of the queries issued against the crowd to optimize for a specified monetary budget. 
 
-\section{Conclusions}
+\vspace{5pt}\noindent\textbf{Knowledge Acquisition Systems:} Recent work has focused on combining crowdsourcing techniques with knowledge acquisition systems~\cite{jiang:13, kondredi:2014, west:2014}. This line of work suggests using the crowd for curating automatically constructed knowledge bases (i.e., assessing the validity of the extracted facts) and for gathering additional knowledge to be added in the knowledge base. Estimating the newly acquired information from a query and then  devising querying strategies that maximize the amount of extracted information will surely be beneficial for knowledge extraction systems.
+
+\vspace{5pt}\noindent\textbf{Deep Web Crawling:} A different line of work has focused on data acquisition from the deep web~\cite{Jin:2011,Sheng:2012}. In such scenarios, data is obtained by querying an interface over a hidden database and extracting results from a dynamically generated answer. Often, such interfaces provide partial answers to issued queries. These answer are usually limited to the top-k tuples based on a database specific ranking function. Sheng et al.~\cite{Sheng:2012} provide near-optimal algorithms that exploit the exposed structure of the underlying domain to extract all the tuples present in the hidden database under consideration. The main difference between this line of work and ours is that answers from a hidden database are deterministic, i.e., a query will always retrieve the same top-k tuples. This assumption does not hold in the crowdsourcing scenario considered in this paper and thus the proposed techniques are not applicable. Since crowdsourced entity extraction queries can be viewed as random samples from an unknown  distribution, one needs to make use of the query result estimation techniques introduced in \Cref{sec:gainestimators}.
+
+\section{Conclusions and Future Work}
 \label{sec:conclusions}
+In this paper, we studied the problem of crowdsourced entity extraction over large and diverse data domains. We introduced a novel crowdsourced entity extraction framework that combines statistical techniques with an adaptive optimization algorithm to maximize the total number of unique entities extracted. We proposed a new regression-based technique for estimating the gain of further querying when the number of retrieved entities is small with respect to the total size of the underlying population. We also introduced a new algorithm that exploits the often known structure of the underlying data domain to devise adaptive querying strategies. Our experimental results show that our techniques yield significantly better performance compared to a collection of baselines.
 
-
+Some of the future directions extending this work include reasoning about the quality and correctness of the extracted result as well as extending the proposed techniques to other types of information extraction tasks. As mentioned before, the techniques proposed in this paper do not deal with incomplete and imprecise information. However, there has been an increasing amount of literature on addressing these issues in a crowdsourcing environment~\cite{ vox-populii, quality, nushi:14, raykar-whom-to-trust}. Combining these techniques with our proposed framework is a promising future direction. Finally, it is of particular interest to consider how the proposed framework can be applied to other budget sensitive information extraction applications including discovering valuable data sources for integration tasks~\cite{rekatsinas:2015} or curating and completing a knowledge base~\cite{kondredi:2014}.
 \bibliographystyle{abbrv}
 \bibliography{crowd_hierarchies}
 

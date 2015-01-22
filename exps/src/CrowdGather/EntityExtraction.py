@@ -45,18 +45,18 @@ class EntityExtraction:
 
     def retrieveItems(self):
         if self.optMethod == "random":
-            gain, cost = self.randomExtraction()
+            gain, cost, actionsSelected = self.randomExtraction()
         elif self.optMethod == "BFS":
-            gain, cost = self.bfsExtraction()
+            gain, cost, actionsSelected = self.bfsExtraction()
         elif self.optMethod == "GS_thres":
-            gain, cost = self.graphSearchExtraction()
+            gain, cost, actionsSelected = self.graphSearchExtraction()
         elif self.optMethod == "GS_exact":
-            gain, cost = self.graphSearchExtractionExact()
+            gain, cost, actionsSelected = self.graphSearchExtractionExact()
         elif self.optMethod == "randomLeaves":
-            gain, cost = self.randomLeavesExtraction()
+            gain, cost, actionsSelected = self.randomLeavesExtraction()
         else:
-            gain, cost = self.ucbFrontierExtraction()
-        return gain, cost
+            gain, cost, actionsSelected = self.graphSearchExtractionExact()
+        return gain, cost, actionsSelected
 
     def getNewEstimator(self, latticePoint, querySize, exListSize):
         if self.estMethod == "chao92" or self.estMethod == "shenRegression":
@@ -93,7 +93,7 @@ class EntityExtraction:
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
                 break
-        return gain, cost
+        return gain, cost, None
 
     def randomLeavesExtraction(self):
 
@@ -130,13 +130,13 @@ class EntityExtraction:
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
             else:
                 break
-        return gain, cost
+        return gain, cost, None
 
     def bfsExtraction(self):
         # traverse lattice in a BFS manner ask single query at each node using a random configuration
         # keep track of queried nodex/configs
 
-        root = self.lattice.points['||']
+        root = self.lattice.points['|']
         frontier = [root]
         activeNodes = {}
         activeNodes[root] = 1
@@ -175,7 +175,7 @@ class EntityExtraction:
             else:
                 pass
 
-        return gain, cost
+        return gain, cost, None
 
     # auxiliary functions
     def gsFindBestAction(self,frontier,nodeEstimates,round,remBudget):
@@ -189,7 +189,9 @@ class EntityExtraction:
                 if cost <= remBudget:
                     gain, variance, upperGain, lowerGain = e.estimateGain(True)
                     armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
+                    #armGain = gain
                     gainCostRatio = float(armGain)/float(cost)
+                    #gainCostRatio = float(armGain)
                     if gainCostRatio > bestScore:
                         bestAction = e
                         bestScore = gainCostRatio
@@ -205,7 +207,10 @@ class EntityExtraction:
 
         round = 1.0
 
-        root = self.lattice.points['||']
+        # actions selected
+        actionsSelected = {}
+
+        root = self.lattice.points['|']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
@@ -230,8 +235,22 @@ class EntityExtraction:
                 #print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
                 #print "Actual gain was:", actualGain
                 #print "Predicted gain was:", bestGain
+                #print "Gain so far ",gain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
                 round += 1.0
+
+                # log selected action
+                bestActionConfig = str(bestAction.querySize)+"_"+str(bestAction.excludeListSize)
+                bestActionLevel = bestAction.point.totalAssignedValues
+
+                if bestActionConfig not in actionsSelected:
+                    actionsSelected[bestActionConfig] = {}
+
+                if bestActionLevel not in actionsSelected[bestActionConfig]:
+                    actionsSelected[bestActionConfig][bestActionLevel] = 0
+
+                actionsSelected[bestActionConfig][bestActionLevel] += 1
+
             else:
                 break
 
@@ -259,9 +278,9 @@ class EntityExtraction:
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
 
-        return gain, cost
+        return gain, cost, actionsSelected
 
-    def gsFindBestActionExact(self,frontier,nodeEstimates):
+    def gsFindBestActionExact(self,frontier,nodeEstimates, remBudget):
         bestAction = None
         bestScore = 0.0
         bestSample = []
@@ -269,13 +288,14 @@ class EntityExtraction:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
                 cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
-                gain, sample = e.computeExactGain()
-                normGain = gain
-                gainCostRatio = float(normGain)/float(cost)
-                if gainCostRatio > bestScore:
-                    bestAction = e
-                    bestScore = gainCostRatio
-                    bestSample = sample
+                if cost <= remBudget:
+                    gain, sample = e.computeExactGain()
+                    normGain = gain
+                    gainCostRatio = float(normGain)/float(cost)
+                    if gainCostRatio > bestScore:
+                        bestAction = e
+                        bestScore = gainCostRatio
+                        bestSample = sample
         return bestAction, bestScore, bestSample
 
     def graphSearchExtractionExact(self):
@@ -285,7 +305,10 @@ class EntityExtraction:
         gain = 0.0
         cost = 0.0
 
-        root = self.lattice.points['||']
+        # actions selected
+        actionsSelected = {}
+
+        root = self.lattice.points['|']
         nodeEstimates = {}
         removedNodes = set([])
         nodeEstimates[root] = []
@@ -302,13 +325,26 @@ class EntityExtraction:
         while cost < self.budget:
             #print "Running cost,gain\t",cost,gain
             # pick the best configuration with expected return more than a threshold
-            bestAction, bestScore, bestSample = self.gsFindBestActionExact(frontier, nodeEstimates)
+            remBudget = self.budget - cost
+            bestAction, bestScore, bestSample = self.gsFindBestActionExact(frontier, nodeEstimates,remBudget)
             if bestAction:
                 gain += bestAction.takeActionFinal(bestSample)
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+
+                # log selected action
+                bestActionConfig = str(bestAction.querySize)+"_"+str(bestAction.excludeListSize)
+                bestActionLevel = bestAction.point.totalAssignedValues
+
+                if bestActionConfig not in actionsSelected:
+                    actionsSelected[bestActionConfig] = {}
+
+                if bestActionLevel not in actionsSelected[bestActionConfig]:
+                    actionsSelected[bestActionConfig][bestActionLevel] = 0
+
+                actionsSelected[bestActionConfig][bestActionLevel] += 1
+
             else:
-                print "No good action found."
-                sys.exit(-1)
+                break
 
             # Extend action collection -- for the current node extract the estimates for each children
             descSet = set([])
@@ -323,13 +359,24 @@ class EntityExtraction:
                             est = self.getNewEstimator(d,querySize,exListSize)
                             nodeEstimates[d].append(est)
 
+            remBudget = self.budget - cost
+
             # check if node corresponding to bestAction should be removed from queue
+<<<<<<< HEAD
             bestChildAction, bestChildScore, bestSample = self.gsFindBestActionExact(descSet,nodeEstimates)
             bestNodeAction, bestNodeScore, bestSample = self.gsFindBestActionExact(set([bestAction.point]),nodeEstimates)
+=======
+            bestChildAction, bestChildScore, bestSample = self.gsFindBestActionExact(descSet,nodeEstimates,remBudget)
+            bestNodeAction, bestNodeScore, bestSample = self.gsFindBestActionExact(set([bestAction.point]),nodeEstimates,remBudget)
+>>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1
 
             if bestNodeScore <= bestChildScore:
                 frontier |= descSet
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
 
+<<<<<<< HEAD
         return gain, cost
+=======
+        return gain, cost, actionsSelected
+>>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1

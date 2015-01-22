@@ -1,0 +1,84 @@
+%!TEX root = ../crowd_hierarchies_v.1.3.tex
+
+
+\section{Discovering Querying Policies}
+\label{sec:solving}
+In this section, we focus on the second component of our proposed algorithmic framework. Specifically, we introduce a querying strategy based on a multi-round adaptive optimization algorithm to maximize the total gain across all rounds under the given budget constraints. The algorithmic framework we propose builds upon ideas from the multi-armed bandit literature~\cite{Auer:2003,EvenDar06actionelimination}. In particular, at each round, the proposed algorithm uses as input the estimated gain or return for queries $q(k,l)$ at the different nodes in $\hierarchy$. Before presenting our proposed algorithm we list several challenges associated with this adaptive optimization problem.
+
+\squishlist
+\item The first challenge is that the number of nodes in $\hierarchy$ is exponential with respect to the number of attributes $\attributes$ describing the domain of interest. Querying every possible node to estimate its expected return for different queries $q(k,l)$ is prohibitively expensive. That said, typical budgets do not allow algorithms to query all nodes in the hierarchy, so this intractability may not hurt us all that much. For example, we can keep estimates for each of the nodes for which at least one entity has been retrieved.
+\item The second challenge is balancing the tradeoff between {\em exploitation} and {\em exploration}~\cite{Auer:2003}. The first refers to querying nodes for which sufficient entities have been retrieved and hence we have an accurate estimate for their expected return; the latter refers to exploring new nodes in $\hierarchy$ to avoid locally optimal policies.
+\squishend
+
+\subsection{Balancing Exploration and Exploitation}
+While issuing different queries $q(k,l)$ at different nodes of $\hierarchy$ we obtain a collection of entities that can be assigned to different nodes in $\hierarchy$. For each node we can estimate the return of a new query $q(k,l)$ using the estimator presented in \Cref{sec:newestim}. However, this estimate is based on a rather small sample of the underlying population. Thus, exploiting this information at every round may need to suboptimal decision. This is the reason why one needs to balance the trade-off between exploiting nodes for which the estimated return is high and nodes that haven't been queried many times. Formally, the latter corresponds to upper-bounding the expected return of each potential action with a confidence interval that depends on both the variance of the expected return and the number of times an action is evaluated.
+
+Let $r(\alpha)$ denote the expected return of action $\alpha$ that is an estimate of the true return $r^*(\alpha)$. Moreover, let $\sigma(\alpha)$ be an error component on the return of action $\alpha$ chosen such that $r(\alpha) - \sigma(\alpha) \leq r^*(\alpha) \leq r(\alpha) + \sigma(\alpha)$ with high probability. The parameter $\sigma(\alpha)$ should take into account both the empirical variance of the expected return as well as our uncertainty if an action or similar actions (e.g., with different $k, l$ but at the same node) has been chosen few times. Let $n_{\alpha,t}$ be the number of times we have chosen action $\alpha$ by round $t$, and let $v_{\alpha,t}$ denote the maximum value between some constant $c$ (e.g., $c = 0.01$) and the empirical variance for action $\alpha$ at round $t$. The latter can be computed using bootstrapping over the retrieved sample and applying the estimators presented in \Cref{sec:newestim} over these bootstrapped samples. Several techniques have been proposed in the multi-armed bandits literature to compute the parameter $\sigma(\alpha)$~\cite{teytaud:inria-00173263}. Teytaud et al.~\cite{teytaud:inria-00173263} showed that techniques considering both the variance and the number of times an action has been chosen tend to outperform other proposed methods. Based on this observation, we choose to use the following formula for sigma:
+\begin{equation}
+\label{eq:upper}
+\sigma(\alpha) = \sqrt{\frac{v_{\alpha,t}\cdot\log(t)}{n_{\alpha,t}}}
+\end{equation}
+
+\subsection{A Multi-Round Querying Policy Algorithm}
+\label{sec:heuristic}
+We now introduce our proposed multi-round algorithm for solving the budgeted entity enumeration problem. At a high-level, our algorithm proceeds as follows: Let $\mathcal{S}$ denote the set of all potential queries $q(k,l)$ that can be issued at the different nodes of $\hierarchy$ during a round $r$. Moreover, let $r(\alpha) + \sigma(\alpha)$ and $c(\alpha)$ be the upper-bounded return (i.e., gain) and cost for an action $\alpha \in \mathcal{S}$. At each round the algorithm identifies an action in $\mathcal{S}$ that maximizes the quantity $\frac{r(\alpha) + \sigma(\alpha)}{c(\alpha)}$ under the constraint that the cost of action $\alpha$ is less or equal to the remaining budget. Since we are operating under a specified budget one can view the problem in hand as a variation of the typical knapsack problem. If no such action exists then the algorithm terminates. Otherwise the algorithm issues the query corresponding to action $\alpha$, updates the set of unique entities obtained from the queries, the remaining budget and updates the set of potential queries $q(k,l)$ that can be executed in the next round.  An overview of the proposed algorithm is shown in Algorithm \ref{algo:overall}. 
+
+As discussed before, the size of $\hierarchy$ is exponential to the values of attributes describing it, and thus, considering all the possible queries corresponding to the different nodes of the hierarchy can be prohibitively expensive. Next, we discuss how one can initialize and update the set of potential actions as the algorithm progresses considering the structure of the poset $\hierarchy$ and the retrieved entities from previous rounds. 
+
+\begin{algorithm}[h]
+\small\caption{Overall Algorithm}
+\label{algo:overall}
+\begin{algorithmic}[1]
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $r,\sigma$: value oracle access to gain upper bound; $c$: value oracle access to the query costs; $\beta_c$: query budget;
+\STATE {\bf Output:} $\uentities$: a set of extracted distinct entities;
+\STATE $\uentities \leftarrow \{\}$
+\STATE $RB \leftarrow \beta_c$ /* Initialize remaining budget */
+\STATE $\mathcal{S} \leftarrow$ {\sf UpdateActionSet($\hierarchy$)}
+\WHILE {$RB > 0$ and $S \neq \{\}$}
+	\STATE $\alpha \leftarrow \arg\max_{\alpha \in {\mathcal{S}}} \frac{r(\alpha)+\sigma(\alpha)}{c(\alpha)}$ such that $RB - c(\alpha) >0$
+	\IF {$\alpha$ is NULL }
+		\STATE break;
+	\ENDIF
+	\STATE $RB \leftarrow RB - c(\alpha)$ /* Update budget */
+	\STATE Issue query corresponding to $\alpha$
+	\STATE $E \leftarrow$ entities from query
+	\STATE $\uentities \leftarrow \uentities \cup E$ /* Update unique entities */
+	\STATE $\mathcal{S} \leftarrow$ {\sf UpdateActionSet($\hierarchy$)}
+\ENDWHILE
+\RETURN $\uentities$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Updating the Set of Actions}
+Due to the exponential size of the poset $\hierarchy$, we need to limit the set of possible actions Algorithm~\ref{algo:overall} considers. To avoid keeping estimates for actions with bad returns we exploit the structure the given domain $\hierarchy$. We propose an algorithm that updates the set of actions by traversing the input poset in a top-down manner extending it by adding new actions that corresponds to queries for nodes that are {\em direct descendants} of already queried nodes.
+
+The intuition behind this approach is the following. It is easy to see that due to the hierarchical structure of the poset nodes at higher levels of the poset corresponds to larger populations of entities. Therefore, issuing queries at these nodes can potentially result to a larger number of extracted entities. Also, traversing the poset in a bottom-down fashion allows one to detect sparsely populated areas of the poset and hence avoid spending any of the available budget on issuing queries corresponding to them.
+
+In more detail, our approach for updating the set of available actions (Algorithm~\ref{algo:updateactions}) proceeds as follows: If the set of available actions is empty start by considering all possible queries that can be issued at the root of $\hierarchy$ (Ln. 4-5). The set of possible queries corresponds to queries $q(k,l)$ for all combinations of the values of parameters $k$ and $l$. Recall that these are pre-specified by the designer of the querying interface. If the set of available actions is not empty, we consider the node associated with the action selected in the last round and populate the set of available actions with all the queries corresponding to its direct descendants (Ln. 7-9). As mentioned above the number of nodes in $\hierarchy$ can be prohibitively large, therefore we also remove any {\em bad actions} from the running set of actions (Ln.  10-14). 
+An action $\alpha$ is bad when $r(\alpha) + \sigma(\alpha) < \max_{\alpha^{\prime} \in \mathcal{S}} (r(\alpha^{\prime}) - \sigma(\alpha^{\prime}))$. Intuitively, this inequality states that we do not need to consider again an action as long as there exists another action such that the upper-bounded return of the former is lower than the lower bounded return of the latter. This is a standard technique adopted in multi-armed bandits to limit the number of actions considered by the algorithm~\cite{EvenDar06actionelimination}. 
+
+
+\begin{algorithm}[h]
+\small\caption{UpdateActionSet}
+\label{algo:updateactions}
+\begin{algorithmic}[1]
+\STATE {\bf Input:} $\hierarchy$: the hierarchy describing the entity domain; $u$: a node in $\hierarchy$ associated with the last selected action; $\mathcal{S}_{old}$: the running set of actions; $V_k$: set of values for query parameter $k$; $V_l$: set of values for query parameter $l$;
+\STATE {\bf Output:} $\mathcal{S}_{new}$: the updated set of actions;
+\STATE \textbf{/* Extend Set of Actions*/}
+\IF {$\mathcal{S}_{old}$ is empty}
+	\RETURN $\{$Root of $\hierarchy \}$
+\ENDIF 
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{old}$
+\FORALL{$d \in ${\sf ~Set of Direct Descendant Nodes of $u$}}
+\STATE $A_d \leftarrow$ Set of queries at $u$ for all configurations in $V_k \times V_l$
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{new} \cup A_d$
+\ENDFOR
+\STATE \textbf{/* Remove Bad Actions*/}
+\STATE /* Find maximum lower bound on gain over all actions in $\mathcal{S}_{new}$*/
+\STATE $thres \leftarrow \max_{\alpha^{\prime} \in \mathcal{S}_{new}} (r(\alpha^{\prime}) - \sigma(\alpha^{\prime}))$  
+\STATE $\mathcal{B} \leftarrow$ All actions $a$ in $\mathcal{S}_{new}$ with $r(\alpha) + \sigma(\alpha) < thres$
+\STATE $\mathcal{S}_{new} \leftarrow \mathcal{S}_{new} \setminus \mathcal{B}$
+\RETURN $\mathcal{S}_{new}$
+\end{algorithmic}
+\end{algorithm}
+\vspace{-20pt}

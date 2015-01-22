@@ -80,6 +80,7 @@ class PointEstimateNew:
             N2 = self.freqCounters[2] + 1.0
         else:
             N2 = 1.0
+<<<<<<< HEAD
 	if 1 in self.freqCounters:
 	    N1 = self.freqCounters[1] + 1.0
 	else:
@@ -89,6 +90,17 @@ class PointEstimateNew:
 
     # estimate altered singletons
     def estimateAlteredSingletons(self,f1):
+=======
+        if 1 in self.freqCounters:
+            N1 = self.freqCounters[1] + 1.0
+        else:
+            N1 = 1.0
+        n = self.sampleSize
+        return 2.0*N2/((n+1)*N1)
+
+    # estimate altered singletons
+    def estimateAlteredSingletonsOld(self):
+>>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1
         items = 0.0
         p1 = self.estimateP1()
         for k in range(self.querySize+1):
@@ -99,6 +111,19 @@ class PointEstimateNew:
 	    #dItems = k*biProb
             items += dItems
         return items
+
+    # estimate altered singletons
+    def estimateAlteredSingletons(self,f1):
+        items = 0.0
+        p1 = self.estimateP1()
+        for k in range(self.querySize+1):
+            mCk = math.factorial(self.querySize)/(math.factorial(k)*math.factorial(self.querySize-k))
+            biProb = mCk*math.pow(p1,k)*math.pow(1.0-p1,self.querySize-k)
+            kTerm = (1.0 - math.pow((1.0 - 1.0/float(f1+1.0)),k))
+            dItems = kTerm*biProb
+            items += dItems
+        return items
+
 
     # auxiliary functions
     def estimateCoverage(self):
@@ -209,8 +234,12 @@ class PointEstimateNew:
         Kprime = self.estimateKprime(newSampleSize)
         f1 = self.freqCounters[1]
         f1c = f1*self.estimateAlteredSingletons(f1)
+<<<<<<< HEAD
         #f1c = self.estimateAlteredSingletons(f1)
 	newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
+=======
+        newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
+>>>>>>> f5330cec3188da4c0df1d30e8b9d175ec43336f1
         return newItems
 
     # estimate return with variance
@@ -226,20 +255,20 @@ class PointEstimateNew:
             if self.point.emptyPopulation == True:
                 return 0.0, self.oldK
             else:
-                #return self.querySize, self.oldK
-                return 1.0, self.oldK
+                return self.querySize, self.oldK
+                #return 1.0, self.oldK
         # compute K
         f0, K = self.estimateF0_regression()
         # check if exclude list contains the entire sample
-        #if len(excludeList) == len(self.point.distinctEntries):
-        #    return self.querySize
+        if len(excludeList) == len(self.point.distinctEntries):
+            return self.querySize
 
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
         Kprime = self.estimateKprime(newSampleSize)
-        f1c = self.estimateAlteredSingletons()
         f1 = self.freqCounters[1]
+        f1c = f1*self.estimateAlteredSingletons(f1)
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems, K
 
@@ -258,7 +287,7 @@ class PointEstimateNew:
         E_value = float(self.excludeListSize)/float(maxExListSize)
 
         w_Spec = 1.0
-        S_value = float(pointSpecificity)/3.0
+        S_value = float(pointSpecificity)/2.0
 
         #cost = (w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec)/(w_Q_Size + w_E_Size + w_Spec)
         cost = w_Q_Size*Q_value + w_E_Size*E_value + S_value*w_Spec
@@ -372,9 +401,12 @@ class PointEstimateNew:
             newDistinct.clear()
             newEntryFreqs.clear()
         variance = np.var(np.array(returnEstimates))
-        mean = np.mean(np.array(returnEstimates))
-        meanK = np.mean(np.array(K_estimates))
-        meanSS = int(round(np.mean(np.array(K_samplesizes))))
+        if len(K_estimates) == 0.0:
+            meanK = None
+            meanSS = None
+        else:
+            meanK = np.mean(np.array(K_estimates))
+            meanSS = int(round(np.mean(np.array(K_samplesizes))))
         mean = np.mean(np.array(returnEstimates))
         alpha = 0.05
         statList = np.sort(np.array(returnEstimates))
@@ -499,7 +531,11 @@ class PointEstimateNew:
         upperValue = gain
         lowerValue = gain
         if upper and len(self.point.retrievedEntries) > 0.0:
-            lowerValue, upperValue, gain, variance = self.bootstrapVarianceAlt(100)
+            lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(10)
+            #lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
+            self.oldK = meanK
+            if meanK:
+                self.oldKValues[meanSS] = meanK
         else:
             variance = 0.0
         return gain, variance, upperValue, lowerValue

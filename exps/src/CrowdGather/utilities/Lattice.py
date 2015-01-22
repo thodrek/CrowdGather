@@ -36,6 +36,7 @@ class Lattice:
         print 'Constructing flat list of lattice points...',
         hLists = [genutils.lattice_points_list(h) for h in hDicts]
         lattice_point_list = genutils.cross(*hLists)
+        #lattice_point_list = genutils.lattice_point_product(hLists[0],hLists[1])
         print 'DONE'
 
         # construct lattice points
