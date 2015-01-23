@@ -28,7 +28,7 @@ class EntityExtraction:
         self.maxExListSize = maxExListSize
 
         # store extraction method
-        if optMethod in ["random", "BFS", "GS_thres", "BerkBaseline" "GS_exact", "randomLeaves", "UCBFront", "GS_thres_NoEx"]:
+        if optMethod in ["random", "BFS", "GS_thres", "BerkBaseline", "GS_exact", "randomLeaves", "UCBFront", "GS_thres_NoEx"]:
             self.optMethod = optMethod
         else:
             print "Invalid extraction method specified"
