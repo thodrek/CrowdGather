@@ -47,7 +47,7 @@ if __name__ == "__main__":
                 costValues = []
                 for i in range(10):
                     eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,"chao92",newLattice)
-                    gain, cost, actionSelected = eExtract.retrieveItems()
+                    gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
                     gainValues.append(gain)
                     costValues.append(cost)
                     newLattice.clearLatticeSamples()
@@ -62,7 +62,7 @@ if __name__ == "__main__":
             else:
                 for est in estimator:
                     eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
-                    gain, cost, actionSelected = eExtract.retrieveItems()
+                    gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
                     print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
                     newLattice.clearLatticeSamples()
                     newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t0.0"+"\t"+str(cost)+"\t0.0"+"\n"
