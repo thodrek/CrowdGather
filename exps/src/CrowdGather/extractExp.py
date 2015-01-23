@@ -61,12 +61,25 @@ if __name__ == "__main__":
                 fileOut.write(newLine)
             else:
                 for est in estimator:
-                    eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
-                    gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
-                    print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
-                    newLattice.clearLatticeSamples()
-                    newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t0.0"+"\t"+str(cost)+"\t0.0"+"\n"
+                    gainValues = []
+                    costValues = []
+                    for i in range(10):
+                        eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
+                        gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
+                        gainValues.append(gain)
+                        costValues.append(cost)
+                        #print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
+                        newLattice.clearLatticeSamples()
+                    # compute mean - variance
+                    gainMean = numpy.mean(gainValues)
+                    gainVar = numpy.var(gainValues)
+
+                    costMean = numpy.mean(costValues)
+                    costVar = numpy.var(costValues)
+                    newLine = str(eMethod)+"\t"+"\t"+str(gainMean)+"\t"+str(gainVar)+"\t"+str(costMean)+"\t"+str(costVar)+"\n"
                     fileOut.write(newLine)
+                    #newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t0.0"+"\t"+str(cost)+"\t0.0"+"\n"
+                    #fileOut.write(newLine)
                     print "DONE with",eMethod," with estimator",est," with budget",b
             print "DONE with",eMethod," with budget",b
         fileOut.close()
