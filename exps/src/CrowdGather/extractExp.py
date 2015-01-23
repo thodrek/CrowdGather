@@ -6,10 +6,10 @@ import numpy
 from utilities import Lattice
 
 if __name__ == "__main__":
-    #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres"]
+    #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
     #estimator = ["chao92", "shenRegression", "newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
-    extractionMethods = ["GS_exact"]
+    extractionMethods = ["BerkBaseline"]
     estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -42,7 +42,7 @@ if __name__ == "__main__":
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
             print "Starting exps with method ",eMethod
-            if eMethod in ["random", "randomLeaves", "BFS"]:
+            if eMethod in ["random", "randomLeaves", "BFS", "BerkBaseline"]:
                 gainValues = []
                 costValues = []
                 for i in range(10):

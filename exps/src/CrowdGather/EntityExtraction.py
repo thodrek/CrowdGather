@@ -28,7 +28,7 @@ class EntityExtraction:
         self.maxExListSize = maxExListSize
 
         # store extraction method
-        if optMethod in ["random", "BFS", "GS_thres", "GS_exact", "randomLeaves", "UCBFront"]:
+        if optMethod in ["random", "BFS", "GS_thres", "BerkBaseline" "GS_exact", "randomLeaves", "UCBFront", "GS_thres_NoEx"]:
             self.optMethod = optMethod
         else:
             print "Invalid extraction method specified"
@@ -45,18 +45,22 @@ class EntityExtraction:
 
     def retrieveItems(self):
         if self.optMethod == "random":
-            gain, cost, actionsSelected = self.randomExtraction()
+            gain, cost, actionsSelected, gainHist, costHist = self.randomExtraction()
         elif self.optMethod == "BFS":
-            gain, cost, actionsSelected = self.bfsExtraction()
+            gain, cost, actionsSelected, gainHist, costHist = self.bfsExtraction()
         elif self.optMethod == "GS_thres":
-            gain, cost, actionsSelected = self.graphSearchExtraction()
+            gain, cost, actionsSelected, gainHist, costHist = self.graphSearchExtraction()
+        elif self.optMethod == "GS_thres_NoEx":
+            gain, cost, actionsSelected, gainHist, costHist = self.graphSearchExtraction(True)
         elif self.optMethod == "GS_exact":
-            gain, cost, actionsSelected = self.graphSearchExtractionExact()
+            gain, cost, actionsSelected, gainHist, costHist = self.graphSearchExtractionExact()
         elif self.optMethod == "randomLeaves":
-            gain, cost, actionsSelected = self.randomLeavesExtraction()
+            gain, cost, actionsSelected, gainHist, costHist = self.randomLeavesExtraction()
+        elif self.optMethod == "BerkBaseline":
+            gain, cost, actionsSelected, gainHist, costHist = self.berkBaselinePlus()
         else:
-            gain, cost, actionsSelected = self.graphSearchExtractionExact()
-        return gain, cost, actionsSelected
+            gain, cost, actionsSelected, gainHist, costHist = self.graphSearchExtractionExact()
+        return gain, cost, actionsSelected, gainHist, costHist
 
     def getNewEstimator(self, latticePoint, querySize, exListSize):
         if self.estMethod == "chao92" or self.estMethod == "shenRegression":
@@ -69,8 +73,15 @@ class EntityExtraction:
         # keep track of queried nodex/configs
         previousQueries = {}
 
+
         cost = 0.0
         gain = 0.0
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
 
         while cost < self.budget:
             # pick a node at random, pick a configuration at random and query it
@@ -91,9 +102,11 @@ class EntityExtraction:
             if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
                 gain += est.takeAction()
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+                gainHist.append(gain)
+                costHist.append(cost)
             else:
                 break
-        return gain, cost, None
+        return gain, cost, None, gainHist, costHist
 
     def randomLeavesExtraction(self):
 
@@ -108,6 +121,12 @@ class EntityExtraction:
 
         cost = 0.0
         gain = 0.0
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
 
         while cost < self.budget:
             # pick a node at random, pick a configuration at random and query it
@@ -128,21 +147,29 @@ class EntityExtraction:
             if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
                 gain += est.takeAction()
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+                gainHist.append(gain)
+                costHist.append(cost)
             else:
                 break
-        return gain, cost, None
+        return gain, cost, None, gainHist, costHist
 
     def bfsExtraction(self):
         # traverse lattice in a BFS manner ask single query at each node using a random configuration
         # keep track of queried nodex/configs
 
-        root = self.lattice.points['|']
+        root = self.lattice.points['||']
         frontier = [root]
         activeNodes = {}
         activeNodes[root] = 1
 
         gain = 0.0
         cost = 0.0
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
 
         while cost < self.budget and len(frontier) > 0:
             #print "Running cost,gain\t",cost,gain
@@ -164,6 +191,9 @@ class EntityExtraction:
                 gain += est.takeAction()
                 cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
 
+                gainHist.append(gain)
+                costHist.append(cost)
+
                 #print "Took:", est.point.getKey(),"with qS:",est.querySize,"and exS:",est.excludeListSize
                 #print "Actual gain was:", actualGain
 
@@ -175,7 +205,68 @@ class EntityExtraction:
             else:
                 pass
 
-        return gain, cost, None
+        return gain, cost, None, gainHist, costHist
+
+    def berkBaselinePlus(self):
+
+        root = self.lattice.points['||']
+        gain = 0.0
+        cost = 0.0
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
+
+        round = 1.0
+        nodeEstimates = {}
+        nodeEstimates[root] = []
+        for conf in self.extConfigs:
+            querySize = conf[0]
+            exListSize = conf[1]
+            est = self.getNewEstimator(root,querySize,exListSize)
+            nodeEstimates[root].append(est)
+
+        # initialize frontier
+        frontier = set([root])
+
+        # actions selected
+        actionsSelected = {}
+
+        while cost < self.budget:
+            remBudget = self.budget - cost
+            bestAction, bestScore, bestGain = self.gsFindBestAction(frontier, nodeEstimates, round, remBudget)
+            if bestAction:
+                actualGain = bestAction.takeAction()
+                gain += actualGain
+                #print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
+                #print "Actual gain was:", actualGain
+                #print "Predicted gain was:", bestGain
+                #print "Gain so far ",gain
+                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+
+                gainHist.append(gain)
+                costHist.append(cost)
+
+                round += 1.0
+
+                # log selected action
+                bestActionConfig = str(bestAction.querySize)+"_"+str(bestAction.excludeListSize)
+                bestActionLevel = bestAction.point.totalAssignedValues
+
+                if bestActionConfig not in actionsSelected:
+                    actionsSelected[bestActionConfig] = {}
+
+                if bestActionLevel not in actionsSelected[bestActionConfig]:
+                    actionsSelected[bestActionConfig][bestActionLevel] = 0
+
+                actionsSelected[bestActionConfig][bestActionLevel] += 1
+
+            else:
+                break
+
+        return gain, cost, actionsSelected, gainHist, costHist
 
     # auxiliary functions
     def gsFindBestAction(self,frontier,nodeEstimates,round,remBudget):
@@ -198,12 +289,19 @@ class EntityExtraction:
                         bestGain = armGain
         return bestAction, bestScore, bestGain
 
-    def graphSearchExtraction(self):
+    def graphSearchExtraction(self,noList = False):
         # traverse lattice starting from root and based on previously
         # chosen decisions
 
         gain = 0.0
         cost = 0.0
+
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
 
         round = 1.0
 
@@ -217,8 +315,11 @@ class EntityExtraction:
         for conf in self.extConfigs:
             querySize = conf[0]
             exListSize = conf[1]
-            est = self.getNewEstimator(root,querySize,exListSize)
-            nodeEstimates[root].append(est)
+            if noList and exListSize != 0:
+                pass
+            else:
+                est = self.getNewEstimator(root,querySize,exListSize)
+                nodeEstimates[root].append(est)
 
         # initialize frontier
         frontier = set([root])
@@ -237,6 +338,10 @@ class EntityExtraction:
                 #print "Predicted gain was:", bestGain
                 #print "Gain so far ",gain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+
+                gainHist.append(gain)
+                costHist.append(cost)
+
                 round += 1.0
 
                 # log selected action
@@ -264,8 +369,11 @@ class EntityExtraction:
                         for conf in self.extConfigs:
                             querySize = conf[0]
                             exListSize = conf[1]
-                            est = self.getNewEstimator(d,querySize,exListSize)
-                            nodeEstimates[d].append(est)
+                            if noList and exListSize != 0:
+                                pass
+                            else:
+                                est = self.getNewEstimator(root,querySize,exListSize)
+                                nodeEstimates[root].append(est)
 
             remBudget = self.budget - cost
 
@@ -278,7 +386,7 @@ class EntityExtraction:
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
 
-        return gain, cost, actionsSelected
+        return gain, cost, actionsSelected, gainHist, costHist
 
     def gsFindBestActionExact(self,frontier,nodeEstimates, remBudget):
         bestAction = None
@@ -298,12 +406,19 @@ class EntityExtraction:
                         bestSample = sample
         return bestAction, bestScore, bestSample
 
+
     def graphSearchExtractionExact(self):
         # traverse lattice starting from root and based on previously
         # chosen decisions
 
         gain = 0.0
         cost = 0.0
+
+        gainHist = []
+        costHist = []
+
+        gainHist.append(gain)
+        costHist.append(cost)
 
         # actions selected
         actionsSelected = {}
@@ -330,6 +445,9 @@ class EntityExtraction:
             if bestAction:
                 gain += bestAction.takeActionFinal(bestSample)
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+
+                gainHist.append(gain)
+                costHist.append(cost)
 
                 # log selected action
                 bestActionConfig = str(bestAction.querySize)+"_"+str(bestAction.excludeListSize)
@@ -371,4 +489,4 @@ class EntityExtraction:
                 removedNodes.add(bestAction.point)
 
 
-        return gain, cost, actionsSelected
+        return gain, cost, actionsSelected, gainHist, costHist
