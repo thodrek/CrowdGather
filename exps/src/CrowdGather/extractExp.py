@@ -9,7 +9,7 @@ if __name__ == "__main__":
     #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
     #estimator = ["chao92", "shenRegression", "newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
-    extractionMethods = ["BerkBaseline"]
+    extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
     estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     for b in budgetValues:
         print "Starting exps with budget ",b
-        fileName = "exactPerformance_budget="+str(b)+".txt"
+        fileName = "expPerformance_budget="+str(b)+".txt"
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
             print "Starting exps with method ",eMethod
