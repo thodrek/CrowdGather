@@ -209,8 +209,8 @@ class PointEstimateNew:
         self.oldK = K
 
         # check if exclude list contains the entire sample
-        if len(excludeList) == len(self.point.distinctEntries):
-            return self.querySize
+        #if len(excludeList) == len(self.point.distinctEntries):
+        #    return self.querySize
 
         # compute query return
         if strataOption and len(self.point.childrenWeights) > 0:

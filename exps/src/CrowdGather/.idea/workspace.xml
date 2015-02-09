@@ -23,19 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PointEstimateShen.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PointEstimateShen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="61" selection-start="3021" selection-end="3021" vertical-scroll-proportion="0.71350366" vertical-offset="929" max-vertical-offset="5640">
+            <state line="74" column="8" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.0" vertical-offset="929" max-vertical-offset="5640">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PointEstimateNew.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PointEstimateNew.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="202" column="16" selection-start="6518" selection-end="6518" vertical-scroll-proportion="0.0" vertical-offset="2639" max-vertical-offset="8250">
+            <state line="103" column="43" selection-start="3330" selection-end="3330" vertical-scroll-proportion="0.40486532" vertical-offset="989" max-vertical-offset="8250">
               <folding />
             </state>
           </provider>
@@ -142,9 +142,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="1009" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="704" />
+    <option name="width" value="1413" />
+    <option name="height" value="1294" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -366,14 +367,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="704" extended-state="6" />
+    <frame x="1009" y="23" width="1413" height="1294" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15806195" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14295977" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -684,16 +685,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PointEstimateNew.py">
+    <entry file="file://$PROJECT_DIR$/PointEstimateShen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="16" selection-start="6518" selection-end="6518" vertical-scroll-proportion="0.0" vertical-offset="2804" max-vertical-offset="8250">
+        <state line="74" column="8" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.0" vertical-offset="929" max-vertical-offset="5640">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PointEstimateShen.py">
+    <entry file="file://$PROJECT_DIR$/PointEstimateNew.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="61" selection-start="3021" selection-end="3021" vertical-scroll-proportion="0.71350366" vertical-offset="929" max-vertical-offset="5640">
+        <state line="103" column="43" selection-start="3330" selection-end="3330" vertical-scroll-proportion="0.40486532" vertical-offset="989" max-vertical-offset="8250">
           <folding />
         </state>
       </provider>
