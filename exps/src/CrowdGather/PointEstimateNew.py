@@ -200,8 +200,8 @@ class PointEstimateNew:
             if self.point.emptyPopulation == True:
                 return 0.0
             else:
-                #return 1.0
-                return self.querySize
+                return 1.0
+                #return self.querySize
 
         # compute K
         f0, K = self.estimateF0_regression()
