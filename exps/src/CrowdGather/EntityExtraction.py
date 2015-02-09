@@ -359,7 +359,7 @@ class EntityExtraction:
             else:
                 break
 
-            # Extend action collection -- for the current node extract the estimates for each children
+            # Extend action collection -- for the current node extract the estimates for its children
             descSet = set([])
             for d in bestAction.point.getDescendants():
                 if d not in removedNodes:
@@ -372,8 +372,8 @@ class EntityExtraction:
                             if noList and exListSize != 0:
                                 pass
                             else:
-                                est = self.getNewEstimator(root,querySize,exListSize)
-                                nodeEstimates[root].append(est)
+                                est = self.getNewEstimator(d,querySize,exListSize)
+                                nodeEstimates[d].append(est)
 
             remBudget = self.budget - cost
 
