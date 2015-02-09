@@ -54,7 +54,7 @@ if __name__ == "__main__":
                     costValues.append(cost)
                     print i, gain, cost, gainHist
                     newLattice.clearLatticeSamples()
-                    print "latticeClean""
+                    print "latticeClean"
                 # compute mean - variance
                 gainMean = numpy.mean(gainValues)
                 gainVar = numpy.var(gainValues)
@@ -75,7 +75,7 @@ if __name__ == "__main__":
                         costValues.append(cost)
                         print i, gain, cost, gainHist
                         newLattice.clearLatticeSamples()
-                        print "latticeClean""
+                        print "latticeClean"
                         #print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
                         #newLattice.clearLatticeSamples()
                     # compute mean - variance
