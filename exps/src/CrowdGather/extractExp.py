@@ -11,7 +11,7 @@ if __name__ == "__main__":
     estimator = ["chao92"]
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
-    extractionMethods = ["BerkBaseline"]
+    extractionMethods = ["BerkBaseline","GS_thres"]
     #estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     for b in budgetValues:
         print "Starting exps with budget ",b
-        fileName = "expPerformance_budget="+str(b)+".txt"
+        fileName = "expPerformanceBerkGSThres_budget="+str(b)+".txt"
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
             print "Starting exps with method ",eMethod
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                 for est in estimator:
                     gainValues = []
                     costValues = []
-                    for i in range(10):
+                    for i in range(2):
                         eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
                         gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
                         gainValues.append(gain)
