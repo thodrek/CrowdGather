@@ -7,9 +7,11 @@ from utilities import Lattice
 
 if __name__ == "__main__":
     #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
-    estimator = ["chao92", "shenRegression", "newRegr"]
+    #estimator = ["chao92", "shenRegression", "newRegr"]
+    estimator = ["chao92"]
     #extractionMethods = ["BFS","GS_thres"]
-    extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
+    #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
+    extractionMethods = ["BerkBaseline", "GS_thres"]
     #estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -58,6 +60,7 @@ if __name__ == "__main__":
                 costMean = numpy.mean(costValues)
                 costVar = numpy.var(costValues)
                 newLine = str(eMethod)+"\t"+"\t"+str(gainMean)+"\t"+str(gainVar)+"\t"+str(costMean)+"\t"+str(costVar)+"\n"
+                print newLine
                 fileOut.write(newLine)
             else:
                 for est in estimator:
@@ -80,6 +83,7 @@ if __name__ == "__main__":
                     fileOut.write(newLine)
                     #newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t0.0"+"\t"+str(cost)+"\t0.0"+"\n"
                     #fileOut.write(newLine)
+                    print newLine
                     print "DONE with",eMethod," with estimator",est," with budget",b
             print "DONE with",eMethod," with budget",b
         fileOut.close()
