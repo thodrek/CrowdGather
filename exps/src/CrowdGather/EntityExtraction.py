@@ -381,7 +381,7 @@ class EntityExtraction:
             bestChildAction, bestChildScore, bestChildGain = self.gsFindBestAction(descSet,nodeEstimates,round,remBudget)
             bestNodeAction, bestNodeScore, bestNodeGain = self.gsFindBestAction(set([bestAction.point]),nodeEstimates,round,remBudget)
 
-            if bestNodeScore <= bestChildScore:
+            if bestNodeScore < bestChildScore:
                 frontier |= descSet
                 frontier.discard(bestAction.point)
                 removedNodes.add(bestAction.point)
