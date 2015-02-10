@@ -240,10 +240,10 @@ class EntityExtraction:
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
-                #print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
-                #print "Actual gain was:", actualGain
-                #print "Predicted gain was:", bestGain
-                #print "Gain so far ",gain
+                print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
+                print "Actual gain was:", actualGain
+                print "Predicted gain was:", bestGain
+                print "Gain so far ",gain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)
@@ -333,10 +333,10 @@ class EntityExtraction:
             if bestAction:
                 actualGain = bestAction.takeAction()
                 gain += actualGain
-                #print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
-                #print "Actual gain was:", actualGain
-                #print "Predicted gain was:", bestGain
-                #print "Gain so far ",gain
+                print "Took:", bestAction.point.getKey(),"with qS:",bestAction.querySize,"and exS:",bestAction.excludeListSize
+                print "Actual gain was:", actualGain
+                print "Predicted gain was:", bestGain
+                print "Gain so far ",gain
                 cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)

@@ -112,6 +112,11 @@ class PointEstimateNew:
             items += dItems
         return items
 
+    # estimate probability of old singleton appearing again
+    def probSingleton(self):
+        p1 = self.estimateP1()
+        return (1.0 - math.pow(1.0 - p1,self.querySize))
+
 
     # auxiliary functions
     def estimateCoverage(self):
@@ -219,9 +224,11 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
-        Kprime = self.estimateKprime(newSampleSize)
-        f1 = self.freqCounters[1]
-        f1c = f1*self.estimateAlteredSingletons(f1)
+        #Kprime = self.estimateKprime(newSampleSize)
+        Kprime = K
+        f1 = max(self.freqCounters[1],1.0)
+        #f1c = f1*self.estimateAlteredSingletons(f1)
+        f1c = f1*self.probSingleton()
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems
 
