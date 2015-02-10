@@ -116,7 +116,7 @@ class PointEstimateNew:
     # auxiliary functions
     def estimateCoverage(self):
         # Good-Turing estimator
-        f1 = self.freqCounters[1]
+        f1 = max(self.freqCounters[1],1.0)
         n = self.sampleSize
         return 1.0 - f1/(n+1)
 
@@ -177,7 +177,7 @@ class PointEstimateNew:
         # sample size
         n = self.sampleSize
         # singletons
-        f1 = 0.0
+        f1 = 1.0
         if 1 in self.freqCounters:
             f1 = self.freqCounters[1]
         return K*f1/n,K
@@ -249,7 +249,8 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
-        Kprime = self.estimateKprime(newSampleSize)
+        #Kprime = self.estimateKprime(newSampleSize)
+        Kprime = K
         f1 = self.freqCounters[1]
         f1c = f1*self.estimateAlteredSingletons(f1)
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
