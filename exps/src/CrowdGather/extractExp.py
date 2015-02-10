@@ -7,8 +7,8 @@ from utilities import Lattice
 
 if __name__ == "__main__":
     #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
-    #estimator = ["chao92", "shenRegression", "newRegr"]
-    estimator = ["chao92","newRegr"]
+    estimator = ["chao92", "shenRegression", "newRegr"]
+    #estimator = ["chao92","newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
     extractionMethods = ["BerkBaseline","GS_thres"]
