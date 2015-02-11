@@ -11,7 +11,7 @@ if __name__ == "__main__":
     #estimator = ["chao92","newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
-    extractionMethods = ["BerkBaseline","GS_thres"]
+    extractionMethods = ["BerkBaseline","GS_thres","GS_thres_NoEx"]
     #estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -37,24 +37,29 @@ if __name__ == "__main__":
     configurations = [(5,0),(10,0),(20,0),(5,2),(10,5),(20,5),(20,10)]
     #configurations = [(10,5)]
     # initialize new EntityExtraction
-
+    logOut = open("log.out",'w')
     for b in budgetValues:
+        logLine = "Starting exps with budget "+str(b)+"\n"
+        logOut.write(logLine)
         print "Starting exps with budget ",b
         fileName = "expPerformanceBerkGSThresKregr_budget="+str(b)+".txt"
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
+            logLine = "Starting exps with method "+str(eMethod)+"\n"
+            logOut.write(logLine)
             print "Starting exps with method ",eMethod
             if eMethod in ["random", "randomLeaves", "BFS", "BerkBaseline"]:
                 gainValues = []
                 costValues = []
-                for i in range(2):
+                for i in range(5):
                     eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,"chao92",newLattice)
                     gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
                     gainValues.append(gain)
                     costValues.append(cost)
-                    print i, gain, cost, gainHist
+                    logLine = eMethod+"\t"+str(i)+"\t"+str(gain)+"\t"+str(cost)+"\t"+str(gainHist)+"\t"+str(costHist)+"\t"+str(actionSelected)+"\n"
+                    logOut.write(logLine)
+                    print eMethod, i, gain, cost, gainHist
                     newLattice.clearLatticeSamples()
-                    print "latticeClean"
                 # compute mean - variance
                 gainMean = numpy.mean(gainValues)
                 gainVar = numpy.var(gainValues)
@@ -63,19 +68,21 @@ if __name__ == "__main__":
                 costVar = numpy.var(costValues)
                 newLine = str(eMethod)+"\t"+"\t"+str(gainMean)+"\t"+str(gainVar)+"\t"+str(costMean)+"\t"+str(costVar)+"\n"
                 print newLine
+                logOut.write(newLine)
                 fileOut.write(newLine)
             else:
                 for est in estimator:
                     gainValues = []
                     costValues = []
-                    for i in range(2):
+                    for i in range(5):
                         eExtract = EntityExtraction.EntityExtraction(b,hList,hDescr,itemInfo,configurations,20,10,eMethod,est,newLattice)
                         gain, cost, actionSelected, gainHist, costHist = eExtract.retrieveItems()
                         gainValues.append(gain)
                         costValues.append(cost)
+                        logLine = eMethod+"_"+str(est)+"\t"+str(i)+"\t"+str(gain)+"\t"+str(cost)+"\t"+str(gainHist)+"\t"+str(costHist)+"\t"+str(actionSelected)+"\n"
+                        logOut.write(logLine)
                         print i, gain, cost, gainHist
                         newLattice.clearLatticeSamples()
-                        print "latticeClean"
                         #print "EstMethod, est, Gain, cost",eMethod,est,gain,cost
                         #newLattice.clearLatticeSamples()
                     # compute mean - variance
@@ -84,8 +91,9 @@ if __name__ == "__main__":
 
                     costMean = numpy.mean(costValues)
                     costVar = numpy.var(costValues)
-                    newLine = str(eMethod)+"\t"+"\t"+str(gainMean)+"\t"+str(gainVar)+"\t"+str(costMean)+"\t"+str(costVar)+"\n"
+                    newLine = str(eMethod)+"_"+str(est)+"\t"+"\t"+str(gainMean)+"\t"+str(gainVar)+"\t"+str(costMean)+"\t"+str(costVar)+"\n"
                     fileOut.write(newLine)
+                    logOut.write(newLine)
                     #newLine = str(eMethod) +"\t"+ str(est)+"\t"+str(gain)+"\t0.0"+"\t"+str(cost)+"\t0.0"+"\n"
                     #fileOut.write(newLine)
                     print newLine

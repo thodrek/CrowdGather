@@ -75,6 +75,30 @@ class PointEstimateNew:
         #    print K, Q, B, M, v, newX
         #    sys.exit(-1)
 
+    def estimateKprimeLog(self, newX, latestK):
+        if len(self.oldKValues) == 1:
+            return latestK
+        # create x and y values
+        x = []
+        y = []
+        for v in self.oldKValues:
+            x.append(v)
+            y.append(self.oldKValues[v])
+        x_ar = np.array(x)
+        y_ar = np.array(y)
+        initial_values = np.array([1.0,1.0,0.0])
+        bounds = [(0.0, None), (0.0, None), (0.0, None)]
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.kappa_new_error_simple, x0 = initial_values, args=(x_ar,y_ar),bounds = bounds, approx_grad=True)
+        A, r, c = params
+        return A*(newX**r) + c
+        #K, Q, B, M, v = params
+        #temp = 1.0/round(v)
+        #try:
+        #    return K/math.pow((1.0 + Q*math.exp(-B*(newX - M))),temp)
+        #except:
+        #    print K, Q, B, M, v, newX
+        #    sys.exit(-1)
+
 
     # estimate P1
     def estimateP1(self):
@@ -227,7 +251,8 @@ class PointEstimateNew:
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
         #Kprime = self.estimateKprime(newSampleSize)
-        Kprime = K
+        #Kprime = K
+        Kprime = self.estimateKprimeLog(newSampleSize,K)
         f1 = max(self.freqCounters[1],1.0)
         #f1c = f1*self.estimateAlteredSingletons(f1)
         f1c = f1*self.probSingleton()

@@ -17,6 +17,18 @@ def kappa_error(params, *args):
         error += (y[i] - y_model)**2
     return error
 
+def kappa_new_error_simple(params, *args):
+    x = args[0]
+    y = args[1]
+    A, r, c = params
+    error = 0.0
+    for i in range(len(x)):
+        try:
+            y_model = A*(x[i]**r) + c
+        except:
+            y_model = y[i]
+        error += (y[i] - y_model)**2
+    return error
 
 def kappa_new_error_gen(params, *args):
     x = args[0]
