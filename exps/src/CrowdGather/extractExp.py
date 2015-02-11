@@ -7,11 +7,12 @@ from utilities import Lattice
 
 if __name__ == "__main__":
     #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
-    estimator = ["chao92", "shenRegression", "newRegr"]
-    #estimator = ["chao92","newRegr"]
+    #estimator = ["chao92", "shenRegression", "newRegr"]
+    estimator = ["newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
-    extractionMethods = ["BerkBaseline","GS_thres","GS_thres_NoEx"]
+    #extractionMethods = ["BerkBaseline","GS_thres","GS_thres_NoEx"]
+    extractionMethods = ["GS_thres"]
     #estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
