@@ -12,7 +12,7 @@ if __name__ == "__main__":
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
     #extractionMethods = ["BerkBaseline","GS_thres"]
-    extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "BerkBaseline"]
+    extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "BerkBaseline", "GS_exact"]
     #extractionMethods = ["GS_thres"]
     #estimator = ["chao92"]
     # construct hierarchy list
@@ -50,7 +50,7 @@ if __name__ == "__main__":
             logLine = "Starting exps with method "+str(eMethod)+"\n"
             logOut.write(logLine)
             print "Starting exps with method ",eMethod
-            if eMethod in ["random", "randomLeaves", "BFS", "BerkBaseline"]:
+            if eMethod in ["random", "randomLeaves", "BFS", "BerkBaseline","GS_exact"]:
                 gainValues = []
                 costValues = []
                 for i in range(5):
