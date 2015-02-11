@@ -250,9 +250,9 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
-        #Kprime = self.estimateKprime(newSampleSize)
+        Kprime = self.estimateKprime(newSampleSize)
         #Kprime = K
-        Kprime = self.estimateKprimeLog(newSampleSize,K)
+        #Kprime = self.estimateKprimeLog(newSampleSize,K)
         f1 = max(self.freqCounters[1],1.0)
         #f1c = f1*self.estimateAlteredSingletons(f1)
         f1c = f1*self.probSingleton()
