@@ -53,8 +53,8 @@ class PointEstimateNew:
 
     # estimate K prime
     def estimateKprime(self, newX):
-        if len(self.oldKvalues) == 1:
-            return self.oldKvalues[self.oldKvalues.keys()[0]]
+        if len(self.oldKValues) == 1:
+            return self.oldKValues[self.oldKValues.keys()[0]]
         # create x and y values
         x = []
         y = []
