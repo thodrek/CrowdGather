@@ -26,7 +26,7 @@ def kappa_new_error_simple(params, *args):
         try:
             y_model = A*(x[i]**r) + c
         except:
-            y_model = y[i]
+            print A,x[i],r,c
         error += (y[i] - y_model)**2
     return error
 
