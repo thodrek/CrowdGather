@@ -53,6 +53,8 @@ class PointEstimateNew:
 
     # estimate K prime
     def estimateKprime(self, newX):
+        if len(self.oldKvalues) == 1:
+            return self.oldKvalues[self.oldKvalues.keys()[0]]
         # create x and y values
         x = []
         y = []
@@ -256,7 +258,7 @@ class PointEstimateNew:
         # compute return
         newSampleSize = self.sampleSize + self.querySize
         n = self.sampleSize
-        #Kprime = self.estimateKprime(newSampleSize)
+        Kprime = self.estimateKprime(newSampleSize)
         Kprime = K
         f1 = self.freqCounters[1]
         f1c = f1*self.estimateAlteredSingletons(f1)
