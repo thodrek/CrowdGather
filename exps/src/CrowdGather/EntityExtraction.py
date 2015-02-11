@@ -276,7 +276,7 @@ class EntityExtraction:
         for node in frontier:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
-                cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost = e.computeCostStep(self.maxQuerySize,self.maxExListSize)
                 if cost <= remBudget:
                     gain, variance, upperGain, lowerGain = e.estimateGain(True)
                     armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
