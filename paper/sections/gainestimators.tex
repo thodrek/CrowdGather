@@ -3,7 +3,7 @@
 
 \section{Estimating the Gain of Queries}
 \label{sec:gainestimators}
-We now present a novel estimation technique for the return of a generalized query $q(k,l)$ at a node $v \in \hierarchy$. Previous work~\cite{trushkowsky:2013} has drawn connections between this problem and species estimation literature~\cite{chao:1992}. However,  these techniques are agnostic to any structure exhibited by the domain under consideration and to the presence of an exclude-list-based query interface. In particular, there is no mechanism for estimating the number of new tuples extracted by a query when restricting the worker answer to not contain any entities from a certain collection of entities as enforced by an exclude list. We first review the existing methodology for estimating the gain of a query, then we discuss how these estimators can be extended to consider an exclude list, and finally, we present a new methodology for estimating the gain of generalized queries $q(k,l)$. 
+We now present a novel estimation technique for the return of a generalized query $q(k,l)$ at a node $v \in \hierarchy$. Previous work~\cite{trushkowsky:2013} has drawn connections between this problem and species estimation literature~\cite{chao:1992}. However,  these techniques really on the presence of a relatively large sample and are agnostic to the presence of an exclude-list-based query interface. In particular, there is no mechanism for estimating the number of new tuples extracted by a query when restricting the worker answer to not contain any entities from a certain collection of entities as enforced by an exclude list. We first review the existing methodology for estimating the gain of a query, then we discuss how these estimators can be extended to consider an exclude list, and finally, we present a new methodology for estimating the gain of generalized queries $q(k,l)$ directly under the presence of little information. 
 
 \subsection{Previous Estimators} 
 Consider a specific node $v \in \hierarchy$. Prior work only considers samples retrieved from the entire population associated with $v$ and does not consider an exclude list. Let $Q$ be the set of all existing samples retrieved by issuing queries against $v$ without an exclude list. These samples can be combined into a single sample of size $n = \sum_{q \in Q} {\sf size}(q)$. Let $f_i$ denote the number of entities that appear $i$ times in this unified sample, and let $f_0$ denote the number of unseen entities from the population under consideration. Finally, let $C$ be the population coverage of the unified sample --- that is, this is the fraction of the population covered by the sample.
@@ -17,13 +17,13 @@ At a high-level, the second term of Shen's formula corresponds to the probabilit
 
 Notice, that the quantities $f_0$ and $C$ are unknown and thus need to be estimated considering the entities in the running unified sample. The coverage can be estimated by considering the Good-Turing estimator $\hat{C} = 1 - \frac{f_1}{n}$ for the existing retrieved sample. On the other hand, multiple estimators have been proposed for estimating the number of unseen entities $f_0$. Trushkowsky et al.~\cite{trushkowsky:2013} proposed a variation of an estimator introduced by Chao et al.~\cite{chao:1992} to estimate $f_0$. Nevertheless, the authors argue that the original estimator proposed by Chao performs similarly with their approach when estimating the gain of an additional query $q(k,0)$.
 
-The estimator by Chao~\cite{chao:1992} on which the authors build has been shown to result in considerable bias in cases where the number of observed entities from a population represents only a {\em small fraction} of the entire population~\cite{hwang:2010}. Notice, that this assumption holds for crowdsourced entity extraction in a large domain, i.e., we are observing only a small portion of the entire population.  To address this problem, Hwang and Shen~\cite{hwang:2010} proposed a regression based technique to estimate $f_0$. This estimator is shown to result in significantly smaller bias and empirically outperforms previously proposed estimators, including the one proposed by Chao, when the ratio of retrieved entities to the entire entity population is small. It also performs comparably to previous estimators when the ratio is larger. Notice that the output of this estimator can also be used as a plug-in quantity in \Cref{eq:shen}. 
+The estimator by Chao~\cite{chao:1992} upon which the authors build has been shown to result in considerable bias in cases where the number of observed entities from a population represents only a {\em small fraction} of the entire population~\cite{hwang:2010}. Notice, that this assumption holds for crowdsourced entity extraction in a large domain, i.e., we are observing only a small portion of the entire population.  To address this problem, Hwang and Shen~\cite{hwang:2010} proposed a regression based technique to estimate $f_0$. This estimator is shown to result in significantly smaller bias and empirically outperforms previously proposed estimators, including the one proposed by Chao, when the ratio of retrieved entities to the entire entity population is small. It also performs comparably to previous estimators when the ratio is larger. Notice that the output of this estimator can also be used as a plug-in quantity in \Cref{eq:shen}. 
 %Thus, in this paper, we use the regression based estimator proposed by Hwang and Shen~\cite{hwang:2010}; in \Cref{sec:exps} we empirically show that it is better than the one proposed by Chao~\cite{chao:1992}.
 
 However, both the aforementioned estimators are agnostic to an exclude list. Next, we discuss how one can estimate the return of a query $q(k,l)$ in the presence of an exclude list of size $l$.
 \subsection{Queries With an Exclude List}
 \label{sec:excludelist}
-Consider an exclude list of size $l$. As discussed before an exclude list is a set of entities that correspond to invalid worker answers. Considering an exclude list for a query at a node $v \in \hierarchy$ corresponds to limiting our sampling to a restricted subset of the entity population corresponding to node $v$. In fact, we want to estimate the expected return of a query of size $k$ conditioning on the fact that the entities in the exclude list will not be retrieved by any new sample. The latter corresponds to removing these entities from the population under consideration. Thus, the estimates $\hat{f}_0$ and $\hat{C}$ should be updated before applying \Cref{eq:shen} to compute the expected return of a query of size $k$. This can be done by removing the entities included in the exclude list from the running sample for node $v$, recomputing the entity counts $f_i$ and following the techniques presented above for computing the updated estimates for $\hat{f}_0$ and $\hat{C}$. This approach requires that the exclude list is known in advance. To construct an exclude list one can follow a randomized approach, where $l$ of the retrieved entities are including in the list uniformly at random. The generated list can be used to update the frequency counts $f_i$ and estimate the gain of the query. Bootstrapping can also be used to obtain improved estimates.
+Consider an exclude list of size $l$. As discussed before an exclude list is a set of entities that correspond to invalid worker answers. Considering an exclude list for a query at a node $v \in \hierarchy$ corresponds to limiting our sampling to a restricted subset of the entity population corresponding to node $v$. In fact, we want to estimate the expected return of a query of size $k$ conditioning on the fact that the entities in the exclude list will not be retrieved by any new sample. The latter corresponds to removing these entities from the population under consideration. Thus, the estimates $\hat{f}_0$ and $\hat{C}$ should be updated before applying \Cref{eq:shen} to compute the expected return of a query of size $k$. This can be done by removing the entities included in the exclude list from the running sample for node $v$, recomputing the entity counts $f_i$ and following the techniques presented above for computing the updated estimates for $\hat{f}_0$ and $\hat{C}$. This approach requires that the exclude list is known in advance. To construct an exclude list one can follow a randomized approach, where $l$ of the retrieved entities are included in the list uniformly at random. The generated list can be used to update the frequency counts $f_i$ and estimate the gain of the query. Bootstrapping can also be used to obtain improved estimates.
 
 \subsection{Regression Based Gain Estimation}
 \label{sec:newestim}
@@ -57,32 +57,39 @@ Therefore, we have:
 \label{eq:new}
 new = K\frac{f_1}{n} - K^{\prime}\frac{f^{\prime}_1}{n+m}
 \end{equation}
-We need to estimate $K$, $K^{\prime}$ and $f^{\prime}_1$. We start with $f^{\prime}_1$, which denotes the number of singleton in the increased sample of size $n+m$. Notice, that $f^{\prime}_1$ is not known since we have not obtained the increased sample yet, so we need to express it in terms of $f_1$, i.e., the number of singletons, in the running sample of size $n$. We have:
+We need to estimate $K$, $K^{\prime}$ and $f^{\prime}_1$. We start with $f^{\prime}_1$, which denotes the number of singleton entities in the increased sample of size $n+m$. Notice, that $f^{\prime}_1$ is not known since we have not obtained the increased sample yet, so we need to express it in terms of $f_1$, i.e., the number of singletons, in the running sample of size $n$. We have:
 \begin{equation}
-f^{\prime}_1 = new + f_1 - f_1*\Pr[\mbox{in query of size m}]
+f^{\prime}_1 = new + f_1 - f_1^c
 \end{equation}
-Following an approach similar to Shen et al.~\cite{shen:2003}, we have that the probability of a singleton appearing in a query of size $m$ is:
+where $f_1^c$ denotes the number of old singleton entities from the sample of size $n$ that appeared in the additional query of size $m$. Let $E_1$ denote the set of singleton entities in the old sample of size $n$. We approximate $f_1^c$ by its expected value:
 \begin{equation}
-\Pr[\mbox{in query of size m}] = \sum_{k=0}^m(1-(1-\frac{1}{f_1})^k) {m \choose k}(1-p_1)^k p_1^{m-k}
+\hat{f}_1^c = \sum_{e \in E_1} \Pr[\mbox{e appears in query of size $m$}]
 \end{equation}
-where $p_1$ denotes the probability that a singleton item in the sample of size $n$ will be selected in a future query. We estimate this probability using the corresponding Good-Turing estimator considering the running sample. We have:
+We compute the probability of an old singleton entity appearing in an additional query as follows. Let $p_e$ denote the popularity of entity $e$. As described before, an additional query of size $m$ corresponds to taking a sample of size $m$ from the underlying entity population without replacement. However, $m$ is significantly smaller compared to the size of the underlying population, thus, we can consider a that taking a sample of size $m$ corresponds to taking a sample {\em with replacement}. Following this we have that:
 \begin{equation}
-p_1 = \hat{\theta}(1) = \frac{1}{n}2\frac{N_2}{N_1}
-\end{equation} 
+\Pr[\mbox{e appears in query of size $m$}] = 1 - (1-p_e)^m
+\end{equation}
+Following a standard approach in the species estimation literature we assume that the popularity of retrieving a singleton entity again is the same for all singleton entities. This popularity can be computed using the corresponding Good-Turing estimator considering the running sample. We have:
+\begin{equation}
+\forall e \in E_1, p_e = p_1 = \hat{\theta}(1) = \frac{1}{n}2\frac{N_2}{N_1}
+\end{equation}
 where $N_2$ is the number of entities that appear twice in the sample and $N_1$ is the number of singletons. 
 Eventually we have that:
-\begin{align}
-f^{\prime}_1 &= new + f_1(1- \sum_{k=0}^m(1-(1-\frac{1}{f_1})^k) {m \choose k}(1-p_1)^k p_1^{m-k}) \nonumber \\
-f^{\prime}_1 &= new + f_1(1- P)
-\end{align}
+\begin{equation}
+\hat{f}_1^c = f_1(1 - (1-p_1)^m)
+\end{equation}
+and
+\begin{equation}
+f^{\prime}_1 = new + f_1(1-p_1)^m
+\end{equation}
 Replacing the last equation in \Cref{eq:new} we have:
 \begin{align}
-&new = K\frac{f_1}{n} - K^{\prime}\frac{new + f_1(1- P)}{n+m} \nonumber \\
+&new = K\frac{f_1}{n} - K^{\prime}\frac{new + f_1(1-p_1)^m}{n+m} \nonumber \\
 %&new = K\frac{f_1}{n} - K^{\prime}\frac{new}{n+m} - K^{\prime}\frac{f_1(1- P)}{n+m} \nonumber \\
 %&new(1 + \frac{K^{\prime}}{n+m}) = K\frac{f_1}{n} - K^{\prime}\frac{f_1(1- P)}{n+m} \nonumber \\
-&new = \frac{1}{(1 + \frac{K^{\prime}}{n+m})}(K\frac{f_1}{n} - K^{\prime}\frac{f_1(1- P)}{n+m}) \nonumber
+&new = \frac{1}{(1 + \frac{K^{\prime}}{n+m})}(K\frac{f_1}{n} - K^{\prime}\frac{f_1(1-p_1)^m}{n+m}) \nonumber
 \end{align}
-Next, we discuss how one can estimate $K$ and $K_{\prime}$. To estimate $K$ we follow the regression approach introduced by Hwang and Shen~\cite{hwang:2010}. From the Cauchy-Schwarz inequality we have that:
+Next, we discuss how one can estimate $K$ and $K^{\prime}$. To estimate $K$ we follow the regression approach introduced by Hwang and Shen~\cite{hwang:2010}. From the Cauchy-Schwarz inequality we have that:
 \begin{equation}
 K = \frac{\sum_{i=1}^S (1-p_i)^n}{\sum_{i=1}^S p_i(1-p_i)^{n-1}} \geq \frac{(n-1)f_1}{2f_2}
 \end{equation}

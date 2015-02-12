@@ -141,6 +141,7 @@ class PointEstimateNew:
     # estimate probability of old singleton appearing again
     def probSingleton(self):
         p1 = self.estimateP1()
+        print "p1 = ",p1
         return (1.0 - math.pow(1.0 - p1,self.querySize))
 
 
