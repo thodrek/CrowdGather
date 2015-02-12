@@ -141,8 +141,13 @@ class PointEstimateNew:
     # estimate probability of old singleton appearing again
     def probSingleton(self):
         p1 = self.estimateP1()
-        print "p1 = ",p1
+        pmax = self.maxProb()
+        print "p1 = ",p1, "pmax = ",pmax, "(1 - p1)/(1-pmax)", (1.0-p1)/(1.0-pmax)
         return (1.0 - math.pow(1.0 - p1,self.querySize))
+
+    def maxProb(self):
+        maxF = max(self.freqCounters.values())
+        return self.freqCounters[maxF]/self.querySize
 
 
     # auxiliary functions
