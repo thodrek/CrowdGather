@@ -69,3 +69,13 @@ def kappa_new_error_gompertz(params, *args):
             y_model = 0.0
         error += (y[i] - y_model)**2
     return error
+
+def turing_smooth(params, *args):
+    x = args[0]
+    y = args[1]
+    A, B = params
+    error = 0.0
+    for i in range(len(x)):
+        y_model = A + B*x[i]
+        error += (y[i] - y_model)**2
+    return error

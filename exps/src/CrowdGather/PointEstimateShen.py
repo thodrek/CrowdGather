@@ -5,6 +5,7 @@ from utilities import functions
 import numpy as np
 import scipy.optimize
 import numpy.random as npr
+import math
 
 class PointEstimateShen:
 
@@ -29,12 +30,41 @@ class PointEstimateShen:
             print "Invalid estimator specified for expected return"
             sys.exit(-1)
 
+        self.smoothTuringParams = {}
+        self.smoothTuringParams['a'] = 0.0
+        self.smoothTuringParams['b'] = 0.0
+
 
     def __del__(self):
         self.freqCounters.clear()
 
     def clear(self):
         self.freqCounters.clear()
+
+    def computeSmoothTuring(self):
+
+        # create (x,y) values
+        x = []
+        y = []
+        for f in self.freqCounters:
+            x.append(math.log(f))
+            y.append(math.log(self.freqCounters[f]))
+
+        # Estimate K using lbfgsb
+        x_ar = np.array(x)
+        y_ar = np.array(y)
+        initial_values = np.array([0.0,-1.2])
+        bounds = [(None, None), (None, -1.0)]
+
+        params, value, d = scipy.optimize.fmin_l_bfgs_b(functions.turing_smooth, x0 = initial_values, args=(x_ar,y_ar), bounds = bounds, approx_grad=True)
+        self.smoothTuringParams['a'] = params[0]
+        self.smoothTuringParams['b'] = params[1]
+
+    def calculateNr(self,r):
+        if r == 1:
+            if 1 in self.freqCounters:
+                return self.freqCounters[1]
+        return math.exp(self.smoothTuringParams['a'] + self.smoothTuringParams['b']*math.log(r))
 
     # methods to retrieve characteristics of local sample
     def uniqueEntries(self):
@@ -58,16 +88,21 @@ class PointEstimateShen:
         self.uniqueNumber = 0.0
         self.freqCounters.clear()
         if len(entryFrequencies) > 0.0:
-            maxF = max(entryFrequencies.values())
-            for f in range(1,maxF+1):
-                self.freqCounters[f] = 0.0
+            #maxF = max(entryFrequencies.values())
+            #for f in range(1,maxF+1):
+            #    self.freqCounters[f] = 0.0
 
             for e in entryFrequencies:
                 if e not in excludeList:
                     f = entryFrequencies[e]
+                    if f not in self.freqCounters:
+                        self.freqCounters[f] = 0.0
                     self.freqCounters[f] += 1.0
                     self.sampleSize += float(f)
                     self.uniqueNumber += 1.0
+
+            # smooth turing
+            self.computeSmoothTuring()
 
     # estimate return
     def estimateReturn(self,strataOption=False):
@@ -120,7 +155,8 @@ class PointEstimateShen:
     # auxiliary functions
     def estimateCoverage(self):
         # Good-Turing estimator
-        f1 = self.freqCounters[1]
+        #f1 = self.freqCounters[1]
+        f1 = self.calculateNr(1)
         n = self.sampleSize
         return 1.0 - f1/(n+1)
 
@@ -155,15 +191,20 @@ class PointEstimateShen:
         # create (x,y) values
         x = []
         y = []
-        for f in self.freqCounters:
-            if f+1 in self.freqCounters:
-                y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(self.freqCounters[f+1] + 1.0)
-                x.append(float(f))
-                y.append(y_new)
-            else:
-                y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(0.0 + 1.0)
-                x.append(float(f))
-                y.append(y_new)
+        maxF = max(self.freqCounters.keys())
+        for f in range(1,maxF+1):
+            y_new = (n-float(f))*self.calculateNr(f)/(float(f)+1.0)*(self.calculateNr(f) + 1.0)
+            x.append(float(f))
+            y.append(y_new)
+        #for f in self.freqCounters:
+        #    if f+1 in self.freqCounters:
+        #        y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(self.freqCounters[f+1] + 1.0)
+        #        x.append(float(f))
+        #        y.append(y_new)
+        #    else:
+        #        y_new = (n-float(f))*self.freqCounters[f]/(float(f)+1.0)*(0.0 + 1.0)
+        #        x.append(float(f))
+        #        y.append(y_new)
         # Not enough data to estimate K
         if len(x) < 1.0:
             return None
@@ -182,9 +223,10 @@ class PointEstimateShen:
         # sample size
         n = self.sampleSize
         # singletons
-        f1 = 0.0
-        if 1 in self.freqCounters:
-            f1 = self.freqCounters[1]
+        f1 = self.calculateNr(1)
+        #f1 = 0.0
+        #if 1 in self.freqCounters:
+        #    f1 = self.freqCounters[1]
         return K*f1/n,K
 
     # estimate return based on Shen estimator
