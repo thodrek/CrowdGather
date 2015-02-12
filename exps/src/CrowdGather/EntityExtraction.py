@@ -99,9 +99,9 @@ class EntityExtraction:
             else:
                 est = previousQueries[queryKey]
 
-            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+            if (cost + est.computeCostStep(self.maxQuerySize,self.maxExListSize)) <= self.budget:
                 gain += est.takeAction()
-                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += est.computeCostStep(self.maxQuerySize,self.maxExListSize)
                 gainHist.append(gain)
                 costHist.append(cost)
             else:
@@ -144,9 +144,9 @@ class EntityExtraction:
             else:
                 est = previousQueries[queryKey]
 
-            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+            if (cost + est.computeCostStep(self.maxQuerySize,self.maxExListSize)) <= self.budget:
                 gain += est.takeAction()
-                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += est.computeCostStep(self.maxQuerySize,self.maxExListSize)
                 gainHist.append(gain)
                 costHist.append(cost)
             else:
@@ -186,10 +186,10 @@ class EntityExtraction:
             est = self.getNewEstimator(p,querySize,exListSize)
 
 
-            if (cost + est.computeCost(self.maxQuerySize,self.maxExListSize)) <= self.budget:
+            if (cost + est.computeCostStep(self.maxQuerySize,self.maxExListSize)) <= self.budget:
                 actualGain = est.takeAction()
                 gain += est.takeAction()
-                cost += est.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += est.computeCostStep(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)
                 costHist.append(cost)
@@ -244,7 +244,7 @@ class EntityExtraction:
                 #print "Actual gain was:", actualGain
                 #print "Predicted gain was:", bestGain
                 #print "Gain so far ",gain
-                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += bestAction.computeCostStep(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)
                 costHist.append(cost)
@@ -276,7 +276,7 @@ class EntityExtraction:
         for node in frontier:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
-                cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost = e.computeCostStep(self.maxQuerySize,self.maxExListSize)
                 if cost <= remBudget:
                     gain, variance, upperGain, lowerGain = e.estimateGain(True)
                     armGain = gain + math.sqrt(variance*math.log(round)/e.timesSelected)
@@ -337,7 +337,7 @@ class EntityExtraction:
                 #print "Actual gain was:", actualGain
                 #print "Predicted gain was:", bestGain
                 #print "Gain so far ",gain
-                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += bestAction.computeCostStep(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)
                 costHist.append(cost)
@@ -395,7 +395,7 @@ class EntityExtraction:
         for node in frontier:
             for e in nodeEstimates[node]:
                 # check if expected return is above a threshold
-                cost = e.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost = e.computeCostStep(self.maxQuerySize,self.maxExListSize)
                 if cost <= remBudget:
                     gain, sample = e.computeExactGain()
                     normGain = gain
@@ -444,7 +444,7 @@ class EntityExtraction:
             bestAction, bestScore, bestSample = self.gsFindBestActionExact(frontier, nodeEstimates,remBudget)
             if bestAction:
                 gain += bestAction.takeActionFinal(bestSample)
-                cost += bestAction.computeCost(self.maxQuerySize,self.maxExListSize)
+                cost += bestAction.computeCostStep(self.maxQuerySize,self.maxExListSize)
 
                 gainHist.append(gain)
                 costHist.append(cost)
