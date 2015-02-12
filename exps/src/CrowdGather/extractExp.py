@@ -7,13 +7,13 @@ from utilities import Lattice
 
 if __name__ == "__main__":
     #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "GS_thres_NoEx", "BerkBaseline"]
-    estimator = ["chao92", "shenRegression", "newRegr"]
-    #estimator = ["newRegr"]
+    #estimator = ["chao92", "shenRegression", "newRegr"]
+    estimator = ["newRegr"]
     #extractionMethods = ["BFS","GS_thres"]
     #extractionMethods = ["BFS", "BerkBaseline", "GS_thres", "GS_thres_NoEx"]
     #extractionMethods = ["BerkBaseline","GS_thres"]
-    extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "BerkBaseline", "GS_exact"]
-    #extractionMethods = ["GS_thres"]
+    #extractionMethods = ["random", "randomLeaves", "BFS", "GS_thres", "BerkBaseline", "GS_exact"]
+    extractionMethods = ["GS_thres"]
     #estimator = ["chao92"]
     # construct hierarchy list
     catH = pickle.load(open("/scratch0/Dropbox/Eventbrite/eventsHierarchies/categoryHierarchy.pkl","rb"))
@@ -39,12 +39,12 @@ if __name__ == "__main__":
     configurations = [(5,0),(10,0),(20,0),(5,2),(10,5),(20,5),(20,10)]
     #configurations = [(10,5)]
     # initialize new EntityExtraction
-    logOut = open("log.out",'w')
+    logOut = open("logTest.out",'w')
     for b in budgetValues:
         logLine = "Starting exps with budget "+str(b)+"\n"
         logOut.write(logLine)
         print "Starting exps with budget ",b
-        fileName = "expPerformanceBerkGSThresKregr_budget="+str(b)+".txt"
+        fileName = "expPerformanceBerkGSThresKregr_Test_budget="+str(b)+".txt"
         fileOut = open(fileName,'w')
         for eMethod in extractionMethods:
             logLine = "Starting exps with method "+str(eMethod)+"\n"
