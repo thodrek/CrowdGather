@@ -600,14 +600,14 @@ class PointEstimateNew:
         gain = self.estimateReturn()
         upperValue = gain
         lowerValue = gain
-        if upper and len(self.point.retrievedEntries) > 0.0:
-            lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(10)
-            #lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
-            self.oldK = meanK
-            if meanK:
-                self.oldKValues[meanSS] = meanK
-        else:
-            variance = 0.0
+        #if upper and len(self.point.retrievedEntries) > 0.0:
+        #    lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(10)
+        #    #lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
+        #    self.oldK = meanK
+        #    if meanK:
+        #        self.oldKValues[meanSS] = meanK
+        #else:
+        variance = 0.0
         return gain, variance, upperValue, lowerValue
 
 
