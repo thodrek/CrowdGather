@@ -337,8 +337,9 @@ class PointEstimateNew:
         n = self.sampleSize
         Kprime = self.estimateKprime(newSampleSize)
         Kprime = K
-        f1 = self.freqCounters[1]
-        f1c = f1*self.estimateAlteredSingletons(f1)
+        #f1 = self.freqCounters[1]
+        f1 = self.calculateNr(1)
+        f1c = f1*self.probSingleton()
         newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
         return newItems, K
 
@@ -557,8 +558,11 @@ class PointEstimateNew:
                 newSampleSize = self.sampleSize + self.querySize
                 n = self.sampleSize
                 Kprime = self.estimateKprime(newSampleSize)
-                f1c = self.estimateAlteredSingletons()
-                f1 = self.freqCounters[1]
+                #f1c = self.estimateAlteredSingletons()
+                f1c = f1*self.probSingleton()
+                #f1 = self.freqCounters[1]
+                f1 = self.calculateNr(1)
+                newItems = (K*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
                 newItems = (self.oldK*f1/n - Kprime*(f1 - f1c)/newSampleSize)/(1.0 + Kprime/newSampleSize)
                 returnEstimates.append(newItems)
 
@@ -600,14 +604,14 @@ class PointEstimateNew:
         gain = self.estimateReturn()
         upperValue = gain
         lowerValue = gain
-        #if upper and len(self.point.retrievedEntries) > 0.0:
-        #    lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(10)
-        #    #lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
-        #    self.oldK = meanK
-        #    if meanK:
-        #        self.oldKValues[meanSS] = meanK
-        #else:
-        variance = 0.0
+        if upper and len(self.point.retrievedEntries) > 0.0:
+            lowerValue, upperValue, mean, variance, meanK, meanSS = self.bootstrapVariance(10)
+            #lowerValue, upperValue, gain, variance = self.bootstrapVariance(100)
+            self.oldK = meanK
+            if meanK:
+                self.oldKValues[meanSS] = meanK
+        else:
+            variance = 0.0
         return gain, variance, upperValue, lowerValue
 
 
