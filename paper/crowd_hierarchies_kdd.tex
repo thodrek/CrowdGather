@@ -1,0 +1,113 @@
+% THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
+% based on ACM SIGPROC-SP.TEX VERSION 2.7
+% Modified by  Gerald Weber <gerald@cs.auckland.ac.nz>
+% Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
+% Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
+\listfiles
+\documentclass{sig-alternate}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{times}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{subfigure}
+\usepackage{xspace}
+\usepackage[noend]{algorithmic}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{epstopdf}
+\usepackage{cleveref}
+\usepackage[font={small,it}]{caption}
+
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    {
+      \setlength{\itemsep}{0pt}
+      \setlength{\parsep}{3pt}
+      \setlength{\topsep}{3pt}
+      \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.5em}
+      \setlength{\labelwidth}{1em}
+      \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishend}{
+    \end{list}  }
+
+\renewcommand*\ttdefault{cmvtt}
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+
+
+\newcommand{\argmax}{\operatornamewithlimits{arg\ max}}
+
+\newcommand{\eat}[1]{}
+\newcommand{\todo}[1]{\textcolor{red}{{TODO: #1}}}
+\newcommand{\add}[1]{\textcolor{red}{{ADD: #1}}}
+\newcommand{\note}[1]{\textcolor{blue}{{#1}}}
+\newcommand{\agp}[1]{\textcolor{blue}{{Aditya: #1}}}
+\newcommand{\stitle}[1]{\vspace{0.5em}\noindent\textbf{#1}}
+
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{problem}{Problem}
+\newtheorem{reduction}{Reduction}
+\newcommand{\domain}{\mathcal{D}}
+\newcommand{\attributes}{\mathcal{A}_D}
+\newcommand{\hierarchy}{\mathcal{H}_D}
+\newcommand{\attrhierarchy}{\mathcal{H}_A}
+\newcommand{\workers}{\mathcal{W}}
+\newcommand{\uentities}{\mathcal{E}}
+\newcommand{\queryvector}{{\bf Q_S}}
+
+
+
+\begin{document}
+
+% ****************** TITLE ****************************************
+
+\title{CrowdGather: Entity Extraction over Structured Domains}
+
+\numberofauthors{3} 
+
+\author{
+	\alignauthor Theodoros Rekatsinas\\
+            \affaddr{University of Maryland, College Park} 
+                \email{thodrek@cs.umd.edu}
+            \alignauthor Amol Deshpande\\
+            \affaddr{University of Maryland, College Park} 
+                \email{amol@cs.umd.edu}
+            \alignauthor Aditya Parameswaran \\
+            \affaddr{University of Illinois, Urbana-Champaign} 
+                \email{adityagp@illinois.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+Crowdsourced entity extraction is often used to acquire data for many applications, including recommendation systems, 
+construction of aggregated listings and directories, and knowledge base construction. Current solutions focus on entity extraction using a single query, e.g., only using ``give me another restaurant", when assembling a list of all restaurants. Due to the cost of human labor, just focusing on a single query limits the practical applicability of these solutions.
+
+In this paper, we leverage {\em structured entity domains}, i.e., domains that can be fully described by a collection of attributes, each potentially displaying hierarchical structure. Given such an entity domain, we enable a richer space of queries, e.g., ``give me another Moroccan restaurant in Manhattan that does takeout". Naturally, enabling a richer space of queries comes with a host of issues, especially since many queries return empty answers. We develop new statistical tools that enable us to reason about the gain of issuing {\em additional queries} given little to no information, and show how we can exploit the overlaps across the results of queries for different points of the data domain to obtain accurate estimates of the gain. We cast the problem of {\em budgeted entity extraction} over large domains as an adaptive optimization problem that seeks to maximize the number of extracted entities, while minimizing the overall extraction costs. We evaluate our techniques with experiments on both synthetic and real-world datasets, demonstrating a yield of up to 4X over competing approaches for the same budget.
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/prelims}
+\input{sections/gainestimators}
+\input{sections/solving}
+\input{sections/exps}
+\input{sections/related}
+\input{sections/conclusions}
+\balance
+
+
+\bibliographystyle{abbrv}
+\bibliography{crowd_hierarchies}
+
+\end{document}
